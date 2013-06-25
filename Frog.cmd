@@ -267,7 +267,7 @@ time = 40
 
 [Command]
 name = "Tokiyo Tomare"
-command = ~F, z, x, F, s
+command = x;~F, z, x, F, s
 time = 40
 
 

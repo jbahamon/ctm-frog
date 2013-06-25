@@ -122,5 +122,62 @@ victory15  = " Hand'eth over the Masamune!"
 ; fvar(39) - Damage Dampener
 
 
+;---------------------------------------------------------------------------
+; Override common states (use same number to override) :
+;---------------------------------------------------------------------------
 
+;---------------------------------------------------------------------------
+; States that are always executed (use statedef -2)
+;---------------------------------------------------------------------------
 
+[Statedef -2]
+
+[State -2, Dampener]
+Type=VarSet
+Trigger1=Roundstate<2
+Trigger2=P2Stateno=[120,160]
+Trigger3=enemynear,ctrl
+Trigger4=P2StateType!=A
+Trigger4=P2MoveType!=H
+fvar(39)=1
+ignorehitpause=1
+
+;---------------------------------------------------------------------------
+; States that are executed when in self's state file (use statedef -3)
+;---------------------------------------------------------------------------
+
+[Statedef -3]
+
+[State -3, Dampener]
+Type = AttackMulSet
+Trigger1 = 1
+value = fvar(39)
+ignorehitpause = 1
+
+;This controller plays a sound everytime KFM lands from a jump, or
+;from his back-dash.
+[State -3, Landing Sound]
+type = PlaySnd
+triggerall = Time = 1
+trigger1 = stateno = 52 ;Jump land
+trigger2 = stateno = 106 ;Run-back land
+value = S7030, 1
+
+[State -3, RemoveExplod]
+type = RemoveExplod
+trigger1 = StateNo !=1040
+ID = 1040
+
+[State -3, Landing Sound]
+type = PlaySnd
+triggerall = AnimElemTime(1) = 1
+trigger1 = stateno = 100 ;Run
+value = S7030, 0
+
+[State -3, Landing Sound]
+type = PlaySnd
+triggerall = Time = 1
+trigger1 = stateno = 50 ;Jump 
+trigger1 = (PrevStateNo != [200,1099]) && (PrevStateNo != [3000,3199])
+trigger2 = stateno = 105 ;Run-back
+value = S7030, 0
