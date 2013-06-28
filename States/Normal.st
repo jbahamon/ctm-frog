@@ -147,7 +147,7 @@ palfx.time=10
 [State 200, Dampen]
 Type=Varset
 Trigger1 = MoveHit
-fvar(39) = fvar(39)*0.86
+fvar(39) = fvar(39)*0.85
 persistent = 0
 ignorehitpause = 1
 
@@ -395,7 +395,7 @@ givepower=36, 36
 [State 200, Dampen]
 Type=Varset
 Trigger1 = MoveHit
-fvar(39) = fvar(39)*0.86
+fvar(39) = fvar(39)*0.85
 persistent = 0
 ignorehitpause = 1
 
