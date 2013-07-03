@@ -2,8 +2,8 @@
 
 [Data]
 life = 1000
-attack = 105
-defence = 95
+attack = 100
+defence = 100
 fall.defence_up = 50
 liedown.time = 60
 airjuggle = 32
@@ -147,6 +147,12 @@ ignorehitpause=1
 ;---------------------------------------------------------------------------
 
 [Statedef -3]
+
+[State -3, Display]
+trigger1 = 1
+type = DisplayToClipboard
+text = "%f"
+params = fvar(39)
 
 [State -3, Dampener]
 Type = AttackMulSet

@@ -20,22 +20,9 @@ type = VarSet
 trigger1 = !time
 var(1) = IfElse(command="qcbc",3,ifelse(command="qcbb",2,1))
 
-[State 1000, Explod]
-type = Explod
-trigger1 = AnimElem = 2
-anim=1005
-ID=1005
-pos=0,-12
-postype=p1
-ownpal=1
-removeongethit=1
-ignorehitpause=0
-sprpriority=2
-bindtime = -1
-
 [State 1000, Sound!]
 type=PlaySnd
-trigger1= AnimElem = 2
+trigger1= !Time
 value = S7010,0
 channel = 0
 
@@ -46,7 +33,7 @@ ID=1005
 
 [State 1000, Water]
 type=helper
-trigger1 = AnimElem = 3
+trigger1 = AnimElem = 2
 name="Bubble"
 ID=1010
 postype=p1
@@ -60,7 +47,7 @@ trigger1 = AnimElemTime(7) = 7
 ctrl=1
 value=0
 
-;Water Generator
+;Water - Air
 [Statedef 1001]
 type=A
 physics=N
@@ -84,24 +71,9 @@ type=varset
 trigger1=!time
 var(1)=ifelse(command="qcbc",3,ifelse(command="qcbb",2,1))
 
-[State 1001, Explod]
-type=Explod
-trigger1 = AnimElem = 2
-trigger1 = PrevStateNo != [600, 699]
-trigger1 = PrevStateNo != 220
-anim=1005
-ID=1005
-pos=0,-12
-postype=p1
-ownpal=1
-removeongethit=1
-ignorehitpause=0
-sprpriority=2
-bindtime = -1
-
 [State 1001, Sound!]
 type=PlaySnd
-trigger1= AnimElem = 2
+trigger1= !Time
 value = S7010,0
 channel = 1
 
@@ -114,12 +86,7 @@ ID=1005
 
 [State 1001, Water]
 type = Helper
-trigger1 = PrevStateNo != [600, 699]
-trigger1 = Time = 45
-trigger2 = AnimElemTime(4) = 0
-trigger2 = PrevStateNo = [600, 699]
-trigger3 = AnimElemTime(4) = 0
-trigger3 = PrevStateNo = 220
+trigger1 = AnimElemTime(4) = 0
 name="Bubble"
 ID=1010
 postype=p1

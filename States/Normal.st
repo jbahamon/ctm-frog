@@ -45,7 +45,7 @@ ignorehitpause = 1
 type = HitDef
 trigger1 = !Time
 attr = S, NA      
-damage = 20,0
+damage = 15,0
 animtype=Light   
 guardflag = M
 hitflag = MAF
@@ -123,7 +123,7 @@ type = HitDef
 trigger1 = AnimElem = 3
 attr = S, NA
 animtype  = Medium
-damage    = 41
+damage    = 38
 hitflag = MAF
 guardflag = M
 pausetime = 10,10
@@ -170,10 +170,10 @@ juggle = 8
 sprpriority=1
 
 [State 220, vel]
-type=velset
-trigger1=animelem=2
+type = VelSet
+trigger1 = AnimElem = 2
 X = 2
-y=-8
+Y = -8
 
 [State 210, Explod]
 type = Explod
@@ -208,7 +208,7 @@ trigger1 = AnimElem = 2
 attr = A, NA
 animtype=Diagup
 air.animtype=Diagup
-damage    = 72
+damage    = 62
 guardflag = MA
 pausetime = 12,12
 hitsound = S7001,3
@@ -292,7 +292,7 @@ ignorehitpause = 1
 type = HitDef
 trigger1 = Animelem=2   
 attr = S, NA           
-damage = 23     
+damage = 20     
 priority = 3, Hit       
 pausetime = 8,8
 sparkno=S7001;
@@ -370,7 +370,7 @@ removeongethit = 1
 type = HitDef
 trigger1 = Animelem = 2   
 attr = S, NA           
-damage = 43   
+damage = 39   
 priority = 3, Hit       
 pausetime = 12,12
 sparkno=S7006
@@ -463,7 +463,7 @@ removeongethit = 1
 type = HitDef
 trigger1 = Animelem=2   
 attr = S, NA           
-damage = 50
+damage = 47
 priority = 3, Hit       
 pausetime = 15,15
 sparkno=S7004
@@ -649,7 +649,7 @@ ignorehitpause = 1
 type = HitDef
 trigger1 = time=0;
 attr = A, NA          
-damage = 42           
+damage = 37           
 pausetime = 10,10    
 hitsound   = S7001,1    
 guardsound = 6,0
@@ -731,7 +731,7 @@ trigger1 = AnimElem = 2
 attr = A, NA
 animtype=Diagup
 air.animtype=Diagup
-damage    = 80
+damage    = 62
 guardflag = MA
 pausetime = 15,15
 hitsound   = S7001,3

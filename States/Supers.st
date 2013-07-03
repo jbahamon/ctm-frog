@@ -185,7 +185,7 @@ pos = 0, 0
 type = PalFX
 trigger1 = Time < 80
 time = 1
-add = 256*Time/80.0, 256*Time/80.0, 256*Time/80.0
+add = floor(256*Time/80.0), floor(256*Time/80.0), floor(256*Time/80.0)
 
 [State 3061, Camera Freeze]
 type=screenbound
@@ -919,8 +919,8 @@ y=sin(fvar(0))*3 + FVar(14)/fvar(15) * 0.23*time
 [State 3111, Vel]
 type=velset
 trigger1 = time >= 15
-X = Fvar(13)/fvar(15) * 4.6 
-Y = (FVar(14)/fvar(15) * 4.6) - Sin(Time * 0.62)
+X = Fvar(13)/fvar(15) * 4.8 
+Y = (FVar(14)/fvar(15) * 4.8) - Sin(Time * 0.62)
 
 [State 3111,Hitdef]
 type=hitdef
@@ -976,7 +976,10 @@ trigger2 = fvar(15) < 3
 value=1015
 ignorehitpause=1
 
-
+;-----------------
+;GrandDream
+;-----------------
+;Ye World - Attempt
 
 ;-----------------
 ;Ye World
@@ -1901,4 +1904,74 @@ type = PosSet
 trigger1 = Pos Y < 0
 Y = 0
 
+;Grand Dream Activation
+[Statedef 3030]
+type = S
+movetype = I
+physics = S
+anim = 3030
+ctrl = 0
+velset = 0,0
+sprpriority = 2
+facep2 = 1
+
+[State 3030, NHB]
+type = NotHitBy
+trigger1 = 1
+time = 1
+value = SCA
+
+[State 3030, PalFx]
+type = PalFX
+trigger1 = 1
+time = 2
+sinadd = 200, 200, 200, 10
+
+[State 3030, Super Pause FX]
+type = helper
+trigger1 = time = 1
+helpertype = normal
+stateno = 7000
+ID = 7000
+name = "Super Charge"
+postype = p1
+pos = 0,0
+ownpal = 1
+persistent = 0
+supermovetime = 9999
+
+[State 3030, Super Pause]
+type = SuperPause
+trigger1 = Time = 1
+time = 60
+movetime = 60
+anim = -1
+sound = S7000,2
+p2defmul = 1
+darken = 0
+
+[State 2110, VarSet]
+type = VarSet
+trigger1 = (!AnimTime)
+v = 21
+value = 1
+
+[State 2020, Super Pause FX]
+type = helper
+trigger1 = time > 1 && Var(21) > 0 
+stateno = 7010
+ID = 3030
+name = "Masa&Mune"
+postype = p1
+pos = 0,-20
+ownpal = 1
+persistent = 0
+supermovetime = 9999
+
+
+[State 2110, End]
+type = ChangeState
+trigger1 = !AnimTime
+value = 0
+ctrl = 1
 

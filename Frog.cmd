@@ -386,6 +386,21 @@ name = "recovery";Required (do not remove)
 command = a+b
 time = 1
 
+[Command]
+name = "2p"
+command = b+c
+time = 1
+
+[Command]
+name = "2p"
+command = a+c
+time = 1
+
+[Command]
+name = "2p"
+command = a+b
+time = 1
+
 ;-| Dir + Button |---------------------------------------------------------
 
 [Command]
@@ -583,6 +598,17 @@ trigger2 = (StateNo = [600, 699])
 trigger2 = movecontact
 trigger3 = (StateNo = 220)
 trigger3 = movecontact
+
+;---------------------------------------------------------------------------
+;Grand Dream Activation
+[State -1, Grand Dream]
+type = ChangeState
+value = 3030
+triggerall = Command = "2p" ;&& !(command = "holdfwd" || command = "holdback")
+triggerall = Power >= 3000
+triggerall = Var(21) = 0
+trigger1 = StateType != A
+trigger1 = ctrl 
 
 ;---------------------------------------------------------------------------
 ;Crouching Light
