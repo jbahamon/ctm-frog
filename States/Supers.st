@@ -1013,35 +1013,22 @@ trigger1 = Time = 5
 time = 45
 movetime = 45
 anim = -1
-sound = S7040,0
+sound = S7010,0
 p2defmul = 1
 darken = 0
 
-[State 3000, Helper]
-type = Helper
-trigger1 = Time = 5
-helpertype = Normal ;player
-name = "Masa"
-ID = 3000
-stateno = 3010
-pos = 10,-7
-postype = p1    ;p2,front,back,left,right
-facing = 1
-keyctrl = 0
-ownpal = 1
-supermovetime = 99999
-pausemovetime = 99999
-
 [State 3000, End]
 type = ChangeState
-trigger1 = Time > 5 && !NumHelper(3000)
+trigger1 = Time > 5 
+trigger1 = !NumHelper(3030)
 value = 0
 ctrl = 1
 
 [State 3000, End]
 type = ChangeState
-trigger1 = NumHelper(3000)
-trigger1 = Helper(3000), MoveHit
+trigger1 = NumHelper(3030)
+trigger1 = Helper(3030), MoveHit
+trigger1 = Helper(3030), StateNo = 7016
 value = 3001
 ctrl = 0
 
@@ -1053,13 +1040,13 @@ anim = 0
 
 [State 3001, Safety]
 type = ChangeState
-trigger1 = !NumHelper(3000)
+trigger1 = !NumHelper(3030)
 value = 0
 
 [State 3001, Anim]
 type = ChangeAnim
 trigger1 = Anim != 3001
-trigger1 = Helper(3000), StateNo != 3010
+trigger1 = Helper(3030), StateNo != 7016
 value = 3001
 
 [State 3001, Snd]
@@ -1084,19 +1071,6 @@ ignorehitpause=0
 sprpriority=3
 bindtime = -1
 persistent = 0
-
-[State 3001, Bubble]
-type = Helper
-trigger1 = AnimElem = 6 && Anim = 3001
-helpertype = normal ;player
-name = "Time Bubble"
-ID = 3002
-stateno = 3013 
-pos = 0,-50
-postype = p1    ;p2,front,back,left,right
-facing = 1
-keyctrl = 0
-ownpal = 0
 
 [State 3001, Stop]
 type = Pause
@@ -1293,332 +1267,6 @@ type = ChangeState
 trigger1 = var(1) = 1
 value = 50
 
-;Masa
-[Statedef 3010]
-type = S
-movetype = A
-physics = N
-velset = 0,0
-anim = 3006
-sprpriority = 1
-
-[State 3010, Snd]
-type = PlaySnd
-trigger1 = Time = 40
-value = S7040,1
-channel = 0
-persistent = 0
-
-[State 3010, Snd]
-type = PlaySnd
-trigger1 = Time = 95
-value = S7040,2
-loop = 1
-channel = 0
-persistent = 0
-
-[State 3010, Scale]
-type = AngleDraw
-trigger1 = Time = [0, 10]
-scale = Time/10.0, 1 + (10 - Time)/5.0
-
-[State 3010, Trans]
-type = Trans
-trigger1 = 1
-trans = addalpha
-alpha = 256, 128
-
-[State 3010, Shadow]
-type = AssertSpecial
-trigger1 = 1
-flag = NoShadow
-
-[State 3010, HitDef]
-type = HitDef
-trigger1 = !Time
-attr = S,HT        ;SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
-hitflag = MA-        ;HLAFD+-
-guardflag = MA         ;HLA
-animtype = light          ;light,medium,hard,back,up,diagup
-air.animtype = light
-damage = 0,0
-;guard.pause,0
-sparkno = -1
-sparkxy = 0,0
-hitsound = S1,0
-guardsound = S2,0
-ground.type = High      ;Low,Trip,None
-air.hittime = 20
-ground.velocity = 0,0
-air.velocity = 0,0
-p1getp2facing = 0
-down.bounce = 0
-id = 0
-chainID = -1
-nochainID = -1
-hitonce = 1
-kill = 0
-numhits = 0
-
-[State 3010, Hit]
-type = TargetLifeAdd
-trigger1 = MoveHit && (AnimElem = 4)
-value = -10
-ignorehitpause = 1
-
-[State 3010, Hit]
-type = EnvShake
-trigger1 = MoveHit && (AnimElem = 4)
-time = 8
-freq = 120
-ampl = 3
-
-[State 3010, Hit]
-type = TargetState
-trigger1 = NumTarget
-value = 3020
-ignorehitpause = 1
-persistent = 0
-
-[State 3010, Helper]
-type = null;Helper
-trigger1 = !Time
-helpertype = normal ;player
-name = "Mune"
-ID = 3000
-stateno = 3011
-pos = -4,-25
-postype = p1    ;p2,front,back,left,right
-facing = 1
-keyctrl = 0
-ownpal = 0
-supermovetime = 99999
-
-[State 3010, go]
-type = VelSet
-trigger1 = Anim = 3006
-trigger1 = AnimElemTime(1) = 45
-X = 6.5
-Y = 0
-
-[State 3011, go]
-type = VelSet
-trigger1 = Anim = 3006
-trigger1 = AnimElemTime(1) = 55 || MoveContact 
-X = 0
-persistent = 0
-
-[State 3011, var]
-type = VarSet
-trigger1 = !Time
-var(1) = -1
-persistent = 0
-
-[State 3011, var]
-type = VarSet
-trigger1 = MoveContact ;|| Time = 35
-var(1) = 95
-persistent = 0
-
-[State 3010, Snd]
-type = ChangeAnim
-trigger1 = var(1) = 40 || (!MoveContact && Time = 110)
-value = 3009
-
-[State 3011, var]
-type = VarAdd
-trigger1 = var(1) > 0
-var(1) = -1
-
-[State 3011, var]
-type = VarSet
-trigger1 = Var(1) = 0 || (!MoveContact && Time = 110)
-var(0) = 10
-persistent = 0
-
-[State 3011, var]
-type = VarSet
-trigger1 = !Time
-var(0) = -1
-
-[State 3011, var]
-type = VarAdd
-trigger1 = var(0) > 0
-var(0) = -1
-
-[State 3011, Scale]
-type = AngleDraw
-trigger1 = var(0) > 0
-scale = (var(0))/10.0, 1 + (10 - var(0))/10.0
-
-[State 3010, Snd]
-type = StopSnd
-trigger1 = Anim = 3009 
-channel = 0
-persistent = 0
-
-[State 3010, Snd]
-type = PlaySnd
-trigger1 = Anim = 3009
-value = S7040,8
-channel = 0
-persistent = 0
-
-[State 3010, end]
-type = ChangeState
-trigger1 = var(0) = 0 && MoveHit
-value = 3012
-
-[State 3010, end]
-type = DestroySelf
-trigger1 = var(0) = 0 && !MoveHit
-
-;Mune
-[Statedef 3011]
-type = S
-movetype = A
-physics = N
-velset = 0,0
-anim = 3007
-sprpriority = 1
-
-[State 3011, Trans]
-type = Trans
-trigger1 = 1
-trans = addalpha
-alpha = 256, 128
-
-[State 3011, Scale]
-type = AngleDraw
-trigger1 = Time = [0, 10]
-scale = Time/10.0, 1 + (10 - Time)/5.0
-
-[State 3011, Shadow]
-type = AssertSpecial
-trigger1 = 1
-flag = NoShadow
-
-[State 3011, go]
-type = VelSet
-trigger1 = AnimElemTime(1) = 45
-X = 4
-Y = 0
-
-[State 3011, go]
-type = VelSet
-trigger1 = Time = 65 || Parent, MoveContact
-X = 0
-persistent = 0
-
-[State 3011, var]
-type = VarSet
-trigger1 = !Time
-var(0) = -1
-persistent = 0
-
-[State 3011, var]
-type = VarSet
-trigger1 = !Time
-var(1) = -1
-persistent = 0
-
-[State 3011, var]
-type = VarSet
-trigger1 = Parent, MoveContact
-var(1) = 40
-
-[State 3011, var]
-type = VarAdd
-trigger1 = var(1) > 0
-var(1) = -1
-
-[State 3011, var]
-type = VarSet
-trigger1 = Var(1) = 0 || Time = 110
-var(0) = 10
-persistent = 0
-
-[State 3011, var]
-type = VarAdd
-trigger1 = var(0) > 0
-var(0) = -1
-
-[State 3011, Scale]
-type = AngleDraw
-trigger1 = var(0) > 0
-scale = (var(0))/10.0, 1 + (10 - var(0))/10.0
-
-[State 3011, end]
-type = DestroySelf
-trigger1 = var(0) = 0
-
-;Masamune
-[Statedef 3012]
-type = S
-movetype = A
-physics = N
-velset = 0,0
-anim = 3008
-sprpriority = 1
-
-[State 3010, end]
-type = StopSnd
-trigger1 = !Time
-channel = 0
-
-[State 3010, Scale]
-type = AngleDraw
-trigger1 = Time = [0, 10]
-scale = Time/10.0, 1 + (10 - Time)/5.0
-
-[State 3010, Trans]
-type = Trans
-trigger1 = 1
-trans = addalpha
-alpha = 256, 128
-
-[State 3012, Shadow]
-type = AssertSpecial
-trigger1 = 1
-flag = NoShadow
-
-[State 3012, Teleport]
-type = PosSet
-trigger1 = !Time
-X = root, Pos X
-Y = root, Pos Y - 17
-
-[State 3012, Var]
-type  = VarSet
-trigger1 = !Time
-var(0) = -2
-
-[State 3012, Var]
-type  = VarSet
-trigger1 = (Parent, NumHelper(3002))
-var(0) = -1
-persistent = 0
-
-[State 3012, Var]
-type  = VarSet
-trigger1 = !(Parent, NumHelper(3002)) && (var(0) = -1)
-var(0) = 40
-
-[State 3012, Var]
-type  = VarAdd
-trigger1 = var(0) > 0
-var(0) = -1
-
-[State 3012, Scale]
-type = AngleDraw
-trigger1 = var(0) = [0,10]
-scale = var(0)/10.0, 1 + (10 - var(0))/5.0
-
-[State 3012, end]
-type = ChangeState
-trigger1 = !var(0)
-value = 3014
-
 ;Bubble
 [Statedef 3013]
 type = S
@@ -1665,14 +1313,6 @@ type = VelSet
 trigger1 = Parent, StateNo = 3002 && Parent, AnimElemNo(0) = 4
 X = 5.7
 persistent = 0
-
-[State 0, DisplayToClipboard]
-type = DisplayToClipboard
-trigger1 = 1
-text = "Pos X = %f, TargetPos X = %f"
-params = Pos X, Target, Pos X
-ignorehitpause = 1
-;persistent = 
 
 [State 3014, Vel]
 type = VelSet

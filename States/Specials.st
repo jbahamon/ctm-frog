@@ -14,6 +14,7 @@ ctrl=0
 sprpriority=1
 velset=0,0
 poweradd=45
+facep2= 1
 
 [State 1000, whatbuttondidyoupress?]
 type = VarSet
@@ -265,6 +266,7 @@ ctrl=0
 velset=0,0
 poweradd=115
 sprpriority=1
+facep2= 1
 
 [State 1020, Sound!]
 type=PlaySnd
@@ -428,6 +430,7 @@ ctrl=0
 velset=0,0
 poweradd=-500
 sprpriority=1
+facep2= 1
 
 [State 1020, Sound!]
 type=PlaySnd
@@ -601,6 +604,7 @@ juggle = 16
 velset=0,0
 poweradd=115
 sprpriority=1
+facep2= 1
 
 [State 1040, Explod]
 type = Explod

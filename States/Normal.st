@@ -13,6 +13,7 @@ sprpriority = 1
 velset = 0,0
 poweradd = 0
 juggle = 2 
+facep2= 1
 
 [State 200, Snd]
 type = PlaySnd
@@ -63,7 +64,7 @@ air.velocity = -2,-2
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=8
-getpower=72, 36
+getpower= IfElse(Var(21) > 0, 0, 72), IfElse(Var(21) > 0, 0, 36)
 givepower=36, 36
 
 [State 200, Dampen]
@@ -85,11 +86,12 @@ type    = S
 movetype= A
 physics = S
 juggle  = 4
-poweradd= 18
+poweradd= IfElse(Var(21) > 0, 0, 18)
 ctrl = 0
 velset = 0,0
 anim = 210
 sprpriority=1
+facep2= 1
 
 [State 200, Snd]
 type = PlaySnd
@@ -138,7 +140,7 @@ ground.velocity = -1
 air.velocity = 0,4
 animtype=Medium
 air.animtype=Medium
-getpower = ifelse(p2movetype = H, 72, 144), 36
+getpower = IfElse(Var(21) > 0, 0, ifelse(p2movetype = H, 72, 144)), IfElse(Var(21) > 0, 0, 36)
 givepower = 36, 36
 palfx.add=200,200,200
 palfx.mul=256,256,256
@@ -165,9 +167,10 @@ movetype=A
 anim=220
 ctrl=0
 velset=0,0
-poweradd=18
+poweradd= IfElse(Var(21) > 0, 0, 18)
 juggle = 8
 sprpriority=1
+facep2= 1
 
 [State 220, vel]
 type = VelSet
@@ -219,12 +222,12 @@ air.type = Low
 ground.slidetime = 11
 ground.velocity = 0,-6
 air.velocity = 0,-6
-fall=1
+fall = Var(21) = 0
 fall.recover = 0
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=12
-getpower = ifelse(p2movetype = H, 72, 144), 36
+getpower = IfElse(Var(21) > 0, 0, ifelse(p2movetype = H, 72, 144)), IfElse(Var(21) > 0, 0, 36)
 givepower = 36, 36
 
 [State 200, Dampen]
@@ -258,8 +261,9 @@ movetype = A
 physics = C
 sprpriority=2
 velset=0,0
-poweradd=0
+poweradd= 0
 juggle=2 
+facep2= 1
 
 [State 400, Snd]
 type = PlaySnd
@@ -311,7 +315,7 @@ air.animtype=Light
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=8
-getpower=72, 36
+getpower=IfElse(Var(21) > 0, 0, 72), IfElse(Var(21) > 0, 0, 36)
 givepower=36, 36
 
 [State 200, Dampen]
@@ -336,8 +340,9 @@ movetype = A
 physics = C
 sprpriority=1
 velset=0,0
-poweradd=18
+poweradd= IfElse(Var(21) > 0, 0, 18)
 juggle=4 
+facep2= 1
 
 [State 410, Snd]
 type = PlaySnd
@@ -429,8 +434,9 @@ movetype = A
 physics = C
 sprpriority=2
 velset=0,0
-poweradd = 18
+poweradd= IfElse(Var(21) > 0, 0, 18)
 juggle=8 
+facep2= 1
 
 [State 420, Snd]
 type = PlaySnd
@@ -526,6 +532,8 @@ ctrl=0
 poweradd=0
 juggle=4
 sprpriority = 1
+facep2= 1
+poweradd= 0
 
 [State 600, Snd]
 type = PlaySnd
@@ -594,9 +602,10 @@ physics=A
 movetype=A
 anim=610
 ctrl=0
-poweradd=18
+poweradd= IfElse(Var(21) > 0, 0, 18)
 juggle=4
 sprpriority = 1
+facep2= 1
 
 [State 610, Snd]
 type = PlaySnd
@@ -665,7 +674,7 @@ air.velocity = 0,10
 animtype=Hard
 air.animtype=Hard
 fall=0
-air.fall=1
+air.fall=Var(21) = 0
 down.bounce =1
 palfx.add=200,200,200
 palfx.mul=256,256,256
@@ -688,9 +697,10 @@ movetype=A
 anim=620
 ctrl=0
 velset=0,0
-poweradd=18
+poweradd= IfElse(Var(21) > 0, 0, 18)
 juggle=16
 sprpriority = 1
+facep2= 1
 
 [State 620, vel]
 type=velset
@@ -740,7 +750,7 @@ sparkno=s7003
 sparkxy=4,0   
 ground.type = High
 air.type = High
-fall=1
+fall = Var(21) = 0
 ground.velocity = -3,-6
 air.velocity = -3,-6
 palfx.add=200,200,200
