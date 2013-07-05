@@ -70,14 +70,14 @@ ignorehitpause = 1
 [State 7011, HitOverride]
 type = HitOverride
 trigger1 = 1
-attr = SCA, AA, AP
+attr = SCA,NA,SA,HA,NP,SP,HP
 stateno = 7015
 ignorehitpause = 1
 
 [State 7011, HitOverride]
 type = NotHitBy
 trigger1 = 1
-value = , AT
+value = SCA,NT,ST,HT 
 ignorehitpause = 1
 
 [State 7011, Debug]
@@ -146,7 +146,7 @@ movetype = A
 anim = 3033
 sprpriority = -2
 facep2= 1
-poweradd = -10
+poweradd = -100
 
 [State 7021, hit]
 type = HitDef
@@ -184,14 +184,14 @@ ignorehitpause = 1
 [State 7011, HitOverride]
 type = HitOverride
 trigger1 = 1
-attr = SCA, AA, AP
+attr = SCA,NA,SA,HA,NP,SP,HP
 stateno = 7015
 ignorehitpause = 1
 
 [State 7011, HitOverride]
 type = NotHitBy
 trigger1 = 1
-value = , AT
+value = SCA,NT,ST,HT 
 ignorehitpause = 1
 
 [State 7012, FollowPlayer]
@@ -219,7 +219,7 @@ movetype = A
 anim = 3034
 sprpriority = -2
 facep2= 1
-poweradd = -12
+poweradd = -120
 
 [State 7013, Turn]
 type = Turn
@@ -229,14 +229,14 @@ ignorehitpause = 1
 [State 7011, HitOverride]
 type = HitOverride
 trigger1 = 1
-attr = SCA, AA, AP
+attr = SCA,NA,SA,HA,NP,SP,HP
 stateno = 7015
 ignorehitpause = 1
 
 [State 7011, HitOverride]
 type = NotHitBy
 trigger1 = 1
-value = , AT
+value = SCA,NT,ST,HT 
 ignorehitpause = 1
 
 [State 7013, FollowPlayer]
@@ -293,7 +293,7 @@ movetype = A
 anim = 3035
 sprpriority = -2
 facep2= 1
-poweradd = -15
+poweradd = -150
 
 [State 7014, Turn]
 type = Turn
@@ -303,14 +303,14 @@ ignorehitpause = 1
 [State 7011, HitOverride]
 type = HitOverride
 trigger1 = 1
-attr = SCA, AA, AP
+attr = SCA,NA,SA,HA,NP,SP,HP
 stateno = 7015
 ignorehitpause = 1
 
 [State 7011, HitOverride]
 type = NotHitBy
 trigger1 = 1
-value = , AT
+value = SCA,NT,ST,HT 
 ignorehitpause = 1
 
 [State 7021, hit]
@@ -372,14 +372,14 @@ ignorehitpause = 1
 [State 7011, HitOverride]
 type = HitOverride
 trigger1 = 1
-attr = , AA, AP
+attr = SCA,NA,SA,HA,NP,SP,HP
 stateno = 7015
 ignorehitpause = 1
 
 [State 7011, HitOverride]
 type = NotHitBy
 trigger1 = 1
-value = , AT
+value = SCA,NT,ST,HT 
 ignorehitpause = 1
 
 [State 7015, NotHitBy]
@@ -498,6 +498,25 @@ time = 8
 freq = 120
 ampl = 3
 
+[State 3010, pos]
+type = Varset
+trigger1 = NumTarget
+fvar(0) = Target, Pos X
+persistent = 0
+
+
+[State 3010, pos]
+type = Varset
+trigger1 = NumTarget
+fvar(1) = Target, Pos Y
+persistent = 0
+
+[State 3010, Hit]
+type = TargetBind
+trigger1 = NumTarget
+pos = fvar(0) - Pos X, fvar(1) - Pos Y
+ignorehitpause = 1
+
 [State 3010, Hit]
 type = TargetState
 trigger1 = NumTarget
@@ -547,7 +566,7 @@ ignorehitpause = 1
 type = ChangeState
 trigger1 = (Var(2) > 136) && !MoveHit
 trigger2 = Var(0) > 136 && MoveHit
-value = IfElse(MoveHit, 7017, 7018)
+value = IfElse(MoveHit, 7019, 7018)
 
 ;Masamune
 [Statedef 7017]
@@ -559,23 +578,12 @@ anim = 3008
 sprpriority = 1
 
 [State 3010, Interrupt]
-trigger1 = Parent, StateNo != [3000, 3010]
+trigger1 = !(Parent, NumHelper(3002))
+trigger1 = Parent, AnimElemNo(0) > 6 
+trigger1 = Parent, Anim = 3001
 type = ChangeState
 value = 7018
 ignorehitpause = 1
-
-[State 3001, Bubble]
-type = Helper
-trigger1 = AnimElem = 2
-helpertype = normal ;player
-name = "Time Bubble"
-ID = 3002
-stateno = 3013 
-pos = 0,-30
-postype = p1    ;p2,front,back,left,right
-facing = 1
-keyctrl = 0
-ownpal = 0
 
 [State 3010, Trans]
 type = Trans
@@ -613,3 +621,38 @@ ignorehitpause = 1
 type = DestroySelf
 trigger1 = Time >= 32
 
+;Masa&Mune Invisible
+[Statedef 7019]
+type = S
+physics = N
+movetype = A
+anim = 7400
+
+[State 3010, Hit]
+type = TargetBind
+trigger1 = NumTarget
+pos = fvar(0) - Pos X, fvar(1) - Pos Y
+ignorehitpause = 1
+
+[State 7019, Premature End]
+type = TargetDrop
+trigger1 = Parent, StateNo != [3000, 3003]
+
+[State 7019, Parent]
+type = ParentVarSet
+trigger1 = 1
+fv = 0
+value = Target, Pos X
+
+[State 7019, Parent]
+type = ParentVarSet
+trigger1 = 1
+fv = 1
+value = Target, Pos Y
+
+[State 7019, Target]
+type = TargetState
+trigger1 = Parent, StateNo = 3002
+trigger1 = Parent, Var(0) > 0
+value = 3021
+persistent = 0

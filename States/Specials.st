@@ -13,7 +13,7 @@ anim=1000
 ctrl=0
 sprpriority=1
 velset=0,0
-poweradd=45
+poweradd=IfElse(Var(21) > 0, 0, 45)
 facep2= 1
 
 [State 1000, whatbuttondidyoupress?]
@@ -57,7 +57,7 @@ anim=1001
 ctrl=0
 velset = 0, -.4
 sprpriority=1
-poweradd=45
+poweradd=IfElse(Var(21) > 0, 0, 45)
 
 [State 1001, Combo]
 type = ChangeAnim
@@ -203,7 +203,7 @@ guard.dist = 100
 envshake.time = 8
 envshake.freq = 120
 envshake.ampl = 2
-getpower=180
+getpower=IfElse(Var(21) > 0, 0, 180)
 
 [State 200, Dampen]
 Type=ParentVarset
@@ -264,7 +264,7 @@ movetype=A
 anim=1020
 ctrl=0
 velset=0,0
-poweradd=115
+poweradd=IfElse(Var(21) > 0, 0, 115)
 sprpriority=1
 facep2= 1
 
@@ -602,7 +602,7 @@ anim=1040
 ctrl=0
 juggle = 16
 velset=0,0
-poweradd=115
+poweradd=IfElse(Var(21) > 0, 0, 115)
 sprpriority=1
 facep2= 1
 
@@ -686,7 +686,7 @@ fall.recover=0
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=12
-getpower=50
+getpower=IfElse(Var(21) > 0, 0, 50)
 
 [State 200, Dampen]
 Type=Varset

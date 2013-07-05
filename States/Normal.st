@@ -394,7 +394,7 @@ air.animtype=Light
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=8
-getpower=72, 36
+getpower=IfElse(Var(21) > 0, 0, 72), IfElse(Var(21) > 0, 0, 36)
 givepower=36, 36
 
 [State 200, Dampen]
@@ -487,7 +487,7 @@ animtype=Hard
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=8
-getpower=216, 36
+getpower= IfElse(Var(21) > 0, 0, 216), IfElse(Var(21) > 0, 0, 36)
 givepower=36, 36
 
 [State 200, Dampen]
@@ -585,7 +585,7 @@ air.animtype=Light
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=12
-getpower = 72, 36
+getpower = IfElse(Var(21) > 0, 0, 72), IfElse(Var(21) > 0, 0, 36)
 givepower = 36, 36
 
 [State 200, Dampen]
@@ -679,7 +679,7 @@ down.bounce =1
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=9
-getpower = ifelse(p2movetype = H, 72, 144), 36
+getpower = IfElse(Var(21) > 0, 0, ifelse(p2movetype = H, 72, 144)), IfElse(Var(21) > 0, 0, 36)
 givepower = 36, 36
 
 [State 200, Dampen]
@@ -756,7 +756,7 @@ air.velocity = -3,-6
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=15
-getpower = ifelse(p2movetype = H, 72, 216), 36
+getpower = IfElse(Var(21) > 0, 0, ifelse(p2movetype = H, 72, 216)), IfElse(Var(21) > 0, 0, 36)
 givepower = 36, 36
 
 [State 200, Dampen]

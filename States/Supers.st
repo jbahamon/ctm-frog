@@ -1038,16 +1038,35 @@ type = S
 movetype = A
 anim = 0
 
-[State 3001, Safety]
-type = ChangeState
-trigger1 = !NumHelper(3030)
-value = 0
-
 [State 3001, Anim]
 type = ChangeAnim
 trigger1 = Anim != 3001
 trigger1 = Helper(3030), StateNo != 7016
 value = 3001
+
+[State 3001, Bubble]
+type = Helper
+trigger1 = Anim = 3001
+trigger1 = !NumHelper(3030) || Helper(3030), StateNo = 7019
+trigger1 = !NumHelper(3031)
+trigger1 = !NumHelper(3002)
+helpertype = normal ;player
+name = "Masa & Mune"
+ID = 3031
+stateno = 7017
+pos = 0,-30
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+pausemovetime = 99999
+persistent = 0
+
+[State 3001, Safety]
+type = ChangeState
+trigger1 = !NumHelper(3030) || Helper(3030), StateNo = 7019
+trigger1 = Anim != 3001
+value = 0
 
 [State 3001, Snd]
 type = PlaySnd
@@ -1055,61 +1074,77 @@ trigger1 = AnimElem = 4 && Anim = 3001
 value = S7040,3
 ;channel = 0
 
-[State 3001, Explod]
-type=Explod
-trigger1= AnimElem = 8 && Anim = 3001
-anim=7350
-ID=7350
-pos=0,-12
-postype=p1
-ownpal=1
-removetime = -2
-removeongethit=1
-supermovetime=999
-pausemovetime = 999
-ignorehitpause=0
-sprpriority=3
-bindtime = -1
-persistent = 0
+[State 3001, Bubble]
+type = Helper
+trigger1 = AnimElem = 6
+helpertype = normal ;player
+name = "Time Bubble"
+ID = 3002
+stateno = 3013 
+pos = 0,-30
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+pausemovetime = 99999
 
 [State 3001, Stop]
 type = Pause
-trigger1 = AnimElemNo(0) > 6 && !NumHelper(3002)
+trigger1 = AnimElemNo(0) > 6 
 time = 2
 movetime = 2
 
 [State 3001, Snd]
 type = PlaySnd
-trigger1 = AnimElemNo(0) > 6 && !NumHelper(3002)
+trigger1 = AnimElemNo(0) > 6
+trigger1 = !NumHelper(3002)
 value = S7040,4
 ;channel = 0
 persistent = 0
 
 [State 3001, BGPalFX]
 type = BGPalFX
-trigger1 = AnimElemNo(0) > 6 && !NumHelper(3002)
+triggerall = AnimElemNo(0) > 6 
+trigger1 = !NumHelper(3002)
 time = 1
-;add = 0,0,0
 mul = 0, 120, 256
 sinadd = 20,20,20,10
 invertall = 1
 color = 0
-;color = 256
-;ignorehitpause = 
-;persistent = 
 
 [State 3001, End]
 type = ChangeState
-trigger1 = !NumHelper(3002) && Helper(3000), StateNo > 3012
+trigger1 = !NumHelper(3030) || Helper(3030), StateNo = 7019
+trigger1 = !NumHelper(3031)
+trigger1 = !NumHelper(3002)
 value = 3002
 
 ;Throwing the Sword
 [Statedef 3002]
 anim = 3002
 
+[State 3002, Var]
+type = VarSet
+trigger1 = !Time
+var(0) = 0
+
+[State 3001, Bubble]
+type = Helper
+trigger1 = AnimElem = 4
+helpertype = normal ;player
+name = "Sword"
+ID = 3003
+stateno = 3014
+pos = 0,-30
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+pausemovetime = 0
+
 [State 3001, Stop]
 type = Pause
-trigger1 = AnimElemTime(6) < 140
+trigger1 = AnimElemTime(6) < 140 
 time = 2
 movetime = 2
 
@@ -1119,7 +1154,6 @@ trigger1 = AnimElemtime(1) = 20
 value = S7040,5
 channel = 0
 persistent = 0
-
 
 [State 3002, PlaySnd]
 type = PlaySnd
@@ -1171,9 +1205,23 @@ Y = 0
 persistent = 0
 
 [State 3003, PosSet]
+type = Helper
+trigger1 = ScreenPos Y < -50
+helpertype = normal ;player
+name = "Frog"
+ID = 3015
+stateno = 3015
+pos = 0,0
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+persistent = 0
+
+[State 3003, PosSet]
 type = PosSet
 trigger1 = ScreenPos Y < -50
-X = Helper(3000), Pos X
+X = fvar(0)
 persistent = 0
 
 [State 3003, PosSet]
@@ -1290,16 +1338,10 @@ flag = NoShadow
 type = DestroySelf
 trigger1 = Time = 130
 
-;Invisible, Sword
+;Sword
 [Statedef 3014]
 anim = 3011
 sprpriority = 1
-
-[State 3014, ChangeAnim]
-type = AssertSpecial
-trigger1 = Parent, StateNo != 3002 && Parent, StateNo != 3003
-trigger2 = Parent, StateNo = 3002 && Parent, AnimElemNo(0) < 4
-flag = Invisible
 
 [State 3014, ChangeAnim]
 type = PosSet
@@ -1310,61 +1352,40 @@ persistent = 0
 
 [State 3014, Vel]
 type = VelSet
-trigger1 = Parent, StateNo = 3002 && Parent, AnimElemNo(0) = 4
-X = 5.7
-persistent = 0
-
-[State 3014, Vel]
-type = VelSet
-trigger1 = Abs(((Target, Pos X) - Pos X)) < 30
-trigger2 = Facing > 0 && Pos X > Target, Pos X
-trigger3 = Facing < 0 && Pos X < Target, Pos X
-X = 0
-persistent = 0
-
-[State 3014, Vel]
-type = VelSet
-trigger1 = Parent, StateNo = 3002 && Parent, AnimElemTime(6) = 140
+trigger1 = !Time
 X = 5.7
 persistent = 0
 
 [State 3014, Stab]
-type = TargetState
-;triggerall = Parent, StateNo = 3002 && Parent, AnimElemTime(6) >= 140
-trigger1 =  Abs((Target, Pos X) - Pos X) < 6
-trigger2 = Facing > 0 && Pos X > Target, Pos X
-trigger3 = Facing < 0 && Pos X < Target, Pos X
-value = 3021
+type = ParentVarSet
+trigger1 =  Abs(Parent, fvar(0) - Pos X) < 6
+trigger2 = Facing > 0 && Pos X > Parent, fvar(0)
+trigger3 = Facing < 0 && Pos X < Parent, fvar(0)
+v = 0
+value = 1
 persistent = 0
 
-[State 3014, Stab]
-type = VelSet
-trigger1 = Target, StateNo = 3021
-X = 0
+[State 3014, fade]
+type = VarSet
+trigger1 = !Time
+var(0) = 0
+
+[State 3014, fade]
+type = VarSet
+trigger1 = Parent, Var(0) > 0
+var(0) = 1
 persistent = 0
 
-[State 3014, Stab]
-type = ChangeAnim
-trigger1 = Target, StateNo = 3021
-value = 3012
-persistent = 0
+[State 3014, fade]
+type = VarAdd
+trigger1 = var(0) > 0
+var(0) = 1
 
-[State 3014, Stab]
-type = AngleDraw
-trigger1 = Target, StateNo = 3021
-trigger1 = Target, AnimElemNo(0) = 4
-value = -45
-
-[State 3014, Stab]
-type = AngleDraw
-trigger1 = Target, StateNo = 3021
-trigger1 = Target, AnimElemNo(0) > 4
-value = -90
-
-[State 3014, stab]
-type = PosSet
-trigger1 = Anim = 3012
-X = Target, Pos X
+[State 3014, fade]
+type = trans
+trigger1 = var(0) > 0
+trans = addalpha
+alpha = 256 - 32 * var(0), 32 * var(0)
 
 [State 3014, stab]
 type = PlayerPush
@@ -1372,9 +1393,8 @@ trigger1 = 1
 value = 0
 
 [State 3014, End]
-type = ChangeState
-trigger1 = Parent, Anim = 3005
-value = 3015
+type = DestroySelf
+trigger1 = var(0) >= 8
 
 ;Big Frog
 [Statedef 3015]
@@ -1394,12 +1414,12 @@ flag = NoShadow
 [State 3015, PalFX]
 type = VarSet
 trigger1 = 1
-var(0) = (32*Time) % 360
+var(0) = (32 * GameTime) % 360
 
 [State 3015, PalFX]
 type = VarSet
 trigger1 = 1
-fvar(1) = var(0)/60.0
+fvar(1) = ((32 * GameTime) % 360)/60.0
 
 [State 3015, PalFX]
 type = VarSet
@@ -1454,35 +1474,37 @@ time = 1
 add = 128, 0, 128 - floor(fvar(2))
 mul = 200, 200, 200
 
-[State 3015, Scale]
-type = Trans
-trigger1 = !var(1)
-trans = AddAlpha
-alpha = 256, 47
+[State 3015, PalFX]
+type = PalFX
+trigger1 = fvar(1) = [5,6]
+color = 0
+time = 1
+add = 128, 0, 128 - floor(fvar(2))
+mul = 200, 200, 200
 
 [State 3015, Fade]
 type = varset
-trigger1 = Parent, Stateno = 50
+trigger1 = Parent, Stateno != 3003
 persistent = 0
-var(1) = 47
+var(1) = 31
+
+[State 3015, PalFX]
+type = Trans
+trigger1 = !Var(1)
+trans = AddAlpha
+alpha = 224, 32
+
+[State 3015, PalFX]
+type = Trans
+trigger1 = Var(1) > 0
+trans = AddAlpha
+alpha = 7 * Var(1), 7 * (32 - Var(1))
 
 [State 3015, telprot]
 type = PosSet
 trigger1 = !var(1)
 X = Parent, Pos X
 Y = Parent, Pos Y
-
-[State 3015, log]
-type = DisplayToClipboard
-trigger1 = 1
-text = "var(1) = %d"
-params = var(1)
-
-[State 3015, Fade]
-type = Trans
-trigger1 = var(1) > 0
-trans = AddAlpha
-alpha = 255, 0
 
 [State 3015, Fade]
 type = VarAdd
@@ -1498,6 +1520,11 @@ trigger1 = (var(1) = 1)
 [Statedef 3020]
 movetype = H
 velset = 0,0
+
+[State 3020, Exit]
+type = SelfState
+trigger1 = !gethitvar(isbound)
+value = 5050
 	
 [State 3020, anim]
 type = ChangeAnim2
@@ -1512,6 +1539,11 @@ movetype = H
 physics = N
 velset = 0,0
 sprpriority = 0
+
+[State 3021, Exit]
+type = SelfState
+trigger1 = !gethitvar(isbound)
+value = 5050
 
 [State 3021, anim]
 type = ChangeAnim2
