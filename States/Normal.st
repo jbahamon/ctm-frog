@@ -12,7 +12,7 @@ physics = S
 sprpriority = 1
 velset = 0,0
 poweradd = 0
-juggle = 2 
+juggle = 3 
 facep2= 1
 
 [State 200, Snd]
@@ -168,7 +168,7 @@ anim=220
 ctrl=0
 velset=0,0
 poweradd= IfElse(Var(21) > 0, 0, 18)
-juggle = 8
+juggle = 12
 sprpriority=1
 facep2= 1
 
@@ -241,12 +241,38 @@ ignorehitpause = 1
 type=statetypeset
 trigger1=animelemtime(2)>=0
 statetype=A
-physics=A
+physics=N
+
+[State 220, gravity]
+type = VelAdd
+trigger1=animelemtime(2)>=0
+Y = .5
 
 [State 220, end]
 type=changestate
-trigger1= animelem=4 && pos y >= 0
-value=52
+trigger1= AnimElemNo(0) = 4 
+trigger1 = Pos y >= - Vel Y && Vel Y > 0
+value=221
+
+; Landing
+[Statedef 221]
+type = S
+physics = S
+movetype = I
+anim = 47
+velset = 0,0
+ctrl = 0
+
+[State 221, Pos]
+type = PosSet
+trigger1 = 1
+Y = 0
+
+[State 221, End]
+type = ChangeState
+trigger1 = Time >= 10
+value = 0
+ctrl = 1
 
 ;===========================================================================
 ; Crouching Moves
@@ -262,7 +288,7 @@ physics = C
 sprpriority=2
 velset=0,0
 poweradd= 0
-juggle=2 
+juggle=3 
 facep2= 1
 
 [State 400, Snd]
@@ -435,7 +461,7 @@ physics = C
 sprpriority=2
 velset=0,0
 poweradd= IfElse(Var(21) > 0, 0, 18)
-juggle=8 
+juggle=6 
 facep2= 1
 
 [State 420, Snd]
@@ -692,13 +718,13 @@ ignorehitpause = 1
 ;Strong Air
 [Statedef 620]
 type=A
-physics=A
+physics=N
 movetype=A
 anim=620
 ctrl=0
 velset=0,0
 poweradd= IfElse(Var(21) > 0, 0, 18)
-juggle=16
+juggle=12
 sprpriority = 1
 facep2= 1
 
@@ -766,9 +792,15 @@ fvar(39) = fvar(39)*0.8
 persistent = 0
 ignorehitpause = 1
 
+[State 220, gravity]
+type = VelAdd
+trigger1 = 1
+Y = .5
+
 [State 620, end]
 type=changestate
-trigger1= animelem=4&&pos y =0
-value=0
+trigger1= AnimElemNo(0) = 4 
+trigger1 = Pos y >= - Vel Y && Vel Y > 0
+value=221
 
 

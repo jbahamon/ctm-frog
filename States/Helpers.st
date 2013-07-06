@@ -70,14 +70,15 @@ ignorehitpause = 1
 [State 7011, HitOverride]
 type = HitOverride
 trigger1 = 1
-attr = SCA,NA,SA,HA,NP,SP,HP
+time = -1
+attr = SCA,AA,AP
 stateno = 7015
 ignorehitpause = 1
 
 [State 7011, HitOverride]
 type = NotHitBy
 trigger1 = 1
-value = SCA,NT,ST,HT 
+value = ,AT
 ignorehitpause = 1
 
 [State 7011, Debug]
@@ -97,6 +98,18 @@ ignorehitpause = 1
 type = VarSet
 trigger1 = Parent, MoveType != A
 var(0) = 0
+
+[State 7015, ChangeAnim]
+type = VarSet
+trigger1 = !Time
+var(1) = StateNo
+ignorehitpause = 1
+
+[State 7011, Light Hit]
+type = ChangeState
+trigger1 = !Parent, Power
+trigger2 = Parent, Var(22) <= 0
+value = 7018
 
 [State 7011, Light Hit]
 type = ChangeState
@@ -146,7 +159,19 @@ movetype = A
 anim = 3033
 sprpriority = -2
 facep2= 1
-poweradd = -100
+
+[State 7015, ChangeAnim]
+type = VarSet
+trigger1 = !Time
+var(1) = StateNo
+ignorehitpause = 1
+
+[State 7015, ChangeAnim]
+type = ParentVarAdd
+trigger1 = !Time
+trigger1 = PrevStateNo != 7015
+var(22) = -200
+ignorehitpause = 1
 
 [State 7021, hit]
 type = HitDef
@@ -219,7 +244,19 @@ movetype = A
 anim = 3034
 sprpriority = -2
 facep2= 1
-poweradd = -120
+
+[State 7015, ChangeAnim]
+type = ParentVarAdd
+trigger1 = !Time
+trigger1 = PrevStateNo != 7015
+var(22) = -240
+ignorehitpause = 1
+
+[State 7015, ChangeAnim]
+type = VarSet
+trigger1 = !Time
+var(1) = StateNo
+ignorehitpause = 1
 
 [State 7013, Turn]
 type = Turn
@@ -293,7 +330,19 @@ movetype = A
 anim = 3035
 sprpriority = -2
 facep2= 1
-poweradd = -150
+
+[State 7015, ChangeAnim]
+type = ParentVarAdd
+trigger1 = !Time
+trigger1 = PrevStateNo != 7015
+var(22) = -300
+ignorehitpause = 1
+
+[State 7015, ChangeAnim]
+type = VarSet
+trigger1 = !Time
+var(1) = StateNo
+ignorehitpause = 1
 
 [State 7014, Turn]
 type = Turn
@@ -372,27 +421,31 @@ ignorehitpause = 1
 [State 7011, HitOverride]
 type = HitOverride
 trigger1 = 1
-attr = SCA,NA,SA,HA,NP,SP,HP
+time = -1
+attr = SCA,AA, AP
 stateno = 7015
 ignorehitpause = 1
 
 [State 7011, HitOverride]
 type = NotHitBy
 trigger1 = 1
-value = SCA,NT,ST,HT 
+time = -1
+value = , AT
 ignorehitpause = 1
 
 [State 7015, NotHitBy]
 type = NotHitBy
-trigger1 = 1
-value = SCA, AA, AP
+trigger1 = !Time
+time = 10
+value = SCA ,AA, AP
 time = 1
 ignorehitpause = 1
      
 [State 7015, LifeAdd]
-type = PowerAdd
+type = ParentVarAdd
 trigger1 = Time = 0
-value = - 2 * floor(gethitvar(damage))
+v = 22
+value = - 4 * floor(gethitvar(damage))
 ignorehitpause = 1
 
 [State 7015, ChangeAnim]
@@ -400,13 +453,6 @@ type = ChangeAnim
 trigger1 = Time < floor(gethitvar(hittime) * 0.8)
 value = Anim
 elem = AnimElemNo(0)
-ignorehitpause = 1
-     
-[State 7015, ChangeAnim]
-type = VarSet
-trigger1 = !Time
-trigger1 = PrevStateNo != 7015
-var(1) = PrevStateNo
 ignorehitpause = 1
      
 [State 7015, End]
@@ -431,6 +477,19 @@ physics = N
 velset = 0,0
 anim = 3036
 sprpriority = 1
+
+[State 7015, ChangeAnim]
+type = ParentVarAdd
+trigger1 = !Time
+trigger1 = PrevStateNo != 7015
+var(22) = -3000
+ignorehitpause = 1
+
+[State 7015, ChangeAnim]
+type = VarSet
+trigger1 = !Time
+var(1) = StateNo
+ignorehitpause = 1
 
 [State 7011, HitOverride]
 type = NotHitBy
@@ -465,13 +524,13 @@ X = 0
 
 [State 3010, HitDef]
 type = HitDef
-trigger1 = (AnimElem = 4) && Anim = 3036
+trigger1 = (AnimElem = 2) && Anim = 3036
 attr = S,HT        ;SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
 hitflag = MA-        ;HLAFD+-
 guardflag = MA         ;HLA
 animtype = light          ;light,medium,hard,back,up,diagup
 air.animtype = light
-damage = 10,0
+damage = 20,0
 ;guard.pause,0
 sparkno = -1
 sparkxy = 0,0
@@ -492,18 +551,26 @@ numhits = 0
 
 [State 3010, Hit]
 type = EnvShake
-trigger1 = MoveHit && (AnimElem = 4)
+triggerall = NumTarget
+trigger1 = MoveHit && (AnimElemTime(2) = 1)
 trigger2 = Anim = 3037 && AnimElem = 2
 time = 8
 freq = 120
 ampl = 3
+
+[State 3010, Hit]
+type = TargetLifeAdd
+triggerall = NumTarget
+trigger1 = MoveHit && (AnimElemTime(2) = 1)
+trigger2 = Anim = 3037 && AnimElem = 2
+value = -10
+kill = 0
 
 [State 3010, pos]
 type = Varset
 trigger1 = NumTarget
 fvar(0) = Target, Pos X
 persistent = 0
-
 
 [State 3010, pos]
 type = Varset
@@ -514,7 +581,7 @@ persistent = 0
 [State 3010, Hit]
 type = TargetBind
 trigger1 = NumTarget
-pos = fvar(0) - Pos X, fvar(1) - Pos Y
+pos = Facing * (fvar(0) - Pos X), fvar(1) - Pos Y
 ignorehitpause = 1
 
 [State 3010, Hit]
@@ -552,20 +619,20 @@ var(0) = 1
 
 [State 3010, End]
 type = ChangeAnim
-trigger1 = Var(0) = 80
+trigger1 = Var(0) = 120
 value = 3037
 
 [State 3010, Trans]
 type = Trans
-trigger1 = Var(0) > 120 && MoveContact
+trigger1 = Var(0) > 160 && MoveContact
 trans = addalpha
-alpha = 256 - 16 * (Var(0) - 120), 128 + 8 * (Var(0) - 120)
+alpha = 256 - 16 * (Var(0) - 160), 128 + 8 * (Var(0) - 160)
 ignorehitpause = 1
 
 [State 3010, End]
 type = ChangeState
 trigger1 = (Var(2) > 136) && !MoveHit
-trigger2 = Var(0) > 136 && MoveHit
+trigger2 = Var(0) > 176 && MoveHit
 value = IfElse(MoveHit, 7019, 7018)
 
 ;Masamune
@@ -618,6 +685,11 @@ alpha = 256 - 16 * (Time - 16), 128 + 8 * (Time - 16)
 ignorehitpause = 1
 
 [State 7010, End]
+type = ParentVarSet
+trigger1 = Time >= 32
+var(21) = 0
+
+[State 7010, End]
 type = DestroySelf
 trigger1 = Time >= 32
 
@@ -631,7 +703,7 @@ anim = 7400
 [State 3010, Hit]
 type = TargetBind
 trigger1 = NumTarget
-pos = fvar(0) - Pos X, fvar(1) - Pos Y
+pos = Facing * (fvar(0) - Pos X), fvar(1) - Pos Y
 ignorehitpause = 1
 
 [State 7019, Premature End]
@@ -656,3 +728,30 @@ trigger1 = Parent, StateNo = 3002
 trigger1 = Parent, Var(0) > 0
 value = 3021
 persistent = 0
+
+[State 7019, Target]
+type = TargetLifeAdd
+triggerall = NumTarget
+trigger1 = Parent, StateNo = 3002
+trigger1 = Parent, Var(0) > 0
+value = -97
+persistent = 0
+kill = 0
+
+[State 7019, Target]
+type = TargetLifeAdd
+triggerall = NumTarget
+trigger1 = Parent, StateNo = 3003
+trigger1 = Parent, var(0) > 30
+value = -103
+persistent = 0
+kill = 1
+
+[State 7010, End]
+type = ParentVarSet
+trigger1 = Parent, StateNo != [3000, 3003]
+var(21) = 0
+
+[State 7010, End]
+type = DestroySelf
+trigger1 = Parent, StateNo != [3000, 3003]

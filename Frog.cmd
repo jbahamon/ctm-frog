@@ -516,7 +516,8 @@ time = 1
 type = ChangeState
 value = 3000
 triggerall = StateType != A
-triggerall = Command = "Tokiyo Tomare"
+triggerall = Command = "qcfhcba" || Command = "qcfhcbb" || Command = "qcfhcbc"
+triggerall = Var(21) > 0 && NumHelper(3030)
 trigger1= Ctrl 	
 
 ;----------------------Supers----------------------
@@ -526,6 +527,7 @@ type = ChangeState
 value = 3060
 triggerall = StateType != A && Power >= 1000
 triggerall = Command = "qcfhcba" || Command = "qcfhcbb" || Command = "qcfhcbc"
+triggerall = !Var(21) && !NumHelper(3030)
 trigger1= Ctrl 			
 
 [State -1, Bubbles]
@@ -679,6 +681,7 @@ trigger1 = ctrl
 trigger2 = (stateno = 600) || (stateno = 610) || (stateno = 220 && AnimElemNo(0) >= 3) || (stateno = 1040)
 trigger2 = movecontact
 trigger3 = stateno = 1350 ;Air blocking
+trigger4 = StateNo = 1001 && AnimElemTime(4) >= 0
 
 ;----------------------Standing----------------------
 ;Stand Light Punch

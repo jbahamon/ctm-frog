@@ -619,6 +619,13 @@ juggle = 16
 sprpriority=1
 poweradd = -1000
 
+[State 7015, ChangeAnim]
+type = VarAdd
+trigger1 = !Time
+trigger1 = Var(21) > 0
+var(22) = -1000
+ignorehitpause = 1
+
 [State 3100, up!]
 type=statetypeset
 trigger1=animelemno(0)=5
@@ -794,6 +801,14 @@ ctrl=0
 juggle = 16
 sprpriority=1
 poweradd = -1000
+
+[State 7015, ChangeAnim]
+type = VarAdd
+trigger1 = !Time
+trigger1 = Var(21) > 0
+var(22) = -1000
+ignorehitpause = 1
+
 
 [State 3000, NHB]
 type = nothitby
@@ -1013,7 +1028,7 @@ trigger1 = Time = 5
 time = 45
 movetime = 45
 anim = -1
-sound = S7010,0
+sound = S7015,3
 p2defmul = 1
 darken = 0
 
@@ -1068,12 +1083,6 @@ trigger1 = !NumHelper(3030) || Helper(3030), StateNo = 7019
 trigger1 = Anim != 3001
 value = 0
 
-[State 3001, Snd]
-type = PlaySnd
-trigger1 = AnimElem = 4 && Anim = 3001
-value = S7040,3
-;channel = 0
-
 [State 3001, Bubble]
 type = Helper
 trigger1 = AnimElem = 6
@@ -1098,7 +1107,7 @@ movetime = 2
 type = PlaySnd
 trigger1 = AnimElemNo(0) > 6
 trigger1 = !NumHelper(3002)
-value = S7040,4
+value = S7010,4
 ;channel = 0
 persistent = 0
 
@@ -1151,7 +1160,7 @@ movetime = 2
 [State 3001, Snd]
 type = PlaySnd
 trigger1 = AnimElemtime(1) = 20
-value = S7040,5
+value = S7000,2
 channel = 0
 persistent = 0
 
@@ -1163,7 +1172,7 @@ value = S7000,3
 [State 3002, PlaySnd]
 type = PlaySnd
 trigger1 = AnimElem = 6
-value = S7040,6
+value = S7015,1
 channel = 0
 
 [State 3002, BGPalFX]
@@ -1197,36 +1206,38 @@ movecamera = 0,0
 type = VelSet
 trigger1 = Anim = 3004 && AnimElem = 2
 Y = - 10
+persistent = 0
+
+[State 3003, ChangeAnim]
+type = PlaySnd
+trigger1 = Anim = 3004 && AnimElem = 2
+value = 7000,0
+persistent = 0
+
+[State 3003, ChangeAnim]
+type = StateTypeSet
+trigger1 = Anim = 3004 && AnimElem = 2
+statetype = A
+physics = N
+persistent = 0
+
 
 [State 3003, PosSet]
 type = VelSet
-trigger1 = ScreenPos Y < -50
+trigger1 = ScreenPos Y < -120
 Y = 0
 persistent = 0
 
-[State 3003, PosSet]
-type = Helper
-trigger1 = ScreenPos Y < -50
-helpertype = normal ;player
-name = "Frog"
-ID = 3015
-stateno = 3015
-pos = 0,0
-postype = p1    ;p2,front,back,left,right
-facing = 1
-keyctrl = 0
-ownpal = 1
-persistent = 0
 
 [State 3003, PosSet]
 type = PosSet
-trigger1 = ScreenPos Y < -50
+trigger1 = ScreenPos Y < -120
 X = fvar(0)
 persistent = 0
 
 [State 3003, PosSet]
 type = ChangeAnim
-trigger1 = ScreenPos Y < -50
+trigger1 = ScreenPos Y < -120
 value = 3005
 persistent = 0
 
@@ -1245,7 +1256,30 @@ persistent = 0
 [State 3003, fall]
 type = VelSet
 trigger1 = Anim = 3005
+trigger1 = AnimElemTime(1) = 50
 Y = 13
+persistent = 0
+
+[State 3003, PosSet]
+type = Helper
+trigger1 = ScreenPos Y < -120
+trigger1 = AnimElemTime(1) = 10
+helpertype = normal ;player
+name = "Frog"
+ID = 3015
+stateno = 3015
+pos = 0,0
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+persistent = 0
+
+[State 3003, fall]
+type = PlaySnd
+trigger1 = ScreenPos Y < -60
+value = 7016,0
+channel = 0
 persistent = 0
 
 [State 3003, fall]
@@ -1253,6 +1287,14 @@ type = VelSet
 trigger1 = Anim = 3005
 trigger1 = Pos Y > -80
 Y = 0
+persistent = 0
+
+[State 3003, fall]
+type = PlaySnd
+trigger1 = Anim = 3005
+trigger1 = Pos Y > -80
+value = 7016,1
+channel = 0
 persistent = 0
 
 [State 3003, fall]
@@ -1283,7 +1325,7 @@ persistent = 0
 [State 3003, fall]
 type = PlaySnd
 trigger1 = var(0) = 1
-value = S7040,7
+value = S7015,1
 persistent = 0
 
 [State 3003, Var]
@@ -1324,6 +1366,13 @@ velset = 0,0
 anim = 1016
 sprpriority = 5
 
+[State 3001, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S7010,1
+;channel = 0
+
+
 [State 3013, Scale]
 trigger1 = 1
 type = AngleDraw
@@ -1346,14 +1395,14 @@ sprpriority = 1
 [State 3014, ChangeAnim]
 type = PosSet
 trigger1 = !Time
-X = Parent, Pos X  + 30
+X = Parent, Pos X  + 30 * Facing
 Y = Parent, Pos Y - 15
 persistent = 0
 
 [State 3014, Vel]
 type = VelSet
 trigger1 = !Time
-X = 5.7
+X = 7.7
 persistent = 0
 
 [State 3014, Stab]
@@ -1374,6 +1423,13 @@ var(0) = 0
 type = VarSet
 trigger1 = Parent, Var(0) > 0
 var(0) = 1
+persistent = 0
+
+[State 3001, Snd]
+type = PlaySnd
+trigger1 = Var(0) > 0
+value = S7002,2
+channel = 0
 persistent = 0
 
 [State 3014, fade]
@@ -1399,6 +1455,7 @@ trigger1 = var(0) >= 8
 ;Big Frog
 [Statedef 3015]
 anim = 3013
+sprpriority = 1
 
 [State 3015, Fade]
 type = varset
@@ -1627,6 +1684,13 @@ type = VarSet
 trigger1 = (!AnimTime)
 v = 21
 value = 1
+
+[State 2110, VarSet]
+type = VarSet
+trigger1 = (!AnimTime)
+v = 22
+value = 3000
+persistent = 0
 
 [State 2020, Super Pause FX]
 type = helper

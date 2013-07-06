@@ -15,6 +15,7 @@ sprpriority=1
 velset=0,0
 poweradd=IfElse(Var(21) > 0, 0, 45)
 facep2= 1
+juggle=12
 
 [State 1000, whatbuttondidyoupress?]
 type = VarSet
@@ -58,6 +59,7 @@ ctrl=0
 velset = 0, -.4
 sprpriority=1
 poweradd=IfElse(Var(21) > 0, 0, 45)
+juggle=12
 
 [State 1001, Combo]
 type = ChangeAnim
@@ -104,16 +106,16 @@ y = -4
 persistent = 0
 
 [State 1001,end]
-type = StateTypeSet
-trigger1 = NumHelper(1010)>0
-physics = A
-persistent = 0
+type = VelAdd
+trigger1 = AnimElemTime(4) >= 0
+Y = 0.48
 
 [State 1001,end]
-type=ChangeState
-trigger1 = Time = 50
+type = ChangeState
+trigger1= AnimElemNo(0) = 4 
+trigger1 = Pos y >= - Vel Y && Vel Y > 0
 ctrl=0
-value=50
+value=221
 
 ;Water Bubble
 [Statedef 1010]
@@ -203,7 +205,7 @@ guard.dist = 100
 envshake.time = 8
 envshake.freq = 120
 envshake.ampl = 2
-getpower=IfElse(Var(21) > 0, 0, 180)
+getpower=IfElse(Parent, Var(21) > 0, 0, 180)
 
 [State 200, Dampen]
 Type=ParentVarset
@@ -267,6 +269,7 @@ velset=0,0
 poweradd=IfElse(Var(21) > 0, 0, 115)
 sprpriority=1
 facep2= 1
+juggle=6
 
 [State 1020, Sound!]
 type=PlaySnd
@@ -431,6 +434,13 @@ velset=0,0
 poweradd=-500
 sprpriority=1
 facep2= 1
+
+[State 7015, ChangeAnim]
+type = VarAdd
+trigger1 = !Time
+trigger1 = Var(21) > 0
+var(22) = -500
+ignorehitpause = 1
 
 [State 1020, Sound!]
 type=PlaySnd

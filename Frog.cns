@@ -148,13 +148,6 @@ ignorehitpause=1
 
 [Statedef -3]
 
-[State -3, Display]
-trigger1 = 1
-type = DisplayToClipboard
-text = "%d"
-params = var(21)
-
-
 [State -3: AssertSpecial]
 type = AssertSpecial
 trigger1 = (Var(21) > 0)
@@ -163,7 +156,13 @@ flag = NoJuggleCheck
 [State -3, Dampener]
 Type = AttackMulSet
 Trigger1 = 1
-value = IfElse(Var(21) > 0, 1.1, fvar(39))
+value = IfElse(Var(21) > 0, 0.68, fvar(39))
+ignorehitpause = 1
+
+[State -3, Power]
+Type = PowerSet
+Trigger1 = Var(21) > 0
+value = Var(22)
 ignorehitpause = 1
 
 ;This controller plays a sound everytime KFM lands from a jump, or
