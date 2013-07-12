@@ -137,13 +137,6 @@ type=varset
 trigger1=!time
 var(0) = (Parent, StateNo = 1000)
 
-[State 1010, :P]
-type=hitby
-trigger1=1
-time=-1
-value=SCA,NP,SP,HP
-ignorehitpause=1
-
 [State 1010, noshadow]
 type=assertspecial
 trigger1=1
@@ -214,13 +207,20 @@ fvar(39) = parent, fvar(39)*0.86
 persistent = 0
 ignorehitpause = 1
 
-[State 1010, HitOverride]
-type=hitoverride
-trigger1=1
-time=-1
-attr=SCA,NP,SP,HP
-stateno=1015
-ignorehitpause=1
+[State 1021, HitOverride]
+type = HitOverride
+trigger1 = 1
+time = -1
+attr = , AA, AP
+stateno = 1015
+ignorehitpause = 1
+
+[State 1021, HB]
+type = NotHitBy
+trigger1 = 1
+time = -1
+value = , AT
+ignorehitpause = 1
 
 [State 1010, burst]
 type=changestate
