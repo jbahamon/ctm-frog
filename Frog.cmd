@@ -565,7 +565,7 @@ trigger1 = Ctrl
 [State -1, Slurp Cut]
 type = ChangeState
 value = 1030
-triggerall = StateType != A && Power >=500
+triggerall = StateType != A && Power >=200
 triggerall = Command = "qcfa" || Command = "qcfb" || Command = "qcfc"
 trigger1 = Ctrl
 

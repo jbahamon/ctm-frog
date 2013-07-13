@@ -431,7 +431,7 @@ anim=1030
 juggle=0
 ctrl=0
 velset=0,0
-poweradd=-500
+poweradd=-200
 sprpriority=1
 facep2= 1
 
@@ -439,7 +439,7 @@ facep2= 1
 type = VarAdd
 trigger1 = !Time
 trigger1 = Var(21) > 0
-var(22) = -500
+var(22) = -200
 ignorehitpause = 1
 
 [State 1020, Sound!]
