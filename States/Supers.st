@@ -619,6 +619,12 @@ juggle = 16
 sprpriority=1
 poweradd = -1000
 
+[State 2010, NHB]
+type = NotHitBy
+trigger1 = animelemno(0) <= 5
+time = 1
+value = SCA
+
 [State 7015, ChangeAnim]
 type = VarAdd
 trigger1 = !Time
