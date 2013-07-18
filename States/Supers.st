@@ -610,7 +610,7 @@ value = 5100
 
 ;Water Pillar
 [Statedef 3100]
-physics=S
+physics=N
 movetype=A
 anim=3100
 ctrl=0
@@ -717,24 +717,33 @@ ctrl=0
 
 ;The Pillar
 [Statedef 3101]
-type=S
-physics=S
+type=A
+physics=N
 movetype=A
 anim=7202
 ctrl=0
 velset=0,0
 sprpriority=4
 
+[State 3101, Realtime]
+type = VarSet
+trigger1 = !Time && PrevStateNo != 3102
+trigger1 = Var(1) := 250
+trigger1 = !(Var(2) := 0)
+V = 0
+value = 0
+ignorehitpause = 1
+
 [State 3101, Snd]
 type = PlaySnd
-trigger1 = !Time
+trigger1 = !Var(0)
 value = S7010,2
 channel = 1
 persistent = 0
 
 [State 3101, hitdef]
-type=hitdef
-trigger1=time%40=0
+type = HitDef
+trigger1 = Var(0) % 40 = 0
 attr=A,HP
 numhits=1
 damage=floor(39* parent, fvar(39)),0
@@ -763,20 +772,15 @@ getpower=0
 [State 200, Dampen]
 Type=ParentVarset
 Trigger1 = MoveHit
+trigger1 = !Var(2)
+trigger1 = (Var(2) := 1)
 fvar(39) = parent, fvar(39)*0.86
 persistent = 0
 ignorehitpause = 1
 
 [State 3101, Shake]
 type = EnvShake
-trigger1 = !Time
-time = 200
-freq = 120
-ampl = 2
-
-[State 3101, Shake]
-type = EnvShake
-trigger1 = !Time
+trigger1 = !Var(0)
 time = 190
 freq = 120
 ampl = 4
@@ -789,13 +793,56 @@ ampl = 0
 
 [State 3101, Close]
 type=ChangeAnim
-trigger1 = Time = 162 || parent, stateno != 3100
+trigger1 = Var(0) >= 162
+trigger2 = Parent, StateNo != 3100
+trigger3 = Var(1) <= 0
 value=7201
 persistent=0
 
+[State 3101, RealTime]
+type = VarAdd
+trigger1 = 1
+V = 0
+value = 1
+ignorehitpause = 1
+
+
 [State 3101, Close]
-type=destroySelf
+type = DestroySelf
 trigger1 = Anim = 7201 && !AnimTime
+
+[Statedef 3102]
+type = A
+movetype = H
+physics = N
+velset = 0, 0
+sprpiority = 4
+anim = 7202
+
+[State 3102, damage]
+type = VarAdd
+trigger1 = !Time
+V = 1
+value = - floor(GetHitVar(damage) * 0.5)
+
+[State 3102, nhb]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+ignorehitpause = 1
+
+[State 3102, pos]
+type = PosSet
+trigger1 = 1
+X = Parent, Pos X
+Y = 20
+ignorehitpause = 1
+
+[State 3102, end]
+type = ChangeState
+trigger1 = Time >= floor(0.7 * GetHitVar(hittime)) 
+value = 3101
+ignorehitpause = 1
 
 ; Bubble Rush
 [Statedef 3110]
