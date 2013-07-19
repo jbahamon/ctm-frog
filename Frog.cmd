@@ -392,7 +392,7 @@ command = b+c
 time = 1
 
 [Command]
-name = "2p"
+name = "a+c"
 command = a+c
 time = 1
 
@@ -606,7 +606,7 @@ trigger3 = movecontact
 [State -1, Grand Dream]
 type = ChangeState
 value = 3030
-triggerall = Command = "2p" ;&& !(command = "holdfwd" || command = "holdback")
+triggerall = Command = "a+c" ;&& !(command = "holdfwd" || command = "holdback")
 triggerall = Power >= 3000
 triggerall = Var(21) = 0
 trigger1 = StateType != A

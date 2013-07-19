@@ -1028,14 +1028,20 @@ Trigger1 = MoveHit
 fvar(39) = parent, fvar(39)*0.95
 persistent = 0
 
-
 [State 3111, HitOverride]
 type=hitoverride
 trigger1=1
 time=-1
-attr=SCA, AA, AP, AT
+attr=SCA, AA, AP
 stateno=1015
 ignorehitpause=1
+
+[State 2012, HB]
+type = NotHitBy
+trigger1 = 1
+time = -1
+value = , AT
+ignorehitpause = 1
 
 [State 3111, burst]
 type=changestate

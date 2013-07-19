@@ -209,7 +209,7 @@ ignorehitpause = 1
 [State 7011, HitOverride]
 type = HitOverride
 trigger1 = 1
-attr = SCA,NA,SA,HA,NP,SP,HP
+attr = SCA,AA, AP
 stateno = 7015
 ignorehitpause = 1
 
@@ -411,7 +411,8 @@ value = 7011
 ; Masa & Mune Gethit
 [Statedef 7015]
 MoveType = H
-     
+poweradd = 0
+ 
 [State 7015, PosFreeze]
 type = PosFreeze
 trigger1 = 1
@@ -734,7 +735,7 @@ type = TargetLifeAdd
 triggerall = NumTarget
 trigger1 = Parent, StateNo = 3002
 trigger1 = Parent, Var(0) > 0
-value = -97
+value = -67
 persistent = 0
 kill = 0
 
@@ -743,7 +744,7 @@ type = TargetLifeAdd
 triggerall = NumTarget
 trigger1 = Parent, StateNo = 3003
 trigger1 = Parent, var(0) > 30
-value = -103
+value = -73
 persistent = 0
 kill = 1
 

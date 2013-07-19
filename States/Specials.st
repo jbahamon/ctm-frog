@@ -211,7 +211,7 @@ ignorehitpause = 1
 type = HitOverride
 trigger1 = 1
 time = -1
-attr = , AA, AP
+attr = SCA, AA, AP
 stateno = 1015
 ignorehitpause = 1
 
