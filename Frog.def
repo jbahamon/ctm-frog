@@ -34,9 +34,9 @@ c = 6
 x2 = 7 ;Hold Start and press button X for palette 7, etc.
 y2 = 8
 z2 = 9
-;a2 = 10
-;b2 = 11
-;c2 = 12
+x2 = 10 
+y2 = 11
+z2 = 12
 
 ; Arcade mode
 ;[Arcade]
