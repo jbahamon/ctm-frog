@@ -265,10 +265,10 @@ trigger1 = Abs(Pos y - Helper(7300), Pos y)< 30
 value=194
 persistent =0 
 
-[State 193, asdasdasdas :D]
-type=Changestate
-trigger1= Anim = 194 && !AnimTime
-value=0
+[State 193, End]
+type = ChangeState
+trigger1 = Anim = 194 && !AnimTime
+value = 0
 
 [State 193, 1] ;Freeze animation until PreIntro is over
 type = ChangeAnim
@@ -322,102 +322,67 @@ type=destroyself
 trigger1=var(0)=1||var(0)<0
 
 
-;Gate Intro
+;Cyrus Intro
 [Statedef 194]
 type = S
 ctrl = 0
 anim = 191
 velset = 0,0
 physics=N
+sprpriority = 1
 
 [State 194, Assert]
-type=AssertSpecial
-trigger1=1
-flag=intro
+type = AssertSpecial
+trigger1 = 1
+flag = intro
 
 [State 194, helper]
-type = helper
-trigger1 = !time
-Name="TimeGate"
-ID=7302
-Stateno=7302
-postype=left
-pos=floor(screenpos x),-100
-ownpal=1
-persistent=0
-
-[State 194, pos]
-type=Screenbound
-trigger1=1
-value=0
-movecamera=0,0
-
-[State 194, Assert]
-type=AssertSpecial
-trigger1=time<150
-flag=invisible
-
-[State 194, pos]
-type=posadd
-trigger1=time=150
-y=-90
-
-[State 194, grav]
-type=velset
-trigger1=time>150&&pos y <0
-y=2.9
-
-[State 194, floor]
-type=posset
-trigger1=pos y>0
-y=0
-
-[State 194, floor]
-type=velset
-trigger1=pos y>0
-y=0
+type = Helper
+trigger1 = !Time
+name = "Cyrus"
+ID = 191
+stateno = 7302
+postype = p1
+pos = 0, -50
+ownpal = 1
+persistent = 0
 
 [State 194, anim]
-type=changeanim
-trigger1=time>150&&pos y =0
-value=7307
-persistent=0
+type = ChangeAnim
+trigger1 = Time > 0
+trigger1 = !NumHelper(191)
+trigger1 = Anim != 192
+value = 192
 
 [State 194, anim]
-type=changestate
-trigger1=anim=7307&&!animtime
-value=192
+type = ChangeState
+trigger1 = Anim = 192 && !AnimTime
+value = 0
 
-;Gate
+;Cyrus
 [Statedef 7302]
-anim=7303
+type = A
+physics = N
+movetype = I
+sprpriority = -1
+anim=7310
 
-[State 7302, :P]
-type=changeanim
-trigger1=time=70
-value=7304
+[State 7301, float]
+type = VelSet
+trigger1 = 1
+Y = 0.3 * Sin(Time/20.0)
 
-[State 7302, Opening]
-type = PlaySnd
-trigger1 = Time = 70
-value = S7015,2
+[State 7301, Ghosty]
+type = Trans 
+trigger1 = Time = [100, 164]
+trans = addalpha
+alpha = 256- 4 * (Time - 100), 128 + 2 * (Time - 100)
 
-[State 7302, :P]
-type=changeanim
-trigger1=anim=7304&&!animtime
-value=7302
-elem=9
-
-[State 7302, :P]
-type=changeanim
-trigger1=time=190
-value=7305
-
-
-[State 7302, Opening]
-type = PlaySnd
-trigger1 = Time = 190
-value = S7016,2
+[State 7301, Ghosty]
+type = Trans 
+trigger1 = Time < 100
+trans = addalpha
+alpha = 256, 128
 
 [State 7302, xD]
 type=AssertSpecial
@@ -425,9 +390,8 @@ trigger1=1
 flag=noshadow
 
 [State 7302, xD]
-type=destroyself
-trigger1=anim=7305&&!animtime
-
+type = destroyself
+trigger1 = Time >= 164
 ;------------------------------Special Intros :B---------------------------------------------
 ;Against Crono
 [Statedef 301]
