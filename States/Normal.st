@@ -645,19 +645,6 @@ trigger1 = AnimElemNo(0) = 1
 x=(vel x)/2
 Y = 0
 
-[State 610,freeze]
-type = VelSet
-trigger1 = !Time
-trigger1 = command = "holddownb"
-X = 0
-
-
-[State 610,freeze]
-type = VelAdd
-trigger1 = !Time
-trigger1 = command = "holddownb"
-Y = 7
-
 [State 610, Explod]
 type = Explod
 trigger1 = AnimElem = 2
