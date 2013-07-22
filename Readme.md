@@ -26,8 +26,8 @@ Special Throws
 
 **Slurp Cut**: D, DF, F + a/b/c (Standing) Requires 500 Power.
 
-	A special throw using Frog's tongue. The tongue's length depends on 
-	the button pressed.
+A special throw using Frog's tongue. The tongue's length depends on 
+the button pressed.
 
 
 Specials
@@ -35,20 +35,18 @@ Specials
 
 **Leap Slash**: F, D, DF + a/b/c (Standing).
 
-	Frog jumps over the enemy and stabs downwards.
-	The horizontal range of the jump depends on the button pressed.
-	You can press any attack button during the jump sequence to make
-	Frog stab right away.
+Frog jumps over the enemy and stabs downwards.
+The horizontal range of the jump depends on the button pressed.
 
 **Water**: D, DB, B + a/b/c (Standing/Air).
 
-	A standard, slow, projectile.
-	The bubble's movement and final position changes depending on the
-	button pressed.
+A standard, slow, projectile.
+The bubble's movement and final position changes depending on the
+button pressed.
 
 **Line Slash**: D, DF, F + a/b/c (Air).
 
-	Frog stops in the air and flies forwards, stabbing the enemy.
+Frog stops in the air and flies forwards, stabbing the enemy.
 
 
 Supers
@@ -56,36 +54,36 @@ Supers
 
 **Bubble Rush**: D, DF, F, D, DF, F, a/b/c (Standing/Air). Requires 1000 Power.
 
-	Frog releases many bubbles that float towards the opponent.
+Frog releases many bubbles that float towards the opponent.
 
 **Water Stream**: D, DB, B, D, DB, B + a/b/c (Standing/Air). Requires 1000 Power.
 
-	Frog creates a water pillar.
+Frog creates a water pillar.
 
 **Mastermune**: D, F, D, B + a/b/c (Standing). Requires 1000 Power.
 
-	Frog jumps and tries to stab the oponent with the Masamune.
-	If it succeeds, Masa and Mune are free to do as they please
-	with the opponent.
+Frog jumps and tries to stab the oponent with the Masamune.
+If it succeeds, Masa and Mune are free to do as they please
+with the opponent.
 
 Special Mode
 ------------
 
 **Grand Dream**: a + c (Standing). Requires 3000 Power.
 
-	Frog unleashes Masa&Mune. They will follow you and attack as you do, 
-	spending Power with each hit they perform. You also lose Power when 
-	Masa&Mune get hit. When you run out of Power, they will dissapear.
-	Use this mode to perform long combos!
+Frog unleashes Masa&Mune. They will follow you and attack as you do, 
+spending Power with each hit they perform. You also lose Power when 
+Masa&Mune get hit. When you run out of Power, they will dissapear.
+Use this mode to perform long combos!
 
 Final Move
 ----------
 
 **Frog Squash Da**: D, B, D, F + a/b/c (Standing, must have Grand Dream activated). Uses all of your Power.
 
-	Masa&Mune throw a barrage of punches and hits. If this move connects, 
-	a series of attacks will be unleashed on your opponent. Can you guess
-	the reference? A clue: WRYYYYY.
+Masa&Mune throw a barrage of punches and hits. If this move connects, 
+a series of attacks will be unleashed on your opponent. Can you guess
+the reference? A clue: WRYYYYY.
 
 
 Credits and Acknowledgements
