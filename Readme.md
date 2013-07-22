@@ -1,11 +1,9 @@
 --------------------------------
-Frog (Beta 2) by SilentProtagonist 
+Frog by SilentProtagonist 
 --------------------------------
 
-Release Date: December 11th, 2012.
-
-Ayla is a three-button character made for MUGEN 1.0.
-This is a beta version: in other words, it's not completely finished.
+Frog is a three-button character made for MUGEN 1.0.
+This is not a final version.
 
 What's Missing:
 
@@ -17,13 +15,18 @@ What's Missing:
 Frog's Moveset
 ==============
 
+Frog is intended to be a combo-heavy character. Try to chain his moves, 
+launch your opponent into the air and finish it with a super move!
+He also jumps higher than other characters, and some of his moves 
+either launch him into the air or can be executed in mid-air. 
+Keep these things in mind when playing as/against Frog.
+
 --------------
-Throws
+Special Throws
 --------------
 
-*Slurp Cut 
-	Command: D, DF, F + a/b/c (Standing)
-	Requires 500 Power.
+*Slurp Cut. Command: D, DF, F + a/b/c (Standing) Requires 500 Power.
+
 	A special throw using Frog's tongue. The tongue's length depends on 
 	the button pressed.
 
@@ -31,21 +34,21 @@ Throws
 Specials
 --------
 
-*Leap Slash
-	Command: F, D, DF + a/b/c (Standing)
+- Leap Slash. Command: F, D, DF + a/b/c (Standing)
+
 	Frog jumps over the enemy and stabs downwards.
 	The horizontal range of the jump depends on the button pressed.
 	You can press any attack button during the jump sequence to make
 	Frog stab right away.
 
-*Water
-	Command: D, DB, B + a/b/c (Standing/Air)
+- Water. Command: D, DB, B + a/b/c (Standing/Air)
+
 	A standard, slow, projectile.
 	The bubble's movement and final position changes depending on the
 	button pressed.
 
-*Line Slash
-	Command: D, DF, F + a/b/c (Air)
+- Line Slash. Command: D, DF, F + a/b/c (Air)
+
 	Frog stops in the air and flies forwards, stabbing the enemy.
 
 
@@ -70,6 +73,11 @@ Supers
 	If it succeeds, Masa and Mune are free to do as they please
 	with the opponent.
 
+------------
+Special Mode
+------------
+
+*
 
 ----------------------------
 Credits and Acknowledgements
