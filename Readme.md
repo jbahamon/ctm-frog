@@ -21,7 +21,7 @@ either launch him into the air or can be executed in mid-air.
 Keep these things in mind when playing as/against Frog.
 
 
-Special Throws
+Throws
 --------------
 
 **Slurp Cut**: D, DF, F + a/b/c (Standing) Requires 500 Power.
@@ -64,7 +64,8 @@ Frog creates a water pillar.
 
 Frog jumps and tries to stab the oponent with the Masamune.
 If it succeeds, Masa and Mune are free to do as they please
-with the opponent.
+with the opponent. This is a throw move, so don't try it against
+enemies immune to those.
 
 Special Mode
 ------------
