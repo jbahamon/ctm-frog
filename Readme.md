@@ -24,7 +24,7 @@ Keep these things in mind when playing as/against Frog.
 Special Throws
 --------------
 
-- Slurp Cut: D, DF, F + a/b/c (Standing) Requires 500 Power.
+*Slurp Cut*: D, DF, F + a/b/c (Standing) Requires 500 Power.
 
 	A special throw using Frog's tongue. The tongue's length depends on 
 	the button pressed.
@@ -33,20 +33,20 @@ Special Throws
 Specials
 --------
 
-- Leap Slash: F, D, DF + a/b/c (Standing).
+*Leap Slash*: F, D, DF + a/b/c (Standing).
 
 	Frog jumps over the enemy and stabs downwards.
 	The horizontal range of the jump depends on the button pressed.
 	You can press any attack button during the jump sequence to make
 	Frog stab right away.
 
-- Water: D, DB, B + a/b/c (Standing/Air).
+*Water*: D, DB, B + a/b/c (Standing/Air).
 
 	A standard, slow, projectile.
 	The bubble's movement and final position changes depending on the
 	button pressed.
 
-- Line Slash: D, DF, F + a/b/c (Air).
+*Line Slash*: D, DF, F + a/b/c (Air).
 
 	Frog stops in the air and flies forwards, stabbing the enemy.
 
@@ -54,15 +54,15 @@ Specials
 Supers
 ------
 
-- Bubble Rush: D, DF, F, D, DF, F, a/b/c (Standing/Air). Requires 1000 Power.
+*Bubble Rush*: D, DF, F, D, DF, F, a/b/c (Standing/Air). Requires 1000 Power.
 
 	Frog releases many bubbles that float towards the opponent.
 
-- Water Stream: D, DB, B, D, DB, B + a/b/c (Standing/Air). Requires 1000 Power.
+*Water Stream*: D, DB, B, D, DB, B + a/b/c (Standing/Air). Requires 1000 Power.
 
 	Frog creates a water pillar.
 
-- Mastermune: D, F, D, B + a/b/c (Standing). Requires 1000 Power.
+*Mastermune*: D, F, D, B + a/b/c (Standing). Requires 1000 Power.
 
 	Frog jumps and tries to stab the oponent with the Masamune.
 	If it succeeds, Masa and Mune are free to do as they please
@@ -71,7 +71,7 @@ Supers
 Special Mode
 ------------
 
-- Grand Dream: a + c (Standing). Requires 3000 Power.
+*Grand Dream*: a + c (Standing). Requires 3000 Power.
 
 	Frog unleashes Masa&Mune. They will follow you and attack as you do, 
 	spending Power with each hit they perform. You also lose Power when 
@@ -81,7 +81,7 @@ Special Mode
 Final Move
 ----------
 
-- Frog Squash Da: D, B, D, F + a/b/c (Standing, must have Grand Dream activated). Uses all of your Power.
+*Frog Squash Da*: D, B, D, F + a/b/c (Standing, must have Grand Dream activated). Uses all of your Power.
 
 	Masa&Mune throw a barrage of punches and hits. If this move connects, 
 	a series of attacks will be unleashed on your opponent. Can you guess
