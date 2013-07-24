@@ -83,8 +83,7 @@ Final Move
 **Frog Squash Da**: D, B, D, F + a/b/c (Standing, must have Grand Dream activated). Uses all of your Power.
 
 Masa&Mune throw a barrage of punches and hits. If this move connects, 
-a series of attacks will be unleashed on your opponent. Can you guess
-the reference? A clue: WRYYYYY.
+a series of attacks will be unleashed on your opponent. "WRYYYYYYYYY".
 
 
 Credits and Acknowledgements
