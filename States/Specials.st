@@ -198,7 +198,7 @@ guard.dist = 100
 envshake.time = 8
 envshake.freq = 120
 envshake.ampl = 2
-getpower=IfElse(Parent, Var(21) > 0, 0, 180)
+getpower=IfElse(Parent, Var(21) > 0, 0, 90)
 
 [State 200, Dampen]
 Type=ParentVarset
