@@ -196,6 +196,12 @@ ctrl = 0
 anim = 190
 velset = 0,0
 
+
+[State 191, 2] ;Assert this until you want "round 1, fight" to begin
+type = AssertSpecial
+trigger1 = 1
+flag = Intro
+
 [State 192, 1] ;Freeze animation until PreIntro is over
 type = ChangeAnim
 trigger1 = RoundState = 0
@@ -205,6 +211,8 @@ value = 190
 type = ChangeState
 trigger1 = AnimTime = 0
 value = 0
+
+
 
 ;Magus Intro
 [Statedef 193]
