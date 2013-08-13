@@ -1027,6 +1027,7 @@ Type=ParentVarset
 Trigger1 = MoveHit
 fvar(39) = parent, fvar(39)*0.95
 persistent = 0
+ignorehitpause = 1
 
 [State 3111, HitOverride]
 type=hitoverride
