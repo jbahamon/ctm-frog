@@ -304,8 +304,12 @@ movecamera=0,0
 
 [State 1020,Going Up..]
 type=statetypeset
-trigger1 = AnimElem = 6
+trigger1 = AnimElem = 5
 statetype=A
+
+[State 1020,Going Up..]
+type=statetypeset
+trigger1 = AnimElem = 6
 physics=A
 
 [State 1020,The "Slash" of Leap Slash]

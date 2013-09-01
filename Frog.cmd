@@ -547,6 +547,7 @@ trigger2 = (Stateno=3050) && !NumExplod(3700)
 trigger3 = ( StateNo = [200,299] ) && MoveHit
 trigger4 = ( StateNo = [400,499] ) && MoveHit
 trigger5 = ( StateNo = [600,699] ) && MoveHit
+trigger6 = ( StateNo = 1020) && MoveHit
 
 ;----------------------Specials----------------------
 
@@ -593,7 +594,7 @@ trigger1 = Ctrl
 trigger1 = StateType = A
 trigger2 = (StateNo = [600, 699])
 trigger2 = movecontact
-trigger3 = (StateNo = 220)
+trigger3 = (StateNo = 220) || (stateno = 1020)
 trigger3 = movecontact
 
 ;---------------------------------------------------------------------------
@@ -673,7 +674,7 @@ value = 620
 triggerall = command = "c"
 triggerall = statetype = A
 trigger1 = ctrl
-trigger2 = (stateno = 600) || (stateno = 610) || (stateno = 220 && AnimElemNo(0) >= 3) || (stateno = 1040)
+trigger2 = (stateno = 600) || (stateno = 610) || (stateno = 220 && AnimElemNo(0) >= 3) || (stateno = 1040) || (stateno = 1020)
 trigger2 = movecontact
 trigger3 = stateno = 1350 ;Air blocking
 trigger4 = StateNo = 1001 && AnimElemTime(4) >= 0
