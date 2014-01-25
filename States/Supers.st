@@ -1523,11 +1523,6 @@ trigger1 = !Time
 persistent = 0
 var(1) = 0
 
-[State 3015]
-type = AssertSpecial
-trigger1 = 1
-flag = NoShadow
-
 [State 3015, PalFX]
 type = VarSet
 trigger1 = 1

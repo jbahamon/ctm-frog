@@ -539,20 +539,27 @@ trigger1 = anim=1035 && AnimElemTime(1) = 8
 value = S7002,0
 channel=1
 
+[State 1035, Shake]
+type = EnvShake
+trigger1 = anim = 1035 && AnimElemTime(2) = 0
+time = 12
+freq = 120
+ampl = 4
+
 [State 1035, There you Go]
 type = TargetState
-trigger1 = anim = 1035 && AnimElemTime(2) = 5
+trigger1 = anim = 1035 && AnimElemTime(2) = 10
 value = 1037
 
 [State 1035, There you Go]
 type = VelSet
-trigger1 = anim = 1035 && AnimElemTime(2) = 5
+trigger1 = anim = 1035 && AnimElemTime(2) = 10
 X = 1
 Y = -5
 
 [State 1035, There you Go]
 type = StateTypeSet
-trigger1 = anim = 1035 && AnimElemTime(2) = 5
+trigger1 = anim = 1035 && AnimElemTime(2) = 10
 statetype = A
 physics = A
 
@@ -697,6 +704,9 @@ air.velocity=-2,-5
 air.fall=1
 fall=1
 fall.recover=0
+envshake.time = 8
+envshake.freq = 120
+envshake.ampl = 4
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=12
