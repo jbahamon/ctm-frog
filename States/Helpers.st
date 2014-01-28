@@ -470,7 +470,7 @@ trigger1 = var(1) != [7011,7014]
 value = var(1)
 ignorehitpause = 1
 
-;Initiating Frog Squash
+;Initiating Frog Squash Da
 [Statedef 7016]
 type = S
 movetype = A
@@ -713,18 +713,19 @@ trigger1 = Parent, StateNo != [3000, 3003]
 
 [State 7019, Parent]
 type = ParentVarSet
-trigger1 = 1
+trigger1 = NumTarget
 fv = 0
 value = Target, Pos X
 
 [State 7019, Parent]
 type = ParentVarSet
-trigger1 = 1
+trigger1 = NumTarget
 fv = 1
 value = Target, Pos Y
 
 [State 7019, Target]
 type = TargetState
+triggerall = NumTarget
 trigger1 = Parent, StateNo = 3002
 trigger1 = Parent, Var(0) > 0
 value = 3021

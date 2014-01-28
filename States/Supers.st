@@ -610,6 +610,7 @@ value = 5100
 
 ;Water Pillar
 [Statedef 3100]
+type = S
 physics=N
 movetype=A
 anim=3100
@@ -717,7 +718,7 @@ ctrl=0
 
 ;The Pillar
 [Statedef 3101]
-type=A
+type=S
 physics=N
 movetype=A
 anim=7202
@@ -744,7 +745,7 @@ persistent = 0
 [State 3101, hitdef]
 type = HitDef
 trigger1 = Var(0) % 40 = 0
-attr=A,HP
+attr=S,HP
 numhits=1
 damage=floor(39* parent, fvar(39)),0
 animtype=Hard
@@ -862,6 +863,11 @@ trigger1 = Var(21) > 0
 var(22) = -1000
 ignorehitpause = 1
 
+[State 7015, ChangeAnim]
+type = VarSet
+trigger1 = !Time
+var(0) = Pos Y < 0
+ignorehitpause = 1
 
 [State 3000, NHB]
 type = nothitby
@@ -950,11 +956,24 @@ value=50
 
 ;Small bubble
 [Statedef 3111]
-type=A
+type=S
 movetype=A
 physics=N
 anim=1011
 sprpriority=4
+
+
+[State 3111, randomVar]
+type=Varset
+trigger1=!time
+var(0)=Parent, Var(0)
+
+[State 3111, randomVar]
+type=StateTypeSet
+trigger1=!time
+trigger1 = Var(0)
+statetype = A
+physics = N
 
 [State 3111, randomVar]
 type=Varset
@@ -992,6 +1011,7 @@ Y = (FVar(14)/fvar(15) * 4.8) - Sin(Time * 0.62)
 
 [State 3111,Hitdef]
 type=hitdef
+triggerall = Var(0)
 triggerall=!movecontact
 triggerall=!movereversed
 trigger1 = Time > 0
@@ -1022,6 +1042,41 @@ envshake.time = 8
 envshake.freq = 120
 envshake.ampl = 2
 
+
+[State 3111,Hitdef]
+type=hitdef
+triggerall = !Var(0)
+triggerall=!movecontact
+triggerall=!movereversed
+trigger1 = Time > 0
+attr=S,HP
+hitflag=MAF
+guardflag=MA
+animtype=Medium
+priority=4
+damage=floor(parent, fvar(39)*21),2
+pausetime=2,14
+sparkno=-1
+hitsound = 5,0
+ground.type = Low
+air.type=Low
+ground.slidetime=2
+ground.hittime=1
+ground.velocity=-1.0,-3.0
+air.velocity=-1.0,-3.0
+fall=1
+fall.recover=0
+air.fall=1
+palfx.invertall=1
+palfx.color=0
+palfx.add = 0, 20, 120
+palfx.time=40
+getpower=0
+envshake.time = 8
+envshake.freq = 120
+envshake.ampl = 2
+
+
 [State 200, Dampen]
 Type=ParentVarset
 Trigger1 = MoveHit
@@ -1051,15 +1106,8 @@ trigger2 = fvar(15) < 3
 value=1015
 ignorehitpause=1
 
-;-----------------
-;GrandDream
-;-----------------
-;Ye World - Attempt
 
-;-----------------
-;Ye World
-;-----------------
-;Ye World - Attempt
+;Frog Squash Da - Attempt
 [Statedef 3000]
 type = S
 movetype = A
@@ -1107,7 +1155,7 @@ trigger1 = Helper(3030), StateNo = 7016
 value = 3001
 ctrl = 0
 
-;Ye World - Connected
+;Frog Squash Da - Connected
 [Statedef 3001]
 type = S
 movetype = A

@@ -119,7 +119,7 @@ value=221
 
 ;Water Bubble
 [Statedef 1010]
-type=A
+type=S
 physics=N
 movetype=A
 anim=1010
@@ -136,6 +136,12 @@ var(1)=(root,var(1))
 type=varset
 trigger1=!time
 var(0) = (Parent, StateNo = 1000)
+
+[State 1010, var]
+type=StateTypeSet
+trigger1=!time && !Var(0)
+statetype = A
+physics = N
 
 [State 1010, noshadow]
 type=assertspecial
@@ -172,6 +178,38 @@ x=0
 
 [State 1010, hitdef]
 type=hitdef
+triggerall = Var(0)
+triggerall=!movecontact
+triggerall=!movereversed
+trigger1 = Time > 0
+priority=6,Hit
+attr=S,SP
+damage= floor(parent, fvar(39)*60), 4
+animtype=Hard
+hitflag=MAF
+guardflag=MA
+pausetime=4,4
+sparkno=-1
+ground.type=High
+ground.slidetime=20
+ground.hittime=20
+ground.velocity=-5
+air.velocity=-3.5,-3.5
+air.fall=1
+p2facing=1
+palfx.invertall=1
+palfx.color=0
+palfx.add = 0, 20, 120
+palfx.time=12
+guard.dist = 100
+envshake.time = 8
+envshake.freq = 120
+envshake.ampl = 2
+getpower=IfElse(Parent, Var(21) > 0, 0, 90)
+
+[State 1010, hitdef]
+type=hitdef
+triggerall = !Var(0)
 triggerall=!movecontact
 triggerall=!movereversed
 trigger1 = Time > 0
@@ -199,6 +237,7 @@ envshake.time = 8
 envshake.freq = 120
 envshake.ampl = 2
 getpower=IfElse(Parent, Var(21) > 0, 0, 90)
+
 
 [State 200, Dampen]
 Type=ParentVarset
@@ -692,7 +731,7 @@ damage=75,2
 animtype=Hard
 hitflag=MAF
 hitsound=S7002,2
-guardflag=HA
+guardflag=MA
 pausetime=5,5
 sparkno=S7006
 sparkxy = 0, -3

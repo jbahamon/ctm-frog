@@ -162,7 +162,7 @@ ctrl = 1
 ;Standing Strong
 [Statedef 220]
 type=S
-physics=N
+physics=S
 movetype=A
 anim=220
 ctrl=0
@@ -212,7 +212,8 @@ attr = A, NA
 animtype=Diagup
 air.animtype=Diagup
 damage    = 62
-guardflag = MA
+guardflag = M
+hitflag = MAF
 pausetime = 12,12
 hitsound = S7001,3
 guardsound = 6,0
@@ -321,7 +322,7 @@ ignorehitpause = 1
 [State 400, HitDef]
 type = HitDef
 trigger1 = Animelem=2   
-attr = S, NA           
+attr = C, NA           
 damage = 20     
 priority = 3, Hit       
 pausetime = 8,8
@@ -400,7 +401,7 @@ removeongethit = 1
 [State 410, HitDef]
 type = HitDef
 trigger1 = Animelem = 2   
-attr = S, NA           
+attr = C, NA           
 damage = 39   
 priority = 3, Hit       
 pausetime = 12,12
@@ -494,7 +495,7 @@ removeongethit = 1
 [State 420, HitDef]
 type = HitDef
 trigger1 = Animelem=2   
-attr = S, NA           
+attr = C, NA           
 damage = 47
 priority = 3, Hit       
 pausetime = 15,15
@@ -594,6 +595,7 @@ trigger1 = Time = 0
 attr = A, NA
 damage    = 20
 guardflag = HA
+hitflag = MAF
 priority = 3
 pausetime = 8,8
 sparkno=s7001
@@ -678,6 +680,7 @@ guardsound = 6,0
 sparkno=s7002
 sparkxy=-10,5
 guardflag = HA
+hitflag = MAF
 ground.type = High    
 air.type = High 
 ground.slidetime = 9  
@@ -755,7 +758,8 @@ attr = A, NA
 animtype=Diagup
 air.animtype=Diagup
 damage    = 62
-guardflag = MA
+guardflag = HA
+hitflag = MAF
 pausetime = 15,15
 hitsound   = S7001,3
 guardsound = 6,0
