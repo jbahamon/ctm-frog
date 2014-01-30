@@ -507,11 +507,11 @@ time = 1
 ;===========================================================================
 
 
-[State -1, Ye World]
+[State -1, Frog Squash Da]
 type = ChangeState
 value = 3000
 triggerall = StateType != A
-triggerall = Command = "qcfhcba" || Command = "qcfhcbb" || Command = "qcfhcbc"
+triggerall = Command = "qcbhcfa" || Command = "qcbhcfb" || Command = "qcbhcfc"
 triggerall = Var(21) > 0 && NumHelper(3030)
 trigger1= Ctrl 	
 

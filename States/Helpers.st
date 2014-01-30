@@ -535,7 +535,7 @@ damage = 20,0
 ;guard.pause,0
 sparkno = -1
 sparkxy = 0,0
-hitsound = S1,0
+hitsound = S7001,1
 guardsound = S2,0
 ground.type = High      ;Low,Trip,None
 air.hittime = 20
@@ -549,6 +549,28 @@ nochainID = -1
 hitonce = 1
 kill = 0
 numhits = 0
+
+[State 7011, Succesive hitsounds]
+type = PlaySnd
+trigger1 = MoveHit && AnimElemTime(2) = 1
+trigger1 = Anim = 3036
+value = S7001,1
+ignorehitpause = 1
+
+
+[State 7011, Final Hitsound]
+type = PlaySnd
+trigger1 = MoveHit && AnimElemTime(2) = 1
+trigger1 = Anim = 3037
+value = S7016,1
+ignorehitpause = 1
+
+
+[State 7011, HitOverride]
+type = PlaySnd
+trigger1 = !Time
+value = S7020,1
+ignorehitpause = 1
 
 [State 3010, Hit]
 type = EnvShake
