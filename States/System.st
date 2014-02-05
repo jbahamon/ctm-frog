@@ -189,13 +189,12 @@ trigger1=!time
 value=192+floor(random%3)
 
 
-;"..." Intro
+;Weapon Intro
 [Statedef 192]
 type = S
 ctrl = 0
 anim = 190
 velset = 0,0
-
 
 [State 191, 2] ;Assert this until you want "round 1, fight" to begin
 type = AssertSpecial
@@ -211,8 +210,6 @@ value = 190
 type = ChangeState
 trigger1 = AnimTime = 0
 value = 0
-
-
 
 ;Magus Intro
 [Statedef 193]
