@@ -3,22 +3,36 @@ Frog by SilentProtagonist
 ================================
 
 Frog is a three-button character made for MUGEN 1.0.
-This is not a final version.
+This is not a final version but it should be playable.
 
 What's Missing:
 
 - More palettes.
-- Special intros and/or winposes, maybe.
+- Specific character interactions (intros, winposes, double techs, maybe)
+
+Frog was the first MUGEN character I made, so there's lots of badly 
+written code in there. I went and fixed most of his issues, though 
+(I hope).
+
+My first version of Frog had double techs as supers, but then I saw it 
+wouldn't make sense if, for example, you had Crono as a partner or 
+opponent and used Spire/Lightning Rod, summoning another Crono.
+I deleted all of that code and made new supers.
 
 
 Frog's Moveset
 ==============
 
-Frog is intended to be a combo-heavy character. Try to chain his moves, 
-launch your opponent into the air and finish it with a super move!
+Frog is intended to be a combo-heavy character, more so in the air. 
+Try to chain his moves, launch your opponent into the air and finish 
+it with a super move!
+
 He also jumps higher than other characters, and some of his moves 
-either launch him into the air or can be executed in mid-air. 
-Keep these things in mind when playing as/against Frog.
+either launch him into the air or can be executed in midair. 
+
+However, his mixup capabilities are lower than for other characters. 
+This means that most of his attacks can be blocked in any stance, so 
+starting a combo could be difficult.
 
 
 Throws
@@ -40,13 +54,13 @@ The horizontal range of the jump depends on the button pressed.
 
 **Water**: D, DB, B + a/b/c (Standing/Air).
 
-A standard, slow, projectile.
+A slow projectile that stays on the screen for a while.
 The bubble's movement and final position changes depending on the
 button pressed.
 
 **Line Slash**: D, DF, F + a/b/c (Air).
 
-Frog stops in the air and flies forwards, stabbing the enemy.
+Frog stops in the air and flies forwards, stabbing the enemy. 
 
 
 Supers
@@ -54,11 +68,12 @@ Supers
 
 **Bubble Rush**: D, DF, F, D, DF, F, a/b/c (Standing/Air). Requires 1000 Power.
 
-Frog releases many bubbles that float towards the opponent.
+Frog releases many bubbles that float towards the opponent. These bubbles automatically
+burst after a short while, so don't use this as a long-range super.
 
 **Water Stream**: D, DB, B, D, DB, B + a/b/c (Standing/Air). Requires 1000 Power.
 
-Frog creates a water pillar.
+Frog creates a water pillar around him that hits many times.
 
 **Mastermune**: D, F, D, B + a/b/c (Standing). Requires 1000 Power.
 
@@ -72,18 +87,22 @@ Special Mode
 
 **Grand Dream**: a + c (Standing). Requires 3000 Power.
 
-Frog unleashes Masa&Mune. They will follow you and attack as you do, 
-spending Power with each hit they perform. You also lose Power when 
-Masa&Mune get hit. When you run out of Power, they will dissapear.
+Frog unleashes Masa&Mune. It will follow you and attack as you do, 
+spending Power with each hit it performs. You also lose Power when 
+Masa&Mune gets hit. Masa&Mune will only dissapear When you run out 
+of Power.
+
 Use this mode to perform long combos!
 
 Final Move
 ----------
 
-**Frog Squash Da**: D, B, D, F + a/b/c (Standing, must have Grand Dream activated). Uses all of your Power.
+**Frog Squash Da**: D, B, D, F + a/b/c (Standing, must have Grand Dream activated). Uses all of your Power, ending Grand Dream.
 
-Masa&Mune throw a barrage of punches and hits. If this move connects, 
-a series of attacks will be unleashed on your opponent. "WRYYYYYYYYY".
+A super throw. Masa&Mune throws a barrage of punches and hits. If this move connects, 
+a series of attacks will be unleashed on your opponent. 
+
+"WRYYYYYYYYY".
 
 
 Credits and Acknowledgements
@@ -116,9 +135,8 @@ Disclaimer
 
 - Chrono Trigger and all of its characters are property of Square-Enix.
 
-- This creation/adaptation was made for entertainment and not for profit.
-
-- This creation/adaptation, nor any part of it, may not be used for commercial purposes. 
+- This creation/adaptation was made for entertainment and not for profit. Therefore, this 
+creation/adaptation (and any part of it) may not be used for commercial purposes. 
 
 - If you want to host this creation, modify or use it for your own purposes,
   try to ask me first.
