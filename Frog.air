@@ -113,7 +113,7 @@ Clsn2: 2
 ; Peak and coming down from Jumping forwards
 [Begin Action 45]
 Clsn2: 1
-  Clsn2[0] = -14, -23, 19, 2
+  Clsn2[0] = -10, -22, 16, 2
 45,0, 0,0, 6, 
 
 ; Peak and coming down from Jumping backwards
@@ -460,6 +460,72 @@ Clsn2: 1
 Clsn2: 1
   Clsn2[0] = -13, -31, 11, 1
 620,3, 0,0, -1, 
+
+; Blade Strike
+[Begin Action 800]
+Clsn2: 1
+  Clsn2[0] = -12, -23, 7, 1
+200,0, 0,0, 7
+Clsn1: 1
+  Clsn1[0] = 1, -25, 10, -4
+Clsn2: 2
+  Clsn2[0] = -12, -23, 7, 1
+  Clsn2[1] = 1, -25, 10, -4
+200,1, -1,1, 5
+Clsn2: 1
+  Clsn2[0] = -12, -23, 7, 1
+47,0, 0,-1, 10
+
+; Blade Strike Success
+[Begin Action 801]
+200,1, 0,0, 3
+200,1, 0,0, 3, , AS192D64
+200,1, 0,0, 3, , AS128D128
+200,1, 0,0, 3, , AS64D192
+200,1, 0,0, -1, , AS0D256
+
+; Blade Strike Hit 1
+[Begin Action 802]
+193,0, 0,0, 7
+193,1, 0,0, 10
+193,2, 0,0, 3, , AS192D64
+193,2, 0,0, 3, , AS128D128
+193,2, 0,0, 3, , AS64D192
+
+; Blade Strike Hit 2
+[Begin Action 803]
+210,0, 0,0, 7
+210,1, 0,0, 10
+210,2, 0,0, 7
+210,3, 0,0, 3, , AS192D64
+210,3, 0,0, 3, , AS128D128
+210,3, 0,0, 3, , AS64D192
+
+; Blade Strike Hit 3
+[Begin Action 804]
+620,0, 0,0, 1
+620,1, 0,-4, 7
+620,2, 0,0, 3
+620,3, 0,0, 3, , AS192D64
+620,3, 0,3, 3, , AS128D128
+620,3, 0,6, 3, , AS64D192
+
+; End
+[Begin Action 805]
+5500,0, 0,0, 32
+
+; Magic Bind (Get Hit)
+[Begin Action 806]
+5000,10, 0,0, -1
+
+; Blade Strike - launch
+[Begin Action 807]
+5030,10, 0,0, 12
+5031,30, 0,0, -1
+
+; Blade Strike - Fall
+[Begin Action 808]
+5041,0, 0,0, -1
 
 ; Water Magic Animation
 [Begin Action 1000]

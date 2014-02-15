@@ -575,7 +575,7 @@ ignorehitpause = 1
 [State 1035, OMG it Hurts!]
 type = playsnd
 trigger1 = anim=1035 && AnimElemTime(1) = 8
-value = S7000,1
+value = S7001,3
 channel=1
 
 [State 1035, Shake]

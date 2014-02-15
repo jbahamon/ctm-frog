@@ -803,4 +803,313 @@ trigger1= AnimElemNo(0) = 4
 trigger1 = Pos y >= - Vel Y && Vel Y > 0
 value=221
 
+;---------------------------------------------------------------------------
+; Blade Strike
+[Statedef 800]
+type    = S
+movetype= A
+physics = S
+juggle  = 3
+ctrl = 0
+anim = 800
+sprpriority = 2
+poweradd = IfElse(Var(21) > 0, 0, 18)
+facep2 = 1
+velset = 0,0
 
+[State 803, Pal]
+type = PalFX
+trigger1 = 1
+add = Floor(32 * Sin(Time * Pi/16.0)) + 32, 32 + Floor(32 * Sin(Time * Pi/16.0)), 32 + Floor(32 * Sin(Time * Pi/16.0))
+mul = 256, 256, 256
+time = 1
+
+[State 800, Direction]
+type = VarSet
+trigger1 = !Time
+var(0) = IfElse(command = "holdback", -1, 1)
+
+[State 800, Do not guard]
+type = attackdist
+trigger1 = 1
+value = 0
+
+[State 800, Idle]
+type = statetypeset
+trigger1 = animelemtime(3) >= 0
+movetype = I
+
+[State 800, Sound]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = S7000,1
+
+[State 800, Hit]
+type = hitdef
+trigger1 = !time
+attr = S, NT 
+hitflag = M-
+priority = 1, Miss
+sparkno = -1
+hitsound = s7000, 0
+p1facing = 1
+p2facing = Var(0)
+p1stateno = 801
+p2stateno = 802
+guard.dist = 0
+fall = 1
+fall.recover = 1
+fall.recovertime = 120
+
+[State 800, End]
+type = ChangeState
+trigger1 = !AnimTime
+value = 0
+ctrl = 1
+
+;Blade Strike - Dissapear
+[Statedef 801]
+type    = S
+movetype= A
+physics = S
+juggle  = 3
+ctrl = 0
+anim = 801
+sprpriority = 1
+poweradd = IfElse(Var(21) > 0, 0, 72)
+velset = 0,0
+
+[State 802, Shake]
+type = PlaySnd
+trigger1 = Time = 32
+trigger2 = Time = 59
+trigger3 = Time = 86
+value = S7001,3
+
+[State 0, DisplayToClipboard]
+type = DisplayToClipboard
+trigger1 = 1
+text = "var(0) = %d"
+params = var(0)
+
+[State 801, Bind]
+type = Trans
+trigger1 = Time = [0, 16]
+trans = addalpha
+alpha = 256 - 16 * Time, 16 * Time
+ignorehitpause = 1
+
+[State 801, Bind]
+type = AssertSpecial
+trigger1 = Time > 16
+trigger1 = anim =  801
+flag = noshadow
+flag2 = invisible
+ignorehitpause = 1
+
+[State 801, Bind]
+type = VarSet
+trigger1 = !Time
+trigger1 = NumTarget
+V = 1
+value = (Target, Pos X - Pos X) * Facing
+ignorehitpause = 1
+
+[State 801, Bind]
+type = TargetBind
+trigger1 = NumTarget
+pos = Var(1), 0
+
+[State 801, First hit]
+type = Explod
+trigger1 = Time = 25
+trigger1 = NumTarget
+removetime = -2
+ID = 800
+anim = 802
+bindtime = -1
+pos = Var(1), Floor(1.1 * Target, Const(size.head.pos.y))
+ownpal = 1
+sprpriority = -1
+shadow = -1
+removeongethit = 1
+supermovetime = 99999
+ignorehitpause = 1
+
+[State 801, First hit]
+type = Explod
+trigger1 = Time = 55
+removetime = -2
+ID = 800
+anim = 803
+bindtime = -1
+facing = -Var(0)
+pos = Var(1) + IfElse(Var(0) < 0, - Floor(Target, Const(size.ground.front)), Floor(Target, Const(size.ground.back))), Floor(Target, Const(size.mid.pos.y))
+ownpal = 1
+sprpriority = 3
+shadow = -1
+removeongethit = 1
+supermovetime = 99999
+ignorehitpause = 1
+
+[State 801, First hit]
+type = Explod
+trigger1 = Time = 90
+removetime = -2
+ID = 800
+anim = 804
+bindtime = 1
+facing = Var(0)
+pos = Var(1) - IfElse(Var(0) < 0, - Floor(Target, Const(size.ground.front)), Floor(Target, Const(size.ground.back))), Floor(Target, Const(size.mid.pos.y))
+ownpal = 1
+vel = 0, -5
+accel = 0, 0.4
+facing = -1
+sprpriority = 3
+shadow = -1
+removeongethit = 1
+supermovetime = 99999
+ignorehitpause = 1
+
+[State 801, push]
+type = VarAdd
+trigger1 = Anim = 801
+trigger1 = AnimElemNo(0) = 1
+var(1) = 2
+
+[State 801, Throw Enemy]
+type = ChangeAnim 
+trigger1 = Time > 90
+trigger1 = !NumExplod(800)
+value = 805
+persistent = 0
+
+[State 801, Throw Enemy]
+type = Trans
+trigger1 = Anim = 805
+trigger1 = AnimElemTime(1) = [0, 16]
+trans = addalpha
+alpha = 16 * AnimElemTime(1), 256 - 16 * AnimElemTime(1)
+
+[State 801, Throw Enemy]
+type = TargetState
+trigger1 = NumTarget
+trigger1 = Time >= 95
+value = 803
+persistent = 0
+
+[State 801, Throw Enemy]
+type = TargetDrop
+trigger1 = NumTarget
+trigger1 = Time >= 95
+
+[State 801, End]
+type = ChangeState
+trigger1 = !NumTarget
+trigger1 = Anim = 805
+trigger1 = !AnimTime
+value = 0
+ctrl = 1
+
+;Shockwave - Gethit
+[Statedef 802]
+type = S
+movetype = H
+physics = N
+ctrl = 0
+sprpriority = 0
+
+[State 802, Priority]
+type = SprPriority
+trigger1 = AnimElem = 3
+value = 2
+
+[State 802, LifeAdd]
+type = LifeAdd
+trigger1 = Time = 32
+trigger2 = Time = 59
+trigger3 = Time = 86
+value = -27
+kill = Time > 60
+
+[State 802, Shake]
+type = EnvShake
+trigger1 = Time = 32
+trigger2 = Time = 59
+trigger3 = Time = 86
+time = 5
+freq = 120
+ampl = 4
+
+[State 802, Shake]
+type = PalFX
+trigger1 = Time = 32
+trigger2 = Time = 59
+trigger3 = Time = 86
+add = 200, 200, 200
+mul = 256, 256, 256
+time = 5
+
+[State 802, Anim]
+type = ChangeAnim2
+trigger1 = !Time
+value = 806
+
+[State 802, Exit]
+type = SelfState
+trigger1 = !gethitvar(isbound)
+value = 5050
+
+;Shockwave - Air
+[Statedef 803]
+type = A
+movetype = H
+physics = N
+ctrl = 0
+sprpriority = 0
+
+[State 803, Vel]
+type = VelSet
+trigger1 = !Time
+y = -6
+x = -4
+
+[State 803, Vel]
+type = VelAdd
+trigger1 = 1
+y = .56
+
+[State 803, Anim]
+type = ChangeAnim2
+trigger1 = !Time
+value = 807
+
+[State 803, Vel]
+type = ChangeAnim2
+trigger1 = Vel Y > 0
+value = 808
+
+[State 803, Pal]
+type = PalFX
+trigger1 = (Vel y > 0) && (Pos y >= 0)
+add = 200, 200, 200
+mul = 256, 256, 256
+time = 8
+
+[State 803, Life]
+type = EnvShake
+trigger1 = (Vel y > 0) && (Pos y >= 0)
+time = 14
+freq = 120
+ampl = 4
+
+[State 803, Life]
+type = PosSet
+trigger1 = (Vel y > 0) && (Pos y >= 0)
+y = 0
+
+[State 803, Hit Ground]
+type = SelfState
+trigger1 = (Vel y > 0) && (Pos y >= 0)
+value = 5100
+ctrl = 0
