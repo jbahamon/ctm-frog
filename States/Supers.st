@@ -81,7 +81,7 @@ persistent=0
 [State 3060,Jump Frog, Jump!]
 type=posadd
 trigger1=animelemtime(7)=40
-x=((enemynear(0), screenpos x) - screenpos x - 2)*facing
+x=((enemynear(numenemy>1&&!enemynear(0),alive), screenpos x) - screenpos x - 2)*facing
 y=-40-screenpos y
 persistent=0
 
