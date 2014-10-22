@@ -1150,7 +1150,7 @@ ctrl = 1
 [State 3000, End]
 type = ChangeState
 trigger1 = NumHelper(3030)
-trigger1 = Helper(3030), MoveHit
+trigger1 = Helper(3030), NumTarget(7016)
 trigger1 = Helper(3030), StateNo = 7016
 value = 3001
 ctrl = 0

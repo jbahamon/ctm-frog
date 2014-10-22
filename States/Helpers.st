@@ -521,6 +521,7 @@ persistent = 0
 [State 3010, go]
 type = VelSet
 trigger1 = MoveContact || Var(2) > 60
+trigger2 = Facing * Floor(EnemyNear(IfElse(EnemyNear(0), Alive, 0, 1)), Pos X - Pos X) < 40
 X = 0
 
 [State 3010, HitDef]
@@ -543,11 +544,38 @@ ground.velocity = 0,0
 air.velocity = 0,0
 p1getp2facing = 0
 down.bounce = 0
-id = 0
+id = 7016
 chainID = -1
 nochainID = -1
 hitonce = 1
 kill = 0
+numhits = 0
+
+[State 3010, HitDef]
+type = HitDef
+trigger1 = Anim = 3037 && !NumTarget(7016)
+attr = S,HA        ;SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+hitflag = MA        ;HLAFD+-
+guardflag = MA         ;HLA
+animtype = light          ;light,medium,hard,back,up,diagup
+air.animtype = light
+damage = 320,0
+;guard.pause,0
+sparkno = -1
+sparkxy = 0,0
+hitsound = S7001,1
+guardsound = S2,0
+ground.type = High      ;Low,Trip,None
+air.hittime = 20
+ground.velocity = 0,0
+air.velocity = 0,0
+p1getp2facing = 0
+down.bounce = 0
+id = 7017
+chainID = -1
+nochainID = 7016,7017
+hitonce = 1
+kill = 1
 numhits = 0
 
 [State 7011, Succesive hitsounds]
@@ -574,7 +602,7 @@ ignorehitpause = 1
 
 [State 3010, Hit]
 type = EnvShake
-triggerall = NumTarget
+triggerall = NumTarget(7016)
 trigger1 = MoveHit && (AnimElemTime(2) = 1)
 trigger2 = Anim = 3037 && AnimElem = 2
 time = 8
@@ -583,33 +611,36 @@ ampl = 3
 
 [State 3010, Hit]
 type = TargetLifeAdd
-triggerall = NumTarget
+triggerall = NumTarget(7016)
 trigger1 = MoveHit && (AnimElemTime(2) = 1)
 trigger2 = Anim = 3037 && AnimElem = 2
+ID = 7016
 value = -10
 kill = 0
 
 [State 3010, pos]
 type = Varset
-trigger1 = NumTarget
-fvar(0) = Target, Pos X
+trigger1 = NumTarget(7016)
+fvar(0) = Target(7016), Pos X
 persistent = 0
 
 [State 3010, pos]
 type = Varset
-trigger1 = NumTarget
-fvar(1) = Target, Pos Y
+trigger1 = NumTarget(7016)
+fvar(1) = Target(7016), Pos Y
 persistent = 0
 
 [State 3010, Hit]
 type = TargetBind
-trigger1 = NumTarget
+trigger1 = NumTarget(7016)
 pos = Facing * (fvar(0) - Pos X), fvar(1) - Pos Y
+ID = 7016
 ignorehitpause = 1
 
 [State 3010, Hit]
 type = TargetState
-trigger1 = NumTarget
+trigger1 = NumTarget(7016)
+ID = 7016
 value = 3020
 ignorehitpause = 1
 persistent = 0
@@ -642,7 +673,9 @@ var(0) = 1
 
 [State 3010, End]
 type = ChangeAnim
+triggerall = Anim != 3037
 trigger1 = Var(0) = 120
+trigger2 = !MoveContact && Var(2) = 90
 value = 3037
 
 [State 3010, Trans]
@@ -654,9 +687,10 @@ ignorehitpause = 1
 
 [State 3010, End]
 type = ChangeState
-trigger1 = (Var(2) > 136) && !MoveHit
-trigger2 = Var(0) > 176 && MoveHit
-value = IfElse(MoveHit, 7019, 7018)
+trigger1 = (Var(2) > 136) && !NumTarget(7016)
+trigger2 = Var(0) > 176 && NumTarget(7016)
+trigger3 = !NumTarget(7016) && Anim = 3037 && !AnimTime
+value = IfElse(NumTarget(7016), 7019, 7018)
 
 ;Masamune
 [Statedef 7017]

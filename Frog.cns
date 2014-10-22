@@ -62,7 +62,7 @@ crouch.friction = .82 ;Friction coefficient when crouching
 ; Up to 100 victory quotes can be specified per language (victory0 - victory99)
 victory1 = "Mine name is Glenn... Cyrus' hopes and dreams...\nand now the Masamune..."
 victory2 = "Lower thine guard and thou'rt allowing the enemy in."
-victory3 = "Though I am...odd of figure, I am a master swordsman!"
+victory3 = "Though I am... odd of figure, I am a master swordsman!"
 victory4 = "Thou can'st not run!"
 victory5 = "You fool.\nFrogs haven't belly buttons!"
 victory6 = "Cyrus, I promise to fulfill your wishes!"
@@ -72,7 +72,7 @@ victory7 = "I rather enjoy this form.\nAnd I oweth it all to you!"
 victory8 = "Cyrus, I hath avenged thee!"
 
 ;Against Crono
-victory9 = " Crono, you hath potential to be a good swordsman!"
+victory9 = "Crono, you hath potential to be a good swordsman!"
 
 ;Against Lucca
 victory10 = "My guise doth not incur thy trust...\nVery well, do as thee please."
@@ -90,7 +90,7 @@ victory13 = "You desire to perish?"
 victory14  = "It's been ages,\nSir Slush!..."
 
 ;Against himself (?)
-victory15  = " Hand'eth over the Masamune!"
+victory15  = "Hand'eth over the Masamune!"
 
 ;---------------------------------------------------------------------------
 ; Variable usage:
