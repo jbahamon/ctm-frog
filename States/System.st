@@ -1,3 +1,40 @@
+; Initialize (at the start of the round)
+[Statedef 5900]
+type = S
+
+[State 5900, 1] ;Clear all int variables
+type = VarRangeSet
+trigger1 = roundsexisted = 0
+value = 0
+
+[State 5900, 2] ;Clear all float variables
+type = VarRangeSet
+trigger1 = roundsexisted = 0
+fvalue = 0
+
+
+[State 5900, 3] ;Change palette
+type = RemapPal
+trigger1 = 1
+source = 1,1
+dest = 1,palno
+
+[State 5900, 3] ;Change palette
+type = VarSet
+trigger1 = 1
+v = 24
+value = 1000
+
+[State 5900, 4] ;Intro for round 1
+type = ChangeState
+trigger1 = roundno = 1
+value = 190
+
+[State 5900, 5] ;All other rounds
+type = ChangeState
+trigger1 = 1
+value = 0
+
 ;---------------------------------------------------------------------------
 ; Lose by Time Over
 ; CNS difficulty: basic
@@ -581,19 +618,36 @@ movetype = I
 physics = S
 sprpriority = 2
 
+[State 195, Stand Var]
+type = VarSet
+triggerall = PalNo = 12
+trigger1 = !Time
+v = 23
+value = IfElse(Var(23), 0, 1)
+
 [State 195, Sound!]
 type=PlaySnd
 trigger1=!time
 value = S7015,1
 channel = 0
 
+
+[State 195, 2]
+type = ChangeState
+triggerall = PalNo = 12
+trigger1 = Time = 20
+value = 0
+ctrl = 1
+
 [State 195, 1]
 type = CtrlSet
+triggerall = PalNo != 12
 trigger1 = Time = 40
 value = 1
 
 [State 195, 2]
 type = ChangeState
+triggerall = PalNo != 12
 trigger1 = AnimTime = 0
 value = 0
 ctrl = 1

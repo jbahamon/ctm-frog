@@ -608,7 +608,8 @@ value = 800
 [State -1, Grand Dream]
 type = ChangeState
 value = 3030
-triggerall = Command = "a+c" ;&& !(command = "holdfwd" || command = "holdback")
+triggerall = Command = "a+c" 
+triggerall = PalNo != 12
 triggerall = Power >= 3000
 triggerall = Var(21) = 0
 trigger1 = StateType != A

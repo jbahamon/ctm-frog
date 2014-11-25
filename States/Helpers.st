@@ -90,8 +90,8 @@ params = Var(0)
 [State 7011, FollowPlayer]
 type = PosAdd
 trigger1 = 1
-X = (ParentDist X)/10.0
-Y = (ParentDist Y - 10)/10.0
+X = (ParentDist X - 20)/2.0
+Y = (ParentDist Y - 10)/2.0
 ignorehitpause = 1
 
 [State 7011, Selector Var]
@@ -105,8 +105,16 @@ trigger1 = !Time
 var(1) = StateNo
 ignorehitpause = 1
 
+[State 7011, Ded]
+type = ChangeState
+triggerall = Root, PalNo = 12
+trigger1 = !Parent, Var(23)
+trigger2 = Parent, Var(23) = 2
+value = 7018
+
 [State 7011, Light Hit]
 type = ChangeState
+triggerall = Root, PalNo != 12
 trigger1 = !Parent, Power
 trigger2 = Parent, Var(22) <= 0
 value = 7018
@@ -146,6 +154,7 @@ value = 7014
 
 [State 7011, Light Hit]
 type = ChangeState
+triggerall = Root, PalNo != 12
 triggerall = Parent, StateNo != Var(0)
 trigger1 = Parent, StateNo = 3000
 value = 7016
@@ -160,17 +169,38 @@ anim = 3033
 sprpriority = -2
 facep2= 1
 
+[State 620, Snd]
+type = PlaySnd
+trigger1 = Animelem=2 
+value = S7000,1
+
 [State 7015, ChangeAnim]
 type = VarSet
 trigger1 = !Time
 var(1) = StateNo
 ignorehitpause = 1
 
+
+[State 7012, FollowPlayer]
+type = PosAdd
+trigger1 = AnimElemNo(0) = 1
+X = (ParentDist X - 20)/5.0
+Y = (ParentDist Y - 10)/5.0
+ignorehitpause = 1
+
+[State 7015, ChangeAnim]
+type = VelSet
+trigger1 = AnimElem = 2
+X = 2
+Y = IfElse(Root, StateType = A, 3, IfElse(Root, StateType = C, -3, 0))
+ignorehitpause = 1
+
 [State 7015, ChangeAnim]
 type = ParentVarAdd
 trigger1 = !Time
+trigger1 = Root, PalNo != 12
 trigger1 = PrevStateNo != 7015
-var(22) = -200
+var(22) = -240
 ignorehitpause = 1
 
 [State 7021, hit]
@@ -178,7 +208,7 @@ type = HitDef
 trigger1 = !Time
 attr = S, NA
 animtype  = Medium
-damage    = 10
+damage    = 15 * (1 + 2 * (Root, PalNo = 12 && Root, Var(23) = 1))
 hitflag = MAF
 guardflag = M
 pausetime = 10,10
@@ -219,13 +249,6 @@ trigger1 = 1
 value = SCA,NT,ST,HT 
 ignorehitpause = 1
 
-[State 7012, FollowPlayer]
-type = PosAdd
-trigger1 = 1
-X = (ParentDist X)/10.0
-Y = (ParentDist Y - 10)/10.0
-ignorehitpause = 1
-
 [State 7012, Selector Var]
 type = VarSet
 trigger1 = !Time
@@ -245,11 +268,17 @@ anim = 3034
 sprpriority = -2
 facep2= 1
 
+[State 620, Snd]
+type = PlaySnd
+trigger1 = Animelem=2 
+value = S7000,1
+
 [State 7015, ChangeAnim]
 type = ParentVarAdd
 trigger1 = !Time
+trigger1 = PalNo != 12
 trigger1 = PrevStateNo != 7015
-var(22) = -240
+var(22) = -280
 ignorehitpause = 1
 
 [State 7015, ChangeAnim]
@@ -276,11 +305,18 @@ trigger1 = 1
 value = SCA,NT,ST,HT 
 ignorehitpause = 1
 
-[State 7013, FollowPlayer]
+[State 7012, FollowPlayer]
 type = PosAdd
-trigger1 = 1
-X = (ParentDist X)/10.0
-Y = (ParentDist Y - 10)/10.0
+trigger1 = AnimElemNo(0) = 1
+X = (ParentDist X - 20)/5.0
+Y = (ParentDist Y - 10)/5.0
+ignorehitpause = 1
+
+[State 7015, ChangeAnim]
+type = VelSet
+trigger1 = AnimElem = 2
+X = 2.5
+Y = IfElse(Root, StateType = A, 3, IfElse(Root, StateType = C, -3, 0))
 ignorehitpause = 1
 
 [State 7013, Selector Var]
@@ -298,7 +334,7 @@ type = HitDef
 trigger1 = !Time
 attr = S, NA
 animtype  = Medium
-damage    = 12
+damage    = 18 * (1 + 2 * (Root, PalNo = 12 && Root, Var(23) = 1))
 hitflag = MAF
 guardflag = M
 pausetime = 10,10
@@ -331,11 +367,19 @@ anim = 3035
 sprpriority = -2
 facep2= 1
 
+[State 7012, FollowPlayer]
+type = PosAdd
+trigger1 = AnimElemNo(0) = 1
+X = (ParentDist X - 20)/5.0
+Y = (ParentDist Y - 10)/5.0
+ignorehitpause = 1
+
 [State 7015, ChangeAnim]
 type = ParentVarAdd
 trigger1 = !Time
+trigger1 = PalNo != 12
 trigger1 = PrevStateNo != 7015
-var(22) = -300
+var(22) = -340
 ignorehitpause = 1
 
 [State 7015, ChangeAnim]
@@ -343,6 +387,11 @@ type = VarSet
 trigger1 = !Time
 var(1) = StateNo
 ignorehitpause = 1
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S7000,1
 
 [State 7014, Turn]
 type = Turn
@@ -367,7 +416,7 @@ type = HitDef
 trigger1 = !Time
 attr = S, NA
 animtype  = Hard
-damage    = 15
+damage    = 25 * (1 + 2 * (Root, PalNo = 12 && Root, Var(23) = 1))
 hitflag = MAF
 guardflag = M
 pausetime = 10,10
@@ -384,18 +433,27 @@ air.velocity = 0,-6
 animtype=Medium
 air.animtype=Medium
 getpower = 0, 0
+id = 7014
+nochainID = 7014
 givepower = 36, 36
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=10
-fall = 0
-
+fall = Root, PalNo = 12
+fall.recover = 0
 
 [State 7014, FollowPlayer]
 type = PosAdd
-trigger1 = 1
-X = (ParentDist X)/10.0
-Y = (ParentDist Y - 10)/10.0
+trigger1 = AnimElemNo(0) = 1
+X = (ParentDist X - 20)/5.0
+Y = (ParentDist Y - 10)/5.0
+ignorehitpause = 1
+
+[State 7015, ChangeAnim]
+type = VelSet
+trigger1 = AnimElem = 2
+X = 3
+Y = IfElse(Root, StateType = A, 3, IfElse(Root, StateType = C, -3, 0))
 ignorehitpause = 1
 
 [State 7014, Selector Var]
@@ -441,12 +499,21 @@ time = 10
 value = SCA ,AA, AP
 time = 1
 ignorehitpause = 1
-     
+
 [State 7015, LifeAdd]
 type = ParentVarAdd
+trigger1 = PalNo != 12
 trigger1 = Time = 0
 v = 22
 value = - 4 * floor(gethitvar(damage))
+ignorehitpause = 1
+     
+[State 7015, LifeAdd]
+type = ParentVarAdd
+trigger1 = PalNo = 12
+trigger1 = Time = 0
+v = 24
+value = - 5 * floor(gethitvar(damage)) 
 ignorehitpause = 1
 
 [State 7015, ChangeAnim]

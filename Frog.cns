@@ -118,6 +118,10 @@ victory15  = "Hand'eth over the Masamune!"
 ; var(7)  - snap thing or something like that
 ; var(8)  - :P!
 ; var(9)  - Masamune
+; 21, 22 - Special mode
+
+; var(23)  - Stand Status: 0 - Off, 1 - On, 2 - Ded
+; var(24)  - Stand Life
 
 ; fvar(39) - Damage Dampener
 
@@ -147,6 +151,50 @@ ignorehitpause=1
 ;---------------------------------------------------------------------------
 
 [Statedef -3]
+
+[State 7015, LifeAdd]
+type = Null;
+trigger1 =  Var(24) <= 0
+trigger1 = (Var(23) != 2)
+trigger1 = (Var(23) := 2)
+trigger1 = (Var(24) := 0)
+ignorehitpause = 1
+
+[State 7015, LifeAdd]
+type = VarAdd;
+trigger1 =  Var(24) < 1000
+trigger1 = (Var(23) = 2 || Var(23) = 0)
+v = 24
+value = 5
+ignorehitpause = 1
+
+[State 7015, LifeAdd]
+type = Null;
+trigger1 =  Var(24) >= 1000
+trigger1 = (Var(24) := 1000)
+trigger1 = (Var(23) = 2)
+trigger1 = (Var(23) := 0)
+ignorehitpause = 1,
+
+[State 0, DisplayToClipboard]
+type = DisplayToClipboard
+trigger1 = 1
+text = "var(24) = %d"
+params = var(24)
+ignorehitpause = 1
+
+[State 2020, Masa & Mune]
+type = helper
+triggerall = !NumHelper(3030)
+trigger1 = PalNo = 12 && Var(23) = 1
+stateno = 7010
+ID = 3030
+name = "Masa&Mune"
+postype = p1
+pos = 0,-20
+ownpal = 1
+persistent = 0
+supermovetime = 9999
 
 [State -3, Prevent Undergound Juggles]
 type= targetbind
