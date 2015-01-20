@@ -36,6 +36,39 @@ trigger1 = 1
 value = 0
 
 ;---------------------------------------------------------------------------
+; Run forward
+[Statedef 100]
+type    = S
+physics = S
+anim = 100
+sprpriority = 1
+
+[State 100, 1]
+type = VelSet
+trigger1 = 1
+x = const(velocity.run.fwd.x) * IfElse(PalNo = 12, 1.2, 1)
+
+[State 100, 2] ;Prevent run from canceling into walk
+type = AssertSpecial
+trigger1 = 1
+flag = NoWalk
+
+[State 100, 3] ;Prevent from turning
+type = AssertSpecial
+trigger1 = 1
+flag = NoAutoTurn
+
+[State 100, 4]
+type = ChangeState
+trigger1 = command != "holdfwd" && PalNo != 12
+value = 0
+
+[State 100, 4]
+type = ChangeState
+trigger1 = !AnimTime && PalNo = 12
+value = 106
+
+;---------------------------------------------------------------------------
 ; Lose by Time Over
 ; CNS difficulty: basic
 [Statedef 170]
