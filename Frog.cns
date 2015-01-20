@@ -174,7 +174,7 @@ trigger1 =  Var(24) >= 1000
 trigger1 = (Var(24) := 1000)
 trigger1 = (Var(23) = 2)
 trigger1 = (Var(23) := 0)
-ignorehitpause = 1,
+ignorehitpause = 1
 
 [State 0, DisplayToClipboard]
 type = DisplayToClipboard
@@ -185,10 +185,10 @@ ignorehitpause = 1
 
 [State 2020, Masa & Mune]
 type = helper
-triggerall = !NumHelper(3030)
+triggerall = !NumHelper(10000)
 trigger1 = PalNo = 12 && Var(23) = 1
-stateno = 7010
-ID = 3030
+stateno = 17010
+ID = 10000
 name = "Masa&Mune"
 postype = p1
 pos = 0,-20

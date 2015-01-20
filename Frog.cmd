@@ -601,8 +601,17 @@ trigger3 = movecontact
 [State -1, Blade Strike]
 type = ChangeState
 trigger1 = (command = "recovery" || command = "2p") && (command = "holdfwd" || command = "holdback")
+trigger1 = PalNo != 12
 trigger1 = roundstate = 2 && ctrl && statetype = S && stateno != 100
 value = 800
+
+[State -1, Blade Strike]
+type = ChangeState
+trigger1 = (command = "c") && (command = "holdfwd" || command = "holdback")
+trigger1 = PalNo = 12
+trigger1 = roundstate = 2 && ctrl && statetype = S && stateno != 100
+value = 13800
+
 
 ;Grand Dream Activation
 [State -1, Grand Dream]

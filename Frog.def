@@ -19,6 +19,10 @@ st2 = States\Normal.st
 st3 = States\Specials.st
 st4 = States\Supers.st
 st5 = States\Helpers.st
+st6 = States\EXNormal.st
+st7 = States\EXSpecials.st
+st8 = States\EXSupers.st
+st9 = States\EXStand.st
 
 [Arcade]
 ;intro.storyboard = 
