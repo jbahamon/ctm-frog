@@ -1,3 +1,78 @@
+
+; Roll
+[Statedef 13500]
+type = U
+movetype = I
+physics = N
+anim = 13500
+velset = 0,0
+ctrl = 0
+poweradd = 0
+juggle = 0
+facep2 = 0
+hitdefpersist = 0
+movehitpersist = 0
+hitcountpersist = 0
+sprpriority = 0
+
+[State 17100: SprPriority]
+type = StateTypeSet
+trigger1 = !Time
+trigger1 = StateType = C
+statetype = S
+
+[State 17100: SprPriority]
+type = SprPriority
+trigger1 = (Vel X != 0)
+value = -2
+
+[State 17100: NotHitBy]
+type = NotHitBy
+trigger1 = (AnimElemNo(0) = [2,5])
+value = , NA, SA, HA, NP, SP, HP
+
+[State 17100: VelSet]
+type = VelSet
+trigger1 = (AnimElem = 2)
+x = 2.9
+
+[State 17100: VelSet]
+type = VelSet
+trigger1 = (AnimElem = 5)
+x = 0
+
+[State 17100: PlayerPush]
+type = PlayerPush
+trigger1 = (Vel X != 0)
+value = 0
+
+[State 17100: AfterImage]
+type = AfterImage
+trigger1 = (AnimElem = 2)
+length = 8
+palbright = 0, 0, 0
+palcolor = 256
+paladd = 0, 0, 0
+palcontrast = 256, 256, 256
+palmul = 1,1,1
+trans = none
+timegap  = 4
+framegap = 4
+time = 2; only 2 ticks!!!
+ignorehitpause = 1
+persistent = 0
+
+[State 17100: AfterImage]
+type = AfterImageTime
+trigger1 = (Vel X != 0)
+time = 2
+
+[State 17100: ChangeState]
+type = ChangeState
+trigger1 = !AnimTime
+value = 52
+ctrl = 0
+
 ; Throw
 [Statedef 13800]
 type    = S

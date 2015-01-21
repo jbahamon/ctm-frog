@@ -571,6 +571,11 @@ X = (Parent, Pos X + (Parent, Var(1) - 40 * Parent, Var(0)) * (Parent, Facing))
 Y = (Parent, Pos Y - 10)
 ignorehitpause = 1
 
+[State 7010, appear]
+type = PosFreeze	
+trigger1 = 1
+ignorehitpause = 1
+
 [State 7015, ChangeAnim]
 type = VarSet
 trigger1 = !Time

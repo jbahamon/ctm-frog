@@ -392,6 +392,11 @@ command = b+c
 time = 1
 
 [Command]
+name = "2p"
+command = b+c
+time = 1
+
+[Command]
 name = "a+c"
 command = a+c
 time = 1
@@ -612,7 +617,6 @@ trigger1 = PalNo = 12
 trigger1 = roundstate = 2 && ctrl && statetype = S && stateno != 100
 value = 13800
 
-
 ;Grand Dream Activation
 [State -1, Grand Dream]
 type = ChangeState
@@ -623,6 +627,15 @@ triggerall = Power >= 3000
 triggerall = Var(21) = 0
 trigger1 = StateType != A
 trigger1 = ctrl 
+
+[State -1, Roll]
+type = ChangeState
+value = 13500
+triggerall = command = "2p"
+triggerall = PalNo = 12
+triggerall = Var(23) = 0 || Var(23) = 2
+trigger1 = StateType != A
+trigger1 = ctrl
 
 ;---------------------------------------------------------------------------
 ;Crouching Light
