@@ -119,12 +119,18 @@ trigger5 = (Parent, StateNo = 1020) && Parent, Var(1) = 3
 trigger6 = (Parent, StateNo = 1040) && Parent, Var(1) = 3
 value = 17014
 
-
 [State 7011, Heavy Hit]
 type = ChangeState
 triggerall = Parent, StateNo != Var(0)
 trigger1 = Parent, StateNo = 13801
 value = 17100
+
+[State 7011, Heavy Hit]
+type = ChangeState
+triggerall = Parent, StateNo != Var(0)
+trigger1 = Parent, StateNo = 13400
+value = 17200
+
 
 ;Light Attack
 [Statedef 17012]
@@ -179,7 +185,7 @@ type = HitDef
 trigger1 = !Time
 attr = S, NA
 animtype  = Medium
-damage    = 15 * (1 + 2 * (Root, Var(23) = 1))
+damage    = 45
 hitflag = MAF
 guardflag = M
 pausetime = 10,10
@@ -199,7 +205,7 @@ palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=10
 p1sprpriority = -2
-p1sprpriority = -3
+p2sprpriority = -3
 fall = 0
 
 [State 7012, Turn]
@@ -303,7 +309,7 @@ type = HitDef
 trigger1 = !Time
 attr = S, NA
 animtype  = Medium
-damage    = 18 * (1 + 2 * (Root, Var(23) = 1))
+damage    = 64
 hitflag = MAF
 guardflag = M
 pausetime = 10,10
@@ -323,7 +329,7 @@ palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=10
 p1sprpriority = -2
-p1sprpriority = -3
+p2sprpriority = -3
 fall = 0
 
 
@@ -383,7 +389,7 @@ type = HitDef
 trigger1 = !Time
 attr = S, NA
 animtype  = Hard
-damage    = 25 * (1 + 2 * (Root, Var(23) = 1))
+damage    = 75
 hitflag = MAF
 guardflag = M
 pausetime = 10,10
@@ -486,6 +492,12 @@ v = 24
 value = - 5 * floor(gethitvar(damage)) 
 ignorehitpause = 1
 
+[State 7011, Heavy Hit]
+type = ChangeState
+triggerall = Parent, StateNo != Var(0)
+trigger1 = Parent, StateNo = 13400
+value = 17200
+
 [State 7015, ChangeAnim]
 type = ChangeAnim
 trigger1 = Time < floor(gethitvar(hittime) * 0.8)
@@ -503,9 +515,17 @@ ignorehitpause = 1
 [State 7015, End]
 type = ChangeState
 trigger1 = Time >= floor(gethitvar(hittime) * 0.8)
+trigger1 = var(1) = 17200 && Parent, Var(23) != 1
+value = 17019
+ignorehitpause = 1
+
+[State 7015, End]
+type = ChangeState
+trigger1 = Time >= floor(gethitvar(hittime) * 0.8)
 trigger1 = var(1) != [17011,17014]
 value = var(1)
 ignorehitpause = 1
+
 
 ;Masamune End
 [Statedef 17018]
@@ -603,3 +623,107 @@ type = ChangeState
 trigger1 = !AnimTime
 value = IfElse(Parent, Var(23) = 0 || Parent, Var(23) = 2, 17019, 17011)
 
+;Guard Cancel
+[Statedef 17200]
+type = S
+physics = N
+movetype = A
+anim = 3034
+sprpriority = -2
+facep2= 1
+
+[State 7010, appear]
+type = trans
+trigger1 = 1
+trans = none
+ignorehitpause = 1
+
+[State 9606, EnvColor]
+type = palfx
+trigger1 = time < 10
+trigger1 = time%2=1
+add = 128,128,192
+time = 1
+persistent = 1
+ignorehitpause = 1
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = Animelem=2 
+value = S7000,1
+
+[State 7015, ChangeAnim]
+type = VarSet
+trigger1 = !Time
+var(1) = StateNo
+ignorehitpause = 1
+
+[State 7013, Turn]
+type = Turn
+trigger1 = Facing != Parent, Facing
+ignorehitpause = 1
+
+[State 7011, HitOverride]
+type = HitOverride
+trigger1 = 1
+attr = SCA,NA,SA,HA,NP,SP,HP
+stateno = 17015
+ignorehitpause = 1
+
+[State 7011, HitOverride]
+type = NotHitBy
+trigger1 = 1
+value = SCA,NT,ST,HT 
+ignorehitpause = 1
+
+[State 7012, FollowPlayer]
+type = PosAdd
+trigger1 = AnimElemNo(0) = 1
+X = (ParentDist X - 20)/5.0
+Y = (ParentDist Y - 10)/5.0
+ignorehitpause = 1
+
+[State 7015, ChangeAnim]
+type = VelSet
+trigger1 = AnimElem = 2
+X = 3
+Y = IfElse(Root, StateType = A, 3, IfElse(Root, StateType = C, -3, 0))
+ignorehitpause = 1
+
+[State 7013, Selector Var]
+type = VarSet
+trigger1 = !Time
+var(0) = Parent, StateNo
+
+[State 7014, Light Hit]
+type = ChangeState
+trigger1 = !AnimTime
+value = IfElse(Parent, Var(23) != 1, 17019, 17011)
+
+[State 7021, hit]
+type = HitDef
+trigger1 = !Time
+attr = S, NA
+animtype  = Medium
+damage    = 18
+hitflag = MAF
+guardflag = M
+pausetime = 10,10
+hitsound = S7001,1
+guardsound = 6,0
+sparkno=s7006
+sparkxy=-8,5
+ground.type = High
+ground.hittime  = 7
+ground.velocity = -4.5,-3
+air.velocity = -5,-7
+animtype=Medium
+air.animtype=Medium
+getpower = 0, 0
+givepower = 36, 36
+palfx.add=200,200,200
+palfx.mul=256,256,256
+palfx.time=10
+p1sprpriority = -2
+p2sprpriority = -3
+fall = 0

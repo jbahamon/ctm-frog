@@ -1,5 +1,35 @@
+;------------------------------------------------------------------------------------------
+
+; Stand Activation
+[Statedef 13195]
+type = S
+ctrl = 0
+anim = 195
+velset = 0,0
+movetype = I
+physics = S
+sprpriority = 2
+
+[State 13195, Sound!]
+type=PlaySnd
+trigger1=!time
+value = S7015,1
+channel = 0
+
+[State 13195, Stand Var]
+type = VarSet
+trigger1 = !Time
+v = 23
+value = IfElse(Var(23) = 1, 0, 1)
+
+[State 13195, 2]
+type = ChangeState
+trigger1 = Time = 20
+value = 0
+ctrl = 1
+
 ; Advancing Guard
-[Statedef 13100]
+[Statedef 13300]
 type    = U
 movetype = I
 physics = N
@@ -10,7 +40,7 @@ velset = 0,0
 type = Explod
 trigger1 = time = 0
 anim = 1015
-pos = 15,ifelse(statetype = C && (var(23) != 1),-7, -20)
+pos = 15,ifelse(statetype = C && (var(23) != 1),-7, -10)
 ownpal = 1
 bindtime = 1
 sprpriority = 2
@@ -19,8 +49,8 @@ pausemovetime = 99999999
 [State 810, 1]
 type = helper
 trigger1 = time = 0
-ID = 13105
-stateno = 13105
+ID = 13305
+stateno = 13305
 pos = -15,0
 facing = 1
 size.ground.back = 20
@@ -67,7 +97,7 @@ trigger1 = time = 1
 value = 151+(command = "holddown")*2
 
 ; Advancing Guard
-[Statedef 13101]
+[Statedef 13301]
 type    = U
 movetype = I
 physics = N
@@ -101,18 +131,18 @@ physics = C
 
 [State 811, 6]
 type = ChangeState
-trigger1 = numhelper(13105) = 1
+trigger1 = numhelper(13305) = 1
 trigger1 = command = "holdback"
 value = 151+(command = "holddown")*2
 
 [State 811, 7]
 type = ChangeState
-trigger1 = !numhelper(13105)
+trigger1 = !numhelper(13305)
 value = 130+(command = "holddown")
 ctrl = 1
 
 ; Advancing Guard Helper
-[Statedef 13105]
+[Statedef 13305]
 type = S
 movetype = I
 physics = N
@@ -146,7 +176,7 @@ trigger1 = Time = 15
 
 ;---------------------------------------------------------------------------
 ; Guard Helper
-[Statedef 13110]
+[Statedef 13310]
 type = S
 movetype = I
 physics = N
@@ -195,35 +225,59 @@ trigger1 = parent,stateno = 150
 trigger2 = parent,stateno = 152
 var(3) = parent,GetHitVar(hittime)
 
-;------------------------------------------------------------------------------------------
 
-; Stand Activation
-[Statedef 13195]
+
+; Guard Cancel
+[Statedef 13400]
 type = S
+movetype = A
+physics = N
+juggle = 0
 ctrl = 0
-anim = 195
+anim = 13000
 velset = 0,0
-movetype = I
-physics = S
-sprpriority = 2
 
-[State 13195, Sound!]
-type=PlaySnd
-trigger1=!time
-value = S7015,1
-channel = 0
-
-[State 13195, Stand Var]
-type = VarSet
+[State 13801, Masa & Mune]
+type = helper
+triggerall = !NumHelper(10000)
 trigger1 = !Time
-v = 23
-value = IfElse(Var(23), 0, 1)
+stateno = 17200
+ID = 10000
+name = "Masa&Mune"
+postype = p1
+pos = 0,-20
+ownpal = 1
+persistent = 0
+supermovetime = 9999
 
-[State 13195, 2]
+[State 220, Position]
+type = PosSet
+trigger1 = Time = 0
+y = 0
+
+[State 2500, NotHitBy]
+type = NotHitBy
+trigger1 = Time <= 10
+value = SCA
+
+[State 9606, EnvColor]
+type = palfx
+trigger1 = time < 10
+trigger1 = time%2=1
+add = 128,128,192
+time = 1
+persistent = 1
+ignorehitpause = 1
+
+[State 220, 3]
 type = ChangeState
-trigger1 = Time = 20
+triggerall = time > 1
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), StateNo = 17019 || Helper(10000), StateNo = 17011
+trigger2 = NumHelper(10000)
 value = 0
 ctrl = 1
+
 
 ; Roll
 [Statedef 13500]

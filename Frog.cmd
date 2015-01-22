@@ -649,13 +649,23 @@ triggerall = Var(21) = 0
 trigger1 = StateType != A
 trigger1 = ctrl 
 
+[State -1]
+type = ChangeState
+value = 13400
+triggerall = roundstate = 2
+triggerall = Command = "y";Command = "dfa" || Command = "dfb" || Command = "dfc"
+triggerall = prevstateno != [810,811]
+trigger1 = stateno = 150 || stateno = 151 || stateno = 152 || stateno = 153
+ignorehitpause = 0
+
 ;Advancing Guard
 [State -1]
 type = ChangeState
-value = 13100
+value = 13300
+triggerall = PalNo = 12
 triggerall = roundstate = 2
-triggerall = command = "3p"
-triggerall = prevstateno != [13100,13101]
+triggerall = command = "2p"
+triggerall = prevstateno != [13300,13301]
 trigger1 = stateno = 150 || stateno = 151 || stateno = 152 || stateno = 153
 ignorehitpause = 0
 
@@ -663,7 +673,7 @@ ignorehitpause = 0
 [State -1, Roll]
 type = ChangeState
 value = 13500
-triggerall = command = "3p"
+triggerall = command = "2p"
 triggerall = PalNo = 12
 triggerall = Var(23) = 0 || Var(23) = 2
 trigger1 = StateType != A
@@ -803,6 +813,7 @@ trigger1 = ctrl
 type = ChangeState
 value = 13195
 triggerall = command = "x"
+triggerall = PalNo = 12
 trigger1 = statetype != A
 trigger1 = ctrl
 
@@ -817,9 +828,8 @@ trigger1 = ctrl
 ;Air Jump
 [State -1, Air Jump]
 type = ChangeState
-trigger1 = Var(23) = 1 || PalNo != 12
-trigger1 = !Var(25)
 triggerall = command = "holdup"
 triggerall = statetype = A
+trigger1 = (!Var(25) && Var(23) = 1) || PalNo != 12
 trigger1 = ctrl
 value = 48

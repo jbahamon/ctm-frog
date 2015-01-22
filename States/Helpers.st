@@ -218,7 +218,7 @@ palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=10
 p1sprpriority = -2
-p1sprpriority = -3
+p2sprpriority = -3
 fall = 0
 
 [State 7012, Turn]
@@ -343,7 +343,7 @@ palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=10
 p1sprpriority = -2
-p1sprpriority = -3
+p2sprpriority = -3
 fall = 0
 
 
@@ -413,7 +413,7 @@ guardsound = 6,0
 sparkno=s7006
 sparkxy=-8,5
 p1sprpriority = -2
-p1sprpriority = -3
+p2sprpriority = -3
 ground.type = High
 ground.hittime  = 7
 ground.velocity = 0,-6
