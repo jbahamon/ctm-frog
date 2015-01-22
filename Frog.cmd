@@ -379,6 +379,21 @@ name = "BB"     ;Required (do not remove)
 command = B, B
 time = 10
 
+
+[Command]
+name = "longjump"
+command = ~D+U
+time = 25
+
+[Command]
+name = "longjump"
+command = ~D+BU
+time = 25
+[Command]
+name = "longjump"
+command = ~D+FU
+time = 25
+
 ;-| 2/3 Button Combination |-----------------------------------------------
 
 [Command]
@@ -741,6 +756,7 @@ trigger2 = movecontact
 
 
 ;----------------------Other----------------------
+
 ;Run Fwd
 [State -1, Run Fwd]
 type = ChangeState
@@ -764,3 +780,30 @@ value = 195
 triggerall = command = "start"
 trigger1 = statetype != A
 trigger1 = ctrl
+
+;Stand (de)activation
+[State -1, Stand]
+type = ChangeState
+value = 13195
+triggerall = command = "x"
+trigger1 = statetype != A
+trigger1 = ctrl
+
+
+;Stand (de)activation
+[State -1, Stand]
+type = ChangeState
+value = 40
+triggerall = command = "longjump"
+trigger1 = statetype = C
+trigger1 = ctrl
+
+;2’iƒWƒƒƒ“ƒv
+[State -1, Run Back]
+type = ChangeState
+trigger1 = Var(23) = 1 || PalNo != 12
+trigger1 = !Var(25)
+triggerall = command = "holdup"
+triggerall = statetype = A
+trigger1 = ctrl
+value = 48

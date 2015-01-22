@@ -1,4 +1,35 @@
 
+
+;------------------------------------------------------------------------------------------
+
+; Stand Activation
+[Statedef 13195]
+type = S
+ctrl = 0
+anim = 195
+velset = 0,0
+movetype = I
+physics = S
+sprpriority = 2
+
+[State 13195, Sound!]
+type=PlaySnd
+trigger1=!time
+value = S7015,1
+channel = 0
+
+[State 13195, Stand Var]
+type = VarSet
+trigger1 = !Time
+v = 23
+value = IfElse(Var(23), 0, 1)
+
+[State 13195, 2]
+type = ChangeState
+trigger1 = Time = 20
+value = 0
+ctrl = 1
+
 ; Roll
 [Statedef 13500]
 type = U

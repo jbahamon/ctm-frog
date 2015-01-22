@@ -52,7 +52,7 @@ airjump.back = -2.55      ;Air jump speeds (opt)
 airjump.fwd = 2.5         ;.
 
 [Movement]
-airjump.num = 1      ;Number of air jumps allowed (opt)
+airjump.num = 0      ;Number of air jumps allowed (opt)
 airjump.height = 25  ;Minimum distance from ground before you can air jump (opt)
 yaccel = .52         ;Vertical acceleration
 stand.friction = .85  ;Friction coefficient when standing
@@ -120,8 +120,9 @@ victory15  = "Hand'eth over the Masamune!"
 ; var(9)  - Masamune
 ; 21, 22 - Special mode
 
-; var(23)  - Stand Status: 0 - Off, 1 - On, 2 - Ded
+; var(23)  - Stand Status: 0 - Off, 1 - On, 2 - Dead
 ; var(24)  - Stand Life
+; var(25)  - Double Jump Used Up
 
 ; fvar(39) - Damage Dampener
 
@@ -145,6 +146,24 @@ Trigger4=P2StateType!=A
 Trigger4=P2MoveType!=H
 fvar(39)=1
 ignorehitpause=1
+
+[State -2, 1]
+type = VarAdd
+trigger1 = var(25) < 0
+var(25) = -1
+
+[State 50, 1]
+type = VarSet
+triggerall = Time = 1
+trigger1 = stateno = 50
+trigger2 = stateno = 5210
+var(25) = -1
+
+[State 50, 1]
+type = VarSet
+trigger1 = var(25) <= -8
+trigger1 = command != "holdup"
+var(25) = 0
 
 ;---------------------------------------------------------------------------
 ; States that are executed when in self's state file (use statedef -3)

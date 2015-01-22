@@ -36,6 +36,314 @@ trigger1 = 1
 value = 0
 
 ;---------------------------------------------------------------------------
+;Jump Start
+[Statedef 40]
+type    = S
+physics = N
+anim = 40
+ctrl = 0
+velset = 0,0
+
+[State 40, HitBy]
+type = HitBy
+trigger1 = 1
+value = SCA, NA,SA,HA,NP,SP,HP
+
+[State 40, 1]
+type = VarSet
+trigger1 = Time = 0
+sysvar(1) = command = "holdfwd"-command = "holdback"
+
+[State 40, 4]
+type = VarSet
+trigger1 = Time = 0
+var(3) = 0
+
+[State 40, 4]
+type = VarSet
+triggerall = Time = 0
+triggerall = PalNo = 12
+trigger1 = PrevStateNo != 100 && PrevStateNo != 105
+trigger1 = Command = "longjump"
+var(3) = 1
+
+[State 40, 4]
+type = VarSet
+triggerall = Time = 0
+trigger1 = PrevStateNo = 100 || PrevStateNo = 105
+var(3) = 2
+
+[State 40, 4]
+type = VarSet
+trigger1 = !Time
+var(4) = 0
+
+[State 40, 5]
+type = VarSet
+trigger1 = command != "holdup"
+var(4) = 1
+
+[State 40, 6]
+type = VelSet
+trigger1 = time = 0
+x = ifelse(!sysvar(1), 0, ifelse(sysvar(1)=1, const(velocity.jump.fwd.x), const(velocity.jump.back.x)))
+
+[State 40, 8]
+type = VelSet
+trigger1 = time = 0
+y = const(velocity.jump.y)
+
+[State 40, Mul]
+type = VelMul
+trigger1 = Var(3)
+trigger1 = PalNo = 12
+X = IfElse((var(23) != 1 && var(3)) || (var(23) = 1 && var(3) = 2),1.5,1)
+Y = IfElse( var(23) != 1 && var(3) = 1,1.5,1)
+persistent = 0
+
+[State 40, 8]
+type = VelMul
+trigger1 = PalNo = 12
+trigger1 = var(4)
+y = .64
+persistent = 0
+
+[State 40, 10]
+type = PosFreeze
+trigger1 = 1
+
+[State 40, 10]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 1
+
+;---------------------------------------------------------------------------
+; Jump Up
+[Statedef 50]
+type    = A
+physics = N
+
+[State 50, 1]
+type = VarSet
+trigger1 = Time = 0
+sysvar(1) = 0
+
+[State 50, 2]
+type = ChangeAnim
+trigger1 = Time = 0
+value = ifelse((vel x)=0, 41, ifelse((vel x)>0, 42, 43))
+
+[State 50, 3]
+type = ChangeAnim
+trigger1 = Vel y > -2
+trigger1 = SelfAnimExist(anim + 3)
+persistent = 0
+value = Anim + 3
+
+[State -3, Variable Height]
+type = PlayerPush
+triggerall = statetype=A && movetype!=H && numenemy
+triggerall = p2bodydist x = [-(enemynear,const(size.ground.back) + enemynear,const(size.ground.front)), 0]
+trigger1 = p2statetype=S
+trigger1 = p2dist y >= (enemynear,const(size.height) - 6); Value depends on each char
+trigger2 = p2statetype=C
+trigger2 = p2dist y >= (enemynear,const(size.height) - 14); Value depends on each char
+trigger3 = p2statetype=L
+trigger3 = p2dist y >= 6
+value=0
+ignorehitpause=1
+
+[State 4030, Gravity]
+type = VelAdd
+trigger1 = var(23) != 1
+trigger1 = PalNo = 12
+y = ifelse(var(4),.5,.6)
+
+[State 4030, Gravity]
+type = VelAdd
+trigger1 = PalNo = 12
+trigger1 = var(23) = 1
+y = ifelse(var(3) || var(4),.5,.6)
+
+[State 4030, Gravity]
+type = VelAdd
+trigger1 = PalNo != 12
+y = const(movement.yaccel)
+
+[State 1100, ChangeState]
+type = ChangeState
+trigger1 = Pos Y >= 0 && Vel Y > 0
+value = 52
+
+;---------------------------------------------------------------------------
+;Second Jump Start
+[Statedef 48]
+type    = A
+physics = N
+anim = 40
+ctrl = 0
+velset = 0,0
+
+[State 40, 1]
+type = VarSet
+trigger1 = Time = 0
+sysvar(1) = (command = "holdfwd"-command = "holdback")*((P2Dist X >= 0)-(P2Dist X < 0))
+
+[State 40, 4]
+type = VarSet
+trigger1 = Time = 0
+var(3) = 0
+
+[State 40, 4]
+type = VarSet
+triggerall = Time = 0
+trigger1 = Command = "longjump"
+var(3) = 1
+
+[State 40, 4]
+type = VarSet
+trigger1 = Time = 0
+var(4) = 0
+
+[State 40, 5]
+type = VarSet
+trigger1 = command != "holdup"
+var(4) = 1
+
+[State 52, 1]
+type = Turn
+trigger1 = Time = 0
+trigger1 = P2Dist X < 0
+
+[State 40, 6]
+type = VelSet
+trigger1 = time = 0
+x = ifelse(!sysvar(1), 0, ifelse(sysvar(1)=1, const(velocity.jump.fwd.x), const(velocity.jump.back.x)))
+
+[State 40, 8]
+type = VelSet
+trigger1 = time = 0
+y = const(velocity.jump.y)
+
+[State 40, Mul]
+type = VelMul
+trigger1 = Var(3)
+trigger1 = PalNo = 12
+X = IfElse((var(23) != 1 && var(3)) || (var(23) = 1 && var(3) = 2),2,1)
+Y = IfElse( var(23) != 1 && var(3) = 1,1.5,1)
+
+persistent = 0
+[State 40, 8]
+type = VelMul
+trigger1 = PalNo = 12
+trigger1 = var(4)
+y = .64
+persistent = 0
+
+[State 40, 10]
+type = PosFreeze
+trigger1 = 1
+
+[State 40, 1]
+type = VarSet
+trigger1 = Time = 0
+var(25) = 1
+
+[State 40, 10]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 60
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;Second Jump Up
+[Statedef 60]
+type    = A
+physics = N
+
+[State 50, 1]
+type = VarSet
+trigger1 = Time = 0
+sysvar(1) = 0
+
+[State 50, 2]
+type = ChangeAnim
+trigger1 = Time = 0
+value = ifelse((vel x)=0, 41, ifelse((vel x)>0, 42, 43))
+
+[State 50, 3]
+type = ChangeAnim
+trigger1 = Vel y > -2
+trigger1 = SelfAnimExist(anim + 3)
+persistent = 0
+value = Anim + 3
+
+[State -3, Variable Height]
+type = PlayerPush
+triggerall = statetype=A && movetype!=H && numenemy
+triggerall = p2bodydist x = [-(enemynear,const(size.ground.back) + enemynear,const(size.ground.front)), 0]
+trigger1 = p2statetype=S
+trigger1 = p2dist y >= (enemynear,const(size.height) - 6); Value depends on each char
+trigger2 = p2statetype=C
+trigger2 = p2dist y >= (enemynear,const(size.height) - 14); Value depends on each char
+trigger3 = p2statetype=L
+trigger3 = p2dist y >= 6
+value=0
+ignorehitpause=1
+
+[State 4030, Gravity]
+type = VelAdd
+trigger1 = PalNo = 12
+y = ifelse(var(3)||var(4),.5,.6)
+
+[State 4030, Gravity]
+type = VelAdd
+trigger1 = PalNo != 12
+y = const(movement.yaccel)
+
+
+[State 1100, ChangeState]
+type = ChangeState
+trigger1 = Pos Y >= 0 && Vel Y > 0
+value = 52
+
+;---------------------------------------------------------------------------
+;Jump Land
+[Statedef 52]
+type = S
+physics = S
+ctrl = 0
+anim = 47
+velset = 0,0
+
+[State 52, 2]
+type = PosSet
+trigger1 = Time = 0
+y = 0
+
+[State 52, 1]
+type = Turn
+trigger1 = Time = 1
+trigger1 = P2Dist X < 0
+
+[State 52, 3]
+type = CtrlSet
+trigger1 = Time = 1
+value = 1
+
+[State 52, Effect]
+type = PlaySnd
+trigger1 = Time = 0
+value = 52, 0
+
+[State 52, 4]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
 ; Run forward
 [Statedef 100]
 type    = S
@@ -651,36 +959,19 @@ movetype = I
 physics = S
 sprpriority = 2
 
-[State 195, Stand Var]
-type = VarSet
-triggerall = PalNo = 12
-trigger1 = !Time
-v = 23
-value = IfElse(Var(23), 0, 1)
-
 [State 195, Sound!]
 type=PlaySnd
 trigger1=!time
 value = S7015,1
 channel = 0
 
-
-[State 195, 2]
-type = ChangeState
-triggerall = PalNo = 12
-trigger1 = Time = 20
-value = 0
-ctrl = 1
-
 [State 195, 1]
 type = CtrlSet
-triggerall = PalNo != 12
 trigger1 = Time = 40
 value = 1
 
 [State 195, 2]
 type = ChangeState
-triggerall = PalNo != 12
 trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
