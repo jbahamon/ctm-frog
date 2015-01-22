@@ -1838,6 +1838,12 @@ Loopstart
 [Begin Action 7400]
 -1,0, 0,0, -1, 
 
+; Advancing Guard
+[Begin Action 7401]
+Clsn2: 1
+  Clsn2[0] = -13, -325, 9, 1
+-1,0, 0,0, 10
+
 ; SVC Midnight Bliss
 [Begin Action 9020]
 12000,0, 0,0, 1, 
@@ -2054,9 +2060,19 @@ Clsn2: 1
 
 ; Roll
 [Begin Action 13500]
+Clsn2: 1
+  Clsn2[0] = -14, -27, 5, -5
 3401,2, -6,-5, 6, H
+Clsn2: 1
+  Clsn2[0] = -11, -36, 10, -13
 220,2, -7,-28, 8, H
+Clsn2: 1
+  Clsn2[0] = -7, -36, 14, -13
 600,1, 8,-37, 5, V
+Clsn2: 1
+  Clsn2[0] = -9, -31, 11, -4
 46,0, 3,-4, 4
+Clsn2: 1
+  Clsn2[0] = -12, -24, 9, -1
 620,0, 0,0, 7
 

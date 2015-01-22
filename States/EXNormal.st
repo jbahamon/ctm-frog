@@ -1,4 +1,199 @@
+; Advancing Guard
+[Statedef 13100]
+type    = U
+movetype = I
+physics = N
+ctrl = 0
+velset = 0,0
 
+[State 810, 1]
+type = Explod
+trigger1 = time = 0
+anim = 1015
+pos = 15,ifelse(statetype = C && (var(23) != 1),-7, -20)
+ownpal = 1
+bindtime = 1
+sprpriority = 2
+pausemovetime = 99999999
+
+[State 810, 1]
+type = helper
+trigger1 = time = 0
+ID = 13105
+stateno = 13105
+pos = -15,0
+facing = 1
+size.ground.back = 20
+size.ground.front = 20
+size.height = 240
+pausemovetime = 99999999
+
+[State 810, 1]
+type = velset
+trigger1 = 1
+x = 0
+
+[State 810, 2]
+type = ChangeAnim
+trigger1 = time >= 0 && command != "holddown"
+value = 150
+
+[State 810, 3]
+type = ChangeAnim
+trigger1 = time >= 0 && command = "holddown"
+value = 151
+
+[State 810, 4]
+type = statetypeset
+trigger1 = command != "holddown"
+statetype = S
+physics = S
+
+[State 810, 5]
+type = statetypeset
+trigger1 = command = "holddown"
+statetype = C
+physics = C
+
+[State 810, 6]
+type = NotHitBy
+trigger1 = time <= 1
+value = SCA
+time = 1
+
+[State 810, 7]
+type = ChangeState
+trigger1 = time = 1
+value = 151+(command = "holddown")*2
+
+; Advancing Guard
+[Statedef 13101]
+type    = U
+movetype = I
+physics = N
+
+[State 811, 1]
+type = velset
+trigger1 = 1
+x = 0
+
+[State 811, 2]
+type = ChangeAnim
+trigger1 = time >= 0 && command != "holddown"
+value = 150
+
+[State 811, 3]
+type = ChangeAnim
+trigger1 = time >= 0 && command = "holddown"
+value = 15
+
+[State 811, 4]
+type = statetypeset
+trigger1 = command != "holddown"
+statetype = S
+physics = S
+
+[State 811, 5]
+type = statetypeset
+trigger1 = command = "holddown"
+statetype = C
+physics = C
+
+[State 811, 6]
+type = ChangeState
+trigger1 = numhelper(13105) = 1
+trigger1 = command = "holdback"
+value = 151+(command = "holddown")*2
+
+[State 811, 7]
+type = ChangeState
+trigger1 = !numhelper(13105)
+value = 130+(command = "holddown")
+ctrl = 1
+
+; Advancing Guard Helper
+[Statedef 13105]
+type = S
+movetype = I
+physics = N
+velset = 0,0
+anim = 7401
+
+[State 815, 1]
+type = PlayerPush
+trigger1 = 1
+value = 1
+
+[State 815, 2]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+
+[State 815, 3]
+type = velset
+trigger1 = Time = 0
+x = 20
+
+[State 815, 4]
+type = veladd
+trigger1 = Time > 0
+x = -1
+
+[State 815, 6]
+type = DestroySelf
+trigger1 = Time = 15
+
+;---------------------------------------------------------------------------
+; Guard Helper
+[Statedef 13110]
+type = S
+movetype = I
+physics = N
+ctrl = 0
+anim = 7400
+
+[State 8500, 1]
+type = varset
+trigger1 = parent,stateno != [150,815]
+var(6) = 0
+
+[State 8500, 1]
+type = varset
+trigger1 = parent,stateno = 150
+trigger2 = parent,stateno = 152
+var(6) = parent,GetHitVar(ctrltime)
+
+[State 8500, 1]
+type = varset
+trigger1 = parent,stateno != [150,815]
+var(5) = 0
+
+[State 8500, 1]
+type = varadd
+trigger1 = parent,stateno = 153
+var(5) = 1
+
+[State 8500, 1]
+type = varset
+trigger1 = parent,stateno != [150,815]
+var(4) = 0
+
+[State 8500, 1]
+type = varadd
+trigger1 = parent,stateno = 151
+var(4) = 1
+
+[State 8500, 1]
+type = varset
+trigger1 = parent,stateno != [150,815]
+var(3) = 0
+
+[State 8500, 1]
+type = varset
+trigger1 = parent,stateno = 150
+trigger2 = parent,stateno = 152
+var(3) = parent,GetHitVar(hittime)
 
 ;------------------------------------------------------------------------------------------
 

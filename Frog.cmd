@@ -421,6 +421,12 @@ name = "2p"
 command = a+b
 time = 1
 
+
+[Command]
+name = "3p"
+command = a+b+c
+time = 1
+
 ;-| Dir + Button |---------------------------------------------------------
 
 ;-| Single Button |---------------------------------------------------------
@@ -643,10 +649,21 @@ triggerall = Var(21) = 0
 trigger1 = StateType != A
 trigger1 = ctrl 
 
+;Advancing Guard
+[State -1]
+type = ChangeState
+value = 13100
+triggerall = roundstate = 2
+triggerall = command = "3p"
+triggerall = prevstateno != [13100,13101]
+trigger1 = stateno = 150 || stateno = 151 || stateno = 152 || stateno = 153
+ignorehitpause = 0
+
+; Dodge
 [State -1, Roll]
 type = ChangeState
 value = 13500
-triggerall = command = "2p"
+triggerall = command = "3p"
 triggerall = PalNo = 12
 triggerall = Var(23) = 0 || Var(23) = 2
 trigger1 = StateType != A
@@ -789,17 +806,16 @@ triggerall = command = "x"
 trigger1 = statetype != A
 trigger1 = ctrl
 
-
-;Stand (de)activation
-[State -1, Stand]
+;High Jump
+[State -1, High Jump]
 type = ChangeState
 value = 40
 triggerall = command = "longjump"
 trigger1 = statetype = C
 trigger1 = ctrl
 
-;2’iƒWƒƒƒ“ƒv
-[State -1, Run Back]
+;Air Jump
+[State -1, Air Jump]
 type = ChangeState
 trigger1 = Var(23) = 1 || PalNo != 12
 trigger1 = !Var(25)

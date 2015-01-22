@@ -147,6 +147,16 @@ Trigger4=P2MoveType!=H
 fvar(39)=1
 ignorehitpause=1
 
+;Guard Helper
+[State -2]
+type = helper
+trigger1 = !NumHelper(13110)
+ID = 13110
+stateno = 13110
+pos = -999,-999
+pausemovetime = 99999999
+supermovetime = 99999999
+
 [State -2, 1]
 type = VarAdd
 trigger1 = var(25) < 0

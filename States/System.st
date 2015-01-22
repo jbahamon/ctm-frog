@@ -377,6 +377,129 @@ trigger1 = !AnimTime && PalNo = 12
 value = 106
 
 ;---------------------------------------------------------------------------
+; SGUARDHIT2 (knocked back)
+[Statedef 151]
+type    = S
+movetype = H
+physics = S
+anim = 150+var(49)
+
+[State 151, 1]
+type = HitVelSet
+trigger1 = Time = 0
+x = 1
+
+[State 151, 2]
+type = VelSet
+trigger1 = Time = GetHitVar(slidetime)
+trigger2 = HitOver
+trigger3 = prevstateno = 810
+trigger3 = numhelper(815) = 1
+trigger4 = prevstateno = 811
+trigger4 = numhelper(815) = 1
+x = 0
+
+[State 151, 3]
+type = CtrlSet
+trigger1 = Time = GetHitVar(ctrltime)
+trigger1 = prevstateno != [810,811]
+value = 1
+
+[State 151, Hi to Lo]
+type = StateTypeSet
+trigger1 = statetype = S && command = "holddown"
+statetype = C
+physics = C
+
+[State 151, Lo to Hi]
+type = StateTypeSet
+trigger1 = statetype = C && command != "holddown"
+statetype = S
+physics = S
+
+[State 151, 4]
+type = ChangeState
+trigger1 = HitOver
+trigger1 = prevstateno != [810,811]
+trigger2 = prevstateno = [810,811]
+trigger2 = !numhelper(815)
+value = 130
+ctrl = 1
+
+[State 151, 5]
+type = ChangeState
+triggerall = numhelper(815) = 1
+trigger1 = command != "holdback"
+trigger1 = prevstateno = 811
+trigger2 = prevstateno = 810
+trigger2 = helper(13110),var(4) + helper(13110),var(5) > helper(13110),var(3)
+trigger3 = prevstateno = 810
+trigger3 = helper(13110),var(4) + helper(13110),var(5) > helper(13110),var(6)
+value = 811
+
+;---------------------------------------------------------------------------
+; CGUARDHIT2 (knocked back)
+[Statedef 153]
+type = C
+movetype = H
+physics = C
+anim = 151+var(49)
+
+[State 153, 1]
+type = HitVelSet
+trigger1 = Time = 0
+x = 1
+
+[State 153, 2]
+type = VelSet
+trigger1 = Time = GetHitVar(slidetime)
+trigger2 = HitOver
+trigger3 = prevstateno = 810
+trigger3 = numhelper(815) = 1
+trigger4 = prevstateno = 811
+trigger4 = numhelper(815) = 1
+x = 0
+
+[State 153, 3]
+type = CtrlSet
+trigger1 = Time = GetHitVar(ctrltime)
+trigger1 = prevstateno != [810,811]
+value = 1
+
+[State 153, Hi to Lo]
+type = StateTypeSet
+trigger1 = statetype = S && command = "holddown"
+statetype = C
+physics = C
+
+[State 153, Lo to Hi]
+type = StateTypeSet
+trigger1 = statetype = C && command != "holddown"
+statetype = S
+physics = S
+
+[State 153, 4]
+type = ChangeState
+trigger1 = HitOver
+trigger1 = prevstateno != [810,811]
+trigger2 = prevstateno = [810,811]
+trigger2 = !numhelper(815)
+value = 131
+ctrl = 1
+
+[State 153, 5]
+type = ChangeState
+triggerall = numhelper(815) = 1
+trigger1 = command != "holdback"
+trigger1 = prevstateno = 811
+trigger2 = prevstateno = 810
+trigger2 = helper(13110),var(4) + helper(13110),var(5) > helper(13110),var(3)
+trigger3 = prevstateno = 810
+trigger3 = helper(13110),var(4) + helper(13110),var(5) > helper(13110),var(6)
+value = 811
+
+
+;---------------------------------------------------------------------------
 ; Lose by Time Over
 ; CNS difficulty: basic
 [Statedef 170]
