@@ -2,12 +2,9 @@
 
 ; Stand Activation
 [Statedef 13195]
-type = S
+type = U
 ctrl = 0
-anim = 195
-velset = 0,0
 movetype = I
-physics = S
 sprpriority = 2
 
 [State 13195, Sound!]
@@ -15,6 +12,26 @@ type=PlaySnd
 trigger1=!time
 value = S7015,1
 channel = 0
+
+[State 13195, Physics]
+type = StateTypeSet
+trigger1 = !Time
+trigger1 = StateType = A
+physics = A
+
+
+[State 13195, Vel]
+type = VelSet
+trigger1 = !Time
+trigger1 = StateType = S
+X = 0
+Y = 0
+
+[State 13195, Anim]
+type = ChangeAnim
+trigger1 = !Time
+trigger1 = StateType = S
+value = 195
 
 [State 13195, Stand Var]
 type = VarSet
@@ -25,7 +42,7 @@ value = IfElse(Var(23) = 1, 0, 1)
 [State 13195, 2]
 type = ChangeState
 trigger1 = Time = 20
-value = 0
+value = IfElse(StateType != A, 0, 50)
 ctrl = 1
 
 ; Advancing Guard

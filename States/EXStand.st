@@ -21,6 +21,7 @@ ignorehitpause = 1
 [State 7010, End]
 type = ChangeState
 trigger1 = Time >= 16
+trigger2 = Parent, StateType = A
 value = 17011
 
 ; Idle Masa&Mune
@@ -172,14 +173,6 @@ X = 2.5
 Y = IfElse(Root, StateType = A, 3, IfElse(Root, StateType = C, -3, 0))
 ignorehitpause = 1
 
-[State 7015, ChangeAnim]
-type = ParentVarAdd
-trigger1 = !Time
-trigger1 = Root, PalNo != 12
-trigger1 = PrevStateNo != 17015
-var(22) = -240
-ignorehitpause = 1
-
 [State 7021, hit]
 type = HitDef
 trigger1 = !Time
@@ -201,6 +194,9 @@ animtype=Medium
 air.animtype=Medium
 getpower = 0, 0
 givepower = 36, 36
+envshake.time = 8
+envshake.freq = 120
+envshake.ampl = 4
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=10
@@ -325,6 +321,9 @@ animtype=Medium
 air.animtype=Medium
 getpower = 0, 0
 givepower = 36, 36
+envshake.time = 10
+envshake.freq = 120
+envshake.ampl = 6
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=10
@@ -398,7 +397,7 @@ guardsound = 6,0
 sparkno=s7006
 sparkxy=-8,5
 p1sprpriority = -2
-p1sprpriority = -3
+p2sprpriority = -3
 ground.type = High
 ground.hittime  = 7
 ground.velocity = 0,-6
@@ -409,6 +408,9 @@ getpower = 0, 0
 id = 7014
 nochainID = 7014
 givepower = 36, 36
+envshake.time = 12
+envshake.freq = 120
+envshake.ampl = 8
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=10
@@ -628,7 +630,7 @@ value = IfElse(Parent, Var(23) = 0 || Parent, Var(23) = 2, 17019, 17011)
 type = S
 physics = N
 movetype = A
-anim = 3034
+anim = 13401
 sprpriority = -2
 facep2= 1
 
@@ -716,6 +718,109 @@ sparkxy=-8,5
 ground.type = High
 ground.hittime  = 7
 ground.velocity = -4.5,-3
+air.velocity = -5,-7
+animtype=Medium
+air.animtype=Medium
+getpower = 0, 0
+givepower = 36, 36
+palfx.add=200,200,200
+palfx.mul=256,256,256
+palfx.time=10
+p1sprpriority = -2
+p2sprpriority = -3
+fall = 0
+
+;Appearance Attack
+[Statedef 17210]
+type = S
+physics = N
+movetype = A
+anim = 14001
+sprpriority = -2
+facep2= 1
+
+[State 7010, appear]
+type = trans
+trigger1 = 1
+trans = none
+ignorehitpause = 1
+
+[State 9606, EnvColor]
+type = palfx
+trigger1 = Anim = 14001
+trigger1 = AnimElemNo(0) < 3
+trigger1 = time%2=0
+add = 128,128,192
+time = 1
+ignorehitpause = 1
+
+[State 17210, Shake]
+type = EnvShake
+trigger1 = !Time
+time = 12
+freq = 120
+ampl = 8
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = Animelem=2 
+value = S7000,1
+
+[State 7015, ChangeAnim]
+type = VarSet
+trigger1 = !Time
+var(1) = StateNo
+ignorehitpause = 1
+
+[State 7013, Turn]
+type = Turn
+trigger1 = Facing != Parent, Facing
+ignorehitpause = 1
+
+[State 7011, HitOverride]
+type = HitOverride
+trigger1 = 1
+attr = SCA,NA,SA,HA,NP,SP,HP
+stateno = 17015
+ignorehitpause = 1
+
+[State 7011, HitOverride]
+type = NotHitBy
+trigger1 = 1
+value = SCA,NT,ST,HT 
+ignorehitpause = 1
+
+[State 7014, Light Hit]
+type = PosFreeze
+trigger1 = 1
+
+[State 7013, Selector Var]
+type = VarSet
+trigger1 = !Time
+var(0) = Parent, StateNo
+
+[State 7014, Light Hit]
+type = ChangeState
+trigger1 = !AnimTime
+value = 17011
+
+[State 7021, hit]
+type = HitDef
+trigger1 = !Time
+attr = S, NA
+animtype  = Medium
+damage    = 111
+hitflag = MAF
+guardflag = M
+pausetime = 10,10
+hitsound = S7001,1
+guardsound = 6,0
+sparkno=s7006
+sparkxy=-8,5
+ground.type = Low
+ground.hittime  = 12
+ground.slidetime = 30
+ground.velocity = -7.5
 air.velocity = -5,-7
 animtype=Medium
 air.animtype=Medium

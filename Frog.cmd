@@ -303,6 +303,7 @@ name = "qcbc"
 command = ~D, DB, B, ~c
 time=15
 
+
 ; ---
 
 [Command]
@@ -367,6 +368,16 @@ name = "qcfc"
 command = ~D, DF, F, ~c
 time=15
 
+[Command]
+name = "qcfx"
+command = ~D, DF, F, ~x
+time=15
+
+[Command]
+name = "qcfx"
+command = ~D, DF, F, x
+time=15
+
 ;-| Double Tap |-----------------------------------------------------------
 
 [Command]
@@ -382,17 +393,10 @@ time = 10
 
 [Command]
 name = "longjump"
-command = ~D+U
+command = ~D,/$U
 time = 25
 
-[Command]
-name = "longjump"
-command = ~D+BU
-time = 25
-[Command]
-name = "longjump"
-command = ~D+FU
-time = 25
+
 
 ;-| 2/3 Button Combination |-----------------------------------------------
 
@@ -623,6 +627,16 @@ trigger2 = movecontact
 trigger3 = (StateNo = 220) || (stateno = 1020)
 trigger3 = movecontact
 
+; Stand Appearance Attack
+[State -1, Air Jump]
+type = ChangeState
+triggerall = command = "qcfx"
+triggerall = statetype != A
+triggerall = PalNo = 12
+trigger1 = Var(23) != 1
+trigger1 = ctrl
+value = 14000
+
 ;---------------------------------------------------------------------------
 [State -1, Blade Strike]
 type = ChangeState
@@ -649,11 +663,13 @@ triggerall = Var(21) = 0
 trigger1 = StateType != A
 trigger1 = ctrl 
 
+; Guard Cancel
 [State -1]
 type = ChangeState
 value = 13400
 triggerall = roundstate = 2
-triggerall = Command = "y";Command = "dfa" || Command = "dfb" || Command = "dfc"
+triggerall = Command = "dfa" || Command = "dfb" || Command = "dfc"
+triggerall = PalNo = 12
 triggerall = prevstateno != [810,811]
 trigger1 = stateno = 150 || stateno = 151 || stateno = 152 || stateno = 153
 ignorehitpause = 0
@@ -814,14 +830,15 @@ type = ChangeState
 value = 13195
 triggerall = command = "x"
 triggerall = PalNo = 12
-trigger1 = statetype != A
 trigger1 = ctrl
 
 ;High Jump
 [State -1, High Jump]
 type = ChangeState
 value = 40
-triggerall = command = "longjump"
+triggerall = PalNo = 12
+triggerall = Var(23) != 1
+triggerall = Command = "longjump"
 trigger1 = statetype = C
 trigger1 = ctrl
 
