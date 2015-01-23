@@ -584,6 +584,7 @@ trigger6 = ( StateNo = 1020) && MoveHit
 [State -1, Leap Slash]
 type = ChangeState
 value = 1020
+triggerall = PalNo != 12
 triggerall = StateType != A 
 triggerall = Command = "dfa" || Command = "dfb" || Command = "dfc"
 trigger1 = Ctrl
@@ -591,6 +592,7 @@ trigger1 = Ctrl
 [State -1, Slurp Cut]
 type = ChangeState
 value = 1030
+triggerall = PalNo != 12
 triggerall = StateType != A && Power >=500
 triggerall = Command = "qcfa" || Command = "qcfb" || Command = "qcfc"
 trigger1 = Ctrl
@@ -598,7 +600,7 @@ trigger1 = Ctrl
 [State -1, Line Slash]
 type = ChangeState
 value = 1040
-;triggerall = FrontEdgeBodyDist >=50 && Pos y < -5
+triggerall = PalNo != 12
 triggerall = Command = "qcfa" || Command = "qcfb" || Command = "qcfc"
 trigger1 = StateType = A 
 trigger1 = Ctrl
@@ -609,6 +611,7 @@ trigger2 = MoveContact
 type = ChangeState
 value = 1000
 triggerall = !NumHelper(1010) 
+triggerall = PalNo != 12
 triggerall = Command = "qcba" || Command = "qcbb" || Command = "qcbc"
 trigger1 = Ctrl
 trigger1 = StateType != A
@@ -620,6 +623,7 @@ type = ChangeState
 value = 1001
 triggerall = !NumHelper(1010) 
 triggerall = Command = "qcba" || Command = "qcbb" || Command = "qcbc"
+triggerall = PalNo != 12
 trigger1 = Ctrl
 trigger1 = StateType = A
 trigger2 = (StateNo = [600, 699])
@@ -627,30 +631,12 @@ trigger2 = movecontact
 trigger3 = (StateNo = 220) || (stateno = 1020)
 trigger3 = movecontact
 
-; Stand Appearance Attack
-[State -1, Air Jump]
-type = ChangeState
-triggerall = command = "qcfx"
-triggerall = statetype != A
-triggerall = PalNo = 12
-trigger1 = Var(23) != 1
-trigger1 = ctrl
-value = 14000
-
-;---------------------------------------------------------------------------
 [State -1, Blade Strike]
 type = ChangeState
 trigger1 = (command = "recovery" || command = "2p") && (command = "holdfwd" || command = "holdback")
 trigger1 = PalNo != 12
 trigger1 = roundstate = 2 && ctrl && statetype = S && stateno != 100
 value = 800
-
-[State -1, Blade Strike]
-type = ChangeState
-trigger1 = (command = "c") && (command = "holdfwd" || command = "holdback")
-trigger1 = PalNo = 12
-trigger1 = roundstate = 2 && ctrl && statetype = S && stateno != 100
-value = 13800
 
 ;Grand Dream Activation
 [State -1, Grand Dream]
@@ -662,6 +648,33 @@ triggerall = Power >= 3000
 triggerall = Var(21) = 0
 trigger1 = StateType != A
 trigger1 = ctrl 
+
+;---------------------------------------------------------------------------
+
+[State -1, Muda Muda]
+type = ChangeState
+value = 14010
+triggerall = PalNo = 12
+triggerall = StateType != A 
+triggerall = Command = "qcfa" || Command = "qcfb" || Command = "qcfc"
+trigger1 = Ctrl
+
+; Stand Appearance Attack
+[State -1, Stand Attack]
+type = ChangeState
+triggerall = command = "qcfx"
+triggerall = statetype != A
+triggerall = PalNo = 12
+trigger1 = Var(23) != 1
+trigger1 = ctrl
+value = 14000
+
+[State -1, Throw]
+type = ChangeState
+trigger1 = (command = "c") && (command = "holdfwd" || command = "holdback")
+trigger1 = PalNo = 12
+trigger1 = roundstate = 2 && ctrl && statetype = S && stateno != 100
+value = 13800
 
 ; Guard Cancel
 [State -1]
@@ -847,6 +860,6 @@ trigger1 = ctrl
 type = ChangeState
 triggerall = command = "holdup"
 triggerall = statetype = A
-trigger1 = (!Var(25) && Var(23) = 1) || PalNo != 12
+trigger1 = !Var(25) && (Var(23) = 1 || PalNo != 12)
 trigger1 = ctrl
 value = 48

@@ -57,12 +57,6 @@ trigger1 = 1
 value = ,AT
 ignorehitpause = 1
 
-[State 7011, Debug]
-type = DisplayToClipboard
-trigger1 = 1
-text = "var(0) = %d"
-params = Var(0)
-
 [State 7011, FollowPlayer]
 type = PosAdd
 trigger1 = 1
@@ -469,7 +463,7 @@ type = HitOverride
 trigger1 = 1
 time = -1
 attr = SCA,AA, AP
-stateno = 7015
+stateno = 17015
 ignorehitpause = 1
 
 [State 7011, HitOverride]
@@ -494,11 +488,12 @@ v = 24
 value = - 5 * floor(gethitvar(damage)) 
 ignorehitpause = 1
 
-[State 7011, Heavy Hit]
-type = ChangeState
-triggerall = Parent, StateNo != Var(0)
-trigger1 = Parent, StateNo = 13400
-value = 17200
+[State 0, DisplayToClipboard]
+type = DisplayToClipboard
+trigger1 = 1
+text = "Var(1) = %d"
+params = var(1)
+ignorehitpause = 1
 
 [State 7015, ChangeAnim]
 type = ChangeAnim
@@ -506,26 +501,20 @@ trigger1 = Time < floor(gethitvar(hittime) * 0.8)
 value = Anim
 elem = AnimElemNo(0)
 ignorehitpause = 1
-     
-[State 7015, End]
-type = ChangeState
-trigger1 = Time >= floor(gethitvar(hittime) * 0.8)
-trigger1 = var(1) = [17011,17014]
-value = 17011
-ignorehitpause = 1
 
 [State 7015, End]
 type = ChangeState
-trigger1 = Time >= floor(gethitvar(hittime) * 0.8)
-trigger1 = var(1) = 17200 && Parent, Var(23) != 1
+triggerall = Time >= floor(gethitvar(hittime) * 0.8)
+trigger1 = (var(1) = [17011,17014]) || var(1) = 17230
 value = 17019
 ignorehitpause = 1
 
 [State 7015, End]
 type = ChangeState
-trigger1 = Time >= floor(gethitvar(hittime) * 0.8)
-trigger1 = var(1) != [17011,17014]
-value = var(1)
+triggerall = Time >= floor(gethitvar(hittime) * 0.8)
+trigger1 = var(1) = 17200 && Parent, Var(23) != 1
+trigger2 = var(1) = 17220
+value = 17019
 ignorehitpause = 1
 
 
@@ -832,3 +821,116 @@ palfx.time=10
 p1sprpriority = -2
 p2sprpriority = -3
 fall = 0
+
+; Muda Muda (No Stand)
+[Statedef 17220]
+type = S
+physics = N
+movetype = A
+anim = 14010
+velset = 0,0
+sprpriority = -2
+facep2= 1
+
+[State 7015, ChangeAnim]
+type = VarSet
+trigger1 = !Time
+var(1) = StateNo
+ignorehitpause = 1
+
+[State 7010, appear]
+type = trans
+trigger1 = 1
+trans = none
+ignorehitpause = 1
+
+[State 7010, appear]
+type = VelSet
+trigger1 = !NumTarget
+trigger2 = NumTarget && FrontEdgeDist > 70
+X = 0.4
+ignorehitpause = 1
+
+[State 7010, appear]
+type = VelSet
+trigger1 = NumTarget && FrontEdgeDist < 50
+X = -2
+ignorehitpause = 1
+
+[State 9606, EnvColor]
+type = palfx
+trigger1 = Anim = 14010
+trigger1 = AnimElemNo(0) < 3
+trigger1 = time%2=0
+add = 128,128,192
+time = 1
+ignorehitpause = 1
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = Animelem=2 
+value = S7000,1 
+
+[State 7011, HitOverride]
+type = HitOverride
+trigger1 = 1
+attr = SCA,NA,SA,HA,NP,SP,HP
+stateno = 17015
+ignorehitpause = 1
+
+[State 7011, HitOverride]
+type = NotHitBy
+trigger1 = 1
+value = ,NT,ST,HT 
+ignorehitpause = 1
+
+[State 7013, Selector Var]
+type = VarSet
+trigger1 = !Time
+var(0) = Parent, StateNo
+
+[State 7014, Light Hit]
+type = ChangeState
+trigger1 = !AnimTime
+value = 17019
+
+[State 3010, HitDef]
+type = HitDef
+trigger1 = AnimElemNo(0) % 2 != 0
+trigger1 = AnimElemTime(AnimElemNo(0)) = 1
+attr = S, SA
+hitflag = MAF
+guardflag = M
+animtype = heavy
+air.animtype = back
+fall.animtype = back
+damage = 28,2
+pausetime = 7,!(random%8=0)*8
+guard.pausetime = 7,!(random%8=0)*8
+sparkno = S8204
+guard.sparkno = S8100
+sparkxy = -4, -10+(random%30)
+hitsound = S1,4
+guardsound = S4,0
+ground.type = High
+air.type = High
+ground.slidetime = 11
+ground.hittime = 11
+air.hittime = 11
+guard.ctrltime = 11
+ground.velocity = -5.5
+guard.velocity = -5
+air.velocity = -2.5, 0
+ground.cornerpush.veloff = 0
+air.cornerpush.veloff = 0
+getpower = 40,0
+givepower = 20,0
+air.fall = 1
+fall.recover = 1
+yaccel = .35
+guard.kill = 0
+p2facing = 1
+palfx.add=200,200,200
+palfx.mul=256,256,256
+palfx.time=6
+

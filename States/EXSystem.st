@@ -35,7 +35,11 @@ value = 195
 
 [State 13195, Stand Var]
 type = VarSet
-trigger1 = !Time
+triggerall = !Time
+trigger1 = Var(23) != 1
+trigger1 = !NumHelper(10000)
+trigger2 = Var(23) = 1
+trigger2 = NumHelper(10000)
 v = 23
 value = IfElse(Var(23) = 1, 0, 1)
 
