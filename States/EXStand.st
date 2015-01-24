@@ -33,6 +33,27 @@ anim = 3032
 sprpriority = -2
 
 [State 7010, appear]
+type = StateTypeSet
+trigger1 = Parent, StateType = S
+statetype = A
+physics = N
+ignorehitpause = 1
+
+[State 7010, appear]
+type = StateTypeSet
+trigger1 = Parent, StateType = C
+statetype = C
+physics = N
+ignorehitpause = 1
+
+[State 7010, appear]
+type = StateTypeSet
+trigger1 = Parent, StateType = A
+statetype = A
+physics = N
+ignorehitpause = 1
+
+[State 7010, appear]
 type = trans
 trigger1 = 1
 trans = none
@@ -41,14 +62,6 @@ ignorehitpause = 1
 [State 7011, Turn]
 type = Turn
 trigger1 = Facing != Parent, Facing
-ignorehitpause = 1
-
-[State 7011, HitOverride]
-type = HitOverride
-trigger1 = 1
-time = -1
-attr = SCA,AA,AP
-stateno = 17015
 ignorehitpause = 1
 
 [State 7011, HitOverride]
@@ -73,6 +86,24 @@ var(0) = 0
 type = VarSet
 trigger1 = !Time
 var(1) = StateNo
+ignorehitpause = 1
+
+
+[State 7011, HitOverride]
+type = HitOverride
+trigger1 = 1
+time = -1
+attr = SCA,AA,AP
+stateno = 17015
+ignorehitpause = 1
+
+[State 130, Stop Guarding]
+type = HitOverride
+trigger1 = command = "holdback" && inguarddist && EnemyNear, MoveType = A
+trigger2 = Parent, StateNo = [120, 155]
+time = -1
+attr = SCA,AA,AP
+stateNo = 17016
 ignorehitpause = 1
 
 [State 7011, Ded]
@@ -142,6 +173,22 @@ sprpriority = -2
 facep2= 1
 
 [State 7010, appear]
+type = StateTypeSet
+trigger1 = !Time
+trigger1 = Parent, StateType = C
+statetype = C
+physics = N
+ignorehitpause = 1
+
+[State 7010, appear]
+type = StateTypeSet
+trigger1 = !Time
+trigger1 = Parent, StateType = A
+statetype = A
+physics = N
+ignorehitpause = 1
+
+[State 7010, appear]
 type = trans
 trigger1 = 1
 trans = none
@@ -175,7 +222,74 @@ ignorehitpause = 1
 [State 7021, hit]
 type = HitDef
 trigger1 = !Time
+trigger1 = Parent, StateType = S
 attr = S, NA
+animtype  = Medium
+damage    = 45
+hitflag = MAF
+guardflag = M
+pausetime = 10,10
+hitsound = S7002,1
+guardsound = 6,0
+sparkno=s7004
+sparkxy=-8,5
+ground.type = High
+ground.hittime  = 7
+ground.velocity = -2
+air.velocity = -2,-2
+animtype=Medium
+air.animtype=Medium
+getpower = 0, 0
+givepower = 36, 36
+envshake.time = 8
+envshake.freq = 120
+envshake.ampl = 4
+palfx.add=200,200,200
+palfx.mul=256,256,256
+palfx.time=10
+p1sprpriority = -2
+p2sprpriority = -3
+fall = 0
+
+
+[State 7021, hit]
+type = HitDef
+trigger1 = !Time
+trigger1 = Parent, StateType = C
+attr = C, NA
+animtype  = Medium
+damage    = 45
+hitflag = MAF
+guardflag = M
+pausetime = 10,10
+hitsound = S7002,1
+guardsound = 6,0
+sparkno=s7004
+sparkxy=-8,5
+ground.type = High
+ground.hittime  = 7
+ground.velocity = -2
+air.velocity = -2,-2
+animtype=Medium
+air.animtype=Medium
+getpower = 0, 0
+givepower = 36, 36
+envshake.time = 8
+envshake.freq = 120
+envshake.ampl = 4
+palfx.add=200,200,200
+palfx.mul=256,256,256
+palfx.time=10
+p1sprpriority = -2
+p2sprpriority = -3
+fall = 0
+
+
+[State 7021, hit]
+type = HitDef
+trigger1 = !Time
+trigger1 = Parent, StateType = A
+attr = A, NA
 animtype  = Medium
 damage    = 45
 hitflag = MAF
@@ -239,6 +353,22 @@ movetype = A
 anim = 3034
 sprpriority = -2
 facep2= 1
+
+[State 7010, appear]
+type = StateTypeSet
+trigger1 = !Time
+trigger1 = Parent, StateType = C
+statetype = C
+physics = N
+ignorehitpause = 1
+
+[State 7010, appear]
+type = StateTypeSet
+trigger1 = !Time
+trigger1 = Parent, StateType = A
+statetype = A
+physics = N
+ignorehitpause = 1
 
 [State 7010, appear]
 type = trans
@@ -339,6 +469,22 @@ movetype = A
 anim = 3035
 sprpriority = -2
 facep2= 1
+
+[State 7010, appear]
+type = StateTypeSet
+trigger1 = !Time
+trigger1 = Parent, StateType = C
+statetype = C
+physics = N
+ignorehitpause = 1
+
+[State 7010, appear]
+type = StateTypeSet
+trigger1 = !Time
+trigger1 = Parent, StateType = A
+statetype = A
+physics = N
+ignorehitpause = 1
 
 [State 7010, appear]
 type = trans
@@ -608,6 +754,65 @@ value = 17019
 ignorehitpause = 1
 
 
+; Masa & Mune Guard
+[Statedef 17016]
+MoveType = H
+poweradd = 0
+
+[State 7010, appear]
+type = trans
+trigger1 = 1
+trans = none
+ignorehitpause = 1
+
+[State 7010, appear]
+type = Offset
+trigger1 = 1
+X = IfElse(Time % 2, -1, 1)
+ignorehitpause = 1
+
+[State 7015, PosFreeze]
+type = PosFreeze
+trigger1 = 1
+value = 1
+ignorehitpause = 1
+
+[State 7011, HitOverride]
+type = HitOverride
+trigger1 = 1
+time = -1
+attr = SCA,AA, AP
+stateno = 17016
+ignorehitpause = 1
+
+[State 7011, HitOverride]
+type = NotHitBy
+trigger1 = 1
+time = -1
+value = , AT
+ignorehitpause = 1
+
+[State 7015, NotHitBy]
+type = NotHitBy
+trigger1 = !Time
+time = 5
+value = SCA ,AA, AP
+time = 1
+ignorehitpause = 1
+
+[State 7015, ChangeAnim]
+type = ChangeAnim
+trigger1 = Time < floor(gethitvar(hittime) * 0.8)
+value = Anim
+elem = AnimElemNo(0)
+ignorehitpause = 1
+
+[State 7015, End]
+type = ChangeState
+trigger1 = Time >= floor(gethitvar(hittime) * 0.8)
+value = 17011
+ignorehitpause = 1
+
 ;Masamune End
 [Statedef 17018]
 type = S
@@ -630,6 +835,13 @@ anim = 3031
 sprpriority = 2
 
 [State 7010, appear]
+type = assertspecial
+trigger1 = Time % 2
+trigger1 = Time < 20
+flag = invisible
+ignorehitpause = 1
+
+[State 7010, appear]
 type = trans
 trigger1 = 1
 trans = none
@@ -637,12 +849,12 @@ ignorehitpause = 1
 
 [State 17018, Scale]
 type = AngleDraw
-trigger1 = Time > 10
-scale = 1 - 0.1 * (Time - 10), 1 + 0.2 * (Time - 10)
+trigger1 = Time > 20
+scale = 1 - 0.1 * (Time - 20), 1 + 0.2 * (Time - 20)
 
 [State 7010, End]
 type = DestroySelf
-trigger1 = Time > 20
+trigger1 = Time > 30
 
 
 ; Throw
@@ -1079,6 +1291,11 @@ type = ChangeState
 trigger1 = !AnimTime
 value = 17011
 
+[State 7014, Light Hit]
+type = ChangeState
+trigger1 = !AnimTime
+value = 17011
+
 [State 3010, HitDef]
 type = HitDef
 trigger1 = AnimElemNo(0) % 2 != 0
@@ -1092,8 +1309,7 @@ fall.animtype = back
 damage = 28,2
 pausetime = 7,!(random%8=0)*8
 guard.pausetime = 7,!(random%8=0)*8
-sparkno = S8204
-guard.sparkno = S7006
+sparkno = S7006
 sparkxy = -4, -10+(random%30)
 hitsound = S1,4
 guardsound = S4,0
