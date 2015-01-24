@@ -1251,6 +1251,39 @@ trigger1 = !Time
 var(1) = StateNo
 ignorehitpause = 1
 
+[State 7015, ChangeAnim]
+type = VarSet
+trigger1 = !Time
+var(2) = 16
+ignorehitpause = 1
+
+[State 7015, ChangeAnim]
+type = VarAdd
+trigger1 = var(2) >= 0
+var(2) = -1
+ignorehitpause = 1
+
+[State 1100, VarSet]
+type = VarSet
+triggerall = var(2) > 0
+triggerall = animelemtime(2) >= 0
+triggerall = animelemtime(25) < 0
+trigger1 = Parent, command = "a"
+trigger2 = Parent, command = "b"
+trigger3 = Parent, command = "c"
+var(2) = 16
+ignorehitpause = 1
+
+[State 1040,ChangeAnim]
+type = ChangeAnim
+trigger1 = !var(2)
+trigger1 = animelemtime(2) >= 0
+trigger1 = animelemtime(25) < 0
+value = anim
+elem = 25
+ignorehitpause = 0
+persistent = 0
+
 [State 7010, appear]
 type = trans
 trigger1 = 1
