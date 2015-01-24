@@ -191,6 +191,16 @@ trigger1 = (Var(24) := 0)
 ignorehitpause = 1
 
 [State 7015, LifeAdd]
+type = ChangeState
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), StateNo = 17015
+trigger1 = MoveType != H
+trigger1 = Var(26)
+trigger1 = !(Var(26) := 0)
+value = 13899
+ignorehitpause = 1
+
+[State 7015, LifeAdd]
 type = VarAdd;
 trigger1 =  Var(24) < 1000
 trigger1 = (Var(23) = 2 || Var(23) = 0)

@@ -60,7 +60,7 @@ ignorehitpause = 1
 [State 7011, FollowPlayer]
 type = PosAdd
 trigger1 = 1
-X = (ParentDist X - 20)/2.0
+X = (ParentDist X)/2.0
 Y = (ParentDist Y - 10)/2.0
 ignorehitpause = 1
 
@@ -126,6 +126,11 @@ triggerall = Parent, StateNo != Var(0)
 trigger1 = Parent, StateNo = 13400
 value = 17200
 
+[State 7011, Heavy Hit]
+type = ChangeState
+triggerall = Parent, StateNo != Var(0)
+trigger1 = Parent, StateNo = 14015
+value = 17225
 
 ;Light Attack
 [Statedef 17012]
@@ -156,7 +161,7 @@ ignorehitpause = 1
 [State 7012, FollowPlayer]
 type = PosAdd
 trigger1 = AnimElemNo(0) = 1
-X = (ParentDist X - 20)/5.0
+X = (ParentDist X)/5.0
 Y = (ParentDist Y - 10)/5.0
 ignorehitpause = 1
 
@@ -273,7 +278,7 @@ ignorehitpause = 1
 [State 7012, FollowPlayer]
 type = PosAdd
 trigger1 = AnimElemNo(0) = 1
-X = (ParentDist X - 20)/5.0
+X = (ParentDist X)/5.0
 Y = (ParentDist Y - 10)/5.0
 ignorehitpause = 1
 
@@ -344,7 +349,7 @@ ignorehitpause = 1
 [State 7012, FollowPlayer]
 type = PosAdd
 trigger1 = AnimElemNo(0) = 1
-X = (ParentDist X - 20)/5.0
+X = (ParentDist X)/5.0
 Y = (ParentDist Y - 10)/5.0
 ignorehitpause = 1
 
@@ -414,7 +419,7 @@ fall.recover = 0
 [State 7014, FollowPlayer]
 type = PosAdd
 trigger1 = AnimElemNo(0) = 1
-X = (ParentDist X - 20)/5.0
+X = (ParentDist X)/5.0
 Y = (ParentDist Y - 10)/5.0
 ignorehitpause = 1
 
@@ -439,6 +444,91 @@ value = 17011
 [Statedef 17015]
 MoveType = H
 poweradd = 0
+
+[State 17015, Vars]
+type = ParentVarSet
+trigger1 = !Time
+v = 26
+value = 1
+ignorehitpause = 1
+
+[State 17015, Vars]
+type = VarSet
+trigger1 = !Time
+v = 10
+value = GetHitVar(groundtype)
+ignorehitpause = 1
+
+[State 17015, Vars]
+type = VarSet
+trigger1 = !Time
+v = 11
+value = GetHitVar(animtype)
+ignorehitpause = 1
+
+[State 17015, Vars]
+type = VarSet
+trigger1 = !Time
+v = 12
+value = GetHitVar(damage)
+ignorehitpause = 1
+
+[State 17015, Vars]
+type = VarSet
+trigger1 = !Time
+v = 13
+value = GetHitVar(fall)
+ignorehitpause = 1
+
+[State 17015, Vars]
+type = VarSet
+trigger1 = !Time
+v = 14
+value = GetHitVar(slidetime)
+ignorehitpause = 1
+
+[State 17015, Vars]
+type = VarSet
+trigger1 = !Time
+v = 15
+value = GetHitVar(hittime)
+ignorehitpause = 1
+
+[State 17015, Vars]
+type = VarSet
+trigger1 = !Time
+v = 16
+value = GetHitVar(hitshaketime)
+ignorehitpause = 1
+
+[State 17015, Vars]
+type = VarSet
+trigger1 = !Time
+v = 17
+value = GetHitVar(airtype)
+ignorehitpause = 1
+
+[State 17015, Vars]
+type = VarSet
+trigger1 = !Time
+fv = 0
+value = GetHitVar(xvel)
+ignorehitpause = 1
+
+[State 17015, Vars]
+type = VarSet
+trigger1 = !Time
+fv = 1
+value = GetHitVar(yvel)
+ignorehitpause = 1
+
+[State 17015, Vars]
+type = VarSet
+trigger1 = !Time
+fv = 2
+value = GetHitVar(yaccel)
+ignorehitpause = 1
+
 
 [State 7010, appear]
 type = trans
@@ -505,8 +595,8 @@ ignorehitpause = 1
 [State 7015, End]
 type = ChangeState
 triggerall = Time >= floor(gethitvar(hittime) * 0.8)
-trigger1 = (var(1) = [17011,17014]) || var(1) = 17230
-value = 17019
+trigger1 = (var(1) = [17011,17014]) || var(1) = 17225
+value = 17011
 ignorehitpause = 1
 
 [State 7015, End]
@@ -547,12 +637,12 @@ ignorehitpause = 1
 
 [State 17018, Scale]
 type = AngleDraw
-trigger1 = 1
-scale = 1 - 0.1 * Time, 1 + 0.2*Time
+trigger1 = Time > 10
+scale = 1 - 0.1 * (Time - 10), 1 + 0.2 * (Time - 10)
 
 [State 7010, End]
 type = DestroySelf
-trigger1 = Time > 10
+trigger1 = Time > 20
 
 
 ; Throw
@@ -670,7 +760,7 @@ ignorehitpause = 1
 [State 7012, FollowPlayer]
 type = PosAdd
 trigger1 = AnimElemNo(0) = 1
-X = (ParentDist X - 20)/5.0
+X = (ParentDist X)/5.0
 Y = (ParentDist Y - 10)/5.0
 ignorehitpause = 1
 
@@ -907,8 +997,103 @@ fall.animtype = back
 damage = 28,2
 pausetime = 7,!(random%8=0)*8
 guard.pausetime = 7,!(random%8=0)*8
+sparkno = S7006
+sparkxy = -4, -10+(random%30)
+hitsound = S1,4
+guardsound = S4,0
+ground.type = High
+air.type = High
+ground.slidetime = 11
+ground.hittime = 11
+air.hittime = 11
+guard.ctrltime = 11
+ground.velocity = -5.5
+guard.velocity = -5
+air.velocity = -2.5, 0
+ground.cornerpush.veloff = 0
+air.cornerpush.veloff = 0
+getpower = 40,0
+givepower = 20,0
+air.fall = 1
+fall.recover = 1
+yaccel = .35
+guard.kill = 0
+p2facing = 1
+palfx.add=200,200,200
+palfx.mul=256,256,256
+palfx.time=6
+
+; Muda Muda (W/Stand)
+[Statedef 17225]
+type = S
+physics = N
+movetype = A
+anim = 14010
+velset = 0,0
+sprpriority = 2
+facep2= 1
+
+[State 7015, ChangeAnim]
+type = VarSet
+trigger1 = !Time
+var(1) = StateNo
+ignorehitpause = 1
+
+[State 7010, appear]
+type = trans
+trigger1 = 1
+trans = none
+ignorehitpause = 1
+
+[State 7010, appear]
+type = PosAdd
+trigger1 = 1
+X = (ParentDist X)/2.0
+Y = (ParentDist Y - 10)/2.0
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = Animelem=2 
+value = S7000,1 
+
+[State 7011, HitOverride]
+type = HitOverride
+trigger1 = 1
+attr = SCA,NA,SA,HA,NP,SP,HP
+stateno = 17015
+ignorehitpause = 1
+
+[State 7011, HitOverride]
+type = NotHitBy
+trigger1 = 1
+value = ,NT,ST,HT 
+ignorehitpause = 1
+
+[State 7013, Selector Var]
+type = VarSet
+trigger1 = !Time
+var(0) = Parent, StateNo
+
+[State 7014, Light Hit]
+type = ChangeState
+trigger1 = !AnimTime
+value = 17011
+
+[State 3010, HitDef]
+type = HitDef
+trigger1 = AnimElemNo(0) % 2 != 0
+trigger1 = AnimElemTime(AnimElemNo(0)) = 1
+attr = S, SA
+hitflag = MAF
+guardflag = M
+animtype = heavy
+air.animtype = back
+fall.animtype = back
+damage = 28,2
+pausetime = 7,!(random%8=0)*8
+guard.pausetime = 7,!(random%8=0)*8
 sparkno = S8204
-guard.sparkno = S8100
+guard.sparkno = S7006
 sparkxy = -4, -10+(random%30)
 hitsound = S1,4
 guardsound = S4,0

@@ -653,11 +653,11 @@ trigger1 = ctrl
 
 [State -1, Muda Muda]
 type = ChangeState
-value = 14010
 triggerall = PalNo = 12
 triggerall = StateType != A 
 triggerall = Command = "qcfa" || Command = "qcfb" || Command = "qcfc"
 trigger1 = Ctrl
+value = IfElse(Var(23) = 1, 14015, 14010)
 
 ; Stand Appearance Attack
 [State -1, Stand Attack]
