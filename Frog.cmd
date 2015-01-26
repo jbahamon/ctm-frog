@@ -651,13 +651,23 @@ trigger1 = ctrl
 
 ;---------------------------------------------------------------------------
 
+[State -1, MUDAA]
+type = ChangeState
+triggerall = PalNo = 12
+triggerall = StateType != A 
+triggerall = (Var(23) = 1 && NumHelper(10000)) || (!Var(23) && !NumHelper(10000))
+triggerall = Command = "qcba" || Command = "qcbb" || Command = "qcbc"
+trigger1 = Ctrl
+value = IfElse(Var(23) = 1 && NumHelper(10000), 14025, 14020)
+
 [State -1, Muda Muda]
 type = ChangeState
 triggerall = PalNo = 12
 triggerall = StateType != A 
+triggerall = (Var(23) = 1 && NumHelper(10000)) || (!Var(23) && !NumHelper(10000))
 triggerall = Command = "qcfa" || Command = "qcfb" || Command = "qcfc"
 trigger1 = Ctrl
-value = IfElse(Var(23) = 1, 14015, 14010)
+value = IfElse(Var(23) = 1 && NumHelper(10000), 14015, 14010)
 
 ; Stand Appearance Attack
 [State -1, Stand Attack]
@@ -665,7 +675,7 @@ type = ChangeState
 triggerall = command = "qcfx"
 triggerall = statetype != A
 triggerall = PalNo = 12
-trigger1 = Var(23) != 1
+trigger1 = Var(23) != 1 && !NumHelper(10000)
 trigger1 = ctrl
 value = 14000
 

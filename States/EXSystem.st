@@ -466,14 +466,14 @@ supermovetime = 9999
 type = VarSet
 trigger1 = !Time
 trigger1 = NumTarget
-V = 1
+FV = 1
 value = (Target, Pos X - Pos X) * Facing 
 ignorehitpause = 1
 
 [State 801, Bind]
 type = TargetBind
 trigger1 = NumTarget
-pos = Var(1), 0
+pos = FVar(1), 0
 
 [State 3001, Stop]
 type = Pause
