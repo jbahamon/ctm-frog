@@ -141,6 +141,107 @@ trigger2 = Helper(10000), StateNo = 17011
 value = 0
 ctrl = 1
 
+
+; Muda Muda Air - W/Stand
+[Statedef 14016]
+type    = A
+movetype= A
+physics = N
+juggle  = 3
+ctrl = 0
+anim = 13301
+sprpriority = 1
+poweradd = IfElse(Var(21) > 0, 0, 18)
+facep2 = 1
+
+[State 1100, Velocity]
+type = VelMul
+triggerall = NumHelper(10000)
+trigger1 = Helper(10000), StateNo = 17226
+trigger1 = Helper(10000), AnimElem = 2
+x = .067
+y = .067
+
+[State 1100, Velocity]
+type = VarSet
+triggerall = NumHelper(10000)
+trigger1 = Helper(10000), StateNo = 17226
+trigger1 = Helper(10000), AnimElem = 2
+fvar(0) = Vel X
+
+[State 1100, Velocity]
+type = VarSet
+triggerall = NumHelper(10000)
+trigger1 = Helper(10000), StateNo = 17226
+trigger1 = Helper(10000), AnimElem = 2
+fvar(1) = Vel Y
+
+[State 1100, Velocity]
+type = VelSet
+triggerall = NumHelper(10000)
+trigger1 = Helper(10000), AnimElemTime(2) >= 0
+trigger1 = Helper(10000), AnimElemTime(31) < 0
+x = fvar(0)+(1.17*command = "holdfwd")-(.63*command = "holdback")
+y = fvar(1)-(3.21*command = "holdup")
+
+[State 1100, Velocity]
+type = VelSet
+triggerall = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 31
+x = fvar(0)
+
+[State 4030, Gravity]
+type = VarAdd
+triggerall = NumHelper(10000)
+trigger1 = Helper(10000), AnimElemTime(2) >= 0
+fvar(1) = IfElse(Helper(10000), AnimElemTime(31) > 0, .5, .033)
+
+[State 1100, Velocity]
+type = PosFreeze
+triggerall = NumHelper(10000)
+trigger1 = Helper(10000), animelemtime(2) < 0
+
+
+[State 803, Safety]
+type = VarSet
+trigger1 = !Time
+v = 1
+value = 0
+
+[State 1030, whatbuttondidyoupress?]
+type = VarSet
+trigger1 = !Time
+var(0) = IfElse(command="qcfc", 2, IfElse(Command = "qcfb", 1, 0))
+
+[State 803, Safety]
+type = VarSet
+trigger1 = !Var(1)
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), StateNo = 17226
+v = 1
+value = 1
+
+[State 803, Safety]
+type = PosSet
+trigger1 = Vel Y > 0 && Vel Y >= - Pos Y
+Y = 0
+
+[State 803, Safety]
+type = ChangeState
+trigger1 = Vel Y > 0 && Vel Y >= - Pos Y
+value = 52
+ctrl = 0
+
+[State 803, Safety]
+type = ChangeState
+trigger1 = !NumHelper(10000)
+trigger2 = Var(1) = 1
+trigger2 = NumHelper(10000)
+trigger2 = Helper(10000), StateNo = 17011
+value = 50
+ctrl = 0
+
+
 ; MUDAA - No Stand
 [Statedef 14020]
 type    = S

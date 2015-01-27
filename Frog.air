@@ -2008,6 +2008,10 @@ Clsn2: 1
 1000,0, 0,0, 6
 1000,0, 0,0, 10
 
+; Air Stand, No Boxes
+[Begin Action 13301]
+3401,2, 0,0, 10
+
 ; Guard Cancel
 [Begin Action 13401]
 Clsn2: 2
@@ -2111,7 +2115,7 @@ Clsn2: 3
 Clsn2: 2
   Clsn2[0] = -13, -56, 17, -37
   Clsn2[1] = -19, -37, 20, -2
-7172,0, 0,0, 4
+7172,0, 0,0, 6
 Clsn1: 1
   Clsn1[0] = 5, -29, 24, -2
 Clsn2: 2
