@@ -1848,149 +1848,125 @@ fvar(39) = Parent, fvar(39)*0.8
 persistent = 0
 ignorehitpause = 1
 
-; MUDAA 2nd Hit GetHit (W/Stand)
+;---------------------------------------------------------------------------
+; MUDAA 2nd Hit GetHit
 [Statedef 17237]
-type = S
+type = A
+movetype = H
 physics = N
-movetype = A
-anim = 14021
-velset = 0,0
-sprpriority = -2
-facep2= 1
+velset = -12,0
+anim = 5012
 
-[State 7015, ChangeAnim]
-type = VarSet
-trigger1 = !Time
-var(1) = StateNo
-ignorehitpause = 1
-
-[State 7010, appear]
-type = trans
+[State 2600, ChangeAnim]
+type = ChangeAnim
 trigger1 = 1
-trans = none
-ignorehitpause = 1
+value = anim
 
-[State 7010, appear]
-type = VelSet
-trigger1 = !MoveContact
-trigger1 = AnimElemNo(0) = 2
-X = 15
-ignorehitpause = 1
-
-[State 7010, appear]
-type = VelSet
-trigger1 = MoveContact
-trigger2 = FrontEdgeDist < 50
-trigger3 = AnimElemNo(0) >= 3
-X = 0
-ignorehitpause = 1
-
-[State 17210, Shake]
-type = EnvShake
-trigger1 = AnimElem = 3
-time = 12
-freq = 120
-ampl = 8
-
-[State 9606, EnvColor]
-type = palfx
-trigger1 = Anim = 14021
-trigger1 = AnimElemNo(0) < 3
-trigger1 = time%2=0
-add = 64,64,96
-time = 1
-ignorehitpause = 1
-
-[State 620, Snd]
-type = PlaySnd
-trigger1 = Animelem=2 
-value = S7000,1 
-
-[State 7011, HitOverride]
-type = HitOverride
-trigger1 = 1
-attr = SCA,NA,SA,HA,NP,SP,HP
-stateno = 17015
-ignorehitpause = 1
-
-[State 7011, HitOverride]
-type = NotHitBy
-trigger1 = 1
-value = ,NT,ST,HT 
-ignorehitpause = 1
-
-[State 7013, Selector Var]
-type = VarSet
-trigger1 = !Time
-var(0) = Parent, StateNo
-
-[State 7014, Light Hit]
+[State 2601, Push]
 type = PlayerPush
 trigger1 = 1
-value = 1
+value = 0
 
-[State 7014, Light Hit]
+[State 2500, ScreenBound]
+type = screenbound
+trigger1 = time >= 30
+value = 0
+
+[State 2600, ChangeState]
 type = ChangeState
-trigger1 = !AnimTime
-value = 17011
-e = I
+trigger1 = backedgebodydist <= 0
+trigger2 = time >= 60
+value = 17238
 
-[State 220, 1]
-type = Hitdef
-trigger1 = !Time
-attr = S, SA
-hitflag = MAF
-guardflag = L
-animtype = heavy
-air.animtype = back
-fall.animtype = back
-priority = 5,Hit
-damage = Floor(56 * Parent, FVar(39))
-pausetime = 0, 15
-guard.pausetime = 0, 15
-sparkno = S8204
-guard.sparkno = S8100
-sparkxy = -20, -40
-hitsound = S1,4
-guardsound = S4,0
-ground.type = Low
-air.type = Low
-ground.slidetime = 17
-ground.hittime = 17
-air.hittime = 17
-guard.ctrltime = 17
-ground.velocity = -18.5,10
-guard.velocity = -12
-air.velocity = -18.5,10
-ground.cornerpush.veloff = 0
-air.cornerpush.veloff = 0
-getpower = 60,0
-givepower = 30,0
+;---------------------------------------------------------------------------
+;MUDAA 2nd Hit GetHit - Flying
+[Statedef 17238]
+type = A
+movetype = H
+physics = N
+velset = 0,0
+
+[State 2500, ScreenBound]
+type = screenbound
+trigger1 = 1
+value = 0
+
+[State 2601, Position]
+type = PosAdd
+trigger1 = Time < 12
+x = ceil((12-ifelse(time%2=0,time,time-1))/4)*ifelse(time%2=1,1,-1)
+
+[State 2600, ChangeAnim]
+type = ChangeAnim
+trigger1 = Time = 0
+value = 5012
+
+[State 2600, ChangeAnim]
+type = ChangeAnim
+trigger1 = Time < 12
+value = anim
+
+[State 2601, ChangeAnim] ;Anim for HIT_UP/HIT_DIAGUP (only if it exists)
+type = ChangeAnim
+trigger1 = time = 12
+trigger1 = SelfAnimExist(5051)
+value = 5051
+
+[State 2601, ChangeAnim] ;Change anim when done with transition
+type = ChangeAnim
+trigger1 = time = 12
+trigger1 = (Anim != [5051, 5059]) && (Anim != [5061, 5069])
+trigger1 = Anim != 5090 ;Not if hit off ground anim
+value = 5050
 persistent = 0
-fall = 1
-air.fall = 1
-fall.recover = 0
-yaccel = .35;44
-guard.kill = 0
-p2facing = 1
 
-[State 200, Dampen]
-Type = ParentVarset
-trigger1 = MoveHit
-trigger1 = Var(4) != HitCount
-trigger1 = (Var(4) := HitCount)
-fvar(39) = Parent, fvar(39)*0.8
-ignorehitpause = 1
+[State 5050, 2] ;Coming down anim
+type = ChangeAnim
+trigger1 = time >= 12
+trigger1 = anim = [5050,5059]
+trigger1 = Vel Y >= ifelse(anim = 5050, 1, -2)
+trigger1 = SelfAnimExist(anim+10)
+value = anim+10
+persistent = 0
 
-[State 7013, Selector Var]
-type = VarSet
-trigger1 = !Time
-var(4) = 0
+[State 2601, EnvShake]
+type = EnvShake
+trigger1 = time = 0
+time = 20
 
-[State 200, Dampen]
-Type = ParentVarset
-trigger1 = MoveHit
-trigger1 = Var(4) != HitCount
-trigger1 = (Var(4) := HitCount)
-fvar(39) = Parent, fvar(39)*0.8
-ignorehitpause = 1
+[State 2601, EnvShake]
+type = EnvShake
+trigger1 = Vel Y > 0
+trigger1 = Pos Y >= 0
+time = 10
+
+
+[State 1027, Spark]
+type = Explod
+trigger1 = time = 12
+anim = F72
+pos = 0, floor (screenpos y) + Const(size.mid.pos.y)
+postype = back
+sprpriority = 3
+
+[State 100, 2]
+type = turn
+trigger1 = backedgebodydist <= 0
+trigger1 = time = 12
+
+[State 2601, Vel]
+type = VelSet
+trigger1 = time = 12
+x = -3.5
+y = -4.3
+
+[State 2601, Vel]
+type = VelAdd
+trigger1 = time > 12
+y = .47
+
+[State 2601, SelfState]
+type = SelfState
+trigger1 = Vel Y > 0
+trigger1 = Pos Y >= 0
+value = 5100
