@@ -109,7 +109,6 @@ ignorehitpause = 1
 [State 7011, Ded]
 type = ChangeState
 trigger1 = !Parent, Var(23)
-trigger2 = Parent, Var(23) = 2
 value = 17018
 
 [State 7011, Light Hit]
@@ -754,7 +753,7 @@ ignorehitpause = 1
 [State 7015, End]
 type = ChangeState
 triggerall = Time >= floor(gethitvar(hittime) * 0.8)
-trigger1 = var(1) = 17200 && Parent, Var(23) != 1
+trigger1 = var(1) = 17200 && !(Parent, Var(23))
 trigger2 = var(1) = 17220
 value = 17019
 ignorehitpause = 1
@@ -920,7 +919,7 @@ var(0) = Parent, StateNo
 [State 7014, Light Hit]
 type = ChangeState
 trigger1 = !AnimTime
-value = IfElse(Parent, Var(23) = 0 || Parent, Var(23) = 2, 17019, 17011)
+value = IfElse(!(Parent, Var(23)), 17019, 17011)
 
 ;Guard Cancel
 [Statedef 17200]
@@ -997,7 +996,7 @@ var(0) = Parent, StateNo
 [State 7014, Light Hit]
 type = ChangeState
 trigger1 = !AnimTime
-value = IfElse(Parent, Var(23) != 1, 17019, 17011)
+value = IfElse(!(Parent, Var(23)), 17019, 17011)
 
 [State 7021, hit]
 type = HitDef
@@ -1257,8 +1256,7 @@ Type = ParentVarset
 trigger1 = MoveHit
 trigger1 = Var(4) != HitCount
 trigger1 = (Var(4) := HitCount)
-fvar(39) = Parent, fvar(39)*0.8
-persistent = 0
+fvar(39) = Parent, fvar(39)*0.9
 ignorehitpause = 1
 
 
@@ -1407,8 +1405,7 @@ Type = ParentVarset
 trigger1 = MoveHit
 trigger1 = Var(3) != HitCount
 trigger1 = (Var(3) := HitCount)
-fvar(39) = Parent, fvar(39)*0.5
-persistent = 0
+fvar(39) = Parent, fvar(39)*0.9
 ignorehitpause = 1
 
 
@@ -1441,7 +1438,6 @@ trigger1 = AnimElemNo(0) = 2
 X = 10 + 5*IfElse(Var(3) = 2, 0.8, IfElse(Var(3) = 1, 0.4, 0))
 ignorehitpause = 1
 
-
 [State 17225, Anim]
 type = ChangeAnim
 trigger1 = animelemtime(2) > 0
@@ -1467,10 +1463,10 @@ ignorehitpause = 1
 
 [State 9606, EnvColor]
 type = palfx
-trigger1 = Anim = 14010
+trigger1 = Anim = 14020
 trigger1 = AnimElemNo(0) < 3
 trigger1 = time%2=0
-add = 128,128,192
+add = 64,64,96
 time = 1
 ignorehitpause = 1
 
@@ -1514,15 +1510,15 @@ value = 17019
 
 [State 3010, HitDef]
 type = HitDef
-trigger1 = AnimElemNo(0) % 2 != 0
-trigger1 = AnimElemTime(AnimElemNo(0)) = 1
+trigger1 = !Time
 attr = S, SA
 hitflag = MAF
 guardflag = M
-animtype = heavy
+animtype = hard
+ground.type = Low
 air.animtype = back
 fall.animtype = back
-damage = Ceil(20 * Parent, FVar(39)),2
+damage = Ceil(120 * Parent, FVar(39)),2
 pausetime = 7,8
 guard.pausetime = 7,8
 sparkno = S7006
@@ -1562,7 +1558,6 @@ trigger1 = MoveHit
 trigger1 = Var(4) != HitCount
 trigger1 = (Var(4) := HitCount)
 fvar(39) = Parent, fvar(39)*0.8
-persistent = 0
 ignorehitpause = 1
 
 
@@ -1621,10 +1616,10 @@ ampl = 8
 
 [State 9606, EnvColor]
 type = palfx
-trigger1 = Anim = 14010
+trigger1 = Anim = 14020
 trigger1 = AnimElemNo(0) < 3
 trigger1 = time%2=0
-add = 128,128,192
+add = 64,64,96
 time = 1
 ignorehitpause = 1
 
@@ -1668,15 +1663,15 @@ value = 17011
 
 [State 3010, HitDef]
 type = HitDef
-trigger1 = AnimElemNo(0) % 2 != 0
-trigger1 = AnimElemTime(AnimElemNo(0)) = 1
+trigger1 = !Time
 attr = S, SA
 hitflag = MAF
 guardflag = M
 animtype = heavy
+ground.type = Low
 air.animtype = back
 fall.animtype = back
-damage = Ceil(20 * Parent, FVar(39)),2
+damage = Ceil(120 * Parent, FVar(39)),2
 pausetime = 7,8
 guard.pausetime = 7,8
 sparkno = S7006
@@ -1705,6 +1700,288 @@ palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=6
 
+
+[State 200, Dampen]
+Type = ParentVarset
+trigger1 = MoveHit
+fvar(39) = Parent, fvar(39)*0.8
+persistent = 0
+ignorehitpause = 1
+
+[State 200, Dampen]
+Type = ChangeState
+trigger1 = Parent, StateNo = 14026
+value = 17236
+ignorehitpause = 1
+
+; MUDAA 2nd Hit (W/Stand)
+[Statedef 17236]
+type = S
+physics = N
+movetype = A
+anim = 14021
+velset = 0,0
+sprpriority = -2
+facep2= 1
+
+[State 7015, ChangeAnim]
+type = VarSet
+trigger1 = !Time
+var(1) = StateNo
+ignorehitpause = 1
+
+[State 7010, appear]
+type = trans
+trigger1 = 1
+trans = none
+ignorehitpause = 1
+
+[State 7010, appear]
+type = VelSet
+trigger1 = !MoveContact
+trigger1 = AnimElemNo(0) = 2
+X = 15
+ignorehitpause = 1
+
+[State 7010, appear]
+type = VelSet
+trigger1 = MoveContact
+trigger2 = FrontEdgeDist < 50
+trigger3 = AnimElemNo(0) >= 3
+X = 0
+ignorehitpause = 1
+
+[State 17210, Shake]
+type = EnvShake
+trigger1 = AnimElem = 3
+time = 12
+freq = 120
+ampl = 8
+
+[State 9606, EnvColor]
+type = palfx
+trigger1 = Anim = 14021
+trigger1 = AnimElemNo(0) < 3
+trigger1 = time%2=0
+add = 64,64,96
+time = 1
+ignorehitpause = 1
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = Animelem=2 
+value = S7000,1 
+
+[State 7011, HitOverride]
+type = HitOverride
+trigger1 = 1
+attr = SCA,NA,SA,HA,NP,SP,HP
+stateno = 17015
+ignorehitpause = 1
+
+[State 7011, HitOverride]
+type = NotHitBy
+trigger1 = 1
+value = ,NT,ST,HT 
+ignorehitpause = 1
+
+[State 7013, Selector Var]
+type = VarSet
+trigger1 = !Time
+var(0) = Parent, StateNo
+
+[State 7014, Light Hit]
+type = PlayerPush
+trigger1 = 1
+value = 1
+
+[State 7014, Light Hit]
+type = ChangeState
+trigger1 = !AnimTime
+value = 17011
+
+[State 220, 1]
+type = Hitdef
+trigger1 = !Time
+attr = S, SA
+hitflag = MAF
+guardflag = L
+animtype = heavy
+air.animtype = back
+fall.animtype = back
+priority = 5,Hit
+damage = Floor(56 * Parent, FVar(39))
+pausetime = 0, 15
+guard.pausetime = 0, 15
+sparkno = S8204
+guard.sparkno = S8100
+sparkxy = -20, -40
+hitsound = S1,4
+guardsound = S4,0
+ground.type = Low
+air.type = Low
+ground.slidetime = 17
+ground.hittime = 17
+air.hittime = 17
+guard.ctrltime = 17
+ground.velocity = -18.5,10
+guard.velocity = -12
+air.velocity = -18.5,10
+ground.cornerpush.veloff = 0
+air.cornerpush.veloff = 0
+getpower = 60,0
+givepower = 30,0
+persistent = 0
+fall = 1
+air.fall = 1
+fall.recover = 0
+yaccel = .35;44
+guard.kill = 0
+p2stateno = 17237
+p2facing = 1
+
+
+[State 200, Dampen]
+Type = ParentVarset
+trigger1 = MoveHit
+fvar(39) = Parent, fvar(39)*0.8
+persistent = 0
+ignorehitpause = 1
+
+; MUDAA 2nd Hit GetHit (W/Stand)
+[Statedef 17237]
+type = S
+physics = N
+movetype = A
+anim = 14021
+velset = 0,0
+sprpriority = -2
+facep2= 1
+
+[State 7015, ChangeAnim]
+type = VarSet
+trigger1 = !Time
+var(1) = StateNo
+ignorehitpause = 1
+
+[State 7010, appear]
+type = trans
+trigger1 = 1
+trans = none
+ignorehitpause = 1
+
+[State 7010, appear]
+type = VelSet
+trigger1 = !MoveContact
+trigger1 = AnimElemNo(0) = 2
+X = 15
+ignorehitpause = 1
+
+[State 7010, appear]
+type = VelSet
+trigger1 = MoveContact
+trigger2 = FrontEdgeDist < 50
+trigger3 = AnimElemNo(0) >= 3
+X = 0
+ignorehitpause = 1
+
+[State 17210, Shake]
+type = EnvShake
+trigger1 = AnimElem = 3
+time = 12
+freq = 120
+ampl = 8
+
+[State 9606, EnvColor]
+type = palfx
+trigger1 = Anim = 14021
+trigger1 = AnimElemNo(0) < 3
+trigger1 = time%2=0
+add = 64,64,96
+time = 1
+ignorehitpause = 1
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = Animelem=2 
+value = S7000,1 
+
+[State 7011, HitOverride]
+type = HitOverride
+trigger1 = 1
+attr = SCA,NA,SA,HA,NP,SP,HP
+stateno = 17015
+ignorehitpause = 1
+
+[State 7011, HitOverride]
+type = NotHitBy
+trigger1 = 1
+value = ,NT,ST,HT 
+ignorehitpause = 1
+
+[State 7013, Selector Var]
+type = VarSet
+trigger1 = !Time
+var(0) = Parent, StateNo
+
+[State 7014, Light Hit]
+type = PlayerPush
+trigger1 = 1
+value = 1
+
+[State 7014, Light Hit]
+type = ChangeState
+trigger1 = !AnimTime
+value = 17011
+e = I
+
+[State 220, 1]
+type = Hitdef
+trigger1 = !Time
+attr = S, SA
+hitflag = MAF
+guardflag = L
+animtype = heavy
+air.animtype = back
+fall.animtype = back
+priority = 5,Hit
+damage = Floor(56 * Parent, FVar(39))
+pausetime = 0, 15
+guard.pausetime = 0, 15
+sparkno = S8204
+guard.sparkno = S8100
+sparkxy = -20, -40
+hitsound = S1,4
+guardsound = S4,0
+ground.type = Low
+air.type = Low
+ground.slidetime = 17
+ground.hittime = 17
+air.hittime = 17
+guard.ctrltime = 17
+ground.velocity = -18.5,10
+guard.velocity = -12
+air.velocity = -18.5,10
+ground.cornerpush.veloff = 0
+air.cornerpush.veloff = 0
+getpower = 60,0
+givepower = 30,0
+persistent = 0
+fall = 1
+air.fall = 1
+fall.recover = 0
+yaccel = .35;44
+guard.kill = 0
+p2facing = 1
+
+[State 200, Dampen]
+Type = ParentVarset
+trigger1 = MoveHit
+trigger1 = Var(4) != HitCount
+trigger1 = (Var(4) := HitCount)
+fvar(39) = Parent, fvar(39)*0.8
+ignorehitpause = 1
+
 [State 7013, Selector Var]
 type = VarSet
 trigger1 = !Time
@@ -1716,5 +1993,4 @@ trigger1 = MoveHit
 trigger1 = Var(4) != HitCount
 trigger1 = (Var(4) := HitCount)
 fvar(39) = Parent, fvar(39)*0.8
-persistent = 0
 ignorehitpause = 1

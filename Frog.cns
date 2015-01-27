@@ -120,9 +120,12 @@ victory15  = "Hand'eth over the Masamune!"
 ; var(9)  - Masamune
 ; 21, 22 - Special mode
 
-; var(23)  - Stand Status: 0 - Off, 1 - On, 2 - Dead
+; var(23)  - Stand Status: 0 - Off, 1 - On
 ; var(24)  - Stand Life
 ; var(25)  - Double Jump Used Up
+; var(26)  - Stand Hit
+; var(27)  - Stand on Cooldown
+; var(28)  - No guarding due to Stand Crash
 
 ; fvar(39) - Damage Dampener
 
@@ -182,13 +185,31 @@ var(25) = 0
 
 [Statedef -3]
 
+[State -3, No Blocking]
+type = AssertSpecial
+triggerall = PalNo = 12
+triggerall = NumHelper(10000)
+trigger1= Helper(10000), StateNo = 17220
+trigger2= Helper(10000), StateNo = 17230
+flag = NoStandGuard
+flag2 = NoCrouchGuard
+flag3 = NoAirGuard
+ignorehitpause = 1
+
 [State 7015, LifeAdd]
 type = Null;
-trigger1 =  Var(24) <= 0
-trigger1 = (Var(23) != 2)
-trigger1 = (Var(23) := 2)
-trigger1 = (Var(24) := 0)
+trigger1 =  Var(24) < 0
+trigger1 = !(Var(24) := 0)
+trigger1 = !(Var(23) := 0)
+trigger1 = (Var(28) := 80)
 ignorehitpause = 1
+
+[State 7015, LifeAdd]
+type = Null;
+trigger1 =  Var(27) > 0
+trigger1 = !(Var(27) := (Var(27) - 1))
+ignorehitpause = 1
+
 
 [State 7015, LifeAdd]
 type = ChangeState
@@ -198,6 +219,16 @@ trigger1 = MoveType != H
 trigger1 = Var(26)
 trigger1 = !(Var(26) := 0)
 value = 13899
+ignorehitpause = 1
+
+
+[State 7015, LifeAdd]
+type = AssertSpecial
+trigger1 =  Var(28) > 0
+trigger1 = (Var(28) := (Var(28) - 1)) + 1
+flag = NoStandGuard
+flag2 = NoAirGuard
+flag3 = NoCrouchGuard
 ignorehitpause = 1
 
 [State 7015, LifeAdd]
@@ -219,8 +250,8 @@ ignorehitpause = 1
 [State 0, DisplayToClipboard]
 type = DisplayToClipboard
 trigger1 = 1
-text = "ctrl = %d"
-params = ctrl
+text = "Var(24) = %d"
+params = Var(24)
 ignorehitpause = 1
 
 [State 2020, Masa & Mune]
@@ -254,6 +285,12 @@ flag = NoJuggleCheck
 Type = AttackMulSet
 Trigger1 = 1
 value = IfElse(Var(21) > 0, 0.68, fvar(39))
+ignorehitpause = 1
+
+[State -3, Dampener]
+Type = DefenceMulSet
+Trigger1 = PalNo = 12
+value = IfElse(Var(23) = 1, 1.15, 1)
 ignorehitpause = 1
 
 [State -3, Power]

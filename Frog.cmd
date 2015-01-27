@@ -651,23 +651,32 @@ trigger1 = ctrl
 
 ;---------------------------------------------------------------------------
 
+[State -1, MUDAA - Second Hit]
+type = ChangeState
+triggerall = PalNo = 12
+triggerall = StateNo = 14025
+triggerall = (Var(23) && NumHelper(10000))
+trigger1 = Helper(10000), MoveContact
+trigger1 = Command = "qcba" || Command = "qcbb" || Command = "qcbc"
+value = 14026
+
 [State -1, MUDAA]
 type = ChangeState
 triggerall = PalNo = 12
 triggerall = StateType != A 
-triggerall = (Var(23) = 1 && NumHelper(10000)) || (!Var(23) && !NumHelper(10000))
+triggerall = (Var(23) && NumHelper(10000)) || (!Var(23) && !NumHelper(10000))
 triggerall = Command = "qcba" || Command = "qcbb" || Command = "qcbc"
 trigger1 = Ctrl
-value = IfElse(Var(23) = 1 && NumHelper(10000), 14025, 14020)
+value = IfElse(Var(23) && NumHelper(10000), 14025, 14020)
 
 [State -1, Muda Muda]
 type = ChangeState
 triggerall = PalNo = 12
 triggerall = StateType != A 
-triggerall = (Var(23) = 1 && NumHelper(10000)) || (!Var(23) && !NumHelper(10000))
+triggerall = (Var(23) && NumHelper(10000)) || (!Var(23) && !NumHelper(10000))
 triggerall = Command = "qcfa" || Command = "qcfb" || Command = "qcfc"
 trigger1 = Ctrl
-value = IfElse(Var(23) = 1 && NumHelper(10000), 14015, 14010)
+value = IfElse(Var(23) && NumHelper(10000), 14015, 14010)
 
 ; Stand Appearance Attack
 [State -1, Stand Attack]
@@ -675,7 +684,7 @@ type = ChangeState
 triggerall = command = "qcfx"
 triggerall = statetype != A
 triggerall = PalNo = 12
-trigger1 = Var(23) != 1 && !NumHelper(10000)
+trigger1 = !Var(23) && !NumHelper(10000)
 trigger1 = ctrl
 value = 14000
 
@@ -714,7 +723,7 @@ type = ChangeState
 value = 13500
 triggerall = command = "2p"
 triggerall = PalNo = 12
-triggerall = Var(23) = 0 || Var(23) = 2
+triggerall = !Var(23)
 trigger1 = StateType != A
 trigger1 = ctrl
 
@@ -860,7 +869,7 @@ trigger1 = ctrl
 type = ChangeState
 value = 40
 triggerall = PalNo = 12
-triggerall = Var(23) != 1
+triggerall = !Var(23)
 triggerall = Command = "longjump"
 trigger1 = statetype = C
 trigger1 = ctrl
@@ -870,6 +879,6 @@ trigger1 = ctrl
 type = ChangeState
 triggerall = command = "holdup"
 triggerall = statetype = A
-trigger1 = !Var(25) && (Var(23) = 1 || PalNo != 12)
+trigger1 = !Var(25) && (Var(23) || PalNo != 12)
 trigger1 = ctrl
 value = 48

@@ -36,16 +36,18 @@ value = 195
 [State 13195, Stand Var]
 type = VarSet
 triggerall = !Time
-trigger1 = Var(23) != 1
+trigger1 = !Var(23)
 trigger1 = !NumHelper(10000)
-trigger2 = Var(23) = 1
+trigger1 = Var(27) := 39
+trigger2 = !Var(27)
+trigger2 = Var(23)
 trigger2 = NumHelper(10000)
 v = 23
-value = IfElse(Var(23) = 1, 0, 1)
+value = !Var(23)
 
 [State 13195, 2]
 type = ChangeState
-trigger1 = Time = 20
+trigger1 = Time = 10
 value = IfElse(StateType != A, 0, 50)
 ctrl = 1
 
@@ -61,7 +63,7 @@ velset = 0,0
 type = Explod
 trigger1 = time = 0
 anim = 1015
-pos = 15,ifelse(statetype = C && (var(23) != 1),-7, -10)
+pos = 15,ifelse(statetype = C && !Var(23),-7, -10)
 ownpal = 1
 bindtime = 1
 sprpriority = 2
@@ -685,7 +687,7 @@ fvar(2) = Helper(10000), FVar(2)
 [State 13899, Safety]
 type = LifeAdd
 trigger1 = !Time
-value = - Var(2)
+value = - Ceil(Var(2) * 1.62)
 
 [State 17015, Vars]
 type = ChangeState
@@ -794,6 +796,11 @@ x = .6
 
 [State 5001, 4]
 type = VelSet
+trigger1 = !Time
+x = fvar(0)
+
+[State 5001, 4]
+type = VelSet
 trigger1 = Time > Var(5)
 x = 0
 
@@ -897,6 +904,11 @@ type = ChangeAnim
 trigger1 = AnimTime = 0
 value = 5025 + Var(1)
 
+[State 5001, 4]
+type = VelSet
+trigger1 = !Time
+x = fvar(0)
+
 [State 5011, 3] ;Stop sliding back
 type = VelMul
 trigger1 = Time >= Var(4)
@@ -995,6 +1007,13 @@ type = ChangeAnim
 trigger1 = Anim != [5000, 5199]
 trigger1 = SelfAnimExist(5030)
 value = 5030
+
+
+[State 5001, 4]
+type = VelSet
+trigger1 = !Time
+x = fvar(0)
+y = fvar(1)
 
 [State 5030, 2]
 type = VelAdd
