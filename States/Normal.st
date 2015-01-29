@@ -212,12 +212,19 @@ var(0) = (PalNo = 12 && Var(23) = 1)
 [State 200, Special Anim]
 type = ChangeAnim
 trigger1 = !Time
+trigger1 = PalNo = 12 && !Var(23)
+value = 13021
+
+[State 200, Special Anim]
+type = ChangeAnim
+trigger1 = !Time
 trigger1 = Var(0)
 value = 13020
 
 [State 210, Explod]
 type = Explod
 trigger1 = !Var(0)
+trigger1 = Anim = 220
 trigger1 = AnimElem = 2
 anim = 7022
 ID = 220
@@ -238,6 +245,30 @@ ownpal = 1
 ignorehitpause = 1
 removeongethit = 1
 
+[State 210, Explod]
+type = Explod
+trigger1 = Anim = 13021
+trigger1 = AnimElem = 2
+anim = 7024
+ID = 220
+pos = 10, -18
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = -1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+scale = 1,1
+sprpriority = 2
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+ignorehitpause = 1
+removeongethit = 1
+
+
 [State 200, Snd]
 type = PlaySnd
 trigger1 = !Var(0)
@@ -247,7 +278,37 @@ value = S7000,1
 [State 220, hit]
 type = HitDef
 trigger1 = AnimElem = 2
+trigger1 = Anim = 13021
+attr = S, NA
+animtype=Diagup
+air.animtype=Diagup
+damage    = 59
+guardflag = M
+hitflag = MAF
+pausetime = 12,12
+hitsound = S7001,3
+guardsound = 6,0
+sparkno=s7003
+sparkxy=12,-12
+air.type = Low
+ground.slidetime = 11
+ground.velocity = -6,-3
+air.velocity = -6,-3
+air.juggle = 12
+fall = Var(21) = 0
+fall.recover = 0
+palfx.add=200,200,200
+palfx.mul=256,256,256
+palfx.time=12
+getpower = IfElse(Var(21) > 0, 0, ifelse(p2movetype = H, 72, 144)), IfElse(Var(21) > 0, 0, 36)
+givepower = 36, 36
+
+
+[State 220, hit]
+type = HitDef
+trigger1 = AnimElem = 2
 trigger1 = !Var(0)
+trigger1 = Anim = 220
 attr = A, NA
 animtype=Diagup
 air.animtype=Diagup
@@ -282,6 +343,7 @@ ignorehitpause = 1
 
 [State 220, vel]
 type = VelSet
+triggerall = PalNo != 12
 trigger1 = !Var(0)
 trigger1 = AnimElem = 2
 X = 2
@@ -290,6 +352,7 @@ Y = -8
 
 [State 220, change]
 type=statetypeset
+triggerall = PalNo != 12
 trigger1 = !Var(0)
 trigger1=animelemtime(2)>=0
 statetype=A
@@ -297,12 +360,14 @@ physics=N
 
 [State 220, gravity]
 type = VelAdd
+triggerall = PalNo != 12
 trigger1 = !Var(0)
 trigger1=animelemtime(2)>=0
 Y = .5
 
 [State 220, end]
 type=changestate
+triggerall = PalNo != 12
 trigger1 = !Var(0)
 trigger1= AnimElemNo(0) = 4 
 trigger1 = Pos y >= - Vel Y && Vel Y > 0
@@ -310,8 +375,9 @@ value=221
 
 [State 220, end]
 type=changestate
+triggerall= !AnimTime
 trigger1 = Var(0)
-trigger1= !AnimTime
+trigger2 = Anim = 13021
 value = 0
 ctrl = 1
 

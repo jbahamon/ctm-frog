@@ -174,6 +174,12 @@ triggerall = Parent, StateNo != Var(0)
 trigger1 = Parent, StateNo = 14016
 value = 17226
 
+[State 7011, Heavy Hit]
+type = ChangeState
+triggerall = Parent, StateNo != Var(0)
+trigger1 = Parent, StateNo = 14040
+value = 17240
+
 ;Light Attack
 [Statedef 17012]
 type = S
@@ -2140,3 +2146,330 @@ type = SelfState
 trigger1 = Vel Y > 0
 trigger1 = Pos Y >= 0
 value = 5100
+
+; Shinei! 
+[Statedef 17240]
+type = S
+physics = N
+movetype = A
+anim = 14040
+velset = 0,0
+sprpriority = -2
+facep2= 1
+velset = 0, 0
+
+[State 7011, HitOverride]
+type = HitOverride
+trigger1 = 1
+attr = SCA,NA,SA,HA,NP,SP,HP
+stateno = 17241
+ignorehitpause = 1
+
+[State 7011, HitOverride]
+type = NotHitBy
+trigger1 = 1
+value = ,NT,ST,HT 
+ignorehitpause = 1
+
+[State 7013, Selector Var]
+type = VarSet
+trigger1 = !Time
+var(0) = Parent, StateNo
+
+[State 7015, ChangeAnim]
+type = VarSet
+trigger1 = !Time
+var(1) = StateNo
+ignorehitpause = 1
+
+[State 1100, Velocity]
+type = VelSet
+trigger1 = AnimElem = 1
+x = abs(root,p2dist x*.02)
+
+[State 1100, Velocity]
+type = VelSet
+trigger1 = AnimElem = 7
+x = 9.2
+
+[State 1100, Velocity]
+type = VelSet
+trigger1 = AnimElem = 11
+x = 0
+
+[State 1100, Velocity]
+type = VelSet
+trigger1 = AnimElem = 12
+x = .83
+
+[State 1100, Velocity]
+type = VelSet
+trigger1 = AnimElem = 13
+x = -.83
+
+[State 1100, Velocity]
+type = VelSet
+trigger1 = AnimElem = 14
+x = -3.5
+
+[State 1100, Velocity]
+type = VelMul
+trigger1 = animelemtime(7) > 0
+trigger1 = animelemtime(11) < 0
+x = .96
+
+[State 1100, Velocity]
+type = VelMul
+trigger1 = animelemtime(14) > 0
+trigger1 = animelemtime(15) < 0
+x = .96
+
+[State 220, Position]
+type = PosSet
+trigger1 = AnimElem = 7
+x = enemynear,pos x-(72*facing)
+
+[State 1100, PowerAdd]
+type = PowerAdd
+trigger1 = AnimElem = 7
+value = 60
+
+[State 220, Effect]
+type = PlaySnd
+trigger1 = AnimElem = 7
+value = 1200, 3
+channel = 0
+
+[State -2, CornerPush]
+type = VarSet
+trigger1 = !Time
+var(2) = 0
+persistent = 0
+ignorehitpause = 1
+
+[State -2, CornerPush]
+type = VarSet
+trigger1 = movecontact
+trigger1 = time > 1
+var(2) = 15
+persistent = 0
+ignorehitpause = 1
+
+[State 105, 1]
+type = VarAdd
+trigger1 = var(2) > 0
+v = 2
+value = -1
+ignorehitpause = 1
+
+[State -2, CornerPush]
+type = PosFreeze
+trigger1 = var(2)
+ignorehitpause = 1
+
+[State 0]
+type = changeanim
+triggerall = var(2)
+trigger1 = AnimElem = 16
+value = anim
+elem = 15
+persistent = 1
+
+[State 220, 1]
+type = Hitdef
+trigger1 = AnimElem = 14
+attr = S, SA
+hitflag = MAF
+guardflag = M
+animtype = heavy
+air.animtype = back
+fall.animtype = back
+priority = 5,Hit
+damage = Floor(119 * Root, FVar(39)),7
+pausetime = 0,15
+guard.pausetime = 0,15
+sparkno = S8204
+guard.sparkno = S8100
+sparkxy = -10, -74
+hitsound = S1,5
+guardsound = S4,0
+ground.type = Low
+air.type = Low
+ground.slidetime = 17
+ground.hittime = 17
+air.hittime = 17
+guard.ctrltime = 17
+ground.velocity = -.65, -4
+guard.velocity = -8
+air.velocity = -.83, -4.3
+ground.cornerpush.veloff = 0
+air.cornerpush.veloff = 0
+getpower = 50,0
+givepower = 25,0
+persistent = 0
+fall = 1
+air.fall = 1
+fall.recover = 1
+yaccel = .35;44
+guard.kill = 0
+palfx.add=200,200,200
+palfx.mul=256,256,256
+palfx.time=6
+envshake.time = 12
+envshake.freq = 120
+envshake.ampl = 8
+p2facing = 1
+
+[State 7014, Light Hit]
+type = ChangeState
+trigger1 = Parent, StateNo != 14040
+value = IfElse(Parent, MoveType = H, 17241, 17019)
+
+[State 7011, FollowPlayer]
+type = PosAdd
+trigger1 = !AnimTime
+X = (ParentDist X)
+Y = (ParentDist Y - 10)
+ignorehitpause = 1
+
+[State 200, Dampen]
+Type = ParentVarset
+trigger1 = MoveHit
+fvar(39) = Parent, fvar(39)*0.9
+persistent = 0
+ignorehitpause = 1
+
+[State 7014, Light Hit]
+type = ChangeState
+trigger1 = !AnimTime
+value = 17011
+
+; Shinei! Got Hit
+[Statedef 17241]
+type = S
+physics = N
+movetype = H
+velset = 0,0
+anim = 3031
+sprpriority = 2
+
+[State 7015, LifeAdd]
+type = ParentVarAdd
+trigger1 = Time = 0
+v = 24
+value = - 5 * floor(gethitvar(damage)) 
+ignorehitpause = 1
+
+[State 17015, Vars]
+type = ParentVarSet
+trigger1 = !Time
+v = 26
+value = 1
+ignorehitpause = 1
+
+[State 17015, Vars]
+type = VarSet
+trigger1 = !Time
+v = 10
+value = GetHitVar(groundtype)
+ignorehitpause = 1
+
+[State 17015, Vars]
+type = VarSet
+trigger1 = !Time
+v = 11
+value = GetHitVar(animtype)
+ignorehitpause = 1
+
+[State 17015, Vars]
+type = VarSet
+trigger1 = !Time
+v = 12
+value = GetHitVar(damage)
+ignorehitpause = 1
+
+[State 17015, Vars]
+type = VarSet
+trigger1 = !Time
+v = 13
+value = GetHitVar(fall)
+ignorehitpause = 1
+
+[State 17015, Vars]
+type = VarSet
+trigger1 = !Time
+v = 14
+value = GetHitVar(slidetime)
+ignorehitpause = 1
+
+[State 17015, Vars]
+type = VarSet
+trigger1 = !Time
+v = 15
+value = GetHitVar(hittime)
+ignorehitpause = 1
+
+[State 17015, Vars]
+type = VarSet
+trigger1 = !Time
+v = 16
+value = GetHitVar(hitshaketime)
+ignorehitpause = 1
+
+[State 17015, Vars]
+type = VarSet
+trigger1 = !Time
+v = 17
+value = GetHitVar(airtype)
+ignorehitpause = 1
+
+[State 17015, Vars]
+type = VarSet
+trigger1 = !Time
+fv = 0
+value = GetHitVar(xvel)
+ignorehitpause = 1
+
+[State 17015, Vars]
+type = VarSet
+trigger1 = !Time
+fv = 1
+value = GetHitVar(yvel)
+ignorehitpause = 1
+
+[State 17015, Vars]
+type = VarSet
+trigger1 = !Time
+fv = 2
+value = GetHitVar(yaccel)
+ignorehitpause = 1
+
+
+[State 7010, appear]
+type = ParentVarSet
+trigger1 = !Time
+v = 23
+value = 0
+ignorehitpause = 1
+
+[State 7010, appear]
+type = assertspecial
+trigger1 = Time % 2
+trigger1 = Time < 20
+flag = invisible
+ignorehitpause = 1
+
+[State 7010, appear]
+type = trans
+trigger1 = 1
+trans = none
+ignorehitpause = 1
+
+[State 17018, Scale]
+type = AngleDraw
+trigger1 = Time > 20
+scale = 1 - 0.1 * (Time - 20), 1 + 0.2 * (Time - 20)
+
+[State 7010, End]
+type = DestroySelf
+trigger1 = Time > 30

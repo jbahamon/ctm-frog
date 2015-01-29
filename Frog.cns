@@ -290,7 +290,7 @@ ignorehitpause = 1
 [State -3, Dampener]
 Type = DefenceMulSet
 Trigger1 = PalNo = 12
-value = IfElse(Var(23) = 1, 1.15, 1)
+value = IfElse(Var(23) = 1, 1.15, 1) * IfElse(StateNo = 14040, 1.5, 1)
 ignorehitpause = 1
 
 [State -3, Power]

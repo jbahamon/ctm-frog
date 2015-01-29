@@ -524,8 +524,57 @@ time = 1
 persistent = 1
 ignorehitpause = 1
 
-
 [State 803, Safety]
 type = DestroySelf 
 trigger1 = Parent, StateNo != 14030
 trigger2 = Time > 10
+
+
+; Shinei!
+[Statedef 14040]
+type    = S
+movetype= A
+physics = S
+ctrl = 0
+anim = 13000
+sprpriority = 2
+poweradd = 0
+velset = 0,0
+
+[State 1030, whatbuttondidyoupress?]
+type = VarSet
+trigger1 = !Time
+var(0) = IfElse(command="dfc", 2, IfElse(Command = "dfb", 1, 0))
+
+
+[State 803, Safety]
+type = VarSet
+trigger1 = !Time
+v = 1
+value = 0
+
+[State 803, Safety]
+type = VarSet
+trigger1 = !Var(1)
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), StateNo = 17240
+v = 1
+value = 1
+
+[State 803, Safety]
+type = ChangeState
+triggerall = !Time
+trigger1 = !Var(23)
+trigger2 = !NumHelper(10000)
+value = 0
+ctrl = 1
+
+
+[State 803, Safety]
+type = ChangeState
+trigger1 = !NumHelper(10000)
+trigger2 = NumHelper(10000)
+trigger2 = Var(1)
+trigger2 = Helper(10000), StateNo != 17240
+value = 0
+ctrl = 1

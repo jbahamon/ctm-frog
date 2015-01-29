@@ -274,6 +274,17 @@ time = 40
 ;-| Special Motions |------------------------------------------------------
 
 [Command]
+name = "Space Ripper Stingy Eyes"
+command =  ~F, c, b, a, 	F
+time=30
+
+
+[Command]
+name = "Space Ripper Stingy Eyes"
+command =  ~F, c, b, a, ~F
+time=30
+
+[Command]
 name = "qcba"
 command =  ~D, DB, B, a
 time=15
@@ -651,10 +662,29 @@ trigger1 = ctrl
 
 ;---------------------------------------------------------------------------
 
+[State -1, Space Ripper Stingy Eyes!]
+type = ChangeState
+triggerall = PalNo = 12
+triggerall = StateType != A 
+triggerall = ctrl
+triggerall = !Var(23) && !NumHelper(10000)
+trigger1 = Command = "Space Ripper Stingy Eyes"
+value = 14040
+
+[State -1, Shinei!]
+type = ChangeState
+triggerall = PalNo = 12
+triggerall = StateType != A 
+triggerall = ctrl
+triggerall = Var(23) && NumHelper(10000)
+trigger1 = Command = "dfa" || Command = "dfb" || Command = "dfc"
+value = 14040
 
 [State -1, The World]
 type = ChangeState
 triggerall = PalNo = 12
+triggerall = StateType != A 
+triggerall = ctrl
 triggerall = !Var(23) && !NumHelper(10000)
 trigger1 = Command = "dfa" || Command = "dfb" || Command = "dfc"
 value = 14030
