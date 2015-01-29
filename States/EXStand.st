@@ -1322,6 +1322,11 @@ trans = none
 ignorehitpause = 1
 
 [State 7010, appear]
+type = Turn
+trigger1 = Facing != Parent, Facing
+ignorehitpause = 1
+
+[State 7010, appear]
 type = PosAdd
 trigger1 = 1
 X = (ParentDist X)/2.0
@@ -1420,6 +1425,11 @@ anim = 14010
 velset = 0,0
 sprpriority = 2
 facep2= 1
+
+[State 7010, appear]
+type = Turn
+trigger1 = Facing != Parent, Facing
+ignorehitpause = 1
 
 [State 7015, ChangeAnim]
 type = VarSet
@@ -1719,6 +1729,11 @@ velset = 0,0
 sprpriority = -2
 facep2= 1
 
+[State 7010, appear]
+type = Turn
+trigger1 = Facing != Parent, Facing
+ignorehitpause = 1
+
 [State 7015, ChangeAnim]
 type = VarSet
 trigger1 = !Time
@@ -1873,6 +1888,11 @@ velset = 0,0
 sprpriority = -2
 facep2= 1
 velset = 0, 0
+
+[State 7010, appear]
+type = Turn
+trigger1 = Facing != Parent, Facing
+ignorehitpause = 1
 
 [State 7015, ChangeAnim]
 type = VarSet

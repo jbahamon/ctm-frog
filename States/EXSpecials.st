@@ -45,10 +45,6 @@ value = 0
 ctrl = 1
 
 
-
-
-
-
 ; Muda Muda - No Stand
 [Statedef 14010]
 type    = S
@@ -411,3 +407,125 @@ trigger2 = NumHelper(10000)
 trigger2 = Helper(10000), StateNo = 17011
 value = 0
 ctrl = 1 
+
+; The World
+[Statedef 14030]
+type    = S
+movetype= I
+physics = S
+ctrl = 0
+anim = 14030
+sprpriority = 2
+poweradd = 0
+velset = 0,0
+
+[State 1030, whatbuttondidyoupress?]
+type = VarSet
+trigger1 = !Time
+var(0) = IfElse(command="dfc", 2, IfElse(Command = "dfb", 1, 0))
+
+[State 803, Safety]
+type = PosSet
+trigger1 = AnimElem = 3
+X = IfElse(Var(0) = 2, 100, IfElse(Var(0) = 1, 0, -100))
+
+
+[State 13801, AfterImage]
+type = helper
+trigger1 = AnimElem = 3
+stateno = 14031
+ID = 14030
+name = "The World Afterimage"
+postype = p1
+pos = 0,0
+ownpal = 1
+persistent = 0
+
+[State 9606, EnvColor]
+type = palfx
+trigger1 = animelemtime(3) >= 0
+trigger1 = animelemtime(4) < 0
+add = 216,216,152
+time = 1
+persistent = 1
+ignorehitpause = 1
+
+[State 9606, EnvColor]
+type = palfx
+trigger1 = animelemtime(4) >= 0
+trigger1 = animelemtime(4) < 4
+add = -64,-64,-64
+time = 1
+persistent = 1
+ignorehitpause = 1
+
+[State 9606, EnvColor]
+type = palfx
+trigger1 = animelemtime(4) >= 4
+trigger1 = animelemtime(4) < 8
+add = 120,120,192
+time = 1
+persistent = 1
+ignorehitpause = 1
+
+[State 803, Safety]
+type = ChangeState
+trigger1 = !AnimTime
+value = 0
+ctrl = 1
+
+
+; The World AfterImage
+[Statedef 14031]
+type    = S
+movetype= I
+physics = N
+ctrl = 0
+anim = 14031
+sprpriority = 2
+poweradd = 0
+velset = 0,0
+
+
+[State 1030, whatbuttondidyoupress?]
+type = OffSet
+trigger1 = 1
+X = IfElse(Time % 2, -1, 1) * (10 - Time)
+
+[State 803, Safety]
+type = Turn
+trigger1 = Parent, Facing != Facing
+
+
+[State 9606, EnvColor]
+type = palfx
+trigger1 = Parent, animelemtime(3) >= 0
+trigger1 = Parent, animelemtime(4) < 0
+add = 216,216,152
+time = 1
+persistent = 1
+ignorehitpause = 1
+
+[State 9606, EnvColor]
+type = palfx
+trigger1 = Parent, animelemtime(4) >= 0
+trigger1 = Parent, animelemtime(4) < 4
+add = -64,-64,-64
+time = 1
+persistent = 1
+ignorehitpause = 1
+
+[State 9606, EnvColor]
+type = palfx
+trigger1 = Parent, animelemtime(4) >= 4
+trigger1 = Parent, animelemtime(4) < 8
+add = 120,120,192
+time = 1
+persistent = 1
+ignorehitpause = 1
+
+
+[State 803, Safety]
+type = DestroySelf 
+trigger1 = Parent, StateNo != 14030
+trigger2 = Time > 10

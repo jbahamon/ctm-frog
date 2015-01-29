@@ -651,6 +651,14 @@ trigger1 = ctrl
 
 ;---------------------------------------------------------------------------
 
+
+[State -1, The World]
+type = ChangeState
+triggerall = PalNo = 12
+triggerall = !Var(23) && !NumHelper(10000)
+trigger1 = Command = "dfa" || Command = "dfb" || Command = "dfc"
+value = 14030
+
 [State -1, MUDAA - Second Hit]
 type = ChangeState
 triggerall = PalNo = 12
