@@ -578,3 +578,157 @@ trigger2 = Var(1)
 trigger2 = Helper(10000), StateNo != 17240
 value = 0
 ctrl = 1
+
+
+; Space Ripper Stingy Eyes!
+[Statedef 14050]
+type    = S
+movetype= A
+physics = S
+ctrl = 0
+anim = 14050
+sprpriority = 0
+poweradd = 0
+velset = 0,0
+
+[State 13801, Masa & Mune]
+type = OffSet
+trigger1 = AnimElemNo(0) = 3
+trigger1 = Time % 4 < 2
+Y = 1
+
+[State 13801, Masa & Mune]
+type = helper
+triggerall = !NumHelper(14050)
+trigger1 = AnimElem = 4
+stateno = 14051
+ID = 14050
+name = "Beam"
+postype = p1
+pos = 15,-15
+ownpal = 1
+persistent = 0
+
+[State 803, Safety]
+type = VarSet
+trigger1 = !Time
+v = 1
+value = 0
+
+
+[State 803, Safety]
+type = ChangeState
+trigger1 = !AnimTime
+value = 0
+ctrl = 1
+
+;BEEM
+[Statedef 14051]
+type    = S
+movetype= A
+physics = S
+ctrl = 0
+anim = 14051
+sprpriority = 2
+poweradd = 0
+velset = 0,0
+
+[State 2203, Start]
+trigger1 = 1
+type = Trans
+trans = add
+
+[State 2203, Start]
+trigger1 = 1
+type = AngleDraw
+scale = 0.5, 0.5
+
+[State 2202, Beam Head]
+type = helper
+trigger1 = AnimElem = 4
+stateno = 14052
+ID = 14051
+name = "Beam Head"
+postype = p1
+pos = 0,0
+ownpal = 1
+persistent = 0
+
+[State 2203, RemoveExplod]
+type = DestroySelf
+trigger1 = Parent, StateNo != 14050 || !AnimTime
+
+
+;Beam Head
+[Statedef 14052]
+type    = S
+movetype= A
+physics = N
+juggle  = 3
+ctrl = 0
+anim = 14052
+sprpriority = 3
+poweradd = 0
+velset = 0, 0
+
+[State 2202, !Shadow]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+ignorehitpause = 1
+
+
+[State 3010, HitDef]
+type = HitDef
+trigger1 = !Time
+attr = S, SP
+hitflag = MAF
+guardflag = 
+animtype = heavy
+ground.type = Low
+air.animtype = back
+fall.animtype = back
+damage = Ceil(83 * Parent, FVar(39)),2
+pausetime = 0,8
+guard.pausetime = 0,8
+sparkno = S7006
+sparkxy = -14, 0
+hitsound = S1,4
+guardsound = S4,0
+ground.type = High
+air.type = High
+ground.slidetime = 11
+ground.hittime = 11
+air.hittime = 11
+guard.ctrltime = 11
+ground.velocity = -4.5
+guard.velocity = -5
+air.velocity = -2.5, 0
+ground.cornerpush.veloff = 0
+air.cornerpush.veloff = 0
+getpower = 40,0
+givepower = 20,0
+air.fall = 1
+fall.recover = 1
+yaccel = .35
+guard.kill = 0
+p2facing = 1
+palfx.add=200,200,200
+palfx.mul=256,256,256
+palfx.time=6	
+
+[State 2203, Start]
+trigger1 = 1
+type = AngleDraw
+scale = 320/16.0, 0.5
+ignorehitpause = 1
+
+[State 2203, Start]
+trigger1 = 1
+type = Trans
+trans = add
+ignorehitpause = 1
+
+[State 2203, RemoveExplod]
+type = DestroySelf
+trigger1 = Root, StateNo != 14050 || !AnimTime

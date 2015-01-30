@@ -273,9 +273,15 @@ time = 40
 
 ;-| Special Motions |------------------------------------------------------
 
+
 [Command]
 name = "Space Ripper Stingy Eyes"
-command =  ~F, c, b, a, 	F
+command =  ~F, c, b, a, F
+time=30
+
+[Command]
+name = "Space Ripper Stingy Eyes"
+command =  y
 time=30
 
 
@@ -666,10 +672,10 @@ trigger1 = ctrl
 type = ChangeState
 triggerall = PalNo = 12
 triggerall = StateType != A 
-triggerall = ctrl
+triggerall = ctrl || StateNo = [200, 220]
 triggerall = !Var(23) && !NumHelper(10000)
 trigger1 = Command = "Space Ripper Stingy Eyes"
-value = 14040
+value = 14050
 
 [State -1, Shinei!]
 type = ChangeState
