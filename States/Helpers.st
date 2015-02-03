@@ -9,30 +9,222 @@ physics = N
 movetype = I
 anim = 7400
 
+[State 7000, Var]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[State 8520, Assert]
+type = assertspecial
+trigger1 = Time < 100
+flag = nobardisplay
+
+[State 7000, Var]
+type = AssertSpecial
+trigger1 = Anim = 7200
+flag = invisible
+
+[State 7000, Var]
+type = VarSet
+trigger1 = !Time
+var(0) = (Parent, StateNo = 2100)
+
+[State 7000, Var]
+type = VarSet
+trigger1 = !Time
+trigger1 = var(1) := (Root, PalNo = 12)
+var(1) = 30
+
 [State 7000, Pal Down]
 type = BGPalFX
-trigger1 = time <= 10 ;&& root, var(10) = 5
+trigger1 = time <= 10 && !Var(1)
 time = 1
 mul = 256 -floor(25.6 * time), 256 -floor(25.6 * time), 256
 color = 256 -floor(25.6 * time)
 
 [State 7000, Pal Static]
 type = BGPalFX
-trigger1 = (time = [11, 39]); && root, var(10) = 5
+trigger1 = (time = [11, 39]) && !Var(1)
 time = 1
 mul = 0, 0, 256
 color = 0
 
 [State 7000, Pal Up]
 type = BGPalFX
-trigger1 = time >= 40 
+trigger1 = time >= 40 && !Var(1) 
 time = 1
 mul = ceil(51.2 * (time - 40)), ceil(51.2 * (time - 40)), 256
 color = floor(51.2 * (time - 40))
 
+[State 7000, Pal Down]
+type = BGPalFX
+trigger1 = time <= 10 && Var(1)
+time = 1
+mul = 256 - floor(19.2 * time), 256 - floor(19.2 * time), 256 - floor(19.2 * time)
+color = 256 -floor(25.6 * time)
+
+[State 7000, Pal Static]
+type = BGPalFX
+trigger1 = (Time = [11, Var(1)]) && Var(1)
+time = 1
+mul = 64 , 64, 64
+color = 0
+
+[State 7000, Pal Up]
+type = BGPalFX
+trigger1 = time >= 40
+trigger1 = !Var(1) 
+time = 1
+mul = 256, ceil(51.2 * (time - 40)), ceil(51.2 * (time - 40))
+color = floor(51.2 * (time - 40))
+
+[State 7000, Pal Up]
+type = BGPalFX
+trigger1 = time = [Var(1),(Var(1) + 10)]
+trigger1 = Var(1) 
+time = 1
+mul = 64 + ceil(19.2 * (time - Var(1))), 64 + ceil(19.2 * (time - Var(1))), 64 + ceil(19.2 * (time - Var(1)))
+color = floor(25.6 * (time - Var(1)))
+
+[State 7000, Pal None]
+type = BGPalFX
+trigger1 = (Time > (Var(1) + 10)) && Var(1)
+time = 1
+add = 0,0,0
+mul = 256, 256, 256
+
 [State 7000, End]
 type = DestroySelf
-trigger1 = Time >= 45
+trigger1 = Time >= IfElse(!Var(1), 45, (Var(1) + 10))
+
+[State 7000, End]
+type = DestroySelf
+trigger1 = Root, StateNo = 13001
+
+
+;Pulsing Portrait - DIO
+[Statedef 7001]
+type = A
+movetype = I
+physics = N
+velset = 0,0
+sprpriority = 6
+anim = 14999
+
+[State 8520, Pos]
+type = Turn
+trigger1 = facing != 1
+
+[State 8520, Pos]
+type = PosAdd
+trigger1 = 1
+X = - ScreenPos X + (random%16) * IfElse((Time % 6 = [1,3]),-1,1) - 16
+Y = Ceil((1.3333333 * gameheight / gamewidth) * 120) - ScreenPos Y + (random%16) * IfElse((Time % 6 = [1,3]),-1,1)
+
+[State 8520, Scale]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[State 8520, Scale]
+type = VarSet
+trigger1 = !Time
+var(0) = 24
+
+[State 8520, Trans]
+type = Trans
+trigger1 = Time < 4
+trans = addalpha
+alpha = Time * 64, 256
+
+[State 8520, Trans]
+type = Trans
+trigger1 = Time = [4, Var(0)]
+trans = addalpha
+alpha = 256, 256
+
+[State 8520, Scale]
+type = AngleDraw
+trigger1 = Time < 8
+scale = Time * 0.125, Time * 0.125
+
+[State 8520, Scale]
+type = Trans
+trigger1 = Time >= Var(0)
+trans = addalpha
+alpha = 256 - 16 * (Time - Var(0)), 256
+
+[State 8520, Safety]
+type = DestroySelf
+trigger1 = Time >= (Var(0) + 16)
+
+[State 7000, End]
+type = DestroySelf
+trigger1 = Var(1) = 1
+trigger1 = Root, StateNo = 13001
+
+
+;Pulsing Portrait - The World
+[Statedef 7002]
+type = A
+movetype = I
+physics = N
+velset = 0,0
+sprpriority = 6
+anim = 14998
+
+[State 8520, Pos]
+type = Turn
+trigger1 = facing != 1
+
+[State 8520, Pos]
+type = PosAdd
+trigger1 = 1
+X = 160 - ScreenPos X
+Y = Ceil((1.3333333 * gameheight / gamewidth) * 120) - ScreenPos Y
+
+[State 8520, Scale]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[State 8520, Scale]
+type = VarSet
+trigger1 = !Time
+var(0) = 24
+
+[State 8520, Trans]
+type = Trans
+trigger1 = Time < 4
+trans = addalpha
+alpha = Time * 64, 256
+
+[State 8520, Trans]
+type = Trans
+trigger1 = Time = [4, Var(0)]
+trans = addalpha
+alpha = 256, 256
+
+[State 8520, Scale]
+type = AngleDraw
+trigger1 = 1
+scale = Time/20.0, Time/20.0
+
+[State 8520, Scale]
+type = Trans
+trigger1 = Time >= Var(0)
+trans = addalpha
+alpha = 256 - 16 * (Time - Var(0)), 256
+
+[State 8520, Safety]
+type = DestroySelf
+trigger1 = Time >= (Var(0) + 16)
+
+[State 7000, End]
+type = DestroySelf
+trigger1 = Var(1) = 1
+trigger1 = Root, StateNo = 13001
+
 
 ;Masa & Mune entrance
 [Statedef 7010]

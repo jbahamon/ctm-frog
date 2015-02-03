@@ -264,6 +264,36 @@ name = "qcfhcbc"
 command = ~D, F, D, B, ~c
 time = 40
 
+[Command]
+name = "qcf2p"
+command = ~D, DF, F, a+b
+time=25
+
+[Command]
+name = "qcf2p"
+command = ~D, DF, F, b+c
+time=25
+
+[Command]
+name = "qcf2p"
+command = ~D, DF, F, a+c
+time=25
+
+[Command]
+name = "qcf2p"
+command = ~D, DF, F, ~a+b
+time=25
+
+[Command]
+name = "qcf2p"
+command = ~D, DF, F, ~b+c
+time=25
+
+[Command]
+name = "qcf2p"
+command = ~D, DF, F, ~a+c
+time=25
+
 
 [Command]
 name = "Tokiyo Tomare"
@@ -560,6 +590,7 @@ value = 3000
 triggerall = StateType != A
 triggerall = Command = "qcbhcfa" || Command = "qcbhcfb" || Command = "qcbhcfc"
 triggerall = Var(21) > 0 && NumHelper(3030)
+triggerall = PalNo != 12
 trigger1= Ctrl 	
 
 ;----------------------Supers----------------------
@@ -570,6 +601,7 @@ value = 3060
 triggerall = StateType != A && Power >= 1000
 triggerall = Command = "qcfhcba" || Command = "qcfhcbb" || Command = "qcfhcbc"
 triggerall = !Var(21) && !NumHelper(3030)
+triggerall = PalNo != 12
 trigger1= Ctrl 			
 
 [State -1, Bubbles]
@@ -577,6 +609,7 @@ type = ChangeState
 value = 3110
 triggerall = !NumHelper(3111) && Power >= 1000
 triggerall = Command = "2qcfa" || Command = "2qcfb" || Command = "2qcfc" 
+triggerall = PalNo != 12
 trigger1 = Ctrl
 trigger2 = ( StateNo = 3100 ) && NumHelper(3100)
 trigger3 = ( StateNo = [200,299] ) && MoveHit
@@ -589,12 +622,25 @@ type = ChangeState
 value = 3100
 triggerall = Power>=1000
 triggerall = Command = "2qcba" || Command = "2qcbb" || Command = "2qcbc" 
+triggerall = PalNo != 12
 trigger1 = Ctrl 
 trigger2 = (Stateno=3050) && !NumExplod(3700)
 trigger3 = ( StateNo = [200,299] ) && MoveHit
 trigger4 = ( StateNo = [400,499] ) && MoveHit
 trigger5 = ( StateNo = [600,699] ) && MoveHit
 trigger6 = ( StateNo = 1020) && MoveHit
+
+
+[State -1, Checkmate]
+type = ChangeState
+triggerall = PalNo = 12 
+triggerall = ctrl
+triggerall = Command = "qcf2p"
+trigger1 = Var(23) && NumHelper(10000) 
+trigger1 = Helper(10000), StateNo = 17011
+trigger2 = !Var(23) && !NumHelper(10000) && StateType != A
+value = IfElse(Var(23) && NumHelper(10000), 15010, 15000)
+
 
 ;----------------------Specials----------------------
 

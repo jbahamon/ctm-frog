@@ -597,6 +597,14 @@ trigger1 = AnimElemNo(0) = 3
 trigger1 = Time % 4 < 2
 Y = 1
 
+
+[State 803, Pal]
+type = PalFX
+trigger1 = AnimElemNo(0) = 3
+add = Floor(32 * Sin(AnimElemTime(3)* Pi/16.0)) + 32, 32 + Floor(32 * Sin(AnimElemTime(3) * Pi/16.0)), 32 + Floor(32 * Sin(AnimElemTime(3)* Pi/16.0))
+mul = 256, 256, 256
+time = 1
+
 [State 13801, Masa & Mune]
 type = helper
 triggerall = !NumHelper(14050)
@@ -605,7 +613,7 @@ stateno = 14051
 ID = 14050
 name = "Beam"
 postype = p1
-pos = 15,-15
+pos = 18,-15
 ownpal = 1
 persistent = 0
 
@@ -688,7 +696,7 @@ animtype = heavy
 ground.type = Low
 air.animtype = back
 fall.animtype = back
-damage = Ceil(83 * Parent, FVar(39)),2
+damage = Ceil(83 * Root, FVar(39)),2
 pausetime = 0,8
 guard.pausetime = 0,8
 sparkno = S7006
@@ -708,6 +716,7 @@ ground.cornerpush.veloff = 0
 air.cornerpush.veloff = 0
 getpower = 40,0
 givepower = 20,0
+fall = 1
 air.fall = 1
 fall.recover = 1
 yaccel = .35
