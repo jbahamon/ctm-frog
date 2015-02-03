@@ -108,7 +108,7 @@ type = A
 movetype = I
 physics = N
 velset = 0,0
-sprpriority = 6
+sprpriority = -6
 anim = 14999
 
 [State 8520, Pos]

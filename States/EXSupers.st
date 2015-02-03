@@ -11,10 +11,15 @@ poweradd = -1000
 facep2 = 1 	
 velset = 0,0
 
-[State 2010, NHB]
+[State 2500, NotHitBy]
 type = NotHitBy
-trigger1 = 1
-time = 1
+trigger1 = Anim = 15000
+trigger1 = AnimElemNo(0) = 1
+value = SCA
+
+[State 2500, NotHitBy]
+type = NotHitBy
+trigger1 = NumHelper(7000)
 value = SCA
 
 [State 2010, Super Pause FX]
@@ -118,7 +123,7 @@ stateno = 15001
 ID = 15001
 name = "Masamune Knife"
 postype = p1
-pos = 22, -10
+pos = 22, -13
 ownpal = 1
 
 [State 1000, Knife 5]
@@ -129,7 +134,7 @@ stateno = 15001
 ID = 15001
 name = "Masamune Knife"
 postype = p1
-pos = 16, 5
+pos = 16, 0
 ownpal = 1
 
 [State 1000, Knife 6]
@@ -140,7 +145,7 @@ stateno = 15001
 ID = 15001
 name = "Masamune Knife"
 postype = p1
-pos = 8, 17
+pos = 8, 12
 ownpal = 1
 
 [State 1000, Knife 7]
@@ -151,7 +156,7 @@ stateno = 15001
 ID = 15001
 name = "Masamune Knife"
 postype = p1
-pos = 11, 10
+pos = 11, 5
 ownpal = 1
 
 [State 1000, Knife 8]
@@ -173,9 +178,8 @@ stateno = 15001
 ID = 15001
 name = "Masamune Knife"
 postype = p1
-pos = 17, -15
+pos = 17, -18
 ownpal = 1
-
 
 [State 2010, End]
 type = ChangeState
@@ -193,7 +197,6 @@ anim = 15001
 ctrl = 0
 velset = 0, 0
 sprpriority = 4
-
 
 [State 803, Pal]
 type = PalFX
@@ -372,3 +375,427 @@ type = ChangeState
 trigger1 = !AnimTime
 value = 15002
 ctrl = 0
+
+; Checkmate (W/Stand)
+[Statedef 15010]
+type    = S
+movetype= A
+physics = S
+juggle  = 3
+ctrl = 0
+anim = 13000
+sprpriority = 2
+poweradd = -1000
+facep2 = 1 	
+velset = 0,0
+
+[State 2010, Super Pause FX]
+type = VarSet
+trigger1 = !Time
+v = 0
+value = 0
+
+[State 2010, Super Pause FX]
+type = VarSet
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), StateNo = 17300
+v = 0
+value = 1
+persistent = 0
+
+[State 2010, Super Pause FX]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 3
+helpertype = normal
+stateno = 7000
+ID = 7000
+name = "Super Charge"
+postype = p1
+pos = 0,0
+ownpal = 1
+persistent = 0
+supermovetime = 9999
+
+
+[State 2010, Super Pause FX]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 3
+helpertype = normal
+stateno = 7000
+ID = 7000
+name = "Super Charge"
+postype = p1
+pos = 0,0
+ownpal = 1
+persistent = 0
+supermovetime = 9999
+
+[State 3250, Super Pause FX]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 3
+helpertype = normal
+stateno = 7001
+ID = 7001
+name = "Super BG"
+postype = p1
+pos = -34, -63
+ownpal = 1
+persistent = 0
+pausemovetime = 9999
+supermovetime = 9999
+
+[State 2010, Super Pause]
+type = superpause
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 3
+time = 45
+movetime = 45
+anim = -1
+sound = S7050,3
+p2defmul = 1
+darken = 0
+
+[State 1000, Knife 1]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 2]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 3]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 4]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 5]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 6]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 7]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 8]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 9]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 1]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+ownpal = 1
+
+
+[State 2010, End]
+type = ChangeState
+trigger1 = Var(0) && NumHelper(10000)
+trigger1 = Helper(10000), StateNo != 17300
+trigger2 = !NumHelper(10000)
+value = 0
+ctrl = 1
+
+
+; Checkmate (Air, W/Stand)
+[Statedef 15015]
+type    = S
+movetype= A
+physics = S
+juggle  = 3
+ctrl = 0
+anim = 13000
+sprpriority = 2
+poweradd = -1000
+facep2 = 1 	
+velset = 0,0
+
+[State 2010, Super Pause FX]
+type = VarSet
+trigger1 = !Time
+v = 0
+value = 0
+
+[State 2010, Super Pause FX]
+type = VarSet
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), StateNo = 17300
+v = 0
+value = 1
+persistent = 0
+
+[State 2010, Super Pause FX]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 3
+helpertype = normal
+stateno = 7000
+ID = 7000
+name = "Super Charge"
+postype = p1
+pos = 0,0
+ownpal = 1
+persistent = 0
+supermovetime = 9999
+
+
+[State 2010, Super Pause FX]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 3
+helpertype = normal
+stateno = 7000
+ID = 7000
+name = "Super Charge"
+postype = p1
+pos = 0,0
+ownpal = 1
+persistent = 0
+supermovetime = 9999
+
+[State 3250, Super Pause FX]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 3
+helpertype = normal
+stateno = 7001
+ID = 7001
+name = "Super BG"
+postype = p1
+pos = -34, -63
+ownpal = 1
+persistent = 0
+pausemovetime = 9999
+supermovetime = 9999
+
+[State 2010, Super Pause]
+type = superpause
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 3
+time = 45
+movetime = 45
+anim = -1
+sound = S7050,3
+p2defmul = 1
+darken = 0
+
+[State 1000, Knife 1]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 2]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 3]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 4]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 5]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 6]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 7]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 8]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 9]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 1]
+type = helper
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+ownpal = 1
+
+
+[State 2010, End]
+type = ChangeState
+trigger1 = Var(0) && NumHelper(10000)
+trigger1 = Helper(10000), StateNo != 17300
+trigger2 = !NumHelper(10000)
+value = 0
+ctrl = 1
+
