@@ -186,6 +186,12 @@ triggerall = Parent, StateNo != Var(0)
 trigger1 = Parent, StateNo = 15010
 value = 17300
 
+[State 7011, Heavy Hit]
+type = ChangeState
+triggerall = Parent, StateNo != Var(0)
+trigger1 = Parent, StateNo = 15015
+value = 17305
+
 
 ;Light Attack
 [Statedef 17012]
@@ -2869,6 +2875,7 @@ type = ChangeState
 trigger1 = !AnimTime
 value = 17011
 
+
 ; Knife 
 [Statedef 17301]
 type = A
@@ -2935,3 +2942,100 @@ value = FVar(0)
 type = DestroySelf
 trigger1 = Parent, AnimElemNo(0) > 3
 trigger2 = Parent, Anim != 15010
+
+; Checkmate (Air, W/Stand)
+[Statedef 17305]
+type = A
+physics = N
+movetype = A
+anim = 15010
+sprpriority = 3
+facep2= 1
+velset = 0,0
+
+[State 7010, appear]
+type = trans
+trigger1 = 1
+trans = none
+ignorehitpause = 1
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = Animelem=2 
+value = S7000,1
+
+[State 7015, ChangeAnim]
+type = VarSet
+trigger1 = !Time
+var(1) = StateNo
+ignorehitpause = 1
+
+[State 7012, FollowPlayer]
+type = PosAdd
+trigger1 = !Time
+X = (ParentDist X)
+Y = (ParentDist Y - 10)
+ignorehitpause = 1
+persistent = 0
+
+[State 7012, FollowPlayer]
+type = PosAdd
+trigger1 = 1
+X = (ParentDist X)/5.0
+Y = (ParentDist Y - 10)/5.0
+ignorehitpause = 1
+
+[State 7012, Turn]
+type = Turn
+trigger1 = Facing != Parent, Facing
+ignorehitpause = 1
+
+[State 7011, HitOverride]
+type = HitOverride
+trigger1 = 1
+attr = SCA,AA, AP
+stateno = 17015
+ignorehitpause = 1
+
+[State 7011, HitOverride]
+type = NotHitBy
+trigger1 = 1
+value = SCA,NT,ST,HT 
+ignorehitpause = 1
+
+[State 7012, Selector Var]
+type = VarSet
+trigger1 = !Time
+var(0) = Parent, StateNo
+
+[State 1000, Knife 1]
+type = helper
+trigger1 = AnimElemTime(1) = [2, 5]
+trigger1 = NumHelper(17301) < 4
+helpertype = normal
+stateno = 17301
+ID = 17301
+name = "Masamune Knife"
+postype = p1
+pos = 31, -34
+ownpal = 1
+supermovetime = 99999
+
+[State 1000, Knife 1]
+type = helper
+trigger1 = AnimElemTime(1) = [2, 5]
+trigger1 = NumHelper(17302) < 4
+helpertype = normal
+stateno = 17302
+ID = 17302
+name = "Masamune Knife"
+postype = p1
+pos = -7, -22
+ownpal = 1
+supermovetime = 99999
+
+[State 7011, Light Hit]
+type = ChangeState
+trigger1 = !AnimTime
+value = 17011
+

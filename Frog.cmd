@@ -639,7 +639,7 @@ triggerall = Command = "qcf2p"
 trigger1 = Var(23) && NumHelper(10000) 
 trigger1 = Helper(10000), StateNo = 17011
 trigger2 = !Var(23) && !NumHelper(10000) && StateType != A
-value = IfElse(Var(23) && NumHelper(10000), 15010, 15000)
+value = IfElse(Var(23) && NumHelper(10000), IfElse(StateType = A, 15015, 15010), 15000)
 
 
 

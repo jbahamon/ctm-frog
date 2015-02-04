@@ -131,7 +131,7 @@ ignorehitpause = 1
 [State 803, Safety]
 type = ChangeState
 trigger1 = !NumHelper(10000)
-trigger2 = Var(1) = 1
+trigger2 = Var(1) = 1 || Time > 3
 trigger2 = NumHelper(10000)
 trigger2 = Helper(10000), StateNo = 17011
 value = 0
@@ -231,7 +231,7 @@ ctrl = 0
 [State 803, Safety]
 type = ChangeState
 trigger1 = !NumHelper(10000)
-trigger2 = Var(1) = 1
+trigger2 = Var(1) = 1 || Time > 3
 trigger2 = NumHelper(10000)
 trigger2 = Helper(10000), StateNo = 17011
 value = 50
@@ -341,7 +341,7 @@ x = 0
 [State 803, Safety]
 type = ChangeState
 trigger1 = !NumHelper(10000)
-trigger2 = Var(1) = 1
+trigger2 = Var(1) = 1 || Time > 3
 trigger2 = NumHelper(10000)
 trigger2 = Helper(10000), StateNo = 17011
 value = 0
@@ -402,7 +402,7 @@ x = 0
 [State 803, Safety]
 type = ChangeState
 trigger1 = !NumHelper(10000)
-trigger2 = Var(1) = 1
+trigger2 = Var(1) = 1 || Time > 3
 trigger2 = NumHelper(10000)
 trigger2 = Helper(10000), StateNo = 17011
 value = 0
@@ -574,7 +574,7 @@ ctrl = 1
 type = ChangeState
 trigger1 = !NumHelper(10000)
 trigger2 = NumHelper(10000)
-trigger2 = Var(1)
+trigger2 = Var(1) || Time > 3
 trigger2 = Helper(10000), StateNo != 17240
 value = 0
 ctrl = 1

@@ -331,22 +331,27 @@ time = -1
 value = SCA, AA, AP, AT
 ignorehitpause = 1
 
+[State 2010, End]
+type = VarSet
+trigger1 = !Time
+fv = 0
+value = 16 * Random/1000.0
 
 [State 2010, End]
 type = AngleDraw
 trigger1 = 1
-value = Time * 12
+value = Time * FVar(0)
 
 [State 1006, End]
 type = AssertSpecial
-trigger1 = Time % 2
+trigger1 = Time % 3
 flag = invisible
 flag2 = noshadow
 
 [State 1006, End]
 type = VelMul
 trigger1 = !Time
-X = -0.6
+X = -0.3
 
 [State 1006, End]
 type = VelAdd
@@ -581,7 +586,7 @@ ownpal = 1
 
 [State 2010, End]
 type = ChangeState
-trigger1 = Var(0) && NumHelper(10000)
+trigger1 = (Var(0) || Time > 3) && NumHelper(10000)
 trigger1 = Helper(10000), StateNo != 17300
 trigger2 = !NumHelper(10000)
 value = 0
@@ -590,12 +595,12 @@ ctrl = 1
 
 ; Checkmate (Air, W/Stand)
 [Statedef 15015]
-type    = S
+type    = A
 movetype= A
 physics = S
 juggle  = 3
 ctrl = 0
-anim = 13000
+anim = 13301
 sprpriority = 2
 poweradd = -1000
 facep2 = 1 	
@@ -610,7 +615,7 @@ value = 0
 [State 2010, Super Pause FX]
 type = VarSet
 trigger1 = NumHelper(10000)
-trigger1 = Helper(10000), StateNo = 17300
+trigger1 = Helper(10000), StateNo = 17305
 v = 0
 value = 1
 persistent = 0
@@ -675,11 +680,11 @@ type = helper
 trigger1 = NumHelper(10000)
 trigger1 = Helper(10000), AnimElem = 5
 helpertype = normal
-stateno = 15001
-ID = 15001
+stateno = 15016
+ID = 15016
 name = "Masamune Knife"
 postype = p1
-pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+pos = Floor(-40 + Random % 60), Floor(- Random % 60)
 ownpal = 1
 
 [State 1000, Knife 2]
@@ -687,11 +692,11 @@ type = helper
 trigger1 = NumHelper(10000)
 trigger1 = Helper(10000), AnimElem = 5
 helpertype = normal
-stateno = 15001
-ID = 15001
+stateno = 15016
+ID = 15016
 name = "Masamune Knife"
 postype = p1
-pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+pos = Floor(-40 + Random % 60), Floor(- Random % 60)
 ownpal = 1
 
 [State 1000, Knife 3]
@@ -699,11 +704,11 @@ type = helper
 trigger1 = NumHelper(10000)
 trigger1 = Helper(10000), AnimElem = 5
 helpertype = normal
-stateno = 15001
-ID = 15001
+stateno = 15016
+ID = 15016
 name = "Masamune Knife"
 postype = p1
-pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+pos = Floor(-40 + Random % 60), Floor(- Random % 60)
 ownpal = 1
 
 [State 1000, Knife 4]
@@ -711,11 +716,11 @@ type = helper
 trigger1 = NumHelper(10000)
 trigger1 = Helper(10000), AnimElem = 5
 helpertype = normal
-stateno = 15001
-ID = 15001
+stateno = 15016
+ID = 15016
 name = "Masamune Knife"
 postype = p1
-pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+pos = Floor(-40 + Random % 60), Floor(- Random % 60)
 ownpal = 1
 
 [State 1000, Knife 5]
@@ -723,11 +728,11 @@ type = helper
 trigger1 = NumHelper(10000)
 trigger1 = Helper(10000), AnimElem = 5
 helpertype = normal
-stateno = 15001
-ID = 15001
+stateno = 15016
+ID = 15016
 name = "Masamune Knife"
 postype = p1
-pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+pos = Floor(-40 + Random % 60), Floor(- Random % 60)
 ownpal = 1
 
 [State 1000, Knife 6]
@@ -735,11 +740,11 @@ type = helper
 trigger1 = NumHelper(10000)
 trigger1 = Helper(10000), AnimElem = 5
 helpertype = normal
-stateno = 15001
-ID = 15001
+stateno = 15016
+ID = 15016
 name = "Masamune Knife"
 postype = p1
-pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+pos = Floor(-40 + Random % 60), Floor(- Random % 60)
 ownpal = 1
 
 [State 1000, Knife 7]
@@ -747,11 +752,11 @@ type = helper
 trigger1 = NumHelper(10000)
 trigger1 = Helper(10000), AnimElem = 5
 helpertype = normal
-stateno = 15001
+stateno = 15016
 ID = 15001
 name = "Masamune Knife"
 postype = p1
-pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+pos = Floor(-40 + Random % 60), Floor(- Random % 60)
 ownpal = 1
 
 [State 1000, Knife 8]
@@ -759,11 +764,11 @@ type = helper
 trigger1 = NumHelper(10000)
 trigger1 = Helper(10000), AnimElem = 5
 helpertype = normal
-stateno = 15001
+stateno = 15016
 ID = 15001
 name = "Masamune Knife"
 postype = p1
-pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+pos = Floor(-40 + Random % 60), Floor(- Random % 60)
 ownpal = 1
 
 [State 1000, Knife 9]
@@ -771,11 +776,11 @@ type = helper
 trigger1 = NumHelper(10000)
 trigger1 = Helper(10000), AnimElem = 5
 helpertype = normal
-stateno = 15001
-ID = 15001
+stateno = 15016
+ID = 15016
 name = "Masamune Knife"
 postype = p1
-pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+pos = Floor(-40 + Random % 60), Floor(- Random % 60)
 ownpal = 1
 
 [State 1000, Knife 1]
@@ -783,19 +788,174 @@ type = helper
 trigger1 = NumHelper(10000)
 trigger1 = Helper(10000), AnimElem = 5
 helpertype = normal
-stateno = 15001
-ID = 15001
+stateno = 15016
+ID = 15016
 name = "Masamune Knife"
 postype = p1
-pos = Floor(-40 + Random % 60), Floor(- Pos Y - Random % 60)
+pos = Floor(-40 + Random % 60), Floor(- Random % 60)
 ownpal = 1
 
+[State 2010, End]
+type = VarSet
+trigger1 = !Time
+var(1) = 0
+persistent = 0
 
 [State 2010, End]
-type = ChangeState
-trigger1 = Var(0) && NumHelper(10000)
-trigger1 = Helper(10000), StateNo != 17300
+type = VarSet
+trigger1 = (Var(0) || Time > 3) && NumHelper(10000)
+trigger1 = Helper(10000), StateNo != 17305
 trigger2 = !NumHelper(10000)
-value = 0
-ctrl = 1
+trigger3 = Var(0) && NumHelper(10000)
+trigger3 = (Helper(10000), Anim = 15010) && Helper(10000), AnimElem = 5
+var(1) = 1
+persistent = 0
+
+[State 2010, End]
+type = VelAdd
+trigger1 = Var(1)
+Y = 0.4
+
+[State 1100, ChangeState]
+type = ChangeState
+triggerall = Var(1)
+trigger1 = Pos Y >= -Vel Y && Vel Y > 0
+value = 52
+
+;Masamune-Knife (Air)
+[Statedef 15016]
+type = A
+physics = N
+movetype = A
+anim = 15016
+ctrl = 0
+velset = 0, 0
+sprpriority = 4
+
+[State 803, Pal]
+type = AngleDraw
+trigger1 = 1
+value = -32
+
+[State 1005, Vel]
+type = velset
+trigger1 = 1
+x = 10
+y = 6.4
+
+[State 803, Pal]
+type = PalFX
+trigger1 = Time < 8
+add = Floor(128 * Cos(Time * Pi/8.0)) + 128, Floor(128 * Cos(Time * Pi/8.0)) + 128, Floor(128 * Cos(Time * Pi/8.0)) + 128
+mul = 256, 256, 256
+time = 1
+
+[State 803, Pal]
+type = PalFX
+trigger1 = !Time
+add = 256, 256, 256
+mul = 256, 256, 256
+time = 1
+
+[State 1005, HitOverride]
+type = hitoverride
+trigger1 = 1
+time = -1
+attr = SCA, AA, AP, AT
+stateno = 15002
+ignorehitpause = 1
+
+[State 1005, HB]
+type = hitby
+trigger1 = 1
+time = -1
+value = SCA, NP, SP, HP
+ignorehitpause = 1
+
+[State 1005, movehitvar]
+type = varset
+trigger1 = movecontact && numtarget
+trigger1 = !(target, ishelper)
+var(3) = 1
+ignorehitpause = 1
+
+[State 1005, timevar]
+type = varadd
+trigger1 = time && var(1) < 25
+var(1) = 1
+
+[State 1005, HitSound]
+type = playsnd
+trigger1 = movehit && numtarget
+trigger1 = !(target, time) && target, movetype = H
+value = S7020,5
+channel = 1
+persistent = 0
+ignorehitpause = 1
+
+[State 1001, Dampen]
+Type = ParentVarset
+Trigger1 = MoveHit
+trigger1 = !(target, time) && target, movetype = H
+fvar(39) = parent, Fvar(39)*0.91
+persistent = 0
+ignorehitpause = 1
+
+[State 1005, Hit]
+type = hitdef
+trigger1 = 1
+priority = 4, Hit
+attr = S, SP
+damage = ceil(21 * root, fvar(39)), 4
+animtype = Heavy
+hitflag = MAF
+guardflag = MA
+air.animtype = back
+fall.animtype = back
+pausetime = 0, 4
+sparkno = -1
+guardsound = s2, 0
+ground.type = Low
+air.type = Low
+ground.slidetime = 17
+ground.hittime = 17
+air.hittime = 17
+guard.ctrltime = 17
+ground.velocity = -1.8,-8.6
+guard.velocity = -8
+air.velocity = -1.8,-8.6
+airguard.velocity = -4.2,-3.2
+ground.cornerpush.veloff = 0
+air.cornerpush.veloff = 0
+getpower = 0,0
+givepower = 10,0
+fall = 1
+air.fall = 1
+fall.recover = 1
+yaccel = .35
+guard.kill = 0
+p2facing = 1
+palfx.add = 200, 200, 200
+palfx.mul = 256, 256, 256
+palfx.time = 4
+airguard.ctrltime = 16
+airguard.velocity = ifelse((root, var(21)), -4, -8) * 0.6, -1.5 * 0.6
+forcestand = 1
+
+[State 1005, End]
+type = changestate
+trigger1 = movecontact
+value = 15003
+ignorehitpause = 1
+
+[State 1006, End]
+type = destroyself
+trigger1 = pos x != [ -240, 240]
+
+[State 1005, End]
+type = changestate
+trigger1 = Pos Y >= 0
+value = 15002
+ignorehitpause = 1
+
 
