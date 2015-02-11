@@ -817,7 +817,7 @@ type = A
 movetype = H
 physics = N
 velset = 0, 0
-sprpiority = 4
+sprpriority = 4
 anim = 7202
 
 [State 3102, damage]

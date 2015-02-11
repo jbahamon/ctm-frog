@@ -296,6 +296,37 @@ time=25
 
 
 [Command]
+name = "qcb2p"
+command = ~D, DB, B, a+b
+time=25
+
+[Command]
+name = "qcb2p"
+command = ~D, DB, B, b+c
+time=25
+
+[Command]
+name = "qcb2p"
+command = ~D, DB, B, a+c
+time=25
+
+[Command]
+name = "qcb2p"
+command = ~D, DB, B, ~a+b
+time=25
+
+[Command]
+name = "qcb2p"
+command = ~D, DB, B, ~b+c
+time=25
+
+[Command]
+name = "qcb2p"
+command = ~D, DF, F, ~a+c
+time=25
+
+
+[Command]
 name = "Tokiyo Tomare"
 command = x;~F, z, x, F, s
 time = 40
@@ -629,6 +660,15 @@ trigger3 = ( StateNo = [200,299] ) && MoveHit
 trigger4 = ( StateNo = [400,499] ) && MoveHit
 trigger5 = ( StateNo = [600,699] ) && MoveHit
 trigger6 = ( StateNo = 1020) && MoveHit
+
+
+[State -1, Road Rolla Da]
+type = ChangeState
+triggerall = PalNo = 12 
+triggerall = ctrl
+triggerall = Command = "qcb2p"
+trigger1 = !Var(23) && !NumHelper(10000)
+value = 15020
 
 
 [State -1, Checkmate]

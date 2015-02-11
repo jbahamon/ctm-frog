@@ -2844,6 +2844,7 @@ type = VarSet
 trigger1 = !Time
 var(0) = Parent, StateNo
 
+
 [State 1000, Knife 1]
 type = helper
 trigger1 = AnimElemTime(1) = [2, 5]
@@ -2876,7 +2877,7 @@ trigger1 = !AnimTime
 value = 17011
 
 
-; Knife 
+; Knife in Hand
 [Statedef 17301]
 type = A
 physics = N
@@ -2909,7 +2910,7 @@ type = DestroySelf
 trigger1 = Parent, AnimElemNo(0) > 3
 trigger2 = Parent, Anim != 15010
 
-; Knife 
+; Knife in Other Hand
 [Statedef 17302]
 type = A
 physics = N
@@ -2952,6 +2953,18 @@ anim = 15010
 sprpriority = 3
 facep2= 1
 velset = 0,0
+
+[State 2500, NotHitBy]
+type = NotHitBy
+trigger1 = AnimElemTime(2) < 0
+value = SCA
+ignorehitpause = 1
+
+[State 2500, NotHitBy]
+type = NotHitBy
+trigger1 = AnimElem = 2
+value = SCA
+time = 8
 
 [State 7010, appear]
 type = trans

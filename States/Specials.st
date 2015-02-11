@@ -587,7 +587,7 @@ ampl = 4
 
 [State 1035, There you Go]
 type = TargetState
-trigger1 = anim = 1035 && AnimElemTime(2) = 10
+trigger1 = anim = 1035 && AnimElemTime(2) = 5
 value = 1037
 
 [State 1035, There you Go]
