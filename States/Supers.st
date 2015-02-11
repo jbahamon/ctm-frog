@@ -1652,13 +1652,13 @@ var(1) = 31
 type = Trans
 trigger1 = !Var(1)
 trans = AddAlpha
-alpha = 224, 32
+alpha = 256, 64
 
 [State 3015, PalFX]
 type = Trans
 trigger1 = Var(1) > 0
 trans = AddAlpha
-alpha = 7 * Var(1), 7 * (32 - Var(1))
+alpha = 8 * Var(1), 6 * (32 - Var(1)) + 64
 
 [State 3015, telprot]
 type = PosSet

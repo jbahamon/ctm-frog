@@ -1015,7 +1015,7 @@ persistent = 0
 [State 1100, Positioning]
 type = PosAdd
 trigger1 = Anim = [15022, 15023]
-x = (P2Dist X) - 50
+x = (P2Dist X) - 80
 persistent = 0
 
 [State 1100, Velocity]
@@ -1024,6 +1024,18 @@ trigger1 = Anim = [15022, 15023]
 x = 5
 y = 25
 persistent = 0
+
+[State 2601, EnvShake]
+type = Width
+trigger1 = 1
+value = 0,0
+ignorehitpause = 1
+
+[State 2601, EnvShake]
+type = PlayerPush
+trigger1 = 1
+value = 0
+ignorehitpause = 1
 
 [State 2010, Super Pause FX]
 type = StateTypeSet
@@ -1184,6 +1196,19 @@ sprpriority = 2
 facep2 = 1
 velset = 0,0
 
+
+[State 2601, EnvShake]
+type = Width
+trigger1 = AnimElemNo(0) < 2
+value = 0,0
+ignorehitpause = 1
+
+[State 2601, EnvShake]
+type = PlayerPush
+trigger1 = AnimElemNo(0) < 2
+value = 0
+ignorehitpause = 1
+
 [State 1100, Velocity]
 type = VelSet
 trigger1 = AnimElem = 2
@@ -1195,6 +1220,12 @@ type = EnvShake
 trigger1 = !Time
 time = 30
 ampl = 5
+
+[State 2601, EnvShake]
+type = PlayerPush
+trigger1 = 1
+value = 0
+ignorehitpause = 1
 
 [State 1100, Velocity]
 type = VelAdd
@@ -1220,17 +1251,18 @@ sprpriority = 2
 facep2 = 1 	
 velset = 0,0
 
-[State 200, 7]
-type = TargetBind
-trigger1 = NumTarget
+[State 1100, Velocity]
+type = ChangeAnim
 trigger1 = !Time
-pos = -25, -ceil(Pos Y)
-ignorehitpause = 1
+trigger1 = Var(0)
+value = 15025
+persistent = 0
 
 [State 200, 7]
 type = screenbound
 trigger1 = 1
 value = 0
+movecamera = 0,0
 
 [State 170, 1]
 type = NotHitBy
@@ -1244,6 +1276,18 @@ x = -3.5
 y = -5
 
 [State 2601, EnvShake]
+type = Width
+trigger1 = animelemtime(56) < 0
+value = 0,0
+ignorehitpause = 1
+
+[State 2601, EnvShake]
+type = PlayerPush
+trigger1 = animelemtime(56) < 0
+value = 0
+ignorehitpause = 1
+
+[State 2601, EnvShake]
 type = EnvShake
 trigger1 = animelem = 1
 trigger2 = animelem = 29
@@ -1255,7 +1299,7 @@ ampl = 5
 [State 2601, EnvShake]
 type = EnvShake
 trigger1 = animelem = 49
-time = 25
+time = 32
 ampl = 8
 
 [State 1100, Velocity]
@@ -1276,19 +1320,19 @@ air.animtype = back
 fall.animtype = back
 priority = 5,Hit
 damage = 16,0
-pausetime = 1,64
+pausetime = 1,100
 guard.pausetime = 1,2
-sparkno = S-1
-guard.sparkno = S8100
+sparkno = -1
+guard.sparkno = -1
 sparkxy = -20, 0
 hitsound = S1,1
 guardsound = S4,0
 ground.type = High
 air.type = High
-ground.slidetime = 11
-ground.hittime = 11
-air.hittime = 11
-guard.ctrltime = 11
+ground.slidetime = 22
+ground.hittime = 22
+air.hittime = 22
+guard.ctrltime = 22
 ground.velocity = 0
 guard.velocity = 0
 air.velocity = -4,-3
@@ -1319,7 +1363,7 @@ air.animtype = back
 fall.animtype = back
 priority = 5,Hit
 damage = 0
-pausetime = 1,64
+pausetime = 1,100
 guard.pausetime = 1,2
 sparkno = S-1
 guard.sparkno = S8100
@@ -1328,10 +1372,10 @@ hitsound = S1,1
 guardsound = S4,0
 ground.type = High
 air.type = High
-ground.slidetime = 11
-ground.hittime = 11
-air.hittime = 11
-guard.ctrltime = 11
+ground.slidetime = 22
+ground.hittime = 22
+air.hittime = 22
+guard.ctrltime = 22
 ground.velocity = 0
 guard.velocity = 0
 air.velocity = -4,-3
@@ -1369,10 +1413,10 @@ hitsound = S1,1
 guardsound = S4,0
 ground.type = High
 air.type = High
-ground.slidetime = 11
-ground.hittime = 11
-air.hittime = 11
-guard.ctrltime = 11
+ground.slidetime = 22
+ground.hittime = 22
+air.hittime = 22
+guard.ctrltime = 22
 ground.velocity = -4,-3
 guard.velocity = 0
 air.velocity = -4,-3
@@ -1390,12 +1434,34 @@ guard.kill = 0
 p2facing = 1
 
 
+[State 200, Dampen]
+type = Varset
+trigger1 = !Time
+var(3) = 0
+
+[State 200, Dampen]
+type = Varset
+trigger1 = MoveHit
+trigger1 = Var(3) != HitCount
+trigger1 = (Var(3) := HitCount)
+fvar(39) = fvar(39)*0.95
+ignorehitpause = 1
+
+[State 200, 7]
+type = TargetState
+trigger1 = numtarget
+trigger1 = win
+trigger1 = animelemtime(50) >= 0
+value = 15029
+ignorehitpause = 1
+persistent = 0
+
 [State 200, 7]
 type = TargetBind
 trigger1 = numtarget
 trigger1 = win
 trigger1 = animelemtime(50) >= 0
-pos = -25,100
+pos = 10,100
 time = -1
 ignorehitpause = 1
 persistent = 0
@@ -1403,19 +1469,16 @@ persistent = 0
 [State 200, 7]
 type = TargetState
 trigger1 = numtarget
-trigger1 = animelemtime(50) >= 0
+trigger1 = animelemtime(50) > 0
 value = 15030
-ignorehitpause = 0
 persistent = 0
+ignorehitpause = 0
 
 [State 200, 7]
-type = null;TargetState
+type = TargetDrop
 trigger1 = numtarget
-trigger1 = win
-trigger1 = animelemtime(50) >= 0
-value = 15029
-ignorehitpause = 1
-persistent = 0
+trigger1 = animelemtime(50) > 0
+ignorehitpause = 0
 
 [State 1100, ChangeState]
 type = ChangeState
@@ -1474,6 +1537,7 @@ ctrl = 1
 ; Landed Off-Screen - Run
 [Statedef 15024]
 type = S
+movetype = I
 physics = N
 velset = 0,0
 ctrl = 0
@@ -1637,19 +1701,19 @@ trigger2 = Parent, StateNo = 15022
 trigger2 = Parent, Anim = 15021
 trigger2 = Parent, AnimElem = 54
 persistent = 0
-var(1) = 31
+var(1) = 32
 
 [State 3015, PalFX]
 type = Trans
 trigger1 = !Var(1)
 trans = AddAlpha
-alpha = 224, 32
+alpha = 256, 64
 
 [State 3015, PalFX]
 type = Trans
 trigger1 = Var(1) > 0
 trans = AddAlpha
-alpha = 7 * Var(1), 7 * (32 - Var(1))
+alpha = 8 * Var(1), 6 * (32 - Var(1)) + 64
 
 [State 3015, telprot]
 type = PosSet
@@ -1679,20 +1743,69 @@ persistent = 0
 var(1) = 0
 
 [State 3015, Fade]
-type = null;varset
-trigger1 = Parent, Stateno != 3003
+type = Varset
+trigger1 = Parent, StateNo != [15020, 15022]
+trigger2 = Parent, StateNo = 15022
+trigger2 = Parent, Anim = 15025
+trigger2 = Parent, AnimElem = 51
 persistent = 0
-var(1) = 31
+var(1) = 40
+
 
 [State 3015, PalFX]
-type = Trans
+type = ChangeAnim
 trigger1 = Var(1) > 0
-trans = AddAlpha
-alpha = 7 * Var(1), 7 * (32 - Var(1))
+value = 15028
+persistent = 0
+
+
+[State 1020, Hitspark]
+type = Explod
+trigger1 = Var(1) > 0
+anim = 15027
+ID = 1020
+pos = 0, 0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 2,-3
+accel = 0,.2
+removetime = 40
+scale = 1,1
+sprpriority = 3
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 1
+persistent = 0
+
+[State 1020, Wheel]
+type = Explod
+trigger1 = Var(1) > 0
+anim = 15029
+ID = 1020
+pos = 0, 0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = -2,-4
+accel = 0,.2
+removetime = 40
+scale = 1,1
+sprpriority = 3
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 1
+persistent = 0
 
 [State 3015, telprot]
 type = PosSet
-trigger1 = 1;!var(1)
+trigger1 = !var(1)
 X = Parent, Pos X
 Y = Parent, Pos Y
 
@@ -1703,7 +1816,7 @@ v = 1
 value = -1
 
 [State 3015, Fade]
-type = null;DestroySelf
+type = DestroySelf
 trigger1 = (var(1) = 1)
 
 ; Initial Gethit
@@ -1812,11 +1925,13 @@ type = ChangeState
 triggerall = roundstate = 2
 trigger1 = time = 2
 value = 15031
+ignorehitpause = 1
 
 [State 2601, SelfState]
-type = SelfState
+type = null;SelfState
 trigger1 = time = 2
 value = 5050
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 ; Flying Towards Wall
