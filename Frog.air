@@ -2985,10 +2985,81 @@ Clsn2: 1
 ; Special Winpose
 [Begin Action 15033]
 15021,1, 0,0, 60
-3401,3, 2,1, 10, H
+15040,0, 0,0, 3
+15040,1, 0,0, 10
 LoopStart
 15021,2, 0,0, 2
 15021,2, 0,-1, 2
+
+; Chi no Shoukan
+[Begin Action 15040]
+15040,0, 0,0, 3
+15040,1, 0,0, 3
+15021,2, 0,0, 4
+15021,2, 0,-2, 3
+15021,2, 0,0, 30
+Clsn1: 1
+  Clsn1[0] = 0, -20, 15, 0
+40,0, 0,0, 10
+40,0, 0,0, 8
+
+; Chi no Shoukan - Stand
+[Begin Action 15041]
+Clsn2: 2
+  Clsn2[0] = -25, -57, 24, -22
+  Clsn2[1] = -18, -28, 14, -1
+7173,1, 0,0, 14
+Clsn2: 2
+  Clsn2[0] = -17, -69, 1, -27
+  Clsn2[1] = -14, -57, 18, -8
+7172,0, 0,0, 30
+Clsn2: 2
+  Clsn2[0] = -17, -74, 11, -32
+  Clsn2[1] = -19, -57, 18, -8
+7175,0, 0,0, 10
+Clsn2: 2
+  Clsn2[0] = -17, -74, 11, -32
+  Clsn2[1] = -19, -57, 18, -8
+7175,0, 0,0, 8
+
+; Chi no Shoukan - GetHit
+[Begin Action 15042]
+5010,0, 0,0, 13
+5062,0, 0,0, -1
+
+; Chi no Shoukan - End Throw
+[Begin Action 15043]
+1030,0, 0,0, 1
+3401,2, 0,0, 9
+
+; Chi no Shoukan - Success
+[Begin Action 15045]
+15045,0, 0,0, -1
+
+; Hand
+[Begin Action 15046]
+15046,0, 0,0, 9
+15046,1, 0,0, -1
+
+; Blood Drop
+[Begin Action 15047]
+15047,0, 0,0, 10
+
+; Blood Drop
+[Begin Action 15048]
+15047,1, 0,0, 10
+
+; Blood Drop
+[Begin Action 15049]
+15047,2, 0,0, 10
+
+; Blood Drop
+[Begin Action 15050]
+15047,3, 0,0, 10
+
+; BG
+[Begin Action 15051]
+15048,0, 0,0, 10
 
 ; MB...
 [Begin Action 66660]

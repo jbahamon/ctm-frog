@@ -975,7 +975,7 @@ velset = 0,0
 type = VarSet
 trigger1 = !Time
 v = 0
-value = 0;Random % 2
+value = Random % 2
 
 [State 3003, fall]
 type = VarSet
@@ -1176,10 +1176,12 @@ yaccel = .35;44
 kill = 0
 guard.kill = 0
 p2facing = 1
+ID = 15020
 
 [State 901, Throw]
 type = TargetState
-trigger1 = time > 1 && numtarget
+trigger1 = time > 1 && numtarget(15020)
+ID = 15020
 value = 15027
 ignorehitpause = 1
 persistent = 0
@@ -1428,6 +1430,7 @@ givepower = 10,0
 persistent = 0
 fall = 1
 air.fall = 1
+ID = 15022
 fall.recover = 0
 yaccel = .35;44
 guard.kill = 0
@@ -1449,18 +1452,20 @@ ignorehitpause = 1
 
 [State 200, 7]
 type = TargetState
-trigger1 = numtarget
+trigger1 = numtarget(15022)
 trigger1 = win
 trigger1 = animelemtime(50) >= 0
+ID = 15022
 value = 15029
 ignorehitpause = 1
 persistent = 0
 
 [State 200, 7]
 type = TargetBind
-trigger1 = numtarget
+trigger1 = numtarget(15022)
 trigger1 = win
 trigger1 = animelemtime(50) >= 0
+ID = 15022
 pos = 10,100
 time = -1
 ignorehitpause = 1
@@ -1468,8 +1473,9 @@ persistent = 0
 
 [State 200, 7]
 type = TargetState
-trigger1 = numtarget
+trigger1 = numtarget(15022)
 trigger1 = animelemtime(50) > 0
+ID = 15022
 value = 15030
 persistent = 0
 ignorehitpause = 0
@@ -1696,6 +1702,7 @@ mul = 200, 200, 200
 
 [State 3015, Fade]
 type = Varset
+triggerall = !Parent, Win
 trigger1 = Parent, StateNo != [15020, 15022]
 trigger2 = Parent, StateNo = 15022
 trigger2 = Parent, Anim = 15021
@@ -1727,6 +1734,14 @@ trigger1 = var(1) > 0
 v = 1
 value = -1
 
+
+[State 3015, Fade]
+type = VarSet
+trigger1 = Root, Win
+trigger1 = Root, StateNo = 15033 || Root, StateNo = 15022 || Root, StateNo = 180
+v = 1
+value = 0
+
 [State 3015, Fade]
 type = DestroySelf
 trigger1 = (var(1) = 1)
@@ -1744,13 +1759,13 @@ var(1) = 0
 
 [State 3015, Fade]
 type = Varset
+triggerall = !Parent, Win
 trigger1 = Parent, StateNo != [15020, 15022]
 trigger2 = Parent, StateNo = 15022
 trigger2 = Parent, Anim = 15025
 trigger2 = Parent, AnimElem = 51
 persistent = 0
 var(1) = 40
-
 
 [State 3015, PalFX]
 type = ChangeAnim
@@ -1814,6 +1829,13 @@ type = VarAdd
 trigger1 = var(1) > 0
 v = 1
 value = -1
+
+[State 3015, Fade]
+type = VarSet
+trigger1 = Root, Win
+trigger1 = Root, StateNo = 15033 || Root, StateNo = 15022 || Root, StateNo = 180
+v = 1
+value = 0
 
 [State 3015, Fade]
 type = DestroySelf
@@ -2052,7 +2074,7 @@ value = 5100
 type    = S
 movetype = I
 physics = N
-anim = 3103
+anim = 15033
 
 [State 170, 1]
 type = NotHitBy
@@ -2075,3 +2097,588 @@ type = Changestate
 trigger1 = p2movetype = A
 value = 180
 ctrl = 1
+
+
+; Chi no Shoukan
+[Statedef 15040]
+type    = S
+movetype= A
+physics = N
+juggle  = 3
+ctrl = 0
+anim = 15040
+sprpriority = 0
+poweradd = -1000
+facep2 = 1 	
+velset = 0,0
+
+[State 2500, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State 2010, Super Pause FX]
+type = helper
+trigger1 = AnimElem = 5
+helpertype = normal
+stateno = 7000
+ID = 7000
+name = "Super Charge"
+postype = p1
+pos = 0,0
+ownpal = 1
+persistent = 0
+supermovetime = 9999
+
+[State 3250, Super Pause FX]
+type = helper
+trigger1 = AnimElem = 5
+helpertype = normal
+stateno = 7001
+ID = 7001
+name = "Super BG"
+postype = p1
+pos = -34, -63
+ownpal = 1
+persistent = 0
+pausemovetime = 9999
+supermovetime = 9999
+
+[State 2010, Super Pause]
+type = superpause
+trigger1 = Animelem = 5
+time = 30
+movetime = 30
+anim = -1
+sound = S7050,3
+p2defmul = 1
+darken = 0
+
+[State 13801, Masa & Mune]
+type = helper
+triggerall = !NumHelper(10000)
+trigger1 = !Time
+stateno = 17310
+ID = 10000
+name = "Masa&Mune"
+postype = p1
+pos = 0,-20
+ownpal = 1
+persistent = 0
+supermovetime = 9999
+
+[State 1100, Velocity]
+type = VelMul
+trigger1 = animelemtime(6) > 0
+trigger2 = Anim = 15045
+x = .95
+
+[State 1100, Velocity]
+type = VelSet
+trigger1 = AnimElem = 6
+x = 9
+
+[State 900, 1]
+type = HitDef
+trigger1 = AnimElem = 6
+attr = S, HT
+hitflag = MAF
+guardflag = MA
+priority = 5, Miss
+pausetime = 13,13
+guard.pausetime = 0,12
+sparkno = S8204
+guard.sparkno = S8100
+sparkxy = -20,-55
+hitsound = S1,3
+guardsound = S4,0
+p1facing = 1
+p2facing = 1
+p2stateno = 15041
+guard.dist = 0
+hitonce = 1
+getpower = 0,0
+givepower = 0,0
+fall = 1
+ID = 15040
+air.fall = 1
+envshake.ampl = 12
+envshake.freq = 120
+envshake.time = 8
+fall.recover = 0
+
+[State 10000, ChangeState]
+type = VelSet
+trigger1 = NumTarget(15040)
+X = 0
+ignorehitpause = 1
+
+[State 10000, ChangeState]
+type = ChangeState
+trigger1 = NumTarget(15040)
+value = 15045
+ignorehitpause = 0
+
+[State 803, Safety]
+type = ChangeState
+trigger1 = !AnimTime
+value = 0
+ctrl = 1
+
+
+; Chi no Shoukan - Gethit
+[Statedef 15041]
+type = S
+movetype = H
+physics = N
+ctrl = 0
+sprpriority = 0
+velset = 0,0
+
+[State 2500, NotHitBy]
+type = ScreenBound
+trigger1 = 1
+value = 1
+movecamera = 1, 0
+
+[State 802, Exit]
+type = ChangeAnim2
+trigger1 = !Time
+value = 15042
+
+[State 802, Exit]
+type = Turn
+trigger1 = AnimElem = 2
+
+[State 802, Exit]
+type = SelfState
+trigger1 = Time > 15 && !gethitvar(isbound)
+value = 5050
+
+; GetHit - Air
+[Statedef 15042]
+type = A
+movetype = H
+physics = N
+ctrl = 0
+sprpriority = 0
+
+[State 803, Vel]
+type = Turn
+trigger1 = !Time
+
+[State 803, Vel]
+type = VelSet
+trigger1 = !Time
+y = -3
+x = -2
+
+[State 803, Vel]
+type = VelAdd
+trigger1 = 1
+y = .56
+
+[State 803, Anim]
+type = ChangeAnim2
+trigger1 = !Time
+value = 807
+
+[State 803, Vel]
+type = ChangeAnim2
+trigger1 = Vel Y > 0
+value = 808
+
+[State 803, Pal]
+type = PalFX
+trigger1 = (Vel y > 0) && (Pos y >= 0)
+add = 200, 200, 200
+mul = 256, 256, 256
+time = 8
+
+
+[State 803, Life]
+type = EnvShake
+trigger1 = (Vel y > 0) && (Pos y >= 0)
+ampl = 12
+freq = 120
+time = 8
+
+[State 803, Life]
+type = PosSet
+trigger1 = (Vel y > 0) && (Pos y >= 0)
+y = 0
+
+[State 803, Hit Ground]
+type = SelfState
+trigger1 = (Vel y > 0) && (Pos y >= 0)
+value = 5100
+ctrl = 0
+
+; Chi no Shoukan Success
+[Statedef 15045]
+type    = S
+movetype= A
+physics = N
+juggle  = 3
+ctrl = 0
+anim = 15045
+sprpriority = 1
+facep2 = 1 	
+velset = 0,0
+
+
+[State 2500, NotHitBy]
+type = ScreenBound
+trigger1 = 1
+value = 1
+movecamera = 1, 0
+
+
+[State 901, Safety]
+type = ChangeAnim
+trigger1 = !NumTarget(15040)
+trigger1 = Anim = 15045
+trigger2 = Time = 286
+value = 15043
+persistent = 0
+
+[State 901, Safety]
+type = VelSet
+trigger1 = Anim = 15043
+trigger1 = AnimElem = 2
+trigger1 = Var(0)
+X = -3
+Y = -3
+persistent = 0
+
+[State 901, Safety]
+type = StateTypeSet
+trigger1 = Anim = 15043
+trigger1 = AnimElem = 2
+trigger1 = Var(0)
+physics = A
+persistent = 0
+
+
+[State 901, Safety]
+type = ChangeState
+trigger1 = Anim = 15043
+trigger1 = !AnimTime
+value = IfElse(Var(0), 50, 0)
+ctrl = !Var(0)
+
+[State 901, Hurt]
+type = TargetLifeAdd
+trigger1 = Time = [90, 280]
+trigger1 = Time % 30 = 5
+value = -Ceil(28*fvar(39))
+kill = 0
+
+[State 901, Hurt]
+type = VarSet
+trigger1 = Time = [90, 280]
+trigger1 = Time % 30 = 5
+fv = 39
+value = FVar(39) * 0.95
+
+[State 901, Hurt]
+type = TargetLifeAdd
+trigger1 = Time = 286
+value = ceil(ifelse((-119*fvar(39))>-7,-7,(-119*fvar(39))))
+
+[State 901, Safety]
+type = TargetState
+trigger1 = Anim = 15043
+trigger1 = AnimElem = 2
+value = 15042
+
+[State 901, Safety]
+type = TargetDrop
+trigger1 = Anim = 15043
+trigger1 = AnimElem = 2
+
+[State 3250, Super Pause FX]
+type = VarSet
+trigger1 = !Time
+trigger1 = NumTarget(15040)
+var(0) = Target(15040), Const(size.height) > Const(size.height)
+persistent = 0
+ignorehitpause = 1
+
+[State 3250, Super Pause FX]
+type = PosAdd
+trigger1 = Time = [0, 5]
+trigger1 = NumTarget(15040)
+trigger1 = Var(0)
+Y = -(Target(15040), Const(size.height) - Const(size.height))/5.0
+ignorehitpause = 1
+
+[State 901, Safety]
+type = StateTypeSet
+trigger1 = Time = 1
+trigger1 = Var(0)
+statetype = A
+persistent = 0
+
+[State 901,1]
+type = TargetBind
+trigger1 = Time <= 5
+pos = 5, -25 - (Target(15040), Const(size.height) - Const(size.height)) * (5 - Time)/5.0
+ignorehitpause = 1
+
+[State 901,1]
+type = TargetBind
+trigger1 = Time > 5
+pos = 5, -25 
+ignorehitpause = 1
+
+[State 901,1]
+type = TargetBind
+trigger1 = Time = [90, 280]
+trigger1 = Time % 30 = 5
+pos = 5, -23
+ignorehitpause = 1
+
+[State 3250, Super Pause FX]
+type = StateTypeSet
+trigger1 = !Time
+trigger1 = Var(0)
+statetype = A
+persistent = 0
+ignorehitpause = 1
+
+
+[State 3250, Super Pause FX]
+type = helper
+trigger1 = Time = 1
+helpertype = normal
+stateno = 7002
+ID = 7002
+name = "Super BG"
+postype = p1
+pos = -34, -63
+ownpal = 1
+persistent = 0
+pausemovetime = 9999
+supermovetime = 9999
+ignorehitpause = 1
+
+[State 3250, Super Pause FX]
+type = helper
+trigger1 = Time > 1
+trigger1 = !NumHelper(7002)
+helpertype = normal
+stateno = 15048
+ID = 15048
+name = "Super BG"
+postype = left
+pos = -34, -63
+ownpal = 1
+persistent = 0
+pausemovetime = 9999
+supermovetime = 9999
+ignorehitpause = 1
+
+
+[State 3250, Super Pause FX]
+type = helper
+trigger1 = Time > 1
+trigger1 = !NumHelper(7002)
+helpertype = normal
+stateno = 15046
+ID = 15046
+name = "Hand"
+postype = p1
+pos = 0,0
+ownpal = 1
+persistent = 0
+pausemovetime = 9999
+supermovetime = 9999
+ignorehitpause = 1
+
+
+[State 3250, Super Pause FX]
+type = helper
+trigger1 = NumHelper(15046)
+trigger1 = Helper(15046), AnimElemNo(0) = 2
+trigger1 = Time % 17 = 0
+helpertype = normal
+stateno = 15047
+ID = 15047
+name = "Blood"
+postype = left
+pos = 0,0
+ownpal = 1
+pausemovetime = 9999
+supermovetime = 9999
+ignorehitpause = 1
+
+
+; Chi no Shoukan Hand
+[Statedef 15046]
+type    = A
+movetype= I
+physics = N
+juggle  = 3
+ctrl = 0
+anim = 15046
+sprpriority = -5
+velset = 0,0
+
+[State 9000, ModifyExplod]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+ignorehitpause = 1
+
+[State 9000, ModifyExplod]
+type = VarSet
+trigger1 = !Time
+fvar(0) = (GameWidth * 2/3.0 + 50)/9.0
+ignorehitpause = 1
+
+[State 9000, ModifyExplod]
+type = PosAdd
+trigger1 = AnimElemNo(0) = 1
+X = IfElse(Facing > 0, (GameWidth + 50), 50) - fvar(0) * Time - ScreenPos X * Facing
+Y = GameHeight / 2.0 - ScreenPos Y
+ignorehitpause = 1
+
+[State 9000, ModifyExplod]
+type = PosAdd
+trigger1 = AnimElemNo(0) = 2
+X =  IfElse(Facing > 0, GameWidth /3.0, - 2 * GameWidth/3.0) - ScreenPos X * Facing
+Y = GameHeight / 2.0 - ScreenPos Y
+ignorehitpause = 1
+
+[State 9000, ModifyExplod]
+type = EnvShake
+trigger1 = AnimElem = 2
+ampl = 12
+freq = 120
+time = 8
+
+[State 9000, ModifyExplod]
+type = DestroySelf
+trigger1 = Parent, StateNo = 15045
+trigger1 = Parent, Time = 230
+trigger2 = Parent, StateNo != 15045
+ignorehitpause = 1
+
+; Chi no Shoukan Blood
+[Statedef 15047]
+type    = A
+movetype= I
+physics = N
+juggle  = 3
+ctrl = 0
+sprpriority = 5
+velset = 0,0
+
+[State 9000, ModifyExplod]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+ignorehitpause = 1
+
+[State 15047, Anim]
+type = ChangeAnim
+trigger1 = !Time
+value = 15047 + Random % 4
+ignorehitpause = 1
+
+[State 9000, ModifyExplod]
+type = VarSet
+trigger1 = !Time
+fvar(0) = GameWidth * (Random/1000.0)
+ignorehitpause = 1
+
+[State 9000, ModifyExplod]
+type = VarSet
+trigger1 = !Time
+fvar(1) = GameHeight * (Random/1000.0)
+ignorehitpause = 1
+
+[State 9000, ModifyExplod]
+type = PosAdd
+trigger1 = 1
+X = fvar(0) - ScreenPos X
+Y = fvar(1) - ScreenPos Y
+ignorehitpause = 1
+
+[State 9000, ModifyExplod]
+type = DestroySelf
+trigger1 = Parent, StateNo = 15045
+trigger1 = Parent, Time = 230
+trigger2 = Parent, StateNo != 15045
+ignorehitpause = 1
+
+; Chi no Shoukan BG
+[Statedef 15048]
+type    = A
+movetype= I
+physics = N
+juggle  = 3
+ctrl = 0
+anim = 15051
+sprpriority = -6
+velset = -6,0
+
+[State 9000, ModifyExplod]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+ignorehitpause = 1
+
+[State 9000, ModifyExplod]
+type = PosAdd
+trigger1 = !Time
+X = GameWidth/2.0 - ScreenPos X
+ignorehitpause = 1
+
+[State 9000, ModifyExplod]
+type = PosAdd
+trigger1 = 1
+Y = GameHeight/2.0 - ScreenPos Y
+ignorehitpause = 1
+
+[State 9000, ModifyExplod]
+type = VarSet
+trigger1 = !Time
+var(0) = -1
+ignorehitpause = 1
+
+[State 9000, ModifyExplod]
+type = PosAdd
+trigger1 = GameWidth/2.0 - ScreenPos X > 64
+X = GameWidth/2.0 - ScreenPos X
+ignorehitpause = 1
+
+[State 9000, ModifyExplod]
+type = VarSet
+trigger1 = Parent, StateNo = 15045
+trigger1 = Parent, Time = 230
+trigger2 = Parent, StateNo != 15045
+var(0) = 16
+persistent = 0
+ignorehitpause = 1
+
+
+[State 9000, ModifyExplod]
+type = Trans
+trigger1 = Var(0) >= 0
+trans = addalpha
+alpha = 16 * Var(0), 256 - 16 * Var(0)
+ignorehitpause = 1
+
+[State 9000, ModifyExplod]
+type = DestroySelf
+trigger1 = !Var(0)
+ignorehitpause = 1
+
+[State 9000, ModifyExplod]
+type = VarAdd
+trigger1 = Var(0) > 0
+var(0) = -1
+ignorehitpause = 1
+

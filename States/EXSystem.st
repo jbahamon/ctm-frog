@@ -19,7 +19,6 @@ trigger1 = !Time
 trigger1 = StateType = A
 physics = A
 
-
 [State 13195, Vel]
 type = VelSet
 trigger1 = !Time

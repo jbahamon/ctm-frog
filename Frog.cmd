@@ -325,6 +325,26 @@ name = "qcb2p"
 command = ~D, DF, F, ~a+c
 time=25
 
+[Command]
+name = "Chi no Shoukan"
+command =  ~b, a, F, a, ~c
+time = 50
+
+[Command]
+name = "Chi no Shoukan"
+command =  ~b, a, F, a, c
+time = 50
+
+
+[Command]
+name = "Chi no Shoukan"
+command =  b, a, F, a, ~c
+time = 50
+
+[Command]
+name = "Chi no Shoukan"
+command =  b, a, F, a, c
+time = 50
 
 [Command]
 name = "Tokiyo Tomare"
@@ -339,12 +359,6 @@ time = 40
 name = "Space Ripper Stingy Eyes"
 command =  ~F, c, b, a, F
 time=30
-
-[Command]
-name = "Space Ripper Stingy Eyes"
-command =  y
-time=30
-
 
 [Command]
 name = "Space Ripper Stingy Eyes"
@@ -661,21 +675,32 @@ trigger4 = ( StateNo = [400,499] ) && MoveHit
 trigger5 = ( StateNo = [600,699] ) && MoveHit
 trigger6 = ( StateNo = 1020) && MoveHit
 
+[State -1, Chi no Shoukan]
+type = ChangeState
+triggerall = PalNo = 12 
+triggerall = ctrl || (!MoveContact && StateNo = [200, 220])
+triggerall = Command = "Chi no Shoukan"
+triggerall = StateType != A
+trigger1 = !Var(23) && !NumHelper(10000)
+trigger2 = Var(23) && NumHelper(10000) 
+trigger2 = Helper(10000), StateNo = 17011  || (!(Helper(10000), MoveContact) && Helper(10000), StateNo = [17012, 17014])
+value = 15040
 
 [State -1, Road Rolla Da]
 type = ChangeState
 triggerall = PalNo = 12 
 triggerall = ctrl
 triggerall = Command = "qcb2p"
+triggerall = Power >= 1000
 trigger1 = !Var(23) && !NumHelper(10000)
 value = 15020
-
 
 [State -1, Checkmate]
 type = ChangeState
 triggerall = PalNo = 12 
 triggerall = ctrl
 triggerall = Command = "qcf2p"
+triggerall = Power >= 1000
 trigger1 = Var(23) && NumHelper(10000) 
 trigger1 = Helper(10000), StateNo = 17011
 trigger2 = !Var(23) && !NumHelper(10000) && StateType != A

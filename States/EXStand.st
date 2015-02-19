@@ -192,6 +192,12 @@ triggerall = Parent, StateNo != Var(0)
 trigger1 = Parent, StateNo = 15015
 value = 17305
 
+[State 7011, Heavy Hit]
+type = ChangeState
+triggerall = Parent, StateNo != Var(0)
+trigger1 = Parent, StateNo = 15040
+value = 17310
+
 
 ;Light Attack
 [Statedef 17012]
@@ -201,6 +207,12 @@ movetype = A
 anim = 3033
 sprpriority = -2
 facep2= 1
+
+[State 7011, Heavy Hit]
+type = ChangeState
+triggerall = Parent, StateNo != Var(0)
+trigger1 = Parent, StateNo = 15040
+value = 17310
 
 [State 7010, appear]
 type = StateTypeSet
@@ -384,6 +396,12 @@ anim = 3034
 sprpriority = -2
 facep2= 1
 
+[State 7011, Heavy Hit]
+type = ChangeState
+triggerall = Parent, StateNo != Var(0)
+trigger1 = Parent, StateNo = 15040
+value = 17310
+
 [State 7010, appear]
 type = StateTypeSet
 trigger1 = !Time
@@ -499,6 +517,12 @@ movetype = A
 anim = 3035
 sprpriority = -2
 facep2= 1
+
+[State 7011, Heavy Hit]
+type = ChangeState
+triggerall = Parent, StateNo != Var(0)
+trigger1 = Parent, StateNo = 15040
+value = 17310
 
 [State 7010, appear]
 type = StateTypeSet
@@ -3051,4 +3075,93 @@ supermovetime = 99999
 type = ChangeState
 trigger1 = !AnimTime
 value = 17011
+
+; Chi no Shoukan
+[Statedef 17310]
+type = S
+movetype = A
+physics = N
+juggle = 0
+ctrl = 0
+anim = 15041
+velset = 0,0
+sprpriority = 2
+
+[State 7012, Selector Var]
+type = VarSet
+trigger1 = !Time
+var(0) = Parent, StateNo
+
+[State 7015, ChangeAnim]
+type = VarSet
+trigger1 = !Time
+var(1) = StateNo
+ignorehitpause = 1
+
+[State 7010, appear]
+type = PosAdd
+trigger1 = 1
+X = (ParentDist X + 15)/2.0
+Y = (ParentDist Y - 5)/2.0
+
+[State 2500, NotHitBy]
+type = NotHitBy
+trigger1 = AnimElemTime(6) < 0
+value = SCA
+ignorehitpause = 1
+
+[State 2500, NotHitBy]
+type = NotHitBy
+trigger1 = AnimElem = 6
+value = SCA
+time = 10
+
+[State 9606, EnvColor]
+type = palfx
+trigger1 = Time < 10
+trigger1 = Time % 2
+add = 128,128,192
+time = 1
+persistent = 1
+ignorehitpause = 1
+
+[State 7014, End]
+type = ChangeState
+trigger1 = Parent, StateNo = 15045
+value = 17311
+
+[State 7014, End]
+type = ChangeState
+trigger1 = Parent, StateNo != [15040, 15049]
+value = IfElse(!(Parent, Var(23)), 17019, 17011)
+
+
+; Chi no Shoukan - Success (Invisible)
+[Statedef 17311]
+type = S
+movetype = A
+physics = N
+juggle = 0
+ctrl = 0
+anim = 7400
+velset = 0,0
+sprpriority = 2
+
+[State 7011, FollowPlayer]
+type = PosAdd
+trigger1 = 1
+X = (ParentDist X)/2.0
+Y = (ParentDist Y - 10)/2.0
+ignorehitpause = 1
+
+[State 7014, End]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+flag2 = invisible
+
+[State 7014, End]
+type = ChangeState
+trigger1 = Parent, StateNo != [15040, 15049]
+value = IfElse(!(Parent, Var(23)), 17019, 17011)
 
