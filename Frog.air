@@ -2993,6 +2993,8 @@ LoopStart
 
 ; Chi no Shoukan
 [Begin Action 15040]
+Clsn2Default: 1
+  Clsn2[0] = -6, -19, 7, 0
 15040,0, 0,0, 3
 15040,1, 0,0, 3
 15021,2, 0,0, 4

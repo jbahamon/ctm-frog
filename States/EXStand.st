@@ -799,6 +799,7 @@ trigger1 = var(1) = 17200 && !(Parent, Var(23))
 trigger2 = var(1) = 17210
 trigger3 = var(1) = 17220
 trigger4 = var(1) = 17230
+trigger5 = var(1) = 17310 && !(Parent, Var(23))
 value = 17019
 ignorehitpause = 1
 
@@ -3086,6 +3087,20 @@ ctrl = 0
 anim = 15041
 velset = 0,0
 sprpriority = 2
+
+
+[State 7011, HitOverride]
+type = HitOverride
+trigger1 = 1
+attr = SCA,NA,SA,HA,NP,SP,HP
+stateno = 17015
+ignorehitpause = 1
+
+[State 7011, HitOverride]
+type = NotHitBy
+trigger1 = 1
+value = ,NT,ST,HT 
+ignorehitpause = 1
 
 [State 7012, Selector Var]
 type = VarSet

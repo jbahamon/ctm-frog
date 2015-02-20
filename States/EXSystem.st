@@ -617,7 +617,7 @@ ctrl = 0
 ;---------------------------------------------------------------------------
 ; Hit Selector
 [Statedef 13899]
-type    = S
+type    = U
 movetype= H
 physics = N
 velset = 0,0

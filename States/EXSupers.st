@@ -1131,7 +1131,7 @@ ignorehitpause = 1
 type = ChangeState
 trigger1 = Pos Y > - Vel Y - Var(1)
 trigger1 = Vel Y > 0
-value = IfElse(NumTarget, 15022, 15021)
+value = IfElse(NumTarget(15020) && MoveHit, 15022, 15021)
 ignorehitpause = 0
 
 [State 220, 1]
@@ -1139,7 +1139,7 @@ type = Hitdef
 trigger1 = Anim = 15022 + Var(0)
 attr = A, HA
 hitflag = MAF
-guardflag = HA
+guardflag = MA
 animtype = heavy
 air.animtype = back
 fall.animtype = back
@@ -1180,7 +1180,7 @@ ID = 15020
 
 [State 901, Throw]
 type = TargetState
-trigger1 = time > 1 && numtarget(15020)
+trigger1 = time > 1 && movehit && numtarget(15020)
 ID = 15020
 value = 15027
 ignorehitpause = 1
@@ -1200,22 +1200,29 @@ velset = 0,0
 
 
 [State 2601, EnvShake]
+type = ChangeAnim
+trigger1 = !Time
+value = 15021
+elem = 53
+ignorehitpause = 1
+
+[State 2601, EnvShake]
 type = Width
-trigger1 = AnimElemNo(0) < 2
+trigger1 = AnimElemNo(0) < 54
 value = 0,0
 ignorehitpause = 1
 
 [State 2601, EnvShake]
 type = PlayerPush
-trigger1 = AnimElemNo(0) < 2
+trigger1 = AnimElemNo(0) < 54
 value = 0
 ignorehitpause = 1
 
 [State 1100, Velocity]
 type = VelSet
-trigger1 = AnimElem = 2
-x = -4.5
-y = -7.5
+trigger1 = AnimElem = 54
+x = -2.5
+y = -4.5
 
 [State 2601, EnvShake]
 type = EnvShake
@@ -1231,12 +1238,12 @@ ignorehitpause = 1
 
 [State 1100, Velocity]
 type = VelAdd
-trigger1 = animelemtime(2) > 0
+trigger1 = animelemtime(54) > 0
 y = .4
 
 [State 1100, ChangeState]
 type = ChangeState
-trigger1 = animelemtime(9) > 0
+trigger1 = animelemtime(54) > 0
 trigger1 = Pos Y >= 0 && Vel Y > 0
 value = 52
 
@@ -1707,6 +1714,7 @@ trigger1 = Parent, StateNo != [15020, 15022]
 trigger2 = Parent, StateNo = 15022
 trigger2 = Parent, Anim = 15021
 trigger2 = Parent, AnimElem = 54
+trigger3 = Parent, StateNo = 15021
 persistent = 0
 var(1) = 32
 
@@ -1764,6 +1772,7 @@ trigger1 = Parent, StateNo != [15020, 15022]
 trigger2 = Parent, StateNo = 15022
 trigger2 = Parent, Anim = 15025
 trigger2 = Parent, AnimElem = 51
+trigger3 = Parent, StateNo = 15021
 persistent = 0
 var(1) = 40
 
@@ -2116,6 +2125,7 @@ velset = 0,0
 type = NotHitBy
 trigger1 = 1
 value = SCA
+ignorehitpause = 1
 
 [State 2010, Super Pause FX]
 type = helper
@@ -2210,12 +2220,14 @@ fall.recover = 0
 [State 10000, ChangeState]
 type = VelSet
 trigger1 = NumTarget(15040)
+trigger1 = MoveHit
 X = 0
 ignorehitpause = 1
 
 [State 10000, ChangeState]
 type = ChangeState
 trigger1 = NumTarget(15040)
+trigger1 = MoveHit
 value = 15045
 ignorehitpause = 0
 
