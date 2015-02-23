@@ -111,6 +111,11 @@ type = ChangeState
 trigger1 = !Parent, Var(23)
 value = 17018
 
+[State 7011, Heavy Hit]
+type = ChangeState
+trigger1 = Parent, MoveType = H
+value = 17015
+
 [State 7011, Light Hit]
 type = ChangeState
 triggerall = Parent, StateNo != Var(0)
@@ -198,6 +203,12 @@ triggerall = Parent, StateNo != Var(0)
 trigger1 = Parent, StateNo = 15040
 value = 17310
 
+[State 7011, Heavy Hit]
+type = ChangeState
+triggerall = Parent, StateNo != Var(0)
+trigger1 = Parent, StateNo = 15060
+value = 17320
+
 
 ;Light Attack
 [Statedef 17012]
@@ -207,6 +218,11 @@ movetype = A
 anim = 3033
 sprpriority = -2
 facep2= 1
+
+[State 7011, Heavy Hit]
+type = ChangeState
+trigger1 = Parent, MoveType = H
+value = 17015
 
 [State 7011, Heavy Hit]
 type = ChangeState
@@ -382,10 +398,18 @@ type = VarSet
 trigger1 = !Time
 var(0) = Parent, StateNo
 
+[State 7014, End]
+type = ChangeState
+trigger1 = !AnimTime
+trigger1 = NumHelper(15060)
+trigger1 = (Var(5) := (Var(5) + 1))
+trigger1 = Helper(15060), Var(Var(5)) > 0
+value = Helper(15060), Var(Var(5))
+
 [State 7011, Light Hit]
 type = ChangeState
 trigger1 = !AnimTime
-value = 17011
+value = IfElse(Root, Var(23), 17011, 17019)
 
 ;Mid Attack
 [Statedef 17013]
@@ -472,10 +496,18 @@ type = VarSet
 trigger1 = !Time
 var(0) = Parent, StateNo
 
-[State 7013, Light Hit]
+[State 7014, End]
 type = ChangeState
 trigger1 = !AnimTime
-value = 17011
+trigger1 = NumHelper(15060)
+trigger1 = (Var(5) := (Var(5) + 1))
+trigger1 = Helper(15060), Var(Var(5)) > 0
+value = Helper(15060), Var(Var(5))
+
+[State 7011, Light Hit]
+type = ChangeState
+trigger1 = !AnimTime
+value = IfElse(Root, Var(23), 17011, 17019)
 
 [State 7021, hit]
 type = HitDef
@@ -634,6 +666,14 @@ ignorehitpause = 1
 type = VarSet
 trigger1 = !Time
 var(0) = Parent, StateNo
+
+[State 7014, End]
+type = ChangeState
+trigger1 = !AnimTime
+trigger1 = NumHelper(15060)
+trigger1 = (Var(5) := (Var(5) + 1))
+trigger1 = Helper(15060), Var(Var(5)) > 0
+value = Helper(15060), Var(Var(5))
 
 [State 7014, Light Hit]
 type = ChangeState
@@ -809,6 +849,7 @@ trigger1 = Time >= floor(gethitvar(hittime) * 0.8)
 value = 17011
 ignorehitpause = 1
 
+
 ; Masa & Mune Guard
 [Statedef 17016]
 MoveType = H
@@ -865,6 +906,77 @@ ignorehitpause = 1
 [State 7015, End]
 type = ChangeState
 trigger1 = Time >= floor(gethitvar(hittime) * 0.8)
+value = 17011
+ignorehitpause = 1
+
+; Masa & Mune Gethit from Parent
+[Statedef 17017]
+MoveType = H
+Anim = 3032
+poweradd = 0
+
+[State 7010, appear]
+type = trans
+trigger1 = 1
+trans = none
+ignorehitpause = 1
+
+[State 7010, appear]
+type = Offset
+trigger1 = 1
+X = IfElse(Time % 2, -2, 2)
+ignorehitpause = 1
+
+[State 7015, PosFreeze]
+type = PosFreeze
+trigger1 = 1
+value = 1
+ignorehitpause = 1
+
+[State 7011, HitOverride]
+type = HitOverride
+trigger1 = 1
+time = -1
+attr = SCA,AA, AP
+stateno = 17015
+ignorehitpause = 1
+
+[State 7011, HitOverride]
+type = NotHitBy
+trigger1 = 1
+time = -1
+value = , AT
+ignorehitpause = 1
+
+[State 7015, NotHitBy]
+type = NotHitBy
+trigger1 = !Time
+time = 10
+value = SCA ,AA, AP
+time = 1
+ignorehitpause = 1
+
+[State 7015, ChangeAnim]
+type = ChangeAnim
+trigger1 = 1
+value = Anim
+elem = AnimElemNo(0)
+ignorehitpause = 1
+
+[State 7015, End]
+type = ChangeState
+triggerall = Parent, MoveType != H
+trigger1 = var(1) = 17200 && !(Parent, Var(23))
+trigger2 = var(1) = 17210
+trigger3 = var(1) = 17220
+trigger4 = var(1) = 17230
+trigger5 = var(1) = 17310 && !(Parent, Var(23))
+value = 17019
+ignorehitpause = 1
+
+[State 7015, End]
+type = ChangeState
+trigger1 = Parent, MoveType != H
 value = 17011
 ignorehitpause = 1
 
@@ -1251,11 +1363,28 @@ type = VarSet
 trigger1 = !Time
 var(3) = Parent, Var(0)
 
-[State 7014, Light Hit]
+
+[State 7014, End]
 type = ChangeState
 trigger1 = !AnimTime
+trigger1 = NumHelper(15060)
+trigger1 = (Var(5) := (Var(5) + 1))
+trigger1 = Helper(15060), Var(Var(5)) > 0
+value = Helper(15060), Var(Var(5))
+
+[State 7014, Light Hit]
+type = ChangeState
+trigger1 = !AnimTime && !NumHelper(15060)
 trigger2 = Parent, MoveType = H
 value = 17019
+
+[State 0, DisplayToClipboard]
+type = DisplayToClipboard
+trigger1 = 1
+text = "n = %d"
+params = NumHelper(15060)
+;ignorehitpause = 
+;persistent = 
 
 [State 3010, HitDef]
 type = HitDef
@@ -1706,9 +1835,19 @@ value = 1
 
 [State 7014, Light Hit]
 type = ChangeState
-trigger1 = !AnimTime
+trigger1 = !AnimTime && !NumHelper(15060)
 trigger2 = Parent, MoveType = H
 value = 17019
+
+
+[State 7014, End]
+type = ChangeState
+trigger1 = !AnimTime
+trigger1 = NumHelper(15060)
+trigger1 = (Var(5) := (Var(5) + 1))
+trigger1 = Helper(15060), Var(Var(5)) > 0
+value = Helper(15060), Var(Var(5))
+
 
 [State 3010, HitDef]
 type = HitDef
@@ -1918,6 +2057,7 @@ ignorehitpause = 1
 
 [State 200, Dampen]
 Type = ChangeState
+trigger1 = !NumHelper(15060)
 trigger1 = Parent, StateNo = 14026
 value = 17236
 ignorehitpause = 1
@@ -2512,304 +2652,6 @@ scale = 1 - 0.1 * (Time - 20), 1 + 0.2 * (Time - 20)
 type = DestroySelf
 trigger1 = Time > 30
 
-; Muda Muda (W/Stand)
-[Statedef 17225]
-type = S
-physics = N
-movetype = A
-anim = 14010
-velset = 0,0
-sprpriority = 2
-facep2= 1
-
-[State 7015, ChangeAnim]
-type = VarSet
-trigger1 = !Time
-var(1) = StateNo
-ignorehitpause = 1
-
-[State 7015, ChangeAnim]
-type = VarSet
-trigger1 = !Time
-var(2) = 16
-ignorehitpause = 1
-
-[State 7015, ChangeAnim]
-type = VarAdd
-trigger1 = var(2) >= 0
-var(2) = -1
-ignorehitpause = 1
-
-[State 1100, VarSet]
-type = VarSet
-triggerall = var(2) > 0
-triggerall = animelemtime(2) >= 0
-triggerall = animelemtime(25) < 0
-trigger1 = Parent, command = "a"
-trigger2 = Parent, command = "b"
-trigger3 = Parent, command = "c"
-var(2) = 16
-ignorehitpause = 1
-
-[State 1040,ChangeAnim]
-type = ChangeAnim
-trigger1 = !var(2)
-trigger1 = animelemtime(2) >= 0
-trigger1 = animelemtime(31) < 0
-value = anim
-elem = 31
-ignorehitpause = 0
-persistent = 0
-
-[State 7010, appear]
-type = trans
-trigger1 = 1
-trans = none
-ignorehitpause = 1
-
-[State 7010, appear]
-type = Turn
-trigger1 = Facing != Parent, Facing
-ignorehitpause = 1
-
-[State 7010, appear]
-type = PosAdd
-trigger1 = 1
-X = (ParentDist X)/2.0
-Y = (ParentDist Y - 10)/2.0
-
-[State 620, Snd]
-type = PlaySnd
-trigger1 = Animelem=2 
-value = S7000,1 
-
-[State 7011, HitOverride]
-type = HitOverride
-trigger1 = 1
-attr = SCA,NA,SA,HA,NP,SP,HP
-stateno = 17015
-ignorehitpause = 1
-
-[State 7011, HitOverride]
-type = NotHitBy
-trigger1 = 1
-value = ,NT,ST,HT 
-ignorehitpause = 1
-
-[State 7013, Selector Var]
-type = VarSet
-trigger1 = !Time
-var(0) = Parent, StateNo
-
-[State 7014, Light Hit]
-type = ChangeState
-trigger1 = !AnimTime
-trigger2 = Parent, StateNo != 14015
-value = 17011
-
-[State 3010, HitDef]
-type = HitDef
-trigger1 = AnimElemNo(0) % 2 != 0
-trigger1 = AnimElemTime(AnimElemNo(0)) = 1
-attr = S, SA
-hitflag = MAF
-guardflag = M
-animtype = heavy
-air.animtype = back
-fall.animtype = back
-damage = Ceil(20 * Parent, FVar(39)),2
-pausetime = 7,!(random%8=0)*8
-guard.pausetime = 7,!(random%8=0)*8
-sparkno = S7006
-sparkxy = -4, -10+(random%30)
-hitsound = S1,4
-guardsound = S4,0
-ground.type = High
-air.type = High
-ground.slidetime = 11
-ground.hittime = 11
-air.hittime = 11
-guard.ctrltime = 11
-ground.velocity = -5.5
-guard.velocity = -5
-air.velocity = -2.5, 0
-ground.cornerpush.veloff = 0
-air.cornerpush.veloff = 0
-getpower = 40,0
-givepower = 20,0
-air.fall = 1
-fall.recover = 1
-yaccel = .35
-guard.kill = 0
-p1sprpriority = 2
-p2facing = 1
-palfx.add=200,200,200
-palfx.mul=256,256,256
-palfx.time=6
-
-
-[State 7013, Selector Var]
-type = VarSet
-trigger1 = !Time
-var(3) = 0
-
-[State 200, Dampen]
-Type = ParentVarset
-trigger1 = MoveHit
-trigger1 = Var(3) != HitCount
-trigger1 = (Var(3) := HitCount)
-fvar(39) = Parent, fvar(39)*0.9
-ignorehitpause = 1
-
-
-; Muda Muda Air(W/Stand)
-[Statedef 17226]
-type = A
-physics = N
-movetype = A
-anim = 14010
-velset = 0,0
-sprpriority = 2
-facep2= 1
-
-[State 7010, appear]
-type = Turn
-trigger1 = Facing != Parent, Facing
-ignorehitpause = 1
-
-[State 7015, ChangeAnim]
-type = VarSet
-trigger1 = !Time
-var(1) = StateNo
-ignorehitpause = 1
-
-[State 7015, ChangeAnim]
-type = VarSet
-trigger1 = !Time
-var(2) = 16
-ignorehitpause = 1
-
-[State 7015, ChangeAnim]
-type = VarAdd
-trigger1 = var(2) >= 0
-var(2) = -1
-ignorehitpause = 1
-
-[State 1100, VarSet]
-type = VarSet
-triggerall = var(2) > 0
-triggerall = animelemtime(2) >= 0
-triggerall = animelemtime(16) < 0
-trigger1 = Parent, command = "a"
-trigger2 = Parent, command = "b"
-trigger3 = Parent, command = "c"
-var(2) = 16
-ignorehitpause = 1
-
-[State 1040,ChangeAnim]
-type = ChangeAnim
-trigger1 = !var(2)
-trigger1 = animelemtime(2) >= 0
-trigger1 = animelemtime(31) < 0
-value = anim
-elem = 31
-ignorehitpause = 0
-persistent = 0
-
-[State 7010, appear]
-type = trans
-trigger1 = 1
-trans = none
-ignorehitpause = 1
-
-[State 7010, appear]
-type = PosAdd
-trigger1 = 1
-X = (ParentDist X)/2.0
-Y = (ParentDist Y - 10)/2.0
-
-[State 620, Snd]
-type = PlaySnd
-trigger1 = Animelem=2 
-value = S7000,1 
-
-[State 7011, HitOverride]
-type = HitOverride
-trigger1 = 1
-attr = SCA,NA,SA,HA,NP,SP,HP
-stateno = 17015
-ignorehitpause = 1
-
-[State 7011, HitOverride]
-type = NotHitBy
-trigger1 = 1
-value = ,NT,ST,HT 
-ignorehitpause = 1
-
-[State 7013, Selector Var]
-type = VarSet
-trigger1 = !Time
-var(0) = Parent, StateNo
-
-[State 7014, Light Hit]
-type = ChangeState
-trigger1 = !AnimTime
-trigger2 = Parent, StateNo != 14016
-value = 17011
-
-[State 3010, HitDef]
-type = HitDef
-trigger1 = AnimElemNo(0) % 2 != 0
-trigger1 = AnimElemTime(AnimElemNo(0)) = 1
-attr = A, SA
-hitflag = MAF
-guardflag = M
-animtype = heavy
-air.animtype = back
-fall.animtype = back
-damage = Ceil(20 * Parent, FVar(39)),2
-pausetime = 7,!(random%8=0)*8
-guard.pausetime = 7,!(random%8=0)*8
-sparkno = S7006
-sparkxy = -4, -10+(random%30)
-hitsound = S1,4
-guardsound = S4,0
-ground.type = High
-air.type = High
-ground.slidetime = 11
-ground.hittime = 11
-air.hittime = 11
-guard.ctrltime = 11
-ground.velocity = -5.5
-guard.velocity = -5
-air.velocity = -2.5, 0
-ground.cornerpush.veloff = 0
-air.cornerpush.veloff = 0
-getpower = 40,0
-givepower = 20,0
-air.fall = 1
-fall.recover = 1
-yaccel = .35
-guard.kill = 0
-p1sprpriority = 2
-p2facing = 1
-palfx.add=200,200,200
-palfx.mul=256,256,256
-palfx.time=6
-
-
-[State 7013, Selector Var]
-type = VarSet
-trigger1 = !Time
-var(3) = 0
-
-[State 200, Dampen]
-Type = ParentVarset
-trigger1 = MoveHit
-trigger1 = Var(3) != HitCount
-trigger1 = (Var(3) := HitCount)
-fvar(39) = Parent, fvar(39)*0.9
-ignorehitpause = 1
 
 ; Checkmate (W/Stand)
 [Statedef 17300]
@@ -2895,6 +2737,14 @@ postype = p1
 pos = -7, -22
 ownpal = 1
 supermovetime = 99999
+
+[State 7014, End]
+type = ChangeState
+trigger1 = !AnimTime
+trigger1 = NumHelper(15060)
+trigger1 = (Var(5) := (Var(5) + 1))
+trigger1 = Helper(15060), Var(Var(5)) > 0
+value = Helper(15060), Var(Var(5))
 
 [State 7011, Light Hit]
 type = ChangeState
@@ -3180,3 +3030,164 @@ type = ChangeState
 trigger1 = Parent, StateNo != [15040, 15049]
 value = IfElse(!(Parent, Var(23)), 17019, 17011)
 
+
+; Tandem Combo Initialization
+[Statedef 17320]
+type = S
+movetype = I
+physics = N
+juggle = 0
+ctrl = 0
+anim = 7400
+velset = 0,0
+sprpriority = 2
+
+[State 7014, End]
+type = ChangeState
+trigger1 = !Time && NumHelper(15060)
+trigger2 = Root, MoveType = H
+trigger3 = Time > 1 && !NumHelper(15060)
+value = IfElse(!(Parent, Var(23)), 17019, 17011)
+
+[State 2010, Super Pause FX]
+type = helper
+trigger1 = !Time
+helpertype = normal
+stateno = 17325
+ID = 15060
+name = "Tandem Combo"
+postype = p1
+pos = 0,0
+ownpal = 1
+persistent = 0
+supermovetime = 99999999
+
+[State 7014, End]
+type = VarSet
+trigger1 = !Time
+var(5) = -1
+
+[State 7014, End]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+flag2 = invisible
+
+[State 7014, End]
+type = ChangeState
+trigger1 = NumHelper(15060)
+trigger1 = Root, StateNo != 15060
+trigger1 = !(Var(5) := (Var(5) + 1))
+trigger1 = Helper(15060), Var(Var(5)) > 0
+value = Helper(15060), Var(Var(5))
+
+; Tandem Combo Initialization
+[Statedef 17325]
+type = S
+movetype = I
+physics = N
+juggle = 0
+ctrl = 0
+anim = 7400
+velset = 0,0
+sprpriority = 2
+
+[State 7014, End]
+type = VarRangeSet
+trigger1 = !Time
+value = -1
+
+[State 7014, End]
+type = VarSet
+trigger1 = !Time
+v = 59
+value = 0
+
+[State 7014, End]
+type = VarSet
+trigger1 = !Time
+v = 58
+value = 0
+
+[State 7014, End]
+type = VarAdd
+trigger1 = Var(58) > 0
+v = 58
+value = -1
+
+
+[State 7014, End]
+type = VarSet
+trigger1 = !Var(58)
+trigger1 = Root, Command = "qcf2p"
+trigger1 = Var(59) < 58
+trigger1 = (Var(59) := (Var(59) + 1))
+trigger1 = Var(58) := 5
+v = var(59) - 1
+value = 17300
+
+[State 7014, End]
+type = VarSet
+trigger1 = !Var(58)
+trigger1 = Root, Command = "qcba" || Root, Command = "qcbb" || Root, Command = "qcbc"
+trigger1 = Var(59) < 58
+trigger1 = (Var(59) := (Var(59) + 1))
+trigger1 = Var(58) := 5
+v = var(59) - 1
+value = 17230
+
+
+[State 7014, End]
+type = VarSet
+trigger1 = !Var(58)
+trigger1 = Root, Command = "qcfa" || Root, Command = "qcfb" || Root, Command = "qcfc" || Root, Command = "qcfa" || Root, Command = "qcfb" || Root, Command = "qcfc"
+trigger1 = Var(59) < 58
+trigger1 = (Var(59) := (Var(59) + 1))
+trigger1 = Var(58) := 5
+v = var(59) - 1
+value = 17220
+
+[State 7014, End]
+type = VarSet
+trigger1 = !Var(58)
+trigger1 = Root, Command = "a"
+trigger1 = Var(59) < 58
+trigger1 = (Var(59) := (Var(59) + 1))
+trigger1 = Var(58) := 5
+v = var(59) - 1
+value = 17012
+
+[State 7014, End]
+type = VarSet
+trigger1 = !Var(58)
+trigger1 = Root, Command = "b"
+trigger1 = Var(59) < 58
+trigger1 = (Var(59) := (Var(59) + 1))
+trigger1 = Var(58) := 5
+v = var(59) - 1
+value = 17013
+
+[State 7014, End]
+type = VarSet
+trigger1 = !Var(58)
+trigger1 = Root, Command = "c"
+trigger1 = Var(59) < 58
+trigger1 = (Var(59) := (Var(59) + 1))
+trigger1 = Var(58) := 5
+v = var(59) - 1
+value = 17014
+
+
+[State 0, DisplayToClipboard]
+type = DisplayToClipboard
+trigger1 = Var(59) > 0
+text = "Last Index = %d, Last Input = %d"
+params = (Var(59) - 1), Var(Var(59) - 1)
+
+[State 0, DisplayToClipboard]
+type = DestroySelf
+trigger1 = Root, StateNo != 15060
+trigger1 = Parent, StateNo != [17011, 17014]
+trigger1 = Parent, StateNo != 17220
+trigger1 = Parent, StateNo != 17230
+trigger1 = Parent, StateNo != 17320

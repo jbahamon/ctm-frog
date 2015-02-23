@@ -72,7 +72,7 @@ persistent = 0
 [State 1001, whatbuttondidyoupress?]
 type=varset
 trigger1=!time
-var(1)=ifelse(command="qcbc",3,ifelse(command="qcbb",2,1))
+var(1)=IfElse(command="qcbc",3,ifelse(command="qcbb",2,1))
 
 [State 1001, Sound!]
 type=PlaySnd

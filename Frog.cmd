@@ -470,6 +470,17 @@ name = "qcfx"
 command = ~D, DF, F, x
 time=15
 
+
+[Command]
+name = "qcbx"
+command = ~D, DB, B, ~x
+time=15
+
+[Command]
+name = "qcbx"
+command = ~D, DB, B, x
+time=15
+
 ;-| Double Tap |-----------------------------------------------------------
 
 [Command]
@@ -560,6 +571,7 @@ time = 1
 name = "start"
 command = s
 time = 1
+
 
 ;-| Hold Dir |--------------------------------------------------------------
 [Command]
@@ -730,7 +742,7 @@ trigger1 = Ctrl
 type = ChangeState
 value = 1040
 triggerall = PalNo != 12
-triggerall = Command = "qcfa" || Command = "qcfb" || Command = "qcfc"
+triggerall = Command = "qcfa" || Command = "qcfb" || Command = "qcfc" 
 trigger1 = StateType = A 
 trigger1 = Ctrl
 trigger2 = StateNo = 220
@@ -751,7 +763,7 @@ trigger2 = movecontact
 type = ChangeState
 value = 1001
 triggerall = !NumHelper(1010) 
-triggerall = Command = "qcba" || Command = "qcbb" || Command = "qcbc"
+triggerall = Command = "qcba" || Command = "qcbb" || Command = "qcbc" 
 triggerall = PalNo != 12
 trigger1 = Ctrl
 trigger1 = StateType = A
@@ -813,7 +825,7 @@ triggerall = PalNo = 12
 triggerall = StateNo = 14025
 triggerall = (Var(23) && NumHelper(10000))
 trigger1 = Helper(10000), MoveContact
-trigger1 = Command = "qcba" || Command = "qcbb" || Command = "qcbc"
+triggerall = Command = "qcba" || Command = "qcbb" || Command = "qcbc" 
 value = 14026
 
 [State -1, MUDAA]
@@ -859,6 +871,16 @@ triggerall = PalNo = 12
 trigger1 = !Var(23) && !NumHelper(10000)
 trigger1 = ctrl
 value = 14000
+
+; Stand Appearance Attack
+[State -1, Stand Attack]
+type = ChangeState
+triggerall = command = "qcbx"
+triggerall = statetype != A
+triggerall = PalNo = 12
+trigger1 = (!Var(23) && !NumHelper(10000)) || (Var(23) && NumHelper(10000))
+trigger1 = ctrl
+value = 15060
 
 [State -1, Throw]
 type = ChangeState

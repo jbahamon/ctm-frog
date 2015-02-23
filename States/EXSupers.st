@@ -2694,3 +2694,37 @@ trigger1 = Var(0) > 0
 var(0) = -1
 ignorehitpause = 1
 
+
+; Tandem Combo
+[Statedef 15060]
+type = S
+movetype = I
+physics = N
+anim = 15060
+velset = 0,0
+ctrl = 0
+poweradd = 0
+juggle = 0
+facep2 = 0
+hitdefpersist = 0
+movehitpersist = 0
+hitcountpersist = 0
+sprpriority = 0
+
+[State 13801, Masa & Mune]
+type = helper
+triggerall = !NumHelper(10000)
+trigger1 = !Time
+stateno = 17320
+ID = 10000
+name = "Masa&Mune"
+postype = p1
+pos = 10,-20
+ownpal = 1
+persistent = 0
+
+[State 17100: ChangeState]
+type = ChangeState
+trigger1 = Time > 200
+value = 52
+ctrl = 0

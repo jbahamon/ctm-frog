@@ -300,7 +300,6 @@ trigger2 = NumHelper(10000)
 value = 0
 ctrl = 1
 
-
 ; Roll
 [Statedef 13500]
 type = U
