@@ -216,6 +216,7 @@ value = 17310
 type = ChangeState
 triggerall = Parent, StateNo != Var(0)
 trigger1 = Parent, StateNo = 15060
+trigger1 = Parent, Time >= 3
 value = 17320
 
 
@@ -228,6 +229,12 @@ anim = 3033
 velset = 0,0
 sprpriority = -2
 facep2= 0
+
+
+[State 7014, Light Hit]
+type = PlayerPush
+trigger1 = 1
+value = 1
 
 [State 7011, Heavy Hit]
 type = ChangeState
@@ -447,6 +454,11 @@ velset = 0,0
 sprpriority = -2
 facep2= 0
 
+[State 7014, Light Hit]
+type = PlayerPush
+trigger1 = 1
+value = 1
+
 [State 7011, Heavy Hit]
 type = ChangeState
 triggerall = Parent, StateNo != Var(0)
@@ -589,6 +601,12 @@ anim = 3035
 velset = 0,0
 sprpriority = -2
 facep2= 0
+
+
+[State 7014, Light Hit]
+type = PlayerPush
+trigger1 = 1
+value = 1
 
 [State 7011, Heavy Hit]
 type = ChangeState
@@ -1377,6 +1395,11 @@ velset = 0,0
 sprpriority = -2
 facep2= 0
 
+[State 7014, Light Hit]
+type = PlayerPush
+trigger1 = 1
+value = 1
+
 [State 7015, ChangeAnim]
 type = VarSet
 trigger1 = !Time
@@ -1392,14 +1415,14 @@ ignorehitpause = 1
 [State 7010, appear]
 type = VelSet
 trigger1 = !NumTarget
-trigger2 = NumTarget && FrontEdgeDist > 70
+trigger2 = NumTarget && FrontEdgeDist > 60
 X = IfElse(Var(3) = 2, 0.8, IfElse(Var(3) = 1, 0.4, 0))
 ignorehitpause = 1
 
 [State 7010, appear]
 type = VelSet
 trigger1 = NumTarget && FrontEdgeDist < 50
-X = -1.7
+X = IfElse(NumHelper(15060), Vel X * 0.9,-1.5)
 ignorehitpause = 1
 
 [State 9606, EnvColor]
@@ -1827,6 +1850,12 @@ anim = 14020
 velset = 0,0
 sprpriority = -2
 facep2= 1
+
+
+[State 7014, Light Hit]
+type = PlayerPush
+trigger1 = 1
+value = 1
 
 [State 7015, ChangeAnim]
 type = VarSet
@@ -3458,7 +3487,7 @@ trigger1 = NumHelper(15060)
 triggerall = Time > 3
 trigger1 = P2bodydist x <= 30
 trigger2 = Root,command = "x"
-trigger2 = !Root,NumHelper(7000) && !root,NumHelper(7001)
+trigger2 = !Root,NumHelper(7000)
 trigger3 = Time >= 43
 value = ifelse(root,command="qcfx",17210,17011)
 
@@ -3503,7 +3532,7 @@ trigger1 = !Var(58)
 trigger1 = Root, Command = "qcf2p"
 trigger1 = Var(59) < 29
 trigger1 = (Var(59) := (Var(59) + 1))
-trigger1 = Var(58) := 5
+trigger1 = Var(58) := 10
 v = var(59) - 1
 value = 17300
 
@@ -3513,7 +3542,7 @@ trigger1 = !Var(58)
 trigger1 = Root, Command = "qcba" || Root, Command = "qcbb" || Root, Command = "qcbc"
 trigger1 = Var(59) < 29
 trigger1 = (Var(59) := (Var(59) + 1))
-trigger1 = Var(58) := 5
+trigger1 = Var(58) := 10
 trigger1 = (Var(Var(59) - 1 + 29) := IfElse(Root, Command="qcbc", 2, IfElse(Root, Command = "qcbb", 1, 0))) + 1
 v = var(59) - 1
 value = 17230
@@ -3536,7 +3565,7 @@ trigger1 = !Var(58)
 trigger1 = Root, Command = "a"
 trigger1 = Var(59) < 29
 trigger1 = (Var(59) := (Var(59) + 1))
-trigger1 = Var(58) := 5
+trigger1 = Var(58) := 10
 v = var(59) - 1
 value = 17012
 
@@ -3546,7 +3575,7 @@ trigger1 = !Var(58)
 trigger1 = Root, Command = "b"
 trigger1 = Var(59) < 29
 trigger1 = (Var(59) := (Var(59) + 1))
-trigger1 = Var(58) := 5
+trigger1 = Var(58) := 10
 v = var(59) - 1
 value = 17013
 
@@ -3556,7 +3585,7 @@ trigger1 = !Var(58)
 trigger1 = Root, Command = "c"
 trigger1 = Var(59) < 29
 trigger1 = (Var(59) := (Var(59) + 1))
-trigger1 = Var(58) := 5
+trigger1 = Var(58) := 10
 v = var(59) - 1
 value = 17014
 

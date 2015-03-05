@@ -2711,10 +2711,39 @@ movehitpersist = 0
 hitcountpersist = 0
 sprpriority = 0
 
+[State 3000, Superpause]
+type = SuperPause
+trigger1 = Time = 3
+time = 120
+movetime = 120
+anim = -1
+sound = S8000,10
+pos = 0,0
+darken = 0
+p2defmul = 1
+poweradd = -1000
+unhittable = 0
+
+[State 3250, Super Pause FX]
+type = helper
+trigger1 = Time = 3
+trigger1 = !NumHelper(7000)
+helpertype = normal
+stateno = 15061
+ID = 7000
+name = "Super BG"
+postype = left
+pos = -34, -63
+ownpal = 1
+persistent = 0
+pausemovetime = 9999
+supermovetime = 9999
+ignorehitpause = 1
+
 [State 13801, Masa & Mune]
 type = helper
 triggerall = !NumHelper(10000)
-trigger1 = !Time
+trigger1 = Time = 3
 stateno = 17320
 ID = 10000
 name = "Masa&Mune"
@@ -2723,8 +2752,90 @@ pos = 10,-20
 ownpal = 1
 persistent = 0
 
+
+[State 2500, NotHitBy]
+type = NotHitBy
+trigger1 = time < 123
+value = SCA
+
+[State 2500, NotHitBy]
+type = NotHitBy
+trigger1 = time = 123
+value = SCA
+time = 20
+
 [State 17100: ChangeState]
 type = ChangeState
-trigger1 = Time > 200
-value = 52
+trigger1 = Time = 123
+value = 0
+ctrl = 1
+
+; Tandem Combo BG
+[Statedef 15061]
+type    = A
+movetype= I
+physics = N
+juggle  = 3
 ctrl = 0
+anim = 15051
+sprpriority = -6
+velset = 8,0
+
+[State 9000, ModifyExplod]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+ignorehitpause = 1
+
+[State 9000, ModifyExplod]
+type = PosAdd
+trigger1 = !Time
+X = GameWidth/2.0 - ScreenPos X
+ignorehitpause = 1
+
+[State 9000, ModifyExplod]
+type = PosAdd
+trigger1 = 1
+Y = GameHeight/2.0 - ScreenPos Y
+ignorehitpause = 1
+
+[State 9000, ModifyExplod]
+type = VarSet
+trigger1 = !Time
+var(0) = -1
+ignorehitpause = 1
+
+[State 9000, ModifyExplod]
+type = PosAdd
+trigger1 = GameWidth/2.0 - ScreenPos X < -64
+X = GameWidth/2.0 - ScreenPos X
+ignorehitpause = 1
+
+[State 9000, ModifyExplod]
+type = VarSet
+trigger1 = Parent, StateNo = 15060
+trigger1 = Parent, Time = 123
+trigger2 = Parent, StateNo != 15060
+var(0) = 16
+persistent = 0
+ignorehitpause = 1
+
+
+[State 9000, ModifyExplod]
+type = Trans
+trigger1 = Var(0) >= 0
+trans = addalpha
+alpha = 16 * Var(0), 256 - 16 * Var(0)
+ignorehitpause = 1
+
+[State 9000, ModifyExplod]
+type = DestroySelf
+trigger1 = !Var(0)
+ignorehitpause = 1
+
+[State 9000, ModifyExplod]
+type = VarAdd
+trigger1 = Var(0) > 0
+var(0) = -1
+ignorehitpause = 1
+
