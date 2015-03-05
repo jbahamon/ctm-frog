@@ -53,6 +53,7 @@ statetype = A
 physics = N
 ignorehitpause = 1
 
+
 [State 7010, appear]
 type = trans
 trigger1 = 1
@@ -68,6 +69,14 @@ ignorehitpause = 1
 type = NotHitBy
 trigger1 = 1
 value = ,AT
+ignorehitpause = 1
+
+
+[State 7011, HitOverride]
+type = NotHitBy
+trigger1 = Parent, StateType = L
+time = 1
+value = SCA
 ignorehitpause = 1
 
 [State 7011, FollowPlayer]
@@ -92,7 +101,7 @@ ignorehitpause = 1
 [State 7011, HitOverride]
 type = HitOverride
 trigger1 = 1
-time = -1
+time = 1
 attr = SCA,AA,AP
 stateno = 17015
 ignorehitpause = 1
@@ -101,7 +110,7 @@ ignorehitpause = 1
 type = HitOverride
 trigger1 = command = "holdback" && inguarddist && EnemyNear, MoveType = A
 trigger2 = Parent, StateNo = [120, 155]
-time = -1
+time = 1
 attr = SCA,AA,AP
 stateNo = 17016
 ignorehitpause = 1
@@ -114,7 +123,7 @@ value = 17018
 [State 7011, Heavy Hit]
 type = ChangeState
 trigger1 = Parent, MoveType = H
-value = 17015
+value = 17017
 
 [State 7011, Light Hit]
 type = ChangeState
@@ -291,7 +300,7 @@ ignorehitpause = 1
 type = HitDef
 triggerall = !Time
 trigger1 = NumHelper(15060)
-trigger1 = Parent, StateType = S
+trigger2 = Parent, StateType = S
 attr = S, NA
 animtype  = Medium
 damage    = 45
@@ -399,6 +408,7 @@ type = HitOverride
 trigger1 = 1
 attr = SCA,AA, AP
 stateno = 17015
+time = 1
 ignorehitpause = 1
 
 [State 7011, HitOverride]
@@ -485,6 +495,7 @@ ignorehitpause = 1
 type = HitOverride
 trigger1 = 1
 attr = SCA,NA,SA,HA,NP,SP,HP
+time = 1
 stateno = 17015
 ignorehitpause = 1
 
@@ -634,6 +645,7 @@ type = HitOverride
 trigger1 = 1
 attr = SCA,NA,SA,HA,NP,SP,HP
 stateno = 17015
+time = 1
 ignorehitpause = 1
 
 [State 7011, HitOverride]
@@ -796,7 +808,6 @@ fv = 2
 value = GetHitVar(yaccel)
 ignorehitpause = 1
 
-
 [State 7010, appear]
 type = trans
 trigger1 = 1
@@ -805,20 +816,27 @@ ignorehitpause = 1
 
 [State 7010, appear]
 type = Offset
-trigger1 = 1
+trigger1 = Time < floor(gethitvar(hittime) * 0.8)
 X = IfElse(Time % 2, -2, 2)
 ignorehitpause = 1
 
 [State 7015, PosFreeze]
 type = PosFreeze
-trigger1 = 1
+trigger1 = Time < floor(gethitvar(hittime) * 0.8)
 value = 1
+ignorehitpause = 1
+
+[State 7015, End]
+type = PosAdd
+trigger1 = Time >= floor(gethitvar(hittime) * 0.8)
+X = (ParentDist X)
+Y = (ParentDist Y - 10)
 ignorehitpause = 1
 
 [State 7011, HitOverride]
 type = HitOverride
 trigger1 = 1
-time = -1
+time = 1
 attr = SCA,AA, AP
 stateno = 17015
 ignorehitpause = 1
@@ -826,7 +844,7 @@ ignorehitpause = 1
 [State 7011, HitOverride]
 type = NotHitBy
 trigger1 = 1
-time = -1
+time = 1
 value = , AT
 ignorehitpause = 1
 
@@ -834,8 +852,16 @@ ignorehitpause = 1
 type = NotHitBy
 trigger1 = !Time
 time = 10
-value = SCA ,AA, AP
+value = SCA
+ignorehitpause = 1
+
+
+[State 7011, HitOverride]
+type = NotHitBy
+trigger1 = Time > 10
+trigger1 = Parent, StateType = L
 time = 1
+value = SCA
 ignorehitpause = 1
 
 [State 7015, LifeAdd]
@@ -843,13 +869,6 @@ type = ParentVarAdd
 trigger1 = Time = 0
 v = 24
 value = - 5 * floor(gethitvar(damage)) 
-ignorehitpause = 1
-
-[State 0, DisplayToClipboard]
-type = DisplayToClipboard
-trigger1 = 1
-text = "Var(1) = %d"
-params = var(1)
 ignorehitpause = 1
 
 [State 7015, ChangeAnim]
@@ -882,6 +901,7 @@ ignorehitpause = 1
 MoveType = H
 poweradd = 0
 
+
 [State 7010, appear]
 type = trans
 trigger1 = 1
@@ -896,22 +916,29 @@ ignorehitpause = 1
 
 [State 7015, PosFreeze]
 type = PosFreeze
-trigger1 = 1
+trigger1 = Time < floor(gethitvar(hittime) * 0.8)
 value = 1
+ignorehitpause = 1
+
+[State 7015, End]
+type = PosAdd
+trigger1 = Time >= floor(gethitvar(hittime) * 0.8)
+X = (ParentDist X)
+Y = (ParentDist Y - 10)
 ignorehitpause = 1
 
 [State 7011, HitOverride]
 type = HitOverride
 trigger1 = 1
-time = -1
+time = 1
 attr = SCA,AA, AP
 stateno = 17016
 ignorehitpause = 1
 
 [State 7011, HitOverride]
 type = NotHitBy
-trigger1 = 1
-time = -1
+trigger1 = Time >= 5
+time = 1
 value = , AT
 ignorehitpause = 1
 
@@ -919,8 +946,14 @@ ignorehitpause = 1
 type = NotHitBy
 trigger1 = !Time
 time = 5
-value = SCA ,AA, AP
+value = SCA
+ignorehitpause = 1
+
+[State 7011, HitOverride]
+type = NotHitBy
+trigger1 = Parent, StateType = L
 time = 1
+value = SCA
 ignorehitpause = 1
 
 [State 7015, ChangeAnim]
@@ -938,7 +971,7 @@ ignorehitpause = 1
 
 ; Masa & Mune Gethit from Parent
 [Statedef 17017]
-MoveType = H
+MoveType = I
 Anim = 3032
 poweradd = 0
 
@@ -950,28 +983,21 @@ ignorehitpause = 1
 
 [State 7010, appear]
 type = Offset
-trigger1 = 1
+trigger1 = Time < floor(Root, gethitvar(hittime) * 0.8)
 X = IfElse(Time % 2, -2, 2)
 ignorehitpause = 1
 
-[State 7015, PosFreeze]
-type = PosFreeze
+[State 7015, End]
+type = PosAdd
 trigger1 = 1
-value = 1
-ignorehitpause = 1
-
-[State 7011, HitOverride]
-type = HitOverride
-trigger1 = 1
-time = -1
-attr = SCA,AA, AP
-stateno = 17015
+X = (ParentDist X)
+Y = (ParentDist Y - 10)
 ignorehitpause = 1
 
 [State 7011, HitOverride]
 type = NotHitBy
 trigger1 = 1
-time = -1
+time = 1
 value = , AT
 ignorehitpause = 1
 
@@ -979,8 +1005,22 @@ ignorehitpause = 1
 type = NotHitBy
 trigger1 = !Time
 time = 10
-value = SCA ,AA, AP
+value = SCA ,AA, AP, AT
+ignorehitpause = 1
+
+[State 7011, HitOverride]
+type = NotHitBy
+trigger1 = Root, StateType = L
 time = 1
+value = SCA, AA, AP, AT
+ignorehitpause = 1
+
+[State 7011, HitOverride]
+type = HitOverride
+trigger1 = 1
+time = 1
+attr = SCA, AA, AP
+stateno = 17015
 ignorehitpause = 1
 
 [State 7015, ChangeAnim]
@@ -1004,6 +1044,7 @@ ignorehitpause = 1
 [State 7015, End]
 type = ChangeState
 trigger1 = Parent, MoveType != H
+trigger1 = Parent, StateType != L
 value = 17011
 ignorehitpause = 1
 
@@ -1153,6 +1194,7 @@ ignorehitpause = 1
 [State 7011, HitOverride]
 type = HitOverride
 trigger1 = 1
+time = 1
 attr = SCA,NA,SA,HA,NP,SP,HP
 stateno = 17015
 ignorehitpause = 1
@@ -1265,6 +1307,7 @@ ignorehitpause = 1
 [State 7011, HitOverride]
 type = HitOverride
 trigger1 = 1
+time = 1
 attr = SCA,NA,SA,HA,NP,SP,HP
 stateno = 17015
 ignorehitpause = 1
@@ -1370,6 +1413,7 @@ value = S7000,1
 [State 7011, HitOverride]
 type = HitOverride
 trigger1 = 1
+time = 1
 attr = SCA,NA,SA,HA,NP,SP,HP
 stateno = 17015
 ignorehitpause = 1
@@ -1411,14 +1455,6 @@ type = ChangeState
 trigger1 = !AnimTime && !NumHelper(15060)
 trigger2 = Parent, MoveType = H
 value = 17019
-
-[State 0, DisplayToClipboard]
-type = DisplayToClipboard
-trigger1 = 1
-text = "n = %d"
-params = NumHelper(15060)
-;ignorehitpause = 
-;persistent = 
 
 [State 3010, HitDef]
 type = HitDef
@@ -1547,6 +1583,7 @@ value = S7000,1
 [State 7011, HitOverride]
 type = HitOverride
 trigger1 = 1
+time = 1
 attr = SCA,NA,SA,HA,NP,SP,HP
 stateno = 17015
 ignorehitpause = 1
@@ -1697,6 +1734,7 @@ value = S7000,1
 [State 7011, HitOverride]
 type = HitOverride
 trigger1 = 1
+time = 1
 attr = SCA,NA,SA,HA,NP,SP,HP
 stateno = 17015
 ignorehitpause = 1
@@ -1842,6 +1880,7 @@ value = S7000,1
 [State 7011, HitOverride]
 type = HitOverride
 trigger1 = 1
+time = 1
 attr = SCA,NA,SA,HA,NP,SP,HP
 stateno = 17015
 ignorehitpause = 1
@@ -2018,6 +2057,7 @@ value = S7000,1
 [State 7011, HitOverride]
 type = HitOverride
 trigger1 = 1
+time = 1
 attr = SCA,NA,SA,HA,NP,SP,HP
 stateno = 17015
 ignorehitpause = 1
@@ -2170,6 +2210,7 @@ value = S7000,1
 [State 7011, HitOverride]
 type = HitOverride
 trigger1 = 1
+time = 1
 attr = SCA,NA,SA,HA,NP,SP,HP
 stateno = 17015
 ignorehitpause = 1
@@ -2381,6 +2422,7 @@ velset = 0, 0
 type = HitOverride
 trigger1 = 1
 attr = SCA,NA,SA,HA,NP,SP,HP
+time = 1
 stateno = 17241
 ignorehitpause = 1
 
@@ -2903,6 +2945,7 @@ ignorehitpause = 1
 type = HitOverride
 trigger1 = 1
 attr = SCA,AA, AP
+time = 1
 stateno = 17015
 ignorehitpause = 1
 
@@ -3062,18 +3105,6 @@ sprpriority = 3
 facep2= 1
 velset = 0,0
 
-[State 2500, NotHitBy]
-type = NotHitBy
-trigger1 = AnimElemTime(2) < 0
-value = SCA
-ignorehitpause = 1
-
-[State 2500, NotHitBy]
-type = NotHitBy
-trigger1 = AnimElem = 2
-value = SCA
-time = 8
-
 [State 7010, appear]
 type = trans
 trigger1 = 1
@@ -3115,14 +3146,27 @@ ignorehitpause = 1
 type = HitOverride
 trigger1 = 1
 attr = SCA,AA, AP
+time = 1
 stateno = 17015
 ignorehitpause = 1
 
 [State 7011, HitOverride]
 type = NotHitBy
-trigger1 = 1
+trigger1 = AnimElemTime(2) >= 7
 value = SCA,NT,ST,HT 
 ignorehitpause = 1
+
+[State 2500, NotHitBy]
+type = NotHitBy
+trigger1 = AnimElemTime(2) < 0
+value = SCA
+ignorehitpause = 1
+
+[State 2500, NotHitBy]
+type = NotHitBy
+trigger1 = AnimElem = 2
+value = SCA
+time = 8
 
 [State 7012, Selector Var]
 type = VarSet
@@ -3176,13 +3220,8 @@ sprpriority = 2
 type = HitOverride
 trigger1 = 1
 attr = SCA,NA,SA,HA,NP,SP,HP
+time = 1
 stateno = 17015
-ignorehitpause = 1
-
-[State 7011, HitOverride]
-type = NotHitBy
-trigger1 = 1
-value = ,NT,ST,HT 
 ignorehitpause = 1
 
 [State 7012, Selector Var]
@@ -3213,6 +3252,13 @@ type = NotHitBy
 trigger1 = AnimElem = 6
 value = SCA
 time = 10
+
+
+[State 7011, HitOverride]
+type = NotHitBy
+trigger1 = AnimElemTime(6) >= 10
+value = ,NT,ST,HT 
+ignorehitpause = 1
 
 [State 9606, EnvColor]
 type = palfx

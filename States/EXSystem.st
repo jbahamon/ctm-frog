@@ -50,6 +50,98 @@ trigger1 = Time = 10
 value = IfElse(StateType != A, 0, 50)
 ctrl = 1
 
+;Stand Meter
+[Statedef 13200]
+type = S
+physics = N
+movetype = I
+anim = 13250
+sprpriority = 4
+
+[State 7200, Shadow]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+ignorehitpause = 1
+
+[State 7200, Amount]
+type = Helper
+trigger1 = !NumHelper(13201)
+name = "Stand Bar"
+ID = 13201
+stateno = 13201
+pos = -16,0
+postype = left    ;p2,front,back,left,right
+facing = 1
+ownpal = 1
+supermovetime = 999999
+;
+;[State 7200, TransVar]
+;type = VarSet
+;trigger1 = !Time
+;var(0) = 0
+;
+;[State 7200, FromTrans]
+;type = VarAdd
+;trigger1 = Root, StateType = A
+;trigger1 = Var(0) < 16
+;var(0) = 1
+;
+;[State 7200, FromTrans]
+;type = VarAdd
+;trigger1 = Root, StateType != A
+;trigger1 = Var(0) > 0
+;var(0) = -1
+;
+;[State 7200, Trans]
+;type = Trans
+;trigger1 = 1
+;trans = addalpha
+;alpha = var(0) * 16, 256 - var(0) * 16
+;ignorehitpause = 1
+
+[State 7200, scale]
+type = AngleDraw
+trigger1 = 1
+scale = 0.5, 0.5
+ignorehitpause = 1
+
+[State 7200, Pos]
+type = PosSet
+trigger1 = 1
+X = Root, Pos X 
+Y = Root, Pos Y + 5
+ignorehitpause = 1
+
+; Stand Bar
+[Statedef 13201]
+type = S
+physics = N
+movetype = I
+anim = 13251
+sprpriority = 5
+
+[State 7201, Shadow]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+ignorehitpause = 1
+
+[State 7201, Pos]
+type = PosSet
+trigger1 = 1
+X = Parent, Pos X - 8
+Y = Parent, Pos Y
+ignorehitpause = 1
+
+[State 7201, scale]
+type = AngleDraw
+trigger1 = 1
+scale = (Root, Var(24) / 1000.0)*0.5, 0.5
+ignorehitpause = 1
+
+
+
 ; Advancing Guard
 [Statedef 13300]
 type    = U
