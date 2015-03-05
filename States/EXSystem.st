@@ -130,7 +130,7 @@ ignorehitpause = 1
 [State 7201, Pos]
 type = PosSet
 trigger1 = 1
-X = Parent, Pos X - 8
+X = Parent, Pos X - 16.5
 Y = Parent, Pos Y
 ignorehitpause = 1
 
@@ -139,7 +139,6 @@ type = AngleDraw
 trigger1 = 1
 scale = (Root, Var(24) / 1000.0)*0.5, 0.5
 ignorehitpause = 1
-
 
 
 ; Advancing Guard

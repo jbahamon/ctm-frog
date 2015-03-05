@@ -225,6 +225,7 @@ type = S
 physics = N
 movetype = A
 anim = 3033
+velset = 0,0
 sprpriority = -2
 facep2= 0
 
@@ -426,8 +427,9 @@ var(0) = Parent, StateNo
 type = ChangeState
 trigger1 = !AnimTime
 trigger1 = NumHelper(15060)
+trigger1 = Var(5) < 29
+trigger1 = Helper(15060), Var(Var(5) + 1) > 0
 trigger1 = (Var(5) := (Var(5) + 1))
-trigger1 = Helper(15060), Var(Var(5)) > 0
 value = Helper(15060), Var(Var(5))
 
 [State 7011, Light Hit]
@@ -441,6 +443,7 @@ type = S
 physics = N
 movetype = A
 anim = 3034
+velset = 0,0
 sprpriority = -2
 facep2= 0
 
@@ -535,8 +538,9 @@ var(0) = Parent, StateNo
 type = ChangeState
 trigger1 = !AnimTime
 trigger1 = NumHelper(15060)
+trigger1 = Var(5) < 29
+trigger1 = Helper(15060), Var(Var(5) + 1) > 0
 trigger1 = (Var(5) := (Var(5) + 1))
-trigger1 = Helper(15060), Var(Var(5)) > 0
 value = Helper(15060), Var(Var(5))
 
 [State 7011, Light Hit]
@@ -582,6 +586,7 @@ type = S
 physics = N
 movetype = A
 anim = 3035
+velset = 0,0
 sprpriority = -2
 facep2= 0
 
@@ -710,8 +715,9 @@ var(0) = Parent, StateNo
 type = ChangeState
 trigger1 = !AnimTime
 trigger1 = NumHelper(15060)
+trigger1 = Var(5) < 29
+trigger1 = Helper(15060), Var(Var(5) + 1) > 0
 trigger1 = (Var(5) := (Var(5) + 1))
-trigger1 = Helper(15060), Var(Var(5)) > 0
 value = Helper(15060), Var(Var(5))
 
 [State 7014, Light Hit]
@@ -1446,8 +1452,9 @@ var(3) = Parent, Var(0)
 type = ChangeState
 trigger1 = !AnimTime
 trigger1 = NumHelper(15060)
+trigger1 = Var(5) < 29
+trigger1 = Helper(15060), Var(Var(5) + 1) > 0
 trigger1 = (Var(5) := (Var(5) + 1))
-trigger1 = Helper(15060), Var(Var(5)) > 0
 value = Helper(15060), Var(Var(5))
 
 [State 7014, Light Hit]
@@ -1924,8 +1931,9 @@ value = 17019
 type = ChangeState
 trigger1 = !AnimTime
 trigger1 = NumHelper(15060)
+trigger1 = Var(5) < 29
+trigger1 = Helper(15060), Var(Var(5) + 1) > 0
 trigger1 = (Var(5) := (Var(5) + 1))
-trigger1 = Helper(15060), Var(Var(5)) > 0
 value = Helper(15060), Var(Var(5))
 
 
@@ -2600,6 +2608,13 @@ fvar(39) = Parent, fvar(39)*0.9
 persistent = 0
 ignorehitpause = 1
 
+
+[State -2, CornerPush]
+type = ScreenBound
+trigger1 = 1
+value = 0
+ignorehitpause = 1
+
 [State 7014, Light Hit]
 type = ChangeState
 trigger1 = !AnimTime
@@ -2751,14 +2766,15 @@ velset = 0,0
 type = ChangeState
 trigger1 = AnimElemTime(5) >= 7 || (!Time && Root, Power < 1000)
 trigger1 = NumHelper(15060)
+trigger1 = Var(5) < 29
+trigger1 = Helper(15060), Var(Var(5) + 1) > 0
 trigger1 = (Var(5) := (Var(5) + 1))
-trigger1 = Helper(15060), Var(Var(5)) > 0
 value = Helper(15060), Var(Var(5))
 
 [State 7014, End]
 type = ChangeState
 triggerall = NumHelper(15060)
-trigger1 = AnimElemTime(5) = 7
+trigger1 = AnimElemTime(5) >= 7
 trigger2 = !Time
 trigger2 = Root, Power < 1000
 value = 17011
@@ -3018,8 +3034,9 @@ supermovetime = 9999
 type = ChangeState
 trigger1 = !AnimTime
 trigger1 = NumHelper(15060)
+trigger1 = Var(5) < 29
+trigger1 = Helper(15060), Var(Var(5) + 1) > 0
 trigger1 = (Var(5) := (Var(5) + 1))
-trigger1 = Helper(15060), Var(Var(5)) > 0
 value = Helper(15060), Var(Var(5))
 
 [State 7011, Light Hit]
@@ -3344,7 +3361,7 @@ supermovetime = 99999999
 [State 7014, End]
 type = VarSet
 trigger1 = !Time
-var(5) = -1
+var(5) = 0
 
 [State 7014, End]
 type = AssertSpecial
@@ -3356,9 +3373,94 @@ flag2 = invisible
 type = ChangeState
 trigger1 = NumHelper(15060)
 trigger1 = Root, StateNo != 15060
-trigger1 = !(Var(5) := (Var(5) + 1))
-trigger1 = Helper(15060), Var(Var(5)) > 0
-value = Helper(15060), Var(Var(5))
+value = 17321
+
+[State 7014, End]
+type = ChangeState
+trigger1 = !NumHelper(15060)
+trigger1 = Root, StateNo != 15060
+value = 17011
+
+
+
+;---------------------------------------------------------------------------
+; Tandem Combo (Advancing)
+[Statedef 17321]
+type = U
+movetype = I
+physics = N
+ctrl = 0
+anim = 15061
+velset = 7.5,0
+
+[State 10000, Assert]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+ignorehitpause = 1
+
+[State 10000, HitBy]
+type = HitBy
+trigger1 = 1
+value = SCA, NA, SA, HA, NP, SP, HP
+
+[State 10000, ScreenBound]
+type = ScreenBound
+trigger1 = 1
+value = 1
+
+[State 10000, PlayerPush]
+type = PlayerPush
+trigger1 = 1
+value = 1
+
+[State 10000, HitOverride] 
+type = HitOverride
+trigger1 = 1
+stateno = 17015
+attr = SCA, NA, SA, HA, NP, SP, HP
+time = 1
+
+
+[State 10000, StateTypeSet]
+type = StateTypeSet
+trigger1 = root,statetype = S
+statetype = S
+ignorehitpause = 1
+
+[State 10000, StateTypeSet]
+type = StateTypeSet
+trigger1 = root,statetype = C
+statetype = C
+ignorehitpause = 1
+
+[State 10000, StateTypeSet]
+type = StateTypeSet
+trigger1 = root,statetype = A
+statetype = A
+ignorehitpause = 1
+
+[State 10000, ChangeState]
+type = ChangeState
+trigger1 = root,movetype = H
+value = 17017
+
+[State 7014, End]
+type = ChangeState
+trigger1 = NumHelper(15060)
+trigger1 = P2bodydist x <= 30
+trigger1 = Helper(15060), Var(0) > 0
+value = Helper(15060), Var(0)
+
+[State 10000, ChangeState]
+type = ChangeState
+trigger1 = NumHelper(15060)
+triggerall = Time > 3
+trigger1 = P2bodydist x <= 30
+trigger2 = Root,command = "x"
+trigger2 = !Root,NumHelper(7000) && !root,NumHelper(7001)
+trigger3 = Time >= 43
+value = ifelse(root,command="qcfx",17210,17011)
 
 ; Tandem Combo Initialization
 [Statedef 17325]
@@ -3472,4 +3574,5 @@ trigger1 = Parent, StateNo != [17011, 17014]
 trigger1 = Parent, StateNo != 17220
 trigger1 = Parent, StateNo != 17230
 trigger1 = Parent, StateNo != 17320
+trigger1 = Parent, StateNo != 17321
 trigger1 = Parent, StateNo != 17300
