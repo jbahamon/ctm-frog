@@ -217,7 +217,7 @@ physics = N
 movetype = A
 anim = 3033
 sprpriority = -2
-facep2= 1
+facep2= 0
 
 [State 7011, Heavy Hit]
 type = ChangeState
@@ -227,12 +227,14 @@ value = 17015
 [State 7011, Heavy Hit]
 type = ChangeState
 triggerall = Parent, StateNo != Var(0)
+trigger1 = !NumHelper(15060)
 trigger1 = Parent, StateNo = 15040
 value = 17310
 
 [State 7010, appear]
 type = StateTypeSet
 trigger1 = !Time
+trigger1 = !NumHelper(15060)
 trigger1 = Parent, StateType = C
 statetype = C
 physics = N
@@ -241,6 +243,7 @@ ignorehitpause = 1
 [State 7010, appear]
 type = StateTypeSet
 trigger1 = !Time
+trigger1 = !NumHelper(15060)
 trigger1 = Parent, StateType = A
 statetype = A
 physics = N
@@ -265,6 +268,7 @@ ignorehitpause = 1
 
 [State 7012, FollowPlayer]
 type = PosAdd
+trigger1 = !NumHelper(15060)
 trigger1 = AnimElemNo(0) = 1
 X = (ParentDist X)/5.0
 Y = (ParentDist Y - 10)/5.0
@@ -274,12 +278,19 @@ ignorehitpause = 1
 type = VelSet
 trigger1 = AnimElem = 2
 X = 2.5
+ignorehitpause = 1
+
+[State 7015, ChangeAnim]
+type = VelSet
+trigger1 = AnimElem = 2
+trigger1 = !NumHelper(15060)
 Y = IfElse(Root, StateType = A, 3, IfElse(Root, StateType = C, -3, 0))
 ignorehitpause = 1
 
 [State 7021, hit]
 type = HitDef
-trigger1 = !Time
+triggerall = !Time
+trigger1 = NumHelper(15060)
 trigger1 = Parent, StateType = S
 attr = S, NA
 animtype  = Medium
@@ -313,6 +324,7 @@ fall = 0
 [State 7021, hit]
 type = HitDef
 trigger1 = !Time
+trigger1 = !NumHelper(15060)
 trigger1 = Parent, StateType = C
 attr = C, NA
 animtype  = Medium
@@ -346,6 +358,7 @@ fall = 0
 [State 7021, hit]
 type = HitDef
 trigger1 = !Time
+trigger1 = !NumHelper(15060)
 trigger1 = Parent, StateType = A
 attr = A, NA
 animtype  = Medium
@@ -377,6 +390,7 @@ fall = 0
 
 [State 7012, Turn]
 type = Turn
+trigger1 = !NumHelper(15060)
 trigger1 = Facing != Parent, Facing
 ignorehitpause = 1
 
@@ -418,7 +432,7 @@ physics = N
 movetype = A
 anim = 3034
 sprpriority = -2
-facep2= 1
+facep2= 0
 
 [State 7011, Heavy Hit]
 type = ChangeState
@@ -429,6 +443,7 @@ value = 17310
 [State 7010, appear]
 type = StateTypeSet
 trigger1 = !Time
+trigger1 = !NumHelper(15060)
 trigger1 = Parent, StateType = C
 statetype = C
 physics = N
@@ -437,6 +452,7 @@ ignorehitpause = 1
 [State 7010, appear]
 type = StateTypeSet
 trigger1 = !Time
+trigger1 = !NumHelper(15060)
 trigger1 = Parent, StateType = A
 statetype = A
 physics = N
@@ -461,6 +477,7 @@ ignorehitpause = 1
 
 [State 7013, Turn]
 type = Turn
+trigger1 = !NumHelper(15060)
 trigger1 = Facing != Parent, Facing
 ignorehitpause = 1
 
@@ -479,6 +496,7 @@ ignorehitpause = 1
 
 [State 7012, FollowPlayer]
 type = PosAdd
+trigger1 = !NumHelper(15060)
 trigger1 = AnimElemNo(0) = 1
 X = (ParentDist X)/5.0
 Y = (ParentDist Y - 10)/5.0
@@ -487,8 +505,14 @@ ignorehitpause = 1
 [State 7015, ChangeAnim]
 type = VelSet
 trigger1 = AnimElem = 2
-X = 3
+trigger1 = !NumHelper(15060)
 Y = IfElse(Root, StateType = A, 3, IfElse(Root, StateType = C, -3, 0))
+ignorehitpause = 1
+
+[State 7015, ChangeAnim]
+type = VelSet
+trigger1 = AnimElem = 2
+X = 3
 ignorehitpause = 1
 
 [State 7013, Selector Var]
@@ -548,7 +572,7 @@ physics = N
 movetype = A
 anim = 3035
 sprpriority = -2
-facep2= 1
+facep2= 0
 
 [State 7011, Heavy Hit]
 type = ChangeState
@@ -559,6 +583,7 @@ value = 17310
 [State 7010, appear]
 type = StateTypeSet
 trigger1 = !Time
+trigger1 = !NumHelper(15060)
 trigger1 = Parent, StateType = C
 statetype = C
 physics = N
@@ -567,6 +592,7 @@ ignorehitpause = 1
 [State 7010, appear]
 type = StateTypeSet
 trigger1 = !Time
+trigger1 = !NumHelper(15060)
 trigger1 = Parent, StateType = A
 statetype = A
 physics = N
@@ -580,6 +606,7 @@ ignorehitpause = 1
 
 [State 7012, FollowPlayer]
 type = PosAdd
+trigger1 = !NumHelper(15060)
 trigger1 = AnimElemNo(0) = 1
 X = (ParentDist X)/5.0
 Y = (ParentDist Y - 10)/5.0
@@ -598,6 +625,7 @@ value = S7000,1
 
 [State 7014, Turn]
 type = Turn
+trigger1 = !NumHelper(15060)
 trigger1 = Facing != Parent, Facing
 ignorehitpause = 1
 
@@ -648,17 +676,16 @@ palfx.time=10
 fall = 1
 fall.recover = 0
 
-[State 7014, FollowPlayer]
-type = PosAdd
-trigger1 = AnimElemNo(0) = 1
-X = (ParentDist X)/5.0
-Y = (ParentDist Y - 10)/5.0
+[State 7015, ChangeAnim]
+type = VelSet
+trigger1 = AnimElem = 2
+X = 3.5
 ignorehitpause = 1
 
 [State 7015, ChangeAnim]
 type = VelSet
 trigger1 = AnimElem = 2
-X = 3.5
+trigger1 = !NumHelper(15060)
 Y = IfElse(Root, StateType = A, 3, IfElse(Root, StateType = C, -3, 0))
 ignorehitpause = 1
 
@@ -1299,7 +1326,7 @@ movetype = A
 anim = 14010
 velset = 0,0
 sprpriority = -2
-facep2= 1
+facep2= 0
 
 [State 7015, ChangeAnim]
 type = VarSet
@@ -1358,11 +1385,18 @@ type = VarSet
 trigger1 = !Time
 var(0) = Parent, StateNo
 
+
 [State 1030, whatbuttondidyoupress?]
 type = VarSet
 trigger1 = !Time
-var(3) = Parent, Var(0)
+trigger1 = NumHelper(15060)
+var(3) = Helper(15060), Var(Var(5) + 29)
 
+[State 1030, whatbuttondidyoupress?]
+type = VarSet
+trigger1 = !Time
+trigger1 = !NumHelper(15060)
+var(3) = Parent, Var(0)
 
 [State 7014, End]
 type = ChangeState
@@ -1826,6 +1860,13 @@ var(0) = Parent, StateNo
 [State 1030, whatbuttondidyoupress?]
 type = VarSet
 trigger1 = !Time
+trigger1 = NumHelper(15060)
+var(3) = Helper(15060), Var(Var(5) + 29)
+
+[State 1030, whatbuttondidyoupress?]
+type = VarSet
+trigger1 = !Time
+trigger1 = !NumHelper(15060)
 var(3) = Parent, Var(0)
 
 [State 7014, Light Hit]
@@ -2663,6 +2704,169 @@ sprpriority = 3
 facep2= 1
 velset = 0,0
 
+
+[State 7014, End]
+type = ChangeState
+trigger1 = AnimElemTime(5) >= 7 || (!Time && Root, Power < 1000)
+trigger1 = NumHelper(15060)
+trigger1 = (Var(5) := (Var(5) + 1))
+trigger1 = Helper(15060), Var(Var(5)) > 0
+value = Helper(15060), Var(Var(5))
+
+[State 7014, End]
+type = ChangeState
+triggerall = NumHelper(15060)
+trigger1 = AnimElemTime(5) = 7
+trigger2 = !Time
+trigger2 = Root, Power < 1000
+value = 17011
+
+[State 7014, End]
+type = PowerAdd
+triggerall = !Time
+trigger1 = Root, Power >= 1000
+value = -1000
+persistent = 0
+
+[State 1000, Knife 1]
+type = helper
+trigger1 = numhelper(15060)
+trigger1 = AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y + 10 - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 2]
+type = helper
+trigger1 = numhelper(15060)
+trigger1 = AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y + 10 - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 3]
+type = helper
+trigger1 = numhelper(15060)
+trigger1 = AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y + 10 - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 4]
+type = helper
+trigger1 = numhelper(15060)
+trigger1 = AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y + 10 - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 5]
+type = helper
+trigger1 = numhelper(15060)
+trigger1 = AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y + 10 - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 6]
+type = helper
+trigger1 = numhelper(15060)
+trigger1 = AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y + 10 - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 7]
+type = helper
+trigger1 = numhelper(15060)
+trigger1 = AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y + 10 - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 8]
+type = helper
+trigger1 = numhelper(15060)
+trigger1 = AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y + 10 - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 9]
+type = helper
+trigger1 = numhelper(15060)
+trigger1 = AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y + 10 - Random % 60)
+ownpal = 1
+
+[State 1000, Knife 1]
+type = helper
+trigger1 = numhelper(15060)
+trigger1 = AnimElem = 5
+helpertype = normal
+stateno = 15001
+ID = 15001
+name = "Masamune Knife"
+postype = p1
+pos = Floor(-40 + Random % 60), Floor(- Pos Y + 10 - Random % 60)
+ownpal = 1
+
+[State 2010, Super Pause]
+type = superpause
+trigger1 = numhelper(15060)
+trigger1 = AnimElem = 3
+time = 45
+movetime = 0
+anim = -1
+sound = S7050,3
+p2defmul = 1
+darken = 0
+
+[State 2010, Super Pause]
+type = ChangeAnim
+trigger1 = numhelper(15060)
+trigger1 = AnimElemTime(3) = 1
+value = 15010
+elem = 4
+persistent = 0
+
 [State 7010, appear]
 type = trans
 trigger1 = 1
@@ -2683,6 +2887,7 @@ ignorehitpause = 1
 [State 7012, FollowPlayer]
 type = PosAdd
 trigger1 = !Time
+trigger1 = !NumHelper(15060)
 X = (ParentDist X)
 Y = (ParentDist Y - 10)
 ignorehitpause = 1
@@ -2690,6 +2895,7 @@ persistent = 0
 
 [State 7012, Turn]
 type = Turn
+trigger1 = !NumHelper(15060)
 trigger1 = Facing != Parent, Facing
 ignorehitpause = 1
 
@@ -2737,6 +2943,33 @@ postype = p1
 pos = -7, -22
 ownpal = 1
 supermovetime = 99999
+
+[State 2010, Super Pause FX]
+type = helper
+trigger1 = !Time
+helpertype = normal
+stateno = 7000
+ID = 7000
+name = "Super Charge"
+postype = p1
+pos = 0,0
+ownpal = 1
+persistent = 0
+supermovetime = 9999
+
+[State 3250, Super Pause FX]
+type = helper
+trigger1 = !Time
+helpertype = normal
+stateno = 7001
+ID = 7001
+name = "Super BG"
+postype = p1
+pos = -34, -63
+ownpal = 1
+persistent = 0
+pausemovetime = 9999
+supermovetime = 9999
 
 [State 7014, End]
 type = ChangeState
@@ -3120,7 +3353,7 @@ value = -1
 type = VarSet
 trigger1 = !Var(58)
 trigger1 = Root, Command = "qcf2p"
-trigger1 = Var(59) < 58
+trigger1 = Var(59) < 29
 trigger1 = (Var(59) := (Var(59) + 1))
 trigger1 = Var(58) := 5
 v = var(59) - 1
@@ -3130,9 +3363,10 @@ value = 17300
 type = VarSet
 trigger1 = !Var(58)
 trigger1 = Root, Command = "qcba" || Root, Command = "qcbb" || Root, Command = "qcbc"
-trigger1 = Var(59) < 58
+trigger1 = Var(59) < 29
 trigger1 = (Var(59) := (Var(59) + 1))
 trigger1 = Var(58) := 5
+trigger1 = (Var(Var(59) - 1 + 29) := IfElse(Root, Command="qcbc", 2, IfElse(Root, Command = "qcbb", 1, 0))) + 1
 v = var(59) - 1
 value = 17230
 
@@ -3140,10 +3374,11 @@ value = 17230
 [State 7014, End]
 type = VarSet
 trigger1 = !Var(58)
-trigger1 = Root, Command = "qcfa" || Root, Command = "qcfb" || Root, Command = "qcfc" || Root, Command = "qcfa" || Root, Command = "qcfb" || Root, Command = "qcfc"
-trigger1 = Var(59) < 58
+trigger1 = Root, Command = "qcfa" || Root, Command = "qcfb" || Root, Command = "qcfc" 
+trigger1 = Var(59) < 29
 trigger1 = (Var(59) := (Var(59) + 1))
 trigger1 = Var(58) := 5
+trigger1 = (Var(Var(59) - 1 + 29) := IfElse(Root, Command="qcfc", 2, IfElse(Root, Command = "qcfb", 1, 0))) + 1
 v = var(59) - 1
 value = 17220
 
@@ -3151,7 +3386,7 @@ value = 17220
 type = VarSet
 trigger1 = !Var(58)
 trigger1 = Root, Command = "a"
-trigger1 = Var(59) < 58
+trigger1 = Var(59) < 29
 trigger1 = (Var(59) := (Var(59) + 1))
 trigger1 = Var(58) := 5
 v = var(59) - 1
@@ -3161,7 +3396,7 @@ value = 17012
 type = VarSet
 trigger1 = !Var(58)
 trigger1 = Root, Command = "b"
-trigger1 = Var(59) < 58
+trigger1 = Var(59) < 29
 trigger1 = (Var(59) := (Var(59) + 1))
 trigger1 = Var(58) := 5
 v = var(59) - 1
@@ -3171,7 +3406,7 @@ value = 17013
 type = VarSet
 trigger1 = !Var(58)
 trigger1 = Root, Command = "c"
-trigger1 = Var(59) < 58
+trigger1 = Var(59) < 29
 trigger1 = (Var(59) := (Var(59) + 1))
 trigger1 = Var(58) := 5
 v = var(59) - 1
@@ -3191,3 +3426,4 @@ trigger1 = Parent, StateNo != [17011, 17014]
 trigger1 = Parent, StateNo != 17220
 trigger1 = Parent, StateNo != 17230
 trigger1 = Parent, StateNo != 17320
+trigger1 = Parent, StateNo != 17300

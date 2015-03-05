@@ -258,7 +258,7 @@ ignorehitpause = 1
 Type = ParentVarset
 Trigger1 = MoveHit
 trigger1 = !(target, time) && target, movetype = H
-fvar(39) = parent, Fvar(39)*0.95
+fvar(39) = Root, Fvar(39)*0.95
 persistent = 0
 ignorehitpause = 1
 
