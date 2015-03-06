@@ -141,6 +141,49 @@ scale = (Root, Var(24) / 1000.0)*0.5, 0.5
 ignorehitpause = 1
 
 
+; Stand Crash BG
+[Statedef 13250]
+type = S
+physics = N
+movetype = I
+anim = 14997
+sprpriority = -105
+
+[State 7201, Shadow]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+ignorehitpause = 1
+
+[State 7201, Shadow]
+type = Trans
+trigger1 = 1
+trans = add
+ignorehitpause = 1
+
+[State 7201, Pos]
+type = PosAdd
+trigger1 = 1
+X = GameWidth/2.0 - ScreenPos X
+Y = GameHeight/2.0 - ScreenPos Y
+ignorehitpause = 1
+
+[State 8520, Scale]
+type = VarSet
+trigger1 = !Time
+v = 0
+value = 4
+
+[State 8520, Scale]
+type = Trans
+trigger1 = Time >= Var(0)
+trans = addalpha
+alpha = 256 - 16 * (Time - Var(0)), 16 * (Time - Var(0))
+
+[State 8520, Safety]
+type = DestroySelf
+trigger1 = Time >= (Var(0) + 16)
+
 ; Advancing Guard
 [Statedef 13300]
 type    = U

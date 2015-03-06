@@ -1849,7 +1849,7 @@ movetype = A
 anim = 14020
 velset = 0,0
 sprpriority = -2
-facep2= 1
+facep2= NumHelper(15060)
 
 
 [State 7014, Light Hit]
@@ -2787,7 +2787,7 @@ physics = N
 movetype = A
 anim = 15010
 sprpriority = 3
-facep2= 1
+facep2= !NumHelper(15060)
 velset = 0,0
 
 
@@ -3487,7 +3487,7 @@ trigger1 = NumHelper(15060)
 triggerall = Time > 3
 trigger1 = P2bodydist x <= 30
 trigger2 = Root,command = "x"
-trigger2 = !Root,NumHelper(7000)
+trigger2 = !Root,NumHelper(7000) && !Root,NumHelper(7001)
 trigger3 = Time >= 43
 value = ifelse(root,command="qcfx",17210,17011)
 
@@ -3532,7 +3532,7 @@ trigger1 = !Var(58)
 trigger1 = Root, Command = "qcf2p"
 trigger1 = Var(59) < 29
 trigger1 = (Var(59) := (Var(59) + 1))
-trigger1 = Var(58) := 10
+trigger1 = Var(58) := 15
 v = var(59) - 1
 value = 17300
 
@@ -3542,7 +3542,7 @@ trigger1 = !Var(58)
 trigger1 = Root, Command = "qcba" || Root, Command = "qcbb" || Root, Command = "qcbc"
 trigger1 = Var(59) < 29
 trigger1 = (Var(59) := (Var(59) + 1))
-trigger1 = Var(58) := 10
+trigger1 = Var(58) := 15
 trigger1 = (Var(Var(59) - 1 + 29) := IfElse(Root, Command="qcbc", 2, IfElse(Root, Command = "qcbb", 1, 0))) + 1
 v = var(59) - 1
 value = 17230
@@ -3554,7 +3554,7 @@ trigger1 = !Var(58)
 trigger1 = Root, Command = "qcfa" || Root, Command = "qcfb" || Root, Command = "qcfc" 
 trigger1 = Var(59) < 29
 trigger1 = (Var(59) := (Var(59) + 1))
-trigger1 = Var(58) := 5
+trigger1 = Var(58) := 15
 trigger1 = (Var(Var(59) - 1 + 29) := IfElse(Root, Command="qcfc", 2, IfElse(Root, Command = "qcfb", 1, 0))) + 1
 v = var(59) - 1
 value = 17220
@@ -3565,7 +3565,7 @@ trigger1 = !Var(58)
 trigger1 = Root, Command = "a"
 trigger1 = Var(59) < 29
 trigger1 = (Var(59) := (Var(59) + 1))
-trigger1 = Var(58) := 10
+trigger1 = Var(58) := 15
 v = var(59) - 1
 value = 17012
 
@@ -3575,7 +3575,7 @@ trigger1 = !Var(58)
 trigger1 = Root, Command = "b"
 trigger1 = Var(59) < 29
 trigger1 = (Var(59) := (Var(59) + 1))
-trigger1 = Var(58) := 10
+trigger1 = Var(58) := 15
 v = var(59) - 1
 value = 17013
 
@@ -3585,7 +3585,7 @@ trigger1 = !Var(58)
 trigger1 = Root, Command = "c"
 trigger1 = Var(59) < 29
 trigger1 = (Var(59) := (Var(59) + 1))
-trigger1 = Var(58) := 10
+trigger1 = Var(58) := 15
 v = var(59) - 1
 value = 17014
 

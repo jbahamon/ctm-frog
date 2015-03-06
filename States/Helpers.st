@@ -35,6 +35,13 @@ trigger1 = !Time
 trigger1 = var(1) := (Root, PalNo = 12)
 var(1) = 30
 
+
+[State 7000, Var]
+type = VarSet
+trigger1 = !Time
+trigger1 = var(1) > 0 && Root, StateNo = 15060
+var(1) = 103
+
 [State 7000, Pal Down]
 type = BGPalFX
 trigger1 = time <= 10 && !Var(1)
@@ -113,13 +120,26 @@ anim = 14999
 
 [State 8520, Pos]
 type = Turn
-trigger1 = facing != 1
+trigger1 = facing != Root, Facing
 
 [State 8520, Pos]
 type = PosAdd
-trigger1 = 1
+trigger1 = Facing > 0
 X = - ScreenPos X + (random%16) * IfElse((Time % 6 = [1,3]),-1,1) - 16
-Y = Ceil((1.3333333 * gameheight / gamewidth) * 120) - ScreenPos Y + (random%16) * IfElse((Time % 6 = [1,3]),-1,1)
+Y = GameHeight/2.0 - ScreenPos Y + (random%16) * IfElse((Time % 6 = [1,3]),-1,1)
+
+[State 8520, Pos]
+type = PosAdd
+trigger1 = Facing < 0
+X = (GameWidth - ScreenPos X)*Facing + (random%16) * IfElse((Time % 6 = [1,3]),-1,1) - 16
+Y = GameHeight/2.0 - ScreenPos Y + (random%16) * IfElse((Time % 6 = [1,3]),-1,1)
+
+[State 0, DisplayToClipboard]
+type = DisplayToClipboard
+trigger1 = 1
+text = "Pos= %d"
+params = ScreenPos X
+
 
 [State 8520, Scale]
 type = AssertSpecial
@@ -130,6 +150,12 @@ flag = noshadow
 type = VarSet
 trigger1 = !Time
 var(0) = 24
+
+
+[State 8520, Scale]
+type = VarSet
+trigger1 = !Time && Root, StateNo = 15060
+var(0) = 103
 
 [State 8520, Trans]
 type = Trans
@@ -180,8 +206,8 @@ trigger1 = facing != 1
 [State 8520, Pos]
 type = PosAdd
 trigger1 = 1
-X = 160 - ScreenPos X
-Y = Ceil((1.3333333 * gameheight / gamewidth) * 120) - ScreenPos Y
+X = GameWidth/2.0 - ScreenPos X
+Y = GameHeight/2.0 - ScreenPos Y
 
 [State 8520, Scale]
 type = AssertSpecial

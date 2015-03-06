@@ -2729,8 +2729,24 @@ type = helper
 trigger1 = Time = 3
 trigger1 = !NumHelper(7000)
 helpertype = normal
-stateno = 15061
+stateno = 7000
 ID = 7000
+name = "Super BG"
+postype = left
+pos = -34, -63
+ownpal = 1
+persistent = 0
+pausemovetime = 9999
+supermovetime = 9999
+ignorehitpause = 1
+
+[State 3250, Super Pause FX]
+type = helper
+trigger1 = Time = 3
+trigger1 = !NumHelper(7001)
+helpertype = normal
+stateno = 7001
+ID = 7001
 name = "Super BG"
 postype = left
 pos = -34, -63
@@ -2769,73 +2785,3 @@ type = ChangeState
 trigger1 = Time = 123
 value = 0
 ctrl = 1
-
-; Tandem Combo BG
-[Statedef 15061]
-type    = A
-movetype= I
-physics = N
-juggle  = 3
-ctrl = 0
-anim = 15051
-sprpriority = -6
-velset = 8,0
-
-[State 9000, ModifyExplod]
-type = AssertSpecial
-trigger1 = 1
-flag = noshadow
-ignorehitpause = 1
-
-[State 9000, ModifyExplod]
-type = PosAdd
-trigger1 = !Time
-X = GameWidth/2.0 - ScreenPos X
-ignorehitpause = 1
-
-[State 9000, ModifyExplod]
-type = PosAdd
-trigger1 = 1
-Y = GameHeight/2.0 - ScreenPos Y
-ignorehitpause = 1
-
-[State 9000, ModifyExplod]
-type = VarSet
-trigger1 = !Time
-var(0) = -1
-ignorehitpause = 1
-
-[State 9000, ModifyExplod]
-type = PosAdd
-trigger1 = GameWidth/2.0 - ScreenPos X < -64
-X = GameWidth/2.0 - ScreenPos X
-ignorehitpause = 1
-
-[State 9000, ModifyExplod]
-type = VarSet
-trigger1 = Parent, StateNo = 15060
-trigger1 = Parent, Time = 123
-trigger2 = Parent, StateNo != 15060
-var(0) = 16
-persistent = 0
-ignorehitpause = 1
-
-
-[State 9000, ModifyExplod]
-type = Trans
-trigger1 = Var(0) >= 0
-trans = addalpha
-alpha = 16 * Var(0), 256 - 16 * Var(0)
-ignorehitpause = 1
-
-[State 9000, ModifyExplod]
-type = DestroySelf
-trigger1 = !Var(0)
-ignorehitpause = 1
-
-[State 9000, ModifyExplod]
-type = VarAdd
-trigger1 = Var(0) > 0
-var(0) = -1
-ignorehitpause = 1
-

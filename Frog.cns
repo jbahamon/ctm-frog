@@ -189,8 +189,9 @@ var(25) = 0
 type = AssertSpecial
 triggerall = PalNo = 12
 triggerall = NumHelper(10000)
-trigger1= Helper(10000), StateNo = 17220
-trigger2= Helper(10000), StateNo = 17230
+trigger1 = Helper(10000), StateNo = 17220
+trigger2 = Helper(10000), StateNo = 17230
+trigger3 = Helper(10000), NumHelper(15060)
 flag = NoStandGuard
 flag2 = NoCrouchGuard
 flag3 = NoAirGuard
@@ -210,11 +211,33 @@ ownpal = 1
 
 [State 7015, LifeAdd]
 type = Null;
-trigger1 =  Var(24) < 0
+trigger1 = PalNo = 12
+trigger1 = Var(24) < 0
 trigger1 = !(Var(24) := 0)
 trigger1 = !(Var(23) := 0)
 trigger1 = (Var(28) := 80)
 ignorehitpause = 1
+
+
+[State 200, Explod]
+type = Helper
+trigger1 =  PalNo = 12
+trigger1 = Var(28) = 80
+stateno = 13250
+ID = 13250
+postype = Left
+pos = 160,104
+ownpal = 1
+ignorehitpause = 1
+sprpriority = -105
+pausemovetime = 99999999
+supermovetime = 99999999
+
+[State 4000, Effect]
+type = null;AssertSpecial
+trigger1 = NumHelper(13250)
+flag = NoFG
+flag2 = NoBG
 
 [State 7015, LifeAdd]
 type = Null;

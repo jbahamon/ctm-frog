@@ -1994,6 +1994,10 @@ Clsn2: 1
 46,0, 0,0, -1
 
 
+; Stand - Stand Light
+[Begin Action 13201]
+-1,0, 0,0, 10
+
 ; Alt Air Medium 
 [Begin Action 13210]
 Clsn2: 1
@@ -2445,6 +2449,12 @@ Clsn1: 1
 [Begin Action 14500]
 14500,0, 0,0, -1
 
+; Stand Crash
+[Begin Action 14997]
+14997,0, 0,0, 1
+14997,1, 0,0, 1
+
+; Lel
 [Begin Action 14998]
 14999,1, 0,0, 10
 

@@ -23,7 +23,13 @@ dest = 1,palno
 type = VarSet
 trigger1 = 1
 v = 24
-value = 1000
+value = 1;000
+
+[State 5900, 3] ;Change palette
+type = VarSet
+trigger1 = 1
+v = 25
+value = 1;000
 
 [State 5900, 4] ;Intro for round 1
 type = ChangeState
