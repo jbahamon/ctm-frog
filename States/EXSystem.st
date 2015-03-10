@@ -55,7 +55,7 @@ facep2= 1
 type = ChangeAnim
 trigger1 = !Time
 trigger1 = PrevStateNo != 13101
-value = 13110
+value = 13010
 
 [State 210, 5]
 type = ChangeState
@@ -99,23 +99,13 @@ sprpriority=1
 facep2= 1
 
 
-
-[State 0, DisplayToClipboard]
-type = DisplayToClipboard
-trigger1 = 1
-text = "HOLII"
-;params = var(10),vel x
-;ignorehitpause = 
-;persistent = 
-
-
 [State 210, 5]
 type = ChangeAnim
 trigger1 = !Time
 trigger1 = PrevStateNo != 13101
 trigger1 = PrevStateNo != 13111
 trigger1 = PrevStateNo != 13110
-value = 13120
+value = 13020
 
 [State 220, end]
 type=changestate

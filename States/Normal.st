@@ -213,7 +213,7 @@ var(0) = (PalNo = 12 && Var(23) = 1)
 type = ChangeAnim
 trigger1 = !Time
 trigger1 = PalNo = 12 && !Var(23)
-value = 13021
+value = 13026
 
 [State 200, Special Anim]
 type = ChangeAnim
@@ -377,7 +377,7 @@ value=221
 type=changestate
 triggerall= !AnimTime
 trigger1 = Var(0)
-trigger2 = Anim = 13021
+trigger2 = Anim = 13026
 value = 0
 ctrl = 1
 

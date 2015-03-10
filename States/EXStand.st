@@ -537,6 +537,32 @@ type = VarSet
 trigger1 = !Time
 var(6) = IfElse(PrevStateNo = 17012, 1, IfElse(PrevStateNo = 17013, 2, 0))
 
+
+[State 7014, End]
+type = ChangeAnim
+triggerall = !Time
+triggerall = !NumHelper(15060)
+trigger1 = Root, PrevStateNo = 100
+trigger2 = Root, PrevStateNo = 105
+value = 13022
+
+[State 7011, Heavy Hit]
+type = ChangeAnim
+trigger1 = !Time
+value = IfElse(NumHelper(15060), 13024, 13021)
+
+[State 7014, End]
+type = ChangeAnim
+triggerall = !Time
+trigger1 = PrevStateNo = 17012
+value = IfElse(NumHelper(15060), 13025, 13023)
+
+[State 7014, End]
+type = ChangeAnim
+trigger1 = !Time
+trigger1 = PrevStateNo = 17013
+value = 13022
+
 [State 7014, Light Hit]
 type = PlayerPush
 trigger1 = 1
