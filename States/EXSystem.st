@@ -1,3 +1,131 @@
+;Standing Light (w/stand)
+[StateDef 13100]
+anim = 13000
+ctrl = 0
+type = S
+movetype = A
+physics = S
+sprpriority = 1
+velset = 0,0
+poweradd = 0
+juggle = 3 
+facep2= 1
+
+[State 200, 1]
+type = ChangeState
+trigger1 = !NumHelper(10000) || !Var(23)
+trigger2 = NumHelper(10000) && Helper(10000), StateNo = 17012 && !(Helper(10000), AnimTime)
+trigger3 = Time > 5 && NumHelper(10000) && Helper(10000), StateNo != [17012, 17014]
+value = 0
+ctrl = 1
+
+;Standing Light (w/stand)
+[StateDef 13101]
+ctrl = 0
+type = S
+movetype = A
+physics = S
+sprpriority = 1
+velset = 0,0
+poweradd = 0
+juggle = 3 
+facep2= 1
+
+[State 200, 1]
+type = ChangeState
+trigger1 = !NumHelper(10000) || !Var(23)
+trigger2 = Time > 5 && NumHelper(10000) && Helper(10000), StateNo != [17012, 17014]
+trigger3 = NumHelper(10000) && Helper(10000), StateNo = 17012 && !(Helper(10000), AnimTime)
+value = 0
+ctrl = 1
+
+;Standing Medium
+[Statedef 13110]
+type    = S
+movetype= A
+physics = S
+juggle  = 4
+poweradd= IfElse(Var(21) > 0, 0, 18)
+ctrl = 0
+velset = 0,0
+sprpriority=1
+facep2= 1
+
+[State 210, 5]
+type = ChangeAnim
+trigger1 = !Time
+trigger1 = PrevStateNo != 13101
+value = 13110
+
+[State 210, 5]
+type = ChangeState
+trigger1 = !NumHelper(10000) || !Var(23)
+trigger2 = NumHelper(10000) && Helper(10000), StateNo = 17013 && !(Helper(10000), AnimTime)
+trigger3 = Time > 5 && NumHelper(10000) && Helper(10000), StateNo != [17012, 17014]
+value = 0
+ctrl = 1
+
+;Standing Medium
+[Statedef 13111]
+type    = S
+movetype= A
+physics = S
+juggle  = 4
+poweradd= IfElse(Var(21) > 0, 0, 18)
+ctrl = 0
+velset = 0,0
+sprpriority=1
+facep2= 1
+
+[State 210, 5]
+type = ChangeState
+trigger1 = !NumHelper(10000) || !Var(23)
+trigger2 = NumHelper(10000) && Helper(10000), StateNo = 17013 && !(Helper(10000), AnimTime)
+trigger3 = Time > 5 && NumHelper(10000) && Helper(10000), StateNo != [17012, 17014]
+value = 0
+ctrl = 1
+
+;Standing Strong
+[Statedef 13120]
+type = S
+physics = S
+movetype = A
+anim = 13020
+ctrl = 0
+velset = 0,0
+poweradd= 18
+juggle = 12
+sprpriority=1
+facep2= 1
+
+
+
+[State 0, DisplayToClipboard]
+type = DisplayToClipboard
+trigger1 = 1
+text = "HOLII"
+;params = var(10),vel x
+;ignorehitpause = 
+;persistent = 
+
+
+[State 210, 5]
+type = ChangeAnim
+trigger1 = !Time
+trigger1 = PrevStateNo != 13101
+trigger1 = PrevStateNo != 13111
+trigger1 = PrevStateNo != 13110
+value = 13120
+
+[State 220, end]
+type=changestate
+trigger1 = !NumHelper(10000) || !Var(23)
+trigger2 = NumHelper(10000) && Helper(10000), StateNo = 17014 && !(Helper(10000), AnimTime)
+trigger3 = Time > 5 && NumHelper(10000) && Helper(10000), StateNo != [17013, 17014]
+value = 0
+ctrl = 1
+
+
 ;------------------------------------------------------------------------------------------
 
 ; Stand Activation
