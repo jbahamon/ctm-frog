@@ -51,6 +51,53 @@ velset = 0,0
 sprpriority=1
 facep2= 1
 
+[State 220, Position]
+type = PosAdd
+triggerall = prevstateno != [100,105]
+trigger1 = Helper(10000), AnimElem = 1
+trigger2 = Helper(10000), AnimElemTime(1) = 1
+trigger3 = Helper(10000), AnimElem = 3
+x = 3
+
+[State 220, Position]
+type = PosAdd
+triggerall = prevstateno != [100,105]
+trigger1 = Helper(10000), AnimElem = 1
+trigger2 = Helper(10000), AnimElem = 3
+trigger3 = Helper(10000), AnimElemTime(4) = 1
+trigger4 = Helper(10000), AnimElem = 5
+x = 2
+
+[State 220, Position]
+type = PosAdd
+triggerall = prevstateno != [100,105]
+trigger1 = !IsHelper
+trigger1 = Helper(10000), AnimElem = 2
+x = 6
+
+[State 220, Position]
+type = PosAdd
+triggerall = prevstateno != [100,105]
+trigger1 = Helper(10000), AnimElem = 4
+x = 1
+
+[State 1100, Velocity]
+type = VelSet
+trigger1 = Prevstateno != [100,105]
+trigger1 = time = 0
+trigger2 = Helper(10000), AnimElem = 2
+x = 0
+
+[State 1100, Velocity]
+type = VelSet
+trigger1 = Time = 0
+y = 0
+
+[State 1100, Velocity]
+type = VelMul
+trigger1 = 1
+x = .95
+
 [State 210, 5]
 type = ChangeAnim
 trigger1 = !Time
@@ -65,7 +112,7 @@ trigger3 = Time > 5 && NumHelper(10000) && Helper(10000), StateNo != [17012, 170
 value = 0
 ctrl = 1
 
-;Standing Medium
+;Standing Medium 2nd hit
 [Statedef 13111]
 type    = S
 movetype= A
@@ -76,6 +123,44 @@ ctrl = 0
 velset = 0,0
 sprpriority=1
 facep2= 1
+
+
+[State 220, Position]
+type = PosAdd
+trigger1 = Helper(10000), AnimElemTime(2) = 18
+trigger2 = Helper(10000), AnimElem = 4
+x = 1
+
+[State 220, Position]
+type = PosAdd
+trigger1 = Helper(10000), AnimElemTime(2) = 20
+x = 7
+
+[State 220, Position]
+type = PosAdd
+trigger1 = Helper(10000), AnimElem = 3
+x = 3
+
+[State 220, Position]
+type = PosAdd
+trigger1 = Helper(10000), AnimElemTime(4) = 2
+x = 2
+persistent = 0
+
+[State 220, Position]
+type = PosAdd
+trigger1 = AnimElemTime(2) = 17
+x = 7
+
+[State 1100, Velocity]
+type = VelSet
+trigger1 = time = 0
+x = 1.67
+
+[State 1100, Velocity]
+type = VelSet
+trigger1 = Helper(10000), AnimElemTime(2) = 7
+x = 0
 
 [State 210, 5]
 type = ChangeState
@@ -88,16 +173,45 @@ ctrl = 1
 ;Standing Strong
 [Statedef 13120]
 type = S
-physics = S
+physics = N
 movetype = A
 anim = 13020
 ctrl = 0
-velset = 0,0
 poweradd= 18
 juggle = 12
 sprpriority=1
 facep2= 1
 
+[State 1100, Velocity]
+type = null;VelSet
+trigger1 = PrevStateNo != 100 && PrevStateNo != 105
+trigger1 = Time = 0
+trigger2 = NumHelper(10000)
+trigger2 = !Helper(10000), AnimTime
+x = 0
+
+[State 1100, Velocity]
+type = VelMul
+trigger1 = 1
+x = .95
+
+[State 1100, Position]
+type = PosAdd
+triggerall = Helper(10000), AnimElem = 3
+trigger1 = PrevStateNo = 100 || PrevStateNo = 105 
+x = 13
+
+[State 1100, Position]
+type = PosAdd
+triggerall = PrevStateNo != 100 && PrevStateNo != 105
+trigger1 = Helper(10000), AnimElem = 3
+trigger2 = Helper(10000), AnimElemTime(3) = 1
+x = 7
+
+[State 220, Position]
+type = PosAdd
+trigger1 = Helper(10000), AnimElem = 4
+x = 7
 
 [State 210, 5]
 type = ChangeAnim

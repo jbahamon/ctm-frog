@@ -377,6 +377,83 @@ velset = 0,0
 sprpriority = -2
 facep2= 0
 
+[State 220, Position]
+type = PosAdd
+trigger1 = PrevStateNo != 17013
+trigger1 = NumHelper(15060)
+trigger1 = AnimElem = 2
+x = 3
+
+[State 220, Position]
+type = PosAdd
+trigger1 = PrevStateNo != 17013
+triggerall = NumHelper(15060)
+trigger1 = AnimElem = 2 || AnimElem = 4
+x = 2
+
+[State 220, Position]
+type = PosAdd
+trigger1 = PrevStateNo != 17013
+trigger1 = NumHelper(15060)
+trigger1 = AnimElemTime(1) = 1
+x = 6
+
+[State 220, Position]
+type = PosAdd
+trigger1 = PrevStateNo != 17013
+trigger1 = NumHelper(15060)
+trigger1 = AnimElemTime(2) = 8
+x = 1
+
+[State 1100, Velocity]
+type = VelSet
+trigger1 = PrevStateNo != 17013
+trigger1 = NumHelper(15060)
+trigger1 = time = 0
+x = 1
+
+[State 1100, Velocity]
+type = VelSet
+trigger1 = PrevStateNo != 17013
+trigger1 = Time = 0
+y = 0
+
+[State 220, Position]
+type = PosAdd
+triggerall = PrevStateNo = 17013
+trigger1 = AnimElemTime(2) = 8
+trigger2 = AnimElem = 4
+x = 1
+
+[State 220, Position]
+type = PosAdd
+trigger1 = PrevStateNo = 17013
+trigger1 = AnimElem = 3
+x = 7
+
+[State 220, Position]
+type = PosAdd
+trigger1 = PrevStateNo = 17013
+trigger1 = AnimElemTime(3) = 1
+x = 3
+
+[State 220, Position]
+type = PosAdd
+trigger1 = PrevStateNo = 17013
+trigger1 = AnimElem = 2
+x = 7
+
+[State 1100, Velocity]
+type = VelSet
+trigger1 = time = 0
+x = 2.67
+
+[State 1100, Velocity]
+type = VelSet
+trigger1 = PrevStateNo = 17013
+trigger1 = AnimElemTime(2) = 3
+x = 1
+
 [State 7014, End]
 type = VarSet
 trigger1 = !Time
@@ -530,6 +607,23 @@ anim = 13021
 velset = 0,0
 sprpriority = -2
 facep2= 0
+
+[State 1100, Position]
+type = PosAdd
+triggerall = AnimElem = 3
+trigger1 = NumHelper(15060) 
+x = 13
+
+[State 1100, Velocity]
+type = VelSet
+trigger1 = NumHelper(15060) 
+trigger1 = time = 0
+x = 1
+
+[State 1100, Velocity]
+type = VelSet
+trigger1 = Time = 0
+y = 0
 
 [State 7014, End]
 type = VarSet
