@@ -266,7 +266,6 @@ trigger1 = Var(6) = 1
 value = 17013
 ignorehitpause = 1
 
-
 [State 7011, Heavy Hit]
 type = ChangeState
 trigger1 = Parent, StateNo = 13120
@@ -536,7 +535,6 @@ facep2= 0
 type = VarSet
 trigger1 = !Time
 var(6) = IfElse(PrevStateNo = 17012, 1, IfElse(PrevStateNo = 17013, 2, 0))
-
 
 [State 7014, End]
 type = ChangeAnim
@@ -1340,6 +1338,37 @@ type = PlayerPush
 trigger1 = 1
 value = 1
 
+[State 1040,ChangeAnim]
+type = ChangeAnim
+trigger1 = NumHelper(15060)
+trigger1 = !Time
+value = 14011
+
+[State 7015, ChangeAnim]
+type = VarSet
+trigger1 = NumHelper(15060)
+trigger1 = !Time
+var(2) = 16
+ignorehitpause = 1
+
+[State 7015, ChangeAnim]
+type = VarAdd
+trigger1 = NumHelper(15060)
+trigger1 = var(2) >= 0
+var(2) = -1
+ignorehitpause = 1
+
+[State 1040,ChangeAnim]
+type = ChangeAnim
+trigger1 = NumHelper(15060)
+trigger1 = !Var(2)
+trigger1 = animelemtime(2) >= 0
+trigger1 = animelemtime(31) < 0
+value = anim
+elem = 31
+ignorehitpause = 0
+persistent = 0
+
 [State 7015, ChangeAnim]
 type = VarSet
 trigger1 = !Time
@@ -1367,7 +1396,6 @@ ignorehitpause = 1
 
 [State 9606, EnvColor]
 type = palfx
-trigger1 = Anim = 14010
 trigger1 = AnimElemNo(0) < 3
 trigger1 = time%2=0
 add = 128,128,192
@@ -1422,7 +1450,7 @@ value = Helper(15060), Var(Var(5))
 
 [State 7014, Light Hit]
 type = ChangeState
-trigger1 = !AnimTime && !NumHelper(15060)
+trigger1 = !AnimTime
 trigger2 = Parent, MoveType = H
 value = 17019
 
@@ -1786,10 +1814,37 @@ ignorehitpause = 1
 type = S
 physics = N
 movetype = A
-anim = 14020
 velset = 0,0
 sprpriority = -2
 facep2= NumHelper(15060)
+
+[State 1030, whatbuttondidyoupress?]
+type = VarSet
+trigger1 = !Time
+trigger1 = NumHelper(15060)
+var(3) = Helper(15060), Var(Var(5) + 29)
+
+[State 1030, whatbuttondidyoupress?]
+type = VarSet
+trigger1 = !Time
+trigger1 = !NumHelper(15060)
+var(3) = Parent, Var(0)
+
+
+[State 7015, ChangeAnim]
+type = ChangeAnim
+trigger1 = !Time
+trigger1 = !NumHelper(15060)
+value = IfElse(Var(3) = 2, 14022, IfElse(Var(3) = 1, 14021, 14020))
+ignorehitpause = 1
+
+
+[State 7015, ChangeAnim]
+type = ChangeAnim
+trigger1 = !Time
+trigger1 = NumHelper(15060)
+value = IfElse(Var(3) = 2, 14028, IfElse(Var(3) = 1, 14027, 14026))
+ignorehitpause = 1
 
 
 [State 7014, Light Hit]
@@ -1821,7 +1876,7 @@ type = ChangeAnim
 trigger1 = animelemtime(2) > 0
 trigger1 = animelemtime(3) < 0
 trigger1 = P2bodydist x < 30
-value = 14020
+value = Anim
 elem = 3
 
 [State 17210, Shake]
@@ -1841,7 +1896,6 @@ ignorehitpause = 1
 
 [State 9606, EnvColor]
 type = palfx
-trigger1 = Anim = 14020
 trigger1 = AnimElemNo(0) < 3
 trigger1 = time%2=0
 add = 64,64,96
@@ -1872,29 +1926,10 @@ type = VarSet
 trigger1 = !Time
 var(0) = Parent, StateNo
 
-[State 1030, whatbuttondidyoupress?]
-type = VarSet
-trigger1 = !Time
-trigger1 = NumHelper(15060)
-var(3) = Helper(15060), Var(Var(5) + 29)
-
-[State 1030, whatbuttondidyoupress?]
-type = VarSet
-trigger1 = !Time
-trigger1 = !NumHelper(15060)
-var(3) = Parent, Var(0)
-
 [State 7014, Light Hit]
 type = PlayerPush
 trigger1 = 1
 value = 1
-
-[State 7014, Light Hit]
-type = ChangeState
-trigger1 = !AnimTime && !NumHelper(15060)
-trigger2 = Parent, MoveType = H
-value = 17019
-
 
 [State 7014, End]
 type = ChangeState
@@ -1904,6 +1939,12 @@ trigger1 = Var(5) < 29
 trigger1 = Helper(15060), Var(Var(5) + 1) > 0
 trigger1 = (Var(5) := (Var(5) + 1))
 value = Helper(15060), Var(Var(5))
+
+[State 7014, Light Hit]
+type = ChangeState
+trigger1 = !AnimTime
+trigger2 = Parent, MoveType = H
+value = 17019
 
 
 [State 3010, HitDef]
@@ -1964,10 +2005,15 @@ ignorehitpause = 1
 type = S
 physics = N
 movetype = A
-anim = 14020
 velset = 0,0
 sprpriority = -2
 facep2= 1
+
+
+[State 1030, whatbuttondidyoupress?]
+type = VarSet
+trigger1 = !Time
+var(3) = Parent, Var(0)
 
 [State 7010, appear]
 type = Turn
@@ -1986,6 +2032,13 @@ trigger1 = 1
 trans = none
 ignorehitpause = 1
 
+[State 7015, ChangeAnim]
+type = ChangeAnim
+trigger1 = !Time
+value = IfElse(Var(3) = 2, 14025, IfElse(Var(3) = 1, 14024, 14023))
+ignorehitpause = 1
+
+
 [State 7010, appear]
 type = VelSet
 trigger1 = !MoveContact
@@ -1998,7 +2051,7 @@ type = ChangeAnim
 trigger1 = animelemtime(2) > 0
 trigger1 = animelemtime(3) < 0
 trigger1 = P2bodydist x < 30
-value = 14020
+value = Anim
 elem = 3
 
 [State 7010, appear]
@@ -2050,10 +2103,6 @@ type = VarSet
 trigger1 = !Time
 var(0) = Parent, StateNo
 
-[State 1030, whatbuttondidyoupress?]
-type = VarSet
-trigger1 = !Time
-var(3) = Parent, Var(0)
 
 [State 7014, Light Hit]
 type = PlayerPush
@@ -3473,21 +3522,25 @@ value = -1
 
 [State 7014, End]
 type = VarSet
+trigger1 = Root, StateNo = 15060
+trigger1 = Time > 4
 trigger1 = !Var(58)
 trigger1 = Root, Command = "qcf2p"
 trigger1 = Var(59) < 29
 trigger1 = (Var(59) := (Var(59) + 1))
-trigger1 = Var(58) := 15
+trigger1 = Var(58) := 3
 v = var(59) - 1
 value = 17300
 
 [State 7014, End]
 type = VarSet
+trigger1 = Root, StateNo = 15060
+trigger1 = Time > 4
 trigger1 = !Var(58)
 trigger1 = Root, Command = "qcba" || Root, Command = "qcbb" || Root, Command = "qcbc"
 trigger1 = Var(59) < 29
 trigger1 = (Var(59) := (Var(59) + 1))
-trigger1 = Var(58) := 15
+trigger1 = Var(58) := 3
 trigger1 = (Var(Var(59) - 1 + 29) := IfElse(Root, Command="qcbc", 2, IfElse(Root, Command = "qcbb", 1, 0))) + 1
 v = var(59) - 1
 value = 17230
@@ -3495,42 +3548,50 @@ value = 17230
 
 [State 7014, End]
 type = VarSet
+trigger1 = Root, StateNo = 15060
+trigger1 = Time > 4
 trigger1 = !Var(58)
 trigger1 = Root, Command = "qcfa" || Root, Command = "qcfb" || Root, Command = "qcfc" 
 trigger1 = Var(59) < 29
 trigger1 = (Var(59) := (Var(59) + 1))
-trigger1 = Var(58) := 15
+trigger1 = Var(58) := 3
 trigger1 = (Var(Var(59) - 1 + 29) := IfElse(Root, Command="qcfc", 2, IfElse(Root, Command = "qcfb", 1, 0))) + 1
 v = var(59) - 1
 value = 17220
 
 [State 7014, End]
 type = VarSet
+trigger1 = Root, StateNo = 15060
+trigger1 = Time > 4
 trigger1 = !Var(58)
 trigger1 = Root, Command = "a"
 trigger1 = Var(59) < 29
 trigger1 = (Var(59) := (Var(59) + 1))
-trigger1 = Var(58) := 15
+trigger1 = Var(58) := 3
 v = var(59) - 1
 value = 17012
 
 [State 7014, End]
 type = VarSet
+trigger1 = Root, StateNo = 15060
+trigger1 = Time > 4
 trigger1 = !Var(58)
 trigger1 = Root, Command = "b"
 trigger1 = Var(59) < 29
 trigger1 = (Var(59) := (Var(59) + 1))
-trigger1 = Var(58) := 15
+trigger1 = Var(58) := 3
 v = var(59) - 1
 value = 17013
 
 [State 7014, End]
 type = VarSet
+trigger1 = Root, StateNo = 15060
+trigger1 = Time > 4
 trigger1 = !Var(58)
 trigger1 = Root, Command = "c"
 trigger1 = Var(59) < 29
 trigger1 = (Var(59) := (Var(59) + 1))
-trigger1 = Var(58) := 15
+trigger1 = Var(58) := 3
 v = var(59) - 1
 value = 17014
 
@@ -3544,7 +3605,7 @@ params = (Var(59) - 1), Var(Var(59) - 1)
 [State 0, DisplayToClipboard]
 type = DestroySelf
 trigger1 = Root, StateNo != 15060
-trigger1 = Parent, StateNo != [17011, 17014]
+trigger1 = Parent, StateNo != [17012, 17014]
 trigger1 = Parent, StateNo != 17220
 trigger1 = Parent, StateNo != 17230
 trigger1 = Parent, StateNo != 17320
