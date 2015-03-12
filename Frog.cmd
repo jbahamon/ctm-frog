@@ -1012,7 +1012,7 @@ value = 13101
 triggerall = StateNo = 13100
 triggerall = PalNo = 12 && NumHelper(10000)
 triggerall = Helper(10000), StateNo = 17012
-triggerall = Helper(10000), MoveContact || Helper(10000), AnimElemNo(0) >= 4
+triggerall = Helper(10000), AnimElemTime(4) >= 6
 triggerall = command = "a"
 triggerall = command != "holddown"
 trigger1 = statetype = S
@@ -1024,7 +1024,7 @@ value = 13110
 triggerall = StateNo = 13101
 triggerall = PalNo = 12 && NumHelper(10000)
 triggerall = Helper(10000), StateNo = 17012
-triggerall = Helper(10000), MoveContact || Helper(10000), AnimElemNo(0) >= 4
+triggerall = Helper(10000), AnimElemTime(4) >= 6
 triggerall = command = "b"
 trigger1= command != "holddown"
 
@@ -1037,7 +1037,7 @@ triggerall = StateNo = 13110
 triggerall = PalNo = 12 && NumHelper(10000)
 triggerall = Helper(10000), StateNo = 17013
 triggerall = Helper(10000), Var(6) = 1
-triggerall = Helper(10000), MoveContact || Helper(10000), AnimElemNo(0) >= 4
+triggerall = Helper(10000), AnimElemTime(4) >= 6
 triggerall = command = "b"
 triggerall = command != "holddown"
 trigger1 = statetype = S
@@ -1061,7 +1061,7 @@ triggerall = StateNo = 13101
 triggerall = PalNo = 12 && NumHelper(10000)
 triggerall = Helper(10000), StateNo = 17012
 triggerall = Helper(10000), Var(6) = 1
-triggerall = Helper(10000), MoveContact || Helper(10000), AnimElemNo(0) >= 4
+triggerall = Helper(10000), AnimElemTime(4) >= 4
 triggerall = command = "a"
 triggerall = command != "holddown"
 trigger1 = statetype = S
@@ -1074,7 +1074,7 @@ triggerall = StateNo = 13110
 triggerall = PalNo = 12 && NumHelper(10000)
 triggerall = Helper(10000), StateNo = 17013
 triggerall = Helper(10000), Var(6) = 0
-triggerall = Helper(10000), MoveContact || Helper(10000), AnimElemNo(0) >= 4
+triggerall = Helper(10000), AnimElemTime(4) >= 6
 triggerall = command = "b"
 triggerall = command != "holddown"
 trigger1 = statetype = S
@@ -1087,7 +1087,7 @@ triggerall = StateNo = 13110
 triggerall = PalNo = 12 && NumHelper(10000)
 triggerall = Helper(10000), StateNo = 17013
 triggerall = Helper(10000), Var(6) = 1
-triggerall = Helper(10000), MoveContact || Helper(10000), AnimElemNo(0) >= 4
+triggerall = Helper(10000), AnimElemTime(4) >= 6
 triggerall = command = "c"
 triggerall = command != "holddown"
 trigger1 = statetype = S

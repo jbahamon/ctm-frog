@@ -155,7 +155,7 @@ x = 7
 [State 1100, Velocity]
 type = VelSet
 trigger1 = time = 0
-x = 1.67
+x = 0.85
 
 [State 1100, Velocity]
 type = VelSet
