@@ -15,26 +15,8 @@ poweradd = 0
 juggle = 3 
 facep2= 1
 
-[State 200, Special Anim]
-type = VarSet
-trigger1 = !Time
-var(0) = (PalNo = 12 && Var(23) = 1)
-
-[State 200, Special Anim]
-type = ChangeAnim
-trigger1 = !Time
-trigger1 = Var(0)
-value = 13000
-
-[State 200, Snd]
-type = PlaySnd
-trigger1 = !Var(0)
-trigger1 = AnimElem = 2
-value = S7000,0
-
 [State 200, Explod]
 type = Explod
-trigger1 = !Var(0)
 trigger1 = AnimElem = 2
 anim = 7020
 ID = 200
@@ -58,7 +40,6 @@ ignorehitpause = 1
 [State 200, HitDef]
 type = HitDef
 trigger1 = !Time
-trigger1 = !Var(0)
 attr = S, NA      
 damage = 15,0
 animtype=Light   
@@ -84,7 +65,6 @@ givepower=36, 36
 
 [State 200, Dampen]
 Type=Varset
-trigger1 = !Var(0)
 Trigger1 = MoveHit
 fvar(39) = fvar(39)*0.95
 persistent = 0
@@ -109,26 +89,13 @@ anim = 210
 sprpriority=1
 facep2= 1
 
-[State 200, Special Anim]
-type = VarSet
-trigger1 = !Time
-var(0) = (PalNo = 12 && Var(23) = 1)
-
-[State 200, Special Anim]
-type = ChangeAnim
-trigger1 = !Time
-trigger1 = Var(0)
-value = 13010
-
 [State 200, Snd]
 type = PlaySnd
-trigger1 = !Var(0)
 trigger1 = AnimElem = 3
 value = S7000,1
 
 [State 210, Explod]
 type = Explod
-trigger1 = !Var(0)
 trigger1 = AnimElem = 3
 anim = 7021
 ID = 210
@@ -151,7 +118,6 @@ ignorehitpause = 1
 
 [State 210, hit]
 type = HitDef
-trigger1 = !Var(0)
 trigger1 = AnimElem = 3
 attr = S, NA
 animtype  = Medium
@@ -179,7 +145,6 @@ palfx.time=10
 
 [State 200, Dampen]
 Type=Varset
-trigger1 = !Var(0)
 Trigger1 = MoveHit
 fvar(39) = fvar(39)*0.85
 persistent = 0
@@ -205,25 +170,13 @@ sprpriority=1
 facep2= 1
 
 [State 200, Special Anim]
-type = VarSet
-trigger1 = !Time
-var(0) = (PalNo = 12 && Var(23) = 1)
-
-[State 200, Special Anim]
 type = ChangeAnim
 trigger1 = !Time
 trigger1 = PalNo = 12 && !Var(23)
 value = 13026
 
-[State 200, Special Anim]
-type = ChangeAnim
-trigger1 = !Time
-trigger1 = Var(0)
-value = 13020
-
 [State 210, Explod]
 type = Explod
-trigger1 = !Var(0)
 trigger1 = Anim = 220
 trigger1 = AnimElem = 2
 anim = 7022
@@ -271,7 +224,6 @@ removeongethit = 1
 
 [State 200, Snd]
 type = PlaySnd
-trigger1 = !Var(0)
 trigger1 = AnimElem = 2
 value = S7000,1
 
@@ -307,7 +259,6 @@ givepower = 36, 36
 [State 220, hit]
 type = HitDef
 trigger1 = AnimElem = 2
-trigger1 = !Var(0)
 trigger1 = Anim = 220
 attr = A, NA
 animtype=Diagup
@@ -335,7 +286,6 @@ givepower = 36, 36
 
 [State 200, Dampen]
 Type=Varset
-trigger1 = !Var(0)
 Trigger1 = MoveHit
 fvar(39) = fvar(39)*0.8
 persistent = 0
@@ -344,16 +294,13 @@ ignorehitpause = 1
 [State 220, vel]
 type = VelSet
 triggerall = PalNo != 12
-trigger1 = !Var(0)
 trigger1 = AnimElem = 2
 X = 2
 Y = -8
 
-
 [State 220, change]
 type=statetypeset
 triggerall = PalNo != 12
-trigger1 = !Var(0)
 trigger1=animelemtime(2)>=0
 statetype=A
 physics=N
@@ -361,14 +308,12 @@ physics=N
 [State 220, gravity]
 type = VelAdd
 triggerall = PalNo != 12
-trigger1 = !Var(0)
 trigger1=animelemtime(2)>=0
 Y = .5
 
 [State 220, end]
 type=changestate
 triggerall = PalNo != 12
-trigger1 = !Var(0)
 trigger1= AnimElemNo(0) = 4 
 trigger1 = Pos y >= - Vel Y && Vel Y > 0
 value=221
@@ -376,8 +321,7 @@ value=221
 [State 220, end]
 type=changestate
 triggerall= !AnimTime
-trigger1 = Var(0)
-trigger2 = Anim = 13026
+trigger1 = Anim = 13026
 value = 0
 ctrl = 1
 
@@ -741,26 +685,13 @@ sprpriority = 1
 facep2= 1
 poweradd= 0
 
-[State 200, Special Anim]
-type = VarSet
-trigger1 = !Time
-var(0) = (PalNo = 12 && Var(23) = 1)
-
-[State 200, Special Anim]
-type = ChangeAnim
-trigger1 = !Time
-trigger1 = Var(0)
-value = 13200
-
 [State 600, Snd]
 type = PlaySnd
-trigger1 = !var(0)
 trigger1 = Animelem=2 
 value = S7000,0
 
 [State 600, Explod]
 type = Explod
-trigger1 = !var(0)
 trigger1 = AnimElem = 2
 anim = 7020
 ID = 600
@@ -783,7 +714,6 @@ ignorehitpause = 1
 
 [State 600, Hitdef]
 type = HitDef
-trigger1 = !var(0)
 trigger1 = Time = 0
 attr = A, NA
 damage    = 20
@@ -812,7 +742,6 @@ givepower = 36, 36
 
 [State 200, Dampen]
 Type=Varset
-trigger1 = !var(0)
 Trigger1 = MoveHit
 fvar(39) = fvar(39)*0.95
 persistent = 0

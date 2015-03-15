@@ -807,6 +807,7 @@ triggerall = PalNo = 12
 triggerall = StateType != A 
 triggerall = ctrl
 triggerall = Var(23) && NumHelper(10000)
+trigger1 = Helper(10000), StateNo = 17011
 trigger1 = Command = "dfa" || Command = "dfb" || Command = "dfc"
 value = 14040
 
@@ -823,9 +824,10 @@ value = 14030
 type = ChangeState
 triggerall = PalNo = 12
 triggerall = StateNo = 14025
-triggerall = (Var(23) && NumHelper(10000))
-trigger1 = Helper(10000), MoveContact
+triggerall = (Var(23) && NumHelper(10000))  
 triggerall = Command = "qcba" || Command = "qcbb" || Command = "qcbc" 
+trigger1 = Helper(10000), StateNo = 17235
+trigger1 = Helper(10000), MoveContact
 value = 14026
 
 [State -1, MUDAA]
@@ -872,13 +874,13 @@ trigger1 = !Var(23) && !NumHelper(10000)
 trigger1 = ctrl
 value = 14000
 
-; Stand Appearance Attack
-[State -1, Stand Attack]
+; Tandem Combo
+[State -1, Tandem Combo]
 type = ChangeState
 triggerall = command = "qcbx"
 triggerall = statetype != A
 triggerall = PalNo = 12
-trigger1 = (!Var(23) && !NumHelper(10000)) || (Var(23) && NumHelper(10000))
+trigger1 = (!Var(23) && !NumHelper(10000)) || (Var(23) && NumHelper(10000) && Helper(10000), StateNo = 17011)
 trigger1 = ctrl
 value = 15060
 
@@ -887,6 +889,7 @@ type = ChangeState
 trigger1 = (command = "c") && (command = "holdfwd" || command = "holdback")
 trigger1 = PalNo = 12
 trigger1 = roundstate = 2 && ctrl && statetype = S && stateno != 100
+trigger1 = (!Var(23) && !NumHelper(10000)) || (Var(23) && NumHelper(10000) && Helper(10000), StateNo = 17011)
 value = 13800
 
 ; Guard Cancel
@@ -958,33 +961,67 @@ trigger2 = (stateno = 400) || (stateno = 410) || (stateno = 200) || (stateno = 2
 trigger2 = movecontact
 
 ;----------------------Air----------------------
+
+;Jump Light Hit (Stand)
+[State -1, Jump Light Hit]
+type = ChangeState
+value = 13130
+triggerall = command = "a"
+triggerall = PalNo = 12 && (Var(23) && NumHelper(10000))
+trigger1 = statetype = A
+trigger1 = ctrl
+trigger2 = stateno = 1350 ;Air blocking
+
 ;Jump Light Hit
 [State -1, Jump Light Hit]
 type = ChangeState
 value = 600
 triggerall = command = "a"
 trigger1 = statetype = A
+triggerall = PalNo != 12 || (!Var(23) && !NumHelper(10000))
 trigger1 = ctrl
 trigger2 = stateno = 600 && movecontact
 trigger2 = animtime >= 6
 trigger3 = stateno = 1350 ;Air blocking
+
+;Jump Medium Hit (Stand)
+[State -1, Jump Light Hit]
+type = ChangeState
+value = 13131
+triggerall = command = "b"
+triggerall = PalNo = 12 && (Var(23) && NumHelper(10000))
+trigger1 = statetype = A
+trigger1 = ctrl
+trigger2 = stateno = 1350 ;Air blocking
 
 ;Jump Medium Hit
 [State -1, Jump Medium Hit]
 type = ChangeState
 value = 610
 triggerall = command = "b"
+triggerall = PalNo != 12 || (!Var(23) && !NumHelper(10000))
 trigger1 = statetype = A
 trigger1 = ctrl
 trigger2 = (stateno = 600) || (stateno = 220 && AnimElemNo(0) >= 3)  || (stateno = 1040)
 trigger2 = movecontact
 trigger3 = stateno = 1350 ;Air blocking
 
+;Jump Strong Hit (Stand)
+[State -1, Jump Light Hit]
+type = ChangeState
+value = 13132
+triggerall = command = "c"
+triggerall = PalNo = 12 && (Var(23) && NumHelper(10000))
+trigger1 = statetype = A
+trigger1 = ctrl
+trigger2 = stateno = 1350 ;Air blocking
+
 ;Jump Strong Hit
 [State -1, Jump Strong Hit]
 type = ChangeState
 value = 620
 triggerall = command = "c"
+triggerall = PalNo != 12 || (!Var(23) && !NumHelper(10000))
 triggerall = statetype = A
 trigger1 = ctrl
 trigger2 = (stateno = 600) || (stateno = 610) || (stateno = 220 && AnimElemNo(0) >= 3) || (stateno = 1040) || (stateno = 1020)

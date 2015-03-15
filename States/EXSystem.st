@@ -11,6 +11,7 @@ poweradd = 0
 juggle = 3 
 facep2= 1
 
+
 [State 200, 1]
 type = ChangeState
 trigger1 = !NumHelper(10000) || !Var(23)
@@ -228,6 +229,141 @@ trigger2 = NumHelper(10000) && Helper(10000), StateNo = 17014 && !(Helper(10000)
 trigger3 = Time > 5 && NumHelper(10000) && Helper(10000), StateNo != [17013, 17014]
 value = 0
 ctrl = 1
+
+
+;Air Standing Light (w/stand)
+[StateDef 13130]
+anim = 13200
+ctrl = 0
+type = A
+movetype = A
+physics = N
+sprpriority = 1
+poweradd = 0
+juggle = 3 
+facep2= 1
+
+[State 803, Safety]
+type = VarSet
+trigger1 = !Var(1)
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), StateNo = 17020
+v = 1
+value = 1
+
+[State 4030, Gravity]
+type = VelAdd
+trigger1 = 1
+y = .6
+
+[State 105, 1]
+type = statetypeset
+trigger1 = movetype = A
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElemTime(3) >= 0
+movetype = I
+
+[State 200, 1]
+type = ChangeState
+trigger1 = !NumHelper(10000) || !Var(23)
+trigger2 = Time > 5 && NumHelper(10000) && Helper(10000), StateNo != 17020
+value = 50
+ctrl = 1
+
+[State 4030, ChangeState]
+type = ChangeState
+trigger1 = Pos Y >= -Vel Y && Vel Y > 0
+value = 52
+
+
+;Air Standing Mid (w/stand)
+[StateDef 13131]
+anim = 13210
+ctrl = 0
+type = A
+movetype = A
+physics = N
+sprpriority = 1
+poweradd = 0
+juggle = 3 
+facep2= 1
+
+[State 803, Safety]
+type = VarSet
+trigger1 = !Var(1)
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), StateNo = 17021
+v = 1
+value = 1
+
+[State 4030, Gravity]
+type = VelAdd
+trigger1 = 1
+y = .6
+
+[State 105, 1]
+type = statetypeset
+trigger1 = movetype = A
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElemTime(3) >= 0
+movetype = I
+
+[State 200, 1]
+type = ChangeState
+trigger1 = !NumHelper(10000) || !Var(23)
+trigger2 = Time > 5 && NumHelper(10000) && Helper(10000), StateNo != 17021
+value = 50
+ctrl = 1
+
+[State 4030, ChangeState]
+type = ChangeState
+trigger1 = Pos Y >= -Vel Y && Vel Y > 0
+value = 52
+
+
+;Air Standing Strong (w/stand)
+[StateDef 13132]
+anim = 13220
+ctrl = 0
+type = A
+movetype = A
+physics = N
+sprpriority = 1
+poweradd = 0
+juggle = 3 
+facep2= 1
+
+[State 803, Safety]
+type = VarSet
+trigger1 = !Var(1)
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), StateNo = 17022
+v = 1
+value = 1
+
+[State 4030, Gravity]
+type = VelAdd
+trigger1 = 1
+y = .6
+
+[State 105, 1]
+type = statetypeset
+trigger1 = movetype = A
+trigger1 = NumHelper(10000)
+trigger1 = Helper(10000), AnimElemTime(3) >= 0
+movetype = I
+
+[State 200, 1]
+type = ChangeState
+trigger1 = !NumHelper(10000) || !Var(23)
+trigger2 = Time > 5 && NumHelper(10000) && Helper(10000), StateNo != 17022
+value = 50
+ctrl = 1
+
+[State 4030, ChangeState]
+type = ChangeState
+trigger1 = Pos Y >= -Vel Y && Vel Y > 0
+value = 52
 
 
 ;------------------------------------------------------------------------------------------
