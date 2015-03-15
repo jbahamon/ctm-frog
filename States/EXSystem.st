@@ -44,13 +44,18 @@ ctrl = 1
 [Statedef 13110]
 type    = S
 movetype= A
-physics = S
+physics = N
 juggle  = 4
 poweradd= IfElse(Var(21) > 0, 0, 18)
 ctrl = 0
-velset = 0,0
 sprpriority=1
 facep2= 1
+
+[State 220, Position]
+type = PosSet
+trigger1 = !Time
+Y = 0
+
 
 [State 220, Position]
 type = PosAdd
@@ -117,7 +122,7 @@ ctrl = 1
 [Statedef 13111]
 type    = S
 movetype= A
-physics = S
+physics = N
 juggle  = 4
 poweradd= IfElse(Var(21) > 0, 0, 18)
 ctrl = 0

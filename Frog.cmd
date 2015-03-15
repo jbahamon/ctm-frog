@@ -968,6 +968,7 @@ type = ChangeState
 value = 13130
 triggerall = command = "a"
 triggerall = PalNo = 12 && (Var(23) && NumHelper(10000))
+triggerall = StateNo != [100, 105]
 trigger1 = statetype = A
 trigger1 = ctrl
 trigger2 = stateno = 1350 ;Air blocking
@@ -990,6 +991,7 @@ type = ChangeState
 value = 13131
 triggerall = command = "b"
 triggerall = PalNo = 12 && (Var(23) && NumHelper(10000))
+triggerall = StateNo != [100, 105]
 trigger1 = statetype = A
 trigger1 = ctrl
 trigger2 = stateno = 1350 ;Air blocking
@@ -1012,6 +1014,7 @@ type = ChangeState
 value = 13132
 triggerall = command = "c"
 triggerall = PalNo = 12 && (Var(23) && NumHelper(10000))
+triggerall = StateNo != [100, 105]
 trigger1 = statetype = A
 trigger1 = ctrl
 trigger2 = stateno = 1350 ;Air blocking
@@ -1089,6 +1092,7 @@ triggerall = command = "b"
 triggerall = command != "holddown"
 trigger1 = statetype = S
 trigger1 = ctrl
+trigger2 = (stateno = 100 && time >= 4) || stateno = 101 || (stateno = 105 && time >= 4)
 
 ; Light to Hard
 [State -1, LightHit]
@@ -1139,6 +1143,7 @@ triggerall = Helper(10000), StateNo = 17011
 triggerall = command != "holddown"
 trigger1 = statetype = S
 trigger1 = ctrl
+trigger2 = (stateno = 100 && time >= 4) || stateno = 101 || (stateno = 105 && time >= 4)
 
 ;Stand Light Punch
 [State -1, LightHit]
