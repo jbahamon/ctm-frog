@@ -189,7 +189,7 @@ sprpriority=1
 facep2= 1
 
 [State 1100, Velocity]
-type = null;VelSet
+type = VelSet
 trigger1 = PrevStateNo != 100 && PrevStateNo != 105
 trigger1 = Time = 0
 trigger2 = NumHelper(10000)
