@@ -230,7 +230,7 @@ value = S7000,1
 [State 220, hit]
 type = HitDef
 trigger1 = AnimElem = 2
-trigger1 = Anim = 13021
+trigger1 = Anim = 13026
 attr = S, NA
 animtype=Diagup
 air.animtype=Diagup

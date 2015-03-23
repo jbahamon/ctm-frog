@@ -2412,7 +2412,7 @@ Clsn2: 3
   Clsn2[2] = -13, -12, 18, 0
 7176,0, 0,0, 4
 
-; Alt Crouch Light (Stand)
+; Alt Crouch Light (Stand) From Running
 [Begin Action 13102]
 Clsn2: 3
   Clsn2[0] = -20, -45, 28, -12
@@ -2435,7 +2435,7 @@ Clsn2: 3
   Clsn2[2] = -13, -12, 18, 0
 7176,0, 0,0, 5
 
-; Alt Crouch Light (Stand)
+; Alt Crouch Light (Stand) From Hard Stand
 [Begin Action 13103]
 Clsn2: 3
   Clsn2[0] = -20, -45, 28, -12
@@ -2458,7 +2458,7 @@ Clsn2: 3
   Clsn2[2] = -13, -12, 18, 0
 7176,0, 0,0, 5
 
-; Alt Crouch Light (Stand)
+; Alt Crouch Light (Stand) Tandem
 [Begin Action 13104]
 Clsn2: 3
   Clsn2[0] = -20, -45, 28, -12
@@ -2532,7 +2532,7 @@ Clsn2: 2
   Clsn2[1] = -17, -16, 15, -2
 7173,1, 0,3, 1
 
-; Alt. Crouch Mid (Stand)
+; Alt. Crouch Mid (Stand) From Running
 [Begin Action 13112]
 Clsn2: 3
   Clsn2[0] = -21, -53, 18, -16
@@ -2563,7 +2563,7 @@ Clsn2: 2
   Clsn2[1] = -17, -16, 15, -2
 7173,1, 0,3, 2
 
-; Alt. Crouch Mid (Stand)
+; Alt. Crouch Mid (Stand) From Light
 [Begin Action 13113]
 Clsn2: 2
   Clsn2[0] = -22, -53, 28, -16
@@ -2598,7 +2598,7 @@ Clsn2: 2
   Clsn2[1] = -17, -16, 15, -2
 7173,1, 0,3, 2
 
-; Alt. Crouch Mid (Stand)
+; Alt. Crouch Mid (Stand) Tandem
 [Begin Action 13114]
 Clsn2: 2
   Clsn2[0] = -22, -53, 28, -16
@@ -2633,7 +2633,7 @@ Clsn2: 2
   Clsn2[1] = -17, -16, 15, -2
 7173,1, 0,3, 2
 
-; Alt. Crouch Mid (Stand)
+; Alt. Crouch Mid (Stand) From Light, Tandem
 [Begin Action 13115]
 Clsn2: 2
   Clsn2[0] = -22, -53, 28, -16
@@ -2746,7 +2746,7 @@ Clsn2: 2
   Clsn2[1] = -13, -15, 10, -3
 7173,1, 0,0, 1
 
-; Hard Crouch 
+; Hard Crouch From Light/Mid
 [Begin Action 13123]
 Clsn2: 2
   Clsn2[0] = -17, -52, 20, -2
@@ -2779,7 +2779,7 @@ Clsn2: 2
   Clsn2[1] = -13, -15, 10, -3
 7173,1, 0,0, 1
 
-; Hard Crouch 
+; Hard Crouch Tandem
 [Begin Action 13124]
 Clsn2: 2
   Clsn2[0] = -17, -52, 20, -2
@@ -2812,7 +2812,7 @@ Clsn2: 2
   Clsn2[1] = -13, -15, 10, -3
 7173,1, 0,0, 2
 
-; Hard Crouch 
+; Hard Crouch From Light/Mid (Tandem)
 [Begin Action 13125]
 Clsn2: 2
   Clsn2[0] = -17, -52, 20, -2

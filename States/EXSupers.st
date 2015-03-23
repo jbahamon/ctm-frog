@@ -2711,6 +2711,18 @@ movehitpersist = 0
 hitcountpersist = 0
 sprpriority = 0
 
+[State 13801, Masa & Mune]
+type = helper
+triggerall = !NumHelper(10000)
+trigger1 = Time = 3
+stateno = 17320
+ID = 10000
+name = "Masa&Mune"
+postype = p1
+pos = 10,-20
+ownpal = 1
+persistent = 0
+
 [State 3000, Superpause]
 type = SuperPause
 trigger1 = Time = 3
@@ -2756,18 +2768,6 @@ pausemovetime = 9999
 supermovetime = 9999
 ignorehitpause = 1
 
-[State 13801, Masa & Mune]
-type = helper
-triggerall = !NumHelper(10000)
-trigger1 = Time = 3
-stateno = 17320
-ID = 10000
-name = "Masa&Mune"
-postype = p1
-pos = 10,-20
-ownpal = 1
-persistent = 0
-
 
 [State 2500, NotHitBy]
 type = NotHitBy
@@ -2779,6 +2779,12 @@ type = NotHitBy
 trigger1 = time = 123
 value = SCA
 time = 20
+
+[State 17100: ChangeState]
+type = VarSet
+trigger1 = Time = 123
+v = 23
+value = 0
 
 [State 17100: ChangeState]
 type = ChangeState

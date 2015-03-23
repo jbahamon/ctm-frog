@@ -11,7 +11,6 @@ poweradd = 0
 juggle = 3 
 facep2= 1
 
-
 [State 200, 1]
 type = ChangeState
 trigger1 = !NumHelper(10000) || !Var(23)
@@ -55,7 +54,6 @@ facep2= 1
 type = PosSet
 trigger1 = !Time
 Y = 0
-
 
 [State 220, Position]
 type = PosAdd
@@ -236,7 +234,7 @@ value = 0
 ctrl = 1
 
 
-;Air Standing Light (w/stand)
+;Air Light (w/stand)
 [StateDef 13130]
 anim = 13200
 ctrl = 0
@@ -281,7 +279,7 @@ trigger1 = Pos Y >= -Vel Y && Vel Y > 0
 value = 52
 
 
-;Air Standing Mid (w/stand)
+;Air Mid (w/stand)
 [StateDef 13131]
 anim = 13210
 ctrl = 0
@@ -326,7 +324,7 @@ trigger1 = Pos Y >= -Vel Y && Vel Y > 0
 value = 52
 
 
-;Air Standing Strong (w/stand)
+;Air Strong (w/stand)
 [StateDef 13132]
 anim = 13220
 ctrl = 0
@@ -370,6 +368,261 @@ type = ChangeState
 trigger1 = Pos Y >= -Vel Y && Vel Y > 0
 value = 52
 
+;Crouching Light (w/stand)
+[StateDef 13140]
+ctrl = 0
+type = C
+movetype = A
+physics = C
+sprpriority = 1
+poweradd = 0
+juggle = 3 
+facep2= 1
+
+[State 210, 5]
+type = ChangeAnim
+trigger1 = !Time
+trigger1 = PrevStateNo != [13140, 13150]
+value = 13110
+
+
+[State 1100, Velocity]
+type = VelSet
+trigger1 = 1
+y = 0
+
+[State 1100, Velocity]
+type = VelMul
+trigger1 = 1
+x = .95
+
+[State 1100, Velocity]
+type = VelSet
+trigger1 = !Time && PrevStateNo != [100, 105]
+trigger2 = Helper(10000), AnimElem = 4
+X = 0
+
+[State 200, 1]
+type = ChangeState
+trigger1 = !NumHelper(10000) || !Var(23)
+trigger2 = NumHelper(10000) && Helper(10000), StateNo = 17030 && !(Helper(10000), AnimTime)
+trigger3 = Time > 5 && NumHelper(10000) && Helper(10000), StateNo != [17030, 17040]
+value = 11
+ctrl = 1
+
+
+;Crouching Light (w/stand)
+[StateDef 13141]
+ctrl = 0
+type = C
+movetype = A
+physics = C
+sprpriority = 1
+velset = 0,0
+poweradd = 0
+juggle = 3 
+facep2= 1
+
+[State 210, 5]
+type = ChangeAnim
+trigger1 = !Time
+trigger1 = PrevStateNo != [13140, 13150]
+value = 13110
+
+[State 200, 1]
+type = ChangeState
+trigger1 = !NumHelper(10000) || !Var(23)
+trigger2 = NumHelper(10000) && Helper(10000), StateNo = 17030 && !(Helper(10000), AnimTime)
+trigger3 = Time > 5 && NumHelper(10000) && Helper(10000), StateNo != [17030, 17040]
+value = 11
+ctrl = 1
+
+
+;Crouching Medium
+[Statedef 13150]
+type    = C
+movetype= A
+physics = C
+juggle  = 4
+poweradd= IfElse(Var(21) > 0, 0, 18)
+ctrl = 0
+sprpriority=1
+facep2= 1
+
+[State 220, Position]
+type = PosSet
+trigger1 = !Time
+Y = 0
+
+[State 1100, Velocity]
+type = VelSet
+trigger1 = !Time && PrevStateNo != [100, 105]
+trigger2 = Helper(10000), AnimElem = 4
+X = 0
+
+[State 210, 5]
+type = ChangeAnim
+trigger1 = !Time
+trigger1 = PrevStateNo != [13140, 13150]
+value = 13110
+
+[State 210, 5]
+type = ChangeState
+trigger1 = !NumHelper(10000) || !Var(23)
+trigger2 = NumHelper(10000) && Helper(10000), StateNo = 17031 && !(Helper(10000), AnimTime)
+trigger3 = Time > 5 && NumHelper(10000) && Helper(10000), StateNo != [17031, 17040]
+value = 11
+ctrl = 1
+
+
+;Crouching Medium - Combo
+[Statedef 13151]
+type    = C
+movetype= A
+physics = C
+juggle  = 4
+poweradd= IfElse(Var(21) > 0, 0, 18)
+ctrl = 0
+sprpriority=1
+facep2= 1
+
+[State 220, Position]
+type = PosSet
+trigger1 = !Time
+Y = 0
+
+[State 220, Position]
+type = PosSet
+trigger1 = !Time
+Y = 0
+
+[State 1100, Velocity]
+type = VelSet
+trigger1 = !Time && PrevStateNo != [100, 105]
+trigger2 = Helper(10000), AnimElem = 4
+X = 0
+
+[State 210, 5]
+type = ChangeAnim
+trigger1 = !Time
+trigger1 = PrevStateNo != [13140, 13150]
+value = 13110
+
+[State 210, 5]
+type = ChangeState
+trigger1 = !NumHelper(10000) || !Var(23)
+trigger2 = NumHelper(10000) && Helper(10000), StateNo = 17031 && !(Helper(10000), AnimTime)
+trigger3 = Time > 5 && NumHelper(10000) && Helper(10000), StateNo != [17031, 17040]
+value = 11
+ctrl = 1
+
+
+;Crouching Strong
+[Statedef 13160]
+type = C
+physics = C
+movetype = A
+anim = 13110
+ctrl = 0
+poweradd= 18
+juggle = 12
+sprpriority=1
+facep2= 1
+
+
+[State 1100, Velocity]
+type = PosAdd
+trigger1 = prevstateno != [100,105]
+trigger1 = Helper(10000), animelem = 2
+trigger2 = prevstateno != [100,105]
+trigger2 = Helper(10000), animelemtime(2) = 1
+trigger3 = Helper(10000), animelem = 3
+trigger4 = prevstateno = [100,105]
+trigger4 = Helper(10000), animelemtime(3) = 1
+trigger5 = prevstateno = [100,105]
+trigger5 = Helper(10000), animelem = 4
+x = 5
+
+
+[State 1100, Velocity]
+type = VelSet
+trigger1 = PrevStateNo != 100 && PrevStateNo != 105
+trigger1 = Time = 0
+trigger2 = NumHelper(10000)
+trigger2 = !Helper(10000), AnimTime
+x = 0
+
+[State 1100, Velocity]
+type = VelMul
+trigger1 = 1
+x = .95
+
+[State 210, 5]
+type = ChangeAnim
+trigger1 = !Time
+trigger1 = PrevStateNo != [13140, 13150]
+value = 13110
+
+[State 220, end]
+type=changestate
+trigger1 = !NumHelper(10000) || !Var(23)
+trigger2 = NumHelper(10000) && Helper(10000), StateNo = 17032 && !(Helper(10000), AnimTime)
+trigger3 = Time > 5 && NumHelper(10000) && Helper(10000), StateNo != [17032, 17040]
+value = 11
+ctrl = 1
+
+;Crouching Strong - Combo
+[Statedef 13161]
+type = C
+physics = C
+movetype = A
+ctrl = 0
+poweradd= 18
+juggle = 12
+sprpriority=1
+facep2= 1
+
+[State 210, 5]
+type = ChangeAnim
+trigger1 = !Time
+trigger1 = PrevStateNo != [13140, 13150]
+value = 13110
+
+
+[State 1100, Velocity]
+type = VelSet
+trigger1 = PrevStateNo != 100 && PrevStateNo != 105
+trigger1 = Time = 0
+trigger2 = NumHelper(10000)
+trigger2 = !Helper(10000), AnimTime
+x = 0
+
+
+[State 1100, Velocity]
+type = PosAdd
+trigger1 = prevstateno != [100,105]
+trigger1 = Helper(10000), animelem = 2
+trigger2 = prevstateno != [100,105]
+trigger2 = Helper(10000), animelemtime(2) = 1
+trigger3 = Helper(10000), animelem = 3
+trigger4 = prevstateno = [100,105]
+trigger4 = Helper(10000), animelemtime(3) = 1
+trigger5 = prevstateno = [100,105]
+trigger5 = Helper(10000), animelem = 4
+x = 5
+
+[State 1100, Velocity]
+type = VelMul
+trigger1 = 1
+x = .95
+
+[State 220, end]
+type=changestate
+trigger1 = !NumHelper(10000) || !Var(23)
+trigger2 = NumHelper(10000) && Helper(10000), StateNo = 17032 && !(Helper(10000), AnimTime)
+trigger3 = Time > 5 && NumHelper(10000) && Helper(10000), StateNo != [17032, 17040]
+value = 11
+ctrl = 1
 
 ;------------------------------------------------------------------------------------------
 
