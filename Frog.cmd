@@ -834,12 +834,12 @@ value = 14026
 type = ChangeState
 triggerall = PalNo = 12
 triggerall = StateType != A 
-triggerall = ctrl
+triggerall = Ctrl || StateNo = 195 || StateNo = 200 || StateNo = 210 || StateNo = 220 || StateNo = 400 || StateNo = 410 || StateNo = 420
 triggerall = Command = "qcba" || Command = "qcbb" || Command = "qcbc"
-trigger1 = Var(23) && NumHelper(10000) 
-trigger1 = Helper(10000), StateNo = 17011
-trigger2 = !Var(23) && !NumHelper(10000)
-value = IfElse(Var(23) && NumHelper(10000), 14025, 14020)
+trigger1 = !Var(23) && !NumHelper(10000)
+trigger2 = Var(23) && NumHelper(10000) 
+trigger2 = Helper(10000), StateNo = 17011
+value = IfElse(Var(23), 14025, 14020)
 
 
 [State -1, Muda Muda - Air]
@@ -858,7 +858,7 @@ type = ChangeState
 triggerall = PalNo = 12
 triggerall = StateType != A 
 triggerall = Command = "qcfa" || Command = "qcfb" || Command = "qcfc"
-triggerall = Ctrl
+triggerall = Ctrl || StateNo = 195 || StateNo = 200 || StateNo = 210 || StateNo = 220 || StateNo = 400 || StateNo = 410 || StateNo = 420
 trigger1 = Var(23) && NumHelper(10000) 
 trigger1 = Helper(10000), StateNo = 17011
 trigger2 = !Var(23) && !NumHelper(10000)
@@ -933,11 +933,11 @@ type = ChangeState
 value = 400
 triggerall = command = "a"
 triggerall = command = "holddown"
-triggerall = PalNo != 12 || (!Var(23) && (NumHelper(15060) || !NumHelper(10000)))
+triggerall = PalNo != 12 || (!Var(23))
 trigger1 = statetype != A
 trigger1 = ctrl
 trigger2 = (stateno = 200)
-trigger2 = movecontact
+trigger2 = movecontact && PalNo != 12
 
 [State -1, Taunt]
 type = ChangeState
@@ -971,11 +971,11 @@ type = ChangeState
 value = 410
 triggerall = command = "b"
 triggerall = command = "holddown"
-triggerall = PalNo != 12 || (!Var(23) && (NumHelper(15060) || !NumHelper(10000)))
+triggerall = PalNo != 12 || (!Var(23))
 trigger1 = statetype != A
 trigger1 = ctrl
 trigger2 = (stateno = 200) || (stateno = 400) 
-trigger2 = movecontact
+trigger2 = movecontact && PalNo != 12
 
 
 ; Light Stand/Crouch to MidCrouch2
@@ -1021,7 +1021,7 @@ type = ChangeState
 value = 420
 triggerall = command = "c"
 triggerall = command = "holddown"
-triggerall = PalNo != 12 || (!Var(23) && (NumHelper(15060) || !NumHelper(10000)))
+triggerall = PalNo != 12 || (!Var(23))
 trigger1 = statetype != A
 trigger1 = ctrl
 
@@ -1089,9 +1089,9 @@ type = ChangeState
 value = 600
 triggerall = command = "a"
 trigger1 = statetype = A
-triggerall = PalNo != 12 || (!Var(23) && (NumHelper(15060) || !NumHelper(10000)))
+triggerall = PalNo != 12 || (!Var(23))
 trigger1 = ctrl
-trigger2 = stateno = 600 && movecontact
+trigger2 = stateno = 600 && movecontact && PalNo != 12
 trigger2 = animtime >= 6
 trigger3 = stateno = 1350 ;Air blocking
 
@@ -1112,11 +1112,11 @@ trigger2 = stateno = 1350 ;Air blocking
 type = ChangeState
 value = 610
 triggerall = command = "b"
-triggerall = PalNo != 12 || (!Var(23) && (NumHelper(15060) || !NumHelper(10000)))
+triggerall = PalNo != 12 || (!Var(23))
 trigger1 = statetype = A
 trigger1 = ctrl
 trigger2 = (stateno = 600) || (stateno = 220 && AnimElemNo(0) >= 3)  || (stateno = 1040)
-trigger2 = movecontact
+trigger2 = movecontact && PalNo != 12
 trigger3 = stateno = 1350 ;Air blocking
 
 ;Jump Strong Hit (Stand)
@@ -1136,11 +1136,11 @@ trigger2 = stateno = 1350 ;Air blocking
 type = ChangeState
 value = 620
 triggerall = command = "c"
-triggerall = PalNo != 12 || (!Var(23) && (NumHelper(15060) || !NumHelper(10000)))
+triggerall = PalNo != 12 || (!Var(23))
 triggerall = statetype = A
 trigger1 = ctrl
 trigger2 = (stateno = 600) || (stateno = 610) || (stateno = 220 && AnimElemNo(0) >= 3) || (stateno = 1040) || (stateno = 1020)
-trigger2 = movecontact
+trigger2 = movecontact && PalNo != 12
 trigger3 = stateno = 1350 ;Air blocking
 trigger4 = StateNo = 1001 && AnimElemTime(4) >= 0
 
@@ -1332,7 +1332,7 @@ type = ChangeState
 value = 200
 triggerall = command = "a"
 triggerall = command != "holddown"
-triggerall = PalNo != 12 || (!Var(23) && (NumHelper(15060) || !NumHelper(10000)))
+triggerall = PalNo != 12 || (!Var(23))
 trigger1 = statetype = S
 trigger1 = ctrl
 
@@ -1342,10 +1342,10 @@ type = ChangeState
 value = 210
 triggerall = command = "b"
 triggerall = command != "holddown"
-triggerall = PalNo != 12 || (!Var(23) && (NumHelper(15060) || !NumHelper(10000)))
+triggerall = PalNo != 12 || (!Var(23))
 trigger1 = statetype = S
 trigger1 = ctrl
-trigger2 = stateno = 200 && movecontact
+trigger2 = stateno = 200 && movecontact && PalNo != 12
 
 ;Strong hit
 [State -1, StrongHit]
@@ -1353,11 +1353,11 @@ type = ChangeState
 value = 220
 triggerall = command = "c"
 triggerall = command != "holddown"
-triggerall = PalNo != 12 || (!Var(23) && (NumHelper(15060) || !NumHelper(10000)))
+triggerall = PalNo != 12 || (!Var(23))
 trigger1 = statetype = S
 trigger1 = ctrl
 trigger2 = (stateno = 200) || (stateno = 210)
-trigger2 = movecontact
+trigger2 = movecontact && PalNo != 12
 
 
 ;----------------------Other----------------------
