@@ -3427,7 +3427,7 @@ ignorehitpause = 1
 type = VelSet
 trigger1 = !MoveContact
 trigger1 = AnimElemNo(0) = 2
-X = IfElse(Var(3) = 2, 20, IfElse(Var(3) = 1, 15, 10))
+X = IfElse(Var(3) = 2, 15, IfElse(Var(3) = 1, 10, 5))
 ignorehitpause = 1
 
 [State 17225, Anim]
@@ -4184,6 +4184,7 @@ value = 17011
 [State 7014, End]
 type = PowerAdd
 triggerall = !Time
+trigger1 =  NumHelper(15060)
 trigger1 = Root, Power >= 1000
 value = -1000
 persistent = 0
@@ -4383,6 +4384,7 @@ var(0) = Parent, StateNo
 type = helper
 trigger1 = AnimElemTime(1) = [2, 5]
 trigger1 = NumHelper(17301) < 4
+trigger1 = NumHelper(15060)
 helpertype = normal
 stateno = 17301
 ID = 17301
@@ -4396,6 +4398,7 @@ supermovetime = 99999
 type = helper
 trigger1 = AnimElemTime(1) = [2, 5]
 trigger1 = NumHelper(17302) < 4
+trigger1 = NumHelper(15060)
 helpertype = normal
 stateno = 17302
 ID = 17302
@@ -4408,6 +4411,7 @@ supermovetime = 99999
 [State 2010, Super Pause FX]
 type = helper
 trigger1 = !Time
+trigger1 = NumHelper(15060)
 helpertype = normal
 stateno = 7000
 ID = 7000
@@ -4421,6 +4425,7 @@ supermovetime = 9999
 [State 3250, Super Pause FX]
 type = helper
 trigger1 = !Time
+trigger1 = NumHelper(15060)
 helpertype = normal
 stateno = 7001
 ID = 7001

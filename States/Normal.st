@@ -36,6 +36,7 @@ shadow = 0,0,0
 ownpal = 1
 removeongethit = 1
 ignorehitpause = 1
+pausemovetime = 99999999
 
 [State 200, HitDef]
 type = HitDef
@@ -115,6 +116,7 @@ shadow = 0,0,0
 ownpal = 1
 removeongethit = 1
 ignorehitpause = 1
+pausemovetime = 99999999
 
 [State 210, hit]
 type = HitDef
@@ -197,6 +199,7 @@ shadow = 0,0,0
 ownpal = 1
 ignorehitpause = 1
 removeongethit = 1
+pausemovetime = 99999999
 
 [State 210, Explod]
 type = Explod
@@ -220,7 +223,7 @@ shadow = 0,0,0
 ownpal = 1
 ignorehitpause = 1
 removeongethit = 1
-
+pausemovetime = 99999999
 
 [State 200, Snd]
 type = PlaySnd
@@ -402,6 +405,7 @@ shadow = 0,0,0
 ownpal = 1
 removeongethit = 1
 ignorehitpause = 1
+pausemovetime = 99999999
 
 [State 400, HitDef]
 type = HitDef
@@ -497,6 +501,7 @@ shadow = 0,0,0
 ownpal = 1
 ignorehitpause = 1
 removeongethit = 1
+pausemovetime = 99999999
 
 [State 410, HitDef]
 type = HitDef
@@ -609,6 +614,7 @@ shadow = 0,0,0
 ownpal = 1
 ignorehitpause = 1
 removeongethit = 1
+pausemovetime = 99999999
 
 [State 420, HitDef]
 type = HitDef
@@ -711,6 +717,7 @@ shadow = 0,0,0
 ownpal = 1
 removeongethit = 1
 ignorehitpause = 1
+pausemovetime = 99999999
 
 [State 600, Hitdef]
 type = HitDef
@@ -805,6 +812,7 @@ shadow = 0,0,0
 ownpal = 1
 removeongethit = 1
 ignorehitpause = 1
+pausemovetime = 99999999
 
 [State 610, HitDef]
 type = HitDef
@@ -905,6 +913,8 @@ shadow = 0,0,0
 ownpal = 1
 removeongethit = 1
 ignorehitpause = 1
+pausemovetime = 99999999
+
 
 [State 620, Snd]
 type = PlaySnd
