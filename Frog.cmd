@@ -347,8 +347,8 @@ command =  b, a, F, a, c
 time = 50
 
 [Command]
-name = "Tokiyo Tomare"
-command = x;~F, z, x, F, s
+name = "Toki yo Tomare"
+command = y;~F, z, x, F, s
 time = 40
 
 
@@ -650,6 +650,15 @@ triggerall = Var(21) > 0 && NumHelper(3030)
 triggerall = PalNo != 12
 trigger1= Ctrl 	
 
+
+[State -1, Frog Squash Da]
+type = ChangeState
+value = 15070
+triggerall = StateType != A
+triggerall = Command = "Toki yo Tomare"
+triggerall = PalNo = 12
+trigger1= Ctrl 	
+
 ;----------------------Supers----------------------
 
 [State -1, Masamune]
@@ -888,10 +897,12 @@ value = 15060
 
 [State -1, Throw]
 type = ChangeState
-trigger1 = (command = "c") && (command = "holdfwd" || command = "holdback")
-trigger1 = PalNo = 12
-trigger1 = roundstate = 2 && ctrl && statetype = S && stateno != 100
-trigger1 = (!Var(23) && !NumHelper(10000)) || (Var(23) && NumHelper(10000) && Helper(10000), StateNo = 17011)
+triggerall = (command = "c") && (command = "holdfwd" || command = "holdback")
+triggerall = PalNo = 12
+triggerall = roundstate = 2 && ctrl && statetype = S && stateno != 100
+trigger1 = (!Var(23) && !NumHelper(10000)) 
+trigger2 = (Var(23) && NumHelper(10000))
+trigger2 = Helper(10000), StateNo = 17011
 value = 13800
 
 ; Guard Cancel

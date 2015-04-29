@@ -200,15 +200,8 @@ sprpriority = 4
 
 [State 803, Pal]
 type = PalFX
-trigger1 = Time < 8
+trigger1 = Time = [1, 8]
 add = Floor(128 * Cos(Time * Pi/8.0)) + 128, Floor(128 * Cos(Time * Pi/8.0)) + 128, Floor(128 * Cos(Time * Pi/8.0)) + 128
-mul = 256, 256, 256
-time = 1
-
-[State 803, Pal]
-type = PalFX
-trigger1 = !Time
-add = 256, 256, 256
 mul = 256, 256, 256
 time = 1
 
@@ -845,13 +838,13 @@ y = 6.4
 
 [State 803, Pal]
 type = PalFX
-trigger1 = Time < 8
+trigger1 = Time = [1, 8]
 add = Floor(128 * Cos(Time * Pi/8.0)) + 128, Floor(128 * Cos(Time * Pi/8.0)) + 128, Floor(128 * Cos(Time * Pi/8.0)) + 128
 mul = 256, 256, 256
 time = 1
 
 [State 803, Pal]
-type = PalFX
+type = null;PalFX
 trigger1 = !Time
 add = 256, 256, 256
 mul = 256, 256, 256
@@ -2720,6 +2713,7 @@ ID = 10000
 name = "Masa&Mune"
 postype = p1
 pos = 10,-20
+pausemovetime = 99999999
 ownpal = 1
 persistent = 0
 
@@ -2791,3 +2785,83 @@ type = ChangeState
 trigger1 = Time = 123
 value = 0
 ctrl = 1
+
+
+; Toki Wo Tomare
+[Statedef 15070]
+type = S
+movetype = I
+physics = N
+anim = 15060
+velset = 0,0
+ctrl = 0
+poweradd = 0
+juggle = 0
+facep2 = 0
+hitdefpersist = 0
+movehitpersist = 0
+hitcountpersist = 0
+sprpriority = 0
+
+[State 3000, Superpause]
+type = Pause
+trigger1 = Time = 3
+time = 100
+movetime = 100
+
+
+[State 3000, Superpause]
+type = VarSet
+trigger1 = Time = 103
+var(29) = Power
+
+
+[State 3001, Bubble]
+type = Helper
+trigger1 = Time = 10
+helpertype = normal ;player
+name = "Time Bubble"
+ID = 15070
+stateno = 15071
+pos = 0,-30
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+pausemovetime = 99999
+
+
+[State 17100: ChangeState]
+type = ChangeState
+trigger1 = Time = 123
+value = 0
+ctrl = 1
+
+;Bubble
+[Statedef 15071]
+type = S
+movetype = A
+physics = N
+velset = 0,0
+anim = 1016
+sprpriority = 5
+
+[State 3001, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S7010,1
+;channel = 0
+
+[State 3013, Scale]
+trigger1 = 1
+type = AngleDraw
+scale = Time/8.0, Time/8.0
+
+[State 3012, Shadow]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 3011, end]
+type = DestroySelf
+trigger1 = Time = 130

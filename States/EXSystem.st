@@ -700,6 +700,7 @@ pos = -16,0
 postype = left    ;p2,front,back,left,right
 facing = 1
 ownpal = 1
+pausemovetime = 99999999
 supermovetime = 999999
 ;
 ;[State 7200, TransVar]
@@ -1030,6 +1031,7 @@ postype = p1
 pos = 0,-20
 ownpal = 1
 persistent = 0
+pausemovetime = 99999999
 supermovetime = 9999
 
 [State 220, Position]
@@ -1220,6 +1222,7 @@ postype = p1
 pos = 0,-20
 ownpal = 1
 persistent = 0
+pausemovetime = 99999999
 supermovetime = 9999
 
 [State 801, Bind]

@@ -126,6 +126,7 @@ victory15  = "Hand'eth over the Masamune!"
 ; var(26)  - Stand Hit
 ; var(27)  - Stand on Cooldown
 ; var(28)  - No guarding due to Stand Crash
+; var(29)  - Toki wo Tomare
 
 ; fvar(39) - Damage Dampener
 
@@ -207,6 +208,7 @@ stateno = 13200
 pos = 10,0
 postype = p1    ;p2,front,back,left,right
 facing = 1
+pausemovetime = 99999999
 ownpal = 1
 
 [State 7015, LifeAdd]
@@ -233,18 +235,49 @@ sprpriority = -105
 pausemovetime = 99999999
 supermovetime = 99999999
 
-[State 4000, Effect]
-type = null;AssertSpecial
-trigger1 = NumHelper(13250)
-flag = NoFG
-flag2 = NoBG
-
 [State 7015, LifeAdd]
 type = Null;
 trigger1 =  Var(27) > 0
 trigger1 = !(Var(27) := (Var(27) - 1))
 ignorehitpause = 1
 
+
+[State 3000, Superpause]
+type = Pause
+trigger1 = Var(29) > 3
+time = 2
+movetime = 2
+ignorehitpause = 1
+
+[State 7015, LifeAdd]
+type = Null;
+trigger1 =  Var(29) > 3
+trigger1 = !(Var(29) := (Var(29) - 3))
+ignorehitpause = 1
+
+[State 7015, LifeAdd]
+type = PowerAdd
+trigger1 =  Var(29) > 0
+value = -3
+ignorehitpause = 1
+
+[State 7015, LifeAdd]
+type = BGPalFX
+trigger1 =  Var(29) > 0
+time = 1
+mul = 0, 120, 256
+sinadd = 20,20,20,10
+invertall = 1
+color = 0
+ignorehitpause = 1
+
+[State 7015, LifeAdd]
+type = ChangeState
+trigger1 =  Var(29) >= 3
+trigger1 = Power <= 0
+trigger1 = IfElse(StateNo = 0 || StateNo = 50, (Var(29) := 4), !(Var(29) := 0))
+value = 15080
+ignorehitpause = 1
 
 [State 7015, LifeAdd]
 type = ChangeState
@@ -298,6 +331,7 @@ postype = p1
 pos = 0,-20
 ownpal = 1
 persistent = 0
+pausemovetime = 99999999
 supermovetime = 9999
 
 [State -3, Prevent Undergound Juggles]

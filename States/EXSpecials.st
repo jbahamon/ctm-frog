@@ -29,6 +29,7 @@ name = "Masa&Mune"
 postype = p1
 pos = 10,-20
 ownpal = 1
+pausemovetime = 99999999
 persistent = 0
 
 [State 803, Safety]
@@ -82,6 +83,7 @@ postype = p1
 pos = 10,-10
 ownpal = 1
 persistent = 0
+pausemovetime = 99999999
 
 [State 803, Safety]
 type = ChangeState
@@ -274,6 +276,7 @@ name = "Masa&Mune"
 postype = p1
 pos = 10,-10
 ownpal = 1
+pausemovetime = 99999999
 persistent = 0
 
 [State 803, Safety]
@@ -439,6 +442,7 @@ name = "The World Afterimage"
 postype = p1
 pos = 0,0
 ownpal = 1
+pausemovetime = 99999999
 persistent = 0
 
 [State 9606, EnvColor]
@@ -615,6 +619,7 @@ name = "Beam"
 postype = p1
 pos = 18,-15
 ownpal = 1
+pausemovetime = 99999999
 persistent = 0
 
 [State 803, Safety]
@@ -659,6 +664,7 @@ ID = 14051
 name = "Beam Head"
 postype = p1
 pos = 0,0
+pausemovetime = 99999999
 ownpal = 1
 persistent = 0
 
