@@ -347,7 +347,7 @@ command =  b, a, F, a, c
 time = 50
 
 [Command]
-name = "Toki yo Tomare"
+name = "Toki wo Tomare"
 command = y;~F, z, x, F, s
 time = 40
 
@@ -651,14 +651,16 @@ triggerall = PalNo != 12
 trigger1= Ctrl 	
 
 
-[State -1, Frog Squash Da]
+[State -1, Toki wo Tomare]
 type = ChangeState
 value = 15070
 triggerall = StateType != A
-triggerall = Command = "Toki yo Tomare"
+triggerall = Command = "Toki wo Tomare"
 triggerall = PalNo = 12
-trigger1= Ctrl 	
-
+triggerall= Ctrl 	
+trigger1 = !Var(23) && !NumHelper(10000)
+trigger2 = Var(23) && NumHelper(10000) 
+trigger2 = Helper(10000), StateNo = 17011
 ;----------------------Supers----------------------
 
 [State -1, Masamune]
@@ -890,6 +892,7 @@ triggerall = command = "qcbx"
 triggerall = statetype != A
 triggerall = PalNo = 12
 triggerall = ctrl
+triggerall = !Var(29)
 trigger1 = !Var(23) && !NumHelper(10000)
 trigger2 = Var(23) && NumHelper(10000) 
 trigger2 = Helper(10000), StateNo = 17011
