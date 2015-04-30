@@ -7,7 +7,7 @@ juggle  = 3
 ctrl = 0
 anim = 13000
 sprpriority = 2
-poweradd = IfElse(Var(21) > 0 || Var(29) > 0, 0, 18)
+poweradd = IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 facep2 = 1
 velset = 0,0
 
@@ -55,7 +55,7 @@ juggle  = 3
 ctrl = 0
 anim = 13000
 sprpriority = 1
-poweradd = IfElse(Var(21) > 0 || Var(29) > 0, 0, 18)
+poweradd = IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 facep2 = 1
 velset = 0,0
 
@@ -100,7 +100,7 @@ juggle  = 3
 ctrl = 0
 anim = 13300
 sprpriority = 1
-poweradd = IfElse(Var(21) > 0 || Var(29) > 0, 0, 18)
+poweradd = IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 facep2 = 1
 velset = 0,0
 
@@ -149,7 +149,7 @@ juggle  = 3
 ctrl = 0
 anim = 13301
 sprpriority = 1
-poweradd = IfElse(Var(21) > 0 || Var(29) > 0, 0, 18)
+poweradd = IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 facep2 = 1
 
 [State 1100, Velocity]
@@ -249,7 +249,7 @@ juggle  = 3
 ctrl = 0
 anim = 13000
 sprpriority = 1
-poweradd = IfElse(Var(21) > 0 || Var(29) > 0, 0, 18)
+poweradd = IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 facep2 = 1
 velset = 0,0
 
@@ -294,7 +294,7 @@ juggle  = 3
 ctrl = 0
 anim = 13300
 sprpriority = 1
-poweradd = IfElse(Var(21) > 0 || Var(29) > 0, 0, 18)
+poweradd = IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 facep2 = 1
 velset = 0,0
 
@@ -360,7 +360,7 @@ juggle  = 3
 ctrl = 0
 anim = 13300
 sprpriority = 1
-poweradd = IfElse(Var(21) > 0 || Var(29) > 0, 0, 18)
+poweradd = IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 facep2 = 1
 velset = 0,0
 

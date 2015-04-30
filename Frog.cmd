@@ -1396,6 +1396,7 @@ trigger1 = ctrl
 [State -1, Taunt]
 type = ChangeState
 value = 195
+triggerall = !NumHelper(15060)
 triggerall = command = "start"
 trigger1 = statetype != A
 trigger1 = ctrl

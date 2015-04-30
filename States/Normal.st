@@ -61,7 +61,7 @@ air.velocity = -2,-2
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=8
-getpower= IfElse(Var(21) > 0 || Var(29) > 0, 0, 72), IfElse(Var(21) > 0 || Var(29) > 0, 0, 36)
+getpower= IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 72), IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 36)
 givepower=36, 36
 
 [State 200, Dampen]
@@ -83,7 +83,7 @@ type    = S
 movetype= A
 physics = S
 juggle  = 4
-poweradd= IfElse(Var(21) > 0 || Var(29) > 0, 0, 18)
+poweradd= IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 ctrl = 0
 velset = 0,0
 anim = 210
@@ -139,7 +139,7 @@ air.velocity = 0,4
 animtype=Medium
 air.animtype=Medium
 air.juggle = 4
-getpower = IfElse(Var(21) > 0 || Var(29) > 0, 0, ifelse(p2movetype = H, 72, 144)), IfElse(Var(21) > 0 || Var(29) > 0, 0, 36)
+getpower = IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, ifelse(p2movetype = H, 72, 144)), IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 36)
 givepower = 36, 36
 palfx.add=200,200,200
 palfx.mul=256,256,256
@@ -166,7 +166,7 @@ movetype=A
 anim=220
 ctrl=0
 velset=0,0
-poweradd= IfElse(Var(21) > 0 || Var(29) > 0, 0, 18)
+poweradd= IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 juggle = 12
 sprpriority=1
 facep2= 1
@@ -255,7 +255,7 @@ fall.recover = 0
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=12
-getpower = IfElse(Var(21) > 0 || Var(29) > 0, 0, ifelse(p2movetype = H, 72, 144)), IfElse(Var(21) > 0 || Var(29) > 0, 0, 36)
+getpower = IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, ifelse(p2movetype = H, 72, 144)), IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 36)
 givepower = 36, 36
 
 
@@ -284,7 +284,7 @@ fall.recover = 0
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=12
-getpower = IfElse(Var(21) > 0 || Var(29) > 0, 0, ifelse(p2movetype = H, 72, 144)), IfElse(Var(21) > 0 || Var(29) > 0, 0, 36)
+getpower = IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, ifelse(p2movetype = H, 72, 144)), IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 36)
 givepower = 36, 36
 
 [State 200, Dampen]
@@ -432,7 +432,7 @@ air.animtype=Light
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=8
-getpower=IfElse(Var(21) > 0 || Var(29) > 0, 0, 72), IfElse(Var(21) > 0 || Var(29) > 0, 0, 36)
+getpower=IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 72), IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 36)
 givepower=36, 36
 
 [State 200, Dampen]
@@ -458,7 +458,7 @@ movetype = A
 physics = C
 sprpriority=1
 velset=0,0
-poweradd= IfElse(Var(21) > 0 || Var(29) > 0, 0, 18)
+poweradd= IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 juggle=4 
 facep2= 1
 
@@ -528,7 +528,7 @@ air.animtype=Light
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=8
-getpower=IfElse(Var(21) > 0 || Var(29) > 0, 0, 72), IfElse(Var(21) > 0 || Var(29) > 0, 0, 36)
+getpower=IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 72), IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 36)
 givepower=36, 36
 
 [State 200, Dampen]
@@ -571,7 +571,7 @@ movetype = A
 physics = C
 sprpriority=2
 velset=0,0
-poweradd= IfElse(Var(21) > 0 || Var(29) > 0, 0, 18)
+poweradd= IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 juggle=6 
 facep2= 1
 
@@ -640,7 +640,7 @@ air.juggle = 6
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=8
-getpower= IfElse(Var(21) > 0 || Var(29) > 0, 0, 216), IfElse(Var(21) > 0 || Var(29) > 0, 0, 36)
+getpower= IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 216), IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 36)
 givepower=36, 36
 
 [State 200, Dampen]
@@ -744,7 +744,7 @@ air.juggle = 4
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=12
-getpower = IfElse(Var(21) > 0 || Var(29) > 0, 0, 72), IfElse(Var(21) > 0 || Var(29) > 0, 0, 36)
+getpower = IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 72), IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 36)
 givepower = 36, 36
 
 [State 200, Dampen]
@@ -761,7 +761,7 @@ physics=A
 movetype=A
 anim=610
 ctrl=0
-poweradd= IfElse(Var(21) > 0 || Var(29) > 0, 0, 18)
+poweradd= IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 juggle=4
 sprpriority = 1
 facep2= 1
@@ -842,7 +842,7 @@ down.bounce =1
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=9
-getpower = IfElse(Var(21) > 0 || Var(29) > 0, 0, ifelse(p2movetype = H, 72, 144)), IfElse(Var(21) > 0 || Var(29) > 0, 0, 36)
+getpower = IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, ifelse(p2movetype = H, 72, 144)), IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 36)
 givepower = 36, 36
 
 [State 200, Dampen]
@@ -861,7 +861,7 @@ movetype=A
 anim=620
 ctrl=0
 velset=0,0
-poweradd= IfElse(Var(21) > 0 || Var(29) > 0, 0, 18)
+poweradd= IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 juggle=12
 sprpriority = 1
 facep2= 1
@@ -946,7 +946,7 @@ palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=15
 air.juggle = 12
-getpower = IfElse(Var(21) > 0 || Var(29) > 0, 0, ifelse(p2movetype = H, 72, 216)), IfElse(Var(21) > 0 || Var(29) > 0, 0, 36)
+getpower = IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, ifelse(p2movetype = H, 72, 216)), IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 36)
 givepower = 36, 36
 
 [State 200, Dampen]
@@ -979,7 +979,7 @@ juggle  = 3
 ctrl = 0
 anim = 800
 sprpriority = 2
-poweradd = IfElse(Var(21) > 0 || Var(29) > 0, 0, 18)
+poweradd = IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 facep2 = 1
 velset = 0,0
 
@@ -1042,7 +1042,7 @@ juggle  = 3
 ctrl = 0
 anim = 801
 sprpriority = 1
-poweradd = IfElse(Var(21) > 0 || Var(29) > 0, 0, 72)
+poweradd = IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 72)
 velset = 0,0
 
 [State 802, Shake]
