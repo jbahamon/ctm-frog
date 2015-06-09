@@ -657,7 +657,8 @@ value = 15070
 triggerall = StateType != A
 triggerall = Command = "Toki wo Tomare"
 triggerall = PalNo = 12
-triggerall= Ctrl 	
+triggerall= Ctrl
+triggerall = !Var(29) 	
 trigger1 = !Var(23) && !NumHelper(10000)
 trigger2 = Var(23) && NumHelper(10000) 
 trigger2 = Helper(10000), StateNo = 17011

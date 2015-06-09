@@ -148,7 +148,7 @@ Trigger2=P2Stateno=[120,160]
 Trigger3=enemynear,ctrl
 Trigger4=P2StateType!=A
 Trigger4=P2MoveType!=H
-fvar(39)=IfElse(PalNo = 12, 0.8, 1)
+fvar(39)=IfElse(PalNo = 12, IfElse(Var(29) > 0, 0.5, 0.8), 1)
 ignorehitpause=1
 
 ;Guard Helper
@@ -255,6 +255,15 @@ trigger1 =  Var(29) > 3
 trigger1 = !(Var(29) := (Var(29) - 3))
 ignorehitpause = 1
 
+[State 0, DisplayToClipboard]
+type = DisplayToClipboard
+trigger1 = 1
+text = "Var(29) = %d"
+params = var(29)
+ignorehitpause = 1
+;persistent = 
+
+
 [State 7015, LifeAdd]
 type = PowerAdd
 trigger1 =  Var(29) > 0
@@ -273,9 +282,9 @@ ignorehitpause = 1
 
 [State 7015, LifeAdd]
 type = ChangeState
-trigger1 =  Var(29) >= 3
+trigger1 =  Var(29) > 0
 trigger1 = Power <= 0
-trigger1 = IfElse(StateNo = 0 || StateNo = 50, !(Var(29) := 4), !(Var(29) := 0))
+trigger1 = IfElse(StateNo = 0 || StateNo = 50 || StateNo = 11, !(Var(29) := 0), !(Var(29) := 4))
 value = 15080
 ignorehitpause = 1
 
@@ -311,13 +320,6 @@ ignorehitpause = 1
 type = Null;
 trigger1 =  Var(24) >= 1000
 trigger1 = (Var(24) := 1000)
-ignorehitpause = 1
-
-[State 0, DisplayToClipboard]
-type = DisplayToClipboard
-trigger1 = 1
-text = "Var(24) = %d"
-params = Var(24)
 ignorehitpause = 1
 
 [State 2020, Masa & Mune]

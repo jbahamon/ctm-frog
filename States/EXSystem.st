@@ -633,12 +633,6 @@ ctrl = 0
 movetype = I
 sprpriority = 2
 
-[State 13195, Sound!]
-type=PlaySnd
-trigger1=!time
-value = S7015,1
-channel = 0
-
 [State 13195, Physics]
 type = StateTypeSet
 trigger1 = !Time
@@ -657,6 +651,16 @@ type = ChangeAnim
 trigger1 = !Time
 trigger1 = StateType = S
 value = 195
+
+
+[State 1100, Velocity]
+type = PlaySnd
+triggerall = !Time
+trigger1 = !Var(23)
+trigger1 = !NumHelper(10000)
+value = 8000,1
+channel = 0
+persistent = 0
 
 [State 13195, Stand Var]
 type = VarSet

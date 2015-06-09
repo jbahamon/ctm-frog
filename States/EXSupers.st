@@ -991,6 +991,15 @@ trigger1 = AnimElemTime(1) = 5
 Y = -12
 persistent = 0
 
+
+[State 1100, Velocity]
+type = PlaySnd
+trigger1 = Anim = 15020
+trigger1 = AnimElem = 2
+value = 8000,0
+channel = 0
+persistent = 0
+
 [State 1100, Velocity]
 type = VelSet
 trigger1 = Anim = 15020
@@ -1036,6 +1045,7 @@ trigger1 = Anim = 15020
 trigger1 = AnimElemTime(1) = 5
 statetype = A
 physics = N
+
 
 [State 2010, Super Pause FX]
 type = ChangeAnim
@@ -1252,6 +1262,40 @@ anim = 15021
 sprpriority = 2
 facep2 = 1 	
 velset = 0,0
+
+
+[State 1100, Velocity]
+type = PlaySnd
+trigger1 = AnimElem = 3
+value = 8000,4
+channel = 0
+persistent = 0
+
+
+[State 1100, Velocity]
+type = PlaySnd
+trigger1 = AnimElem = 28
+value = 8000,5
+channel = 0
+persistent = 0
+
+
+[State 1100, Velocity]
+type = PlaySnd
+trigger1 = AnimElem = 32
+value = 8000,6
+channel = 0
+loop = 1
+persistent = 0
+
+
+[State 1100, Velocity]
+type = PlaySnd
+trigger1 = AnimElem = 50
+value = 8000,7
+channel = 0
+persistent = 0
+
 
 [State 1100, Velocity]
 type = ChangeAnim
@@ -2803,18 +2847,56 @@ movehitpersist = 0
 hitcountpersist = 0
 sprpriority = 0
 
+
+[State 3250, Super Pause FX]
+type = helper
+trigger1 = !Time
+helpertype = normal
+stateno = 7000
+ID = 7000
+name = "Super BG"
+postype = p1
+pos = -34, -63
+ownpal = 1
+persistent = 0
+pausemovetime = 9999
+supermovetime = 9999
+
+
+[State 3250, Super Pause FX]
+type = helper
+trigger1 = !Time
+helpertype = normal
+stateno = 7001
+ID = 7001
+name = "Super BG"
+postype = p1
+pos = -34, -63
+ownpal = 1
+persistent = 0
+pausemovetime = 9999
+supermovetime = 9999
+
+[State 2010, Super Pause]
+type = superpause
+trigger1 = !Time
+time = 30
+movetime = 30
+anim = -1
+sound = S7050,3
+p2defmul = 1
+darken = 0
+
 [State 3000, Superpause]
 type = Pause
-trigger1 = Time = 3
-time = 100
-movetime = 100
-
+trigger1 = Time = 33
+time = 70
+movetime = 70
 
 [State 3000, Superpause]
 type = VarSet
 trigger1 = Time = 103
 var(29) = Power
-
 
 [State 3001, Bubble]
 type = Helper
@@ -2865,3 +2947,58 @@ flag = NoShadow
 [State 3011, end]
 type = DestroySelf
 trigger1 = Time = 130
+
+
+; Toki Wo Tomare End
+[Statedef 15080]
+type = S
+movetype = I
+physics = N
+anim = 15080
+velset = 0,0
+ctrl = 0
+poweradd = 0
+juggle = 0
+facep2 = 0
+hitdefpersist = 0
+movehitpersist = 0
+hitcountpersist = 0
+sprpriority = 0
+
+
+[State 2010, Super Pause FX]
+type = helper
+trigger1 = AnimElem = 5
+helpertype = normal
+stateno = 7000
+ID = 7000
+name = "Super Charge"
+postype = p1
+pos = 0,0
+ownpal = 1
+persistent = 0
+supermovetime = 9999
+
+[State 17100: Power]
+type = PowerSet
+trigger1 = !Time
+value = 0
+
+[State 17100: Var]
+type = VarSet
+trigger1 = !Time
+v = 29
+value = 0
+
+[State 3000, Superpause]
+type = Pause
+trigger1 = 1
+time = 2
+movetime = 2
+ignorehitpause = 1
+
+[State 17100: ChangeState]
+type = ChangeState
+trigger1 = Time = 60
+value = 0
+ctrl = 1
