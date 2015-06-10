@@ -936,6 +936,21 @@ physics = N
 velset = 0,0
 anim = 7401
 
+[State 1100, Velocity]
+type = PlaySnd
+trigger1 = !Time
+value = 8000,6
+channel = 0
+loop = 1
+persistent = 0
+
+[State 1100, Velocity]
+type = PlaySnd
+trigger1 = Time = 12
+value = 8000,7
+channel = 0
+persistent = 0
+
 [State 815, 1]
 type = PlayerPush
 trigger1 = 1

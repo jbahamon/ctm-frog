@@ -1282,7 +1282,7 @@ persistent = 0
 
 [State 1100, Velocity]
 type = PlaySnd
-trigger1 = AnimElem = 32
+trigger1 = AnimElem = 30
 value = 8000,6
 channel = 0
 loop = 1
@@ -2158,6 +2158,13 @@ poweradd = -1000
 facep2 = 1 	
 velset = 0,0
 
+[State 1100, Velocity]
+type = PlaySnd
+trigger1 = !Time
+value = 8000,10
+channel = 0
+persistent = 0
+
 [State 2500, NotHitBy]
 type = NotHitBy
 trigger1 = 1
@@ -2197,7 +2204,7 @@ trigger1 = Animelem = 5
 time = 30
 movetime = 30
 anim = -1
-sound = S7050,3
+sound = -1
 p2defmul = 1
 darken = 0
 
@@ -2375,6 +2382,19 @@ sprpriority = 1
 facep2 = 1 	
 velset = 0,0
 
+[State 1100, Velocity]
+type = PlaySnd
+trigger1 = Time = 0
+value = 8000,15
+channel = 0
+persistent = 0
+
+[State 1100, Velocity]
+type = PlaySnd
+trigger1 = Time = 80
+value = 8000,9
+channel = 0
+persistent = 0
 
 [State 2500, NotHitBy]
 type = ScreenBound
@@ -2848,6 +2868,21 @@ hitcountpersist = 0
 sprpriority = 0
 
 
+[State 1100, Velocity]
+type = PlaySnd
+trigger1 = Time = 0
+value = 8000,1
+channel = 0
+persistent = 0
+
+[State 1100, Velocity]
+type = PlaySnd
+trigger1 = Time = 50
+value = 8000,12
+channel = 0
+persistent = 0
+
+
 [State 3250, Super Pause FX]
 type = helper
 trigger1 = !Time
@@ -2880,27 +2915,49 @@ supermovetime = 9999
 [State 2010, Super Pause]
 type = superpause
 trigger1 = !Time
-time = 30
-movetime = 30
+time = 60
+movetime = 60
 anim = -1
-sound = S7050,3
+sound = -1
 p2defmul = 1
 darken = 0
 
+[State 13801, Masa & Mune]
+type = helper
+triggerall = !NumHelper(10000)
+trigger1 = !Time
+stateno = 17010
+ID = 10000
+name = "Masa&Mune"
+postype = p1
+pos = 0,-20
+ownpal = 1
+pausemovetime = 9999999
+supermovetime = 9999999
+
+[State 1100, Velocity]
+type = VarSet
+trigger1 = !Time
+trigger1 = NumHelper(10000)
+trigger1 = !Var(23)
+v = 23
+value = 1
+
+
 [State 3000, Superpause]
 type = Pause
-trigger1 = Time = 33
+trigger1 = Time = 63
 time = 70
 movetime = 70
 
 [State 3000, Superpause]
 type = VarSet
-trigger1 = Time = 103
+trigger1 = Time = 133
 var(29) = Power
 
 [State 3001, Bubble]
 type = Helper
-trigger1 = Time = 10
+trigger1 = Time = 40
 helpertype = normal ;player
 name = "Time Bubble"
 ID = 15070
@@ -2915,7 +2972,7 @@ pausemovetime = 99999
 
 [State 17100: ChangeState]
 type = ChangeState
-trigger1 = Time = 123
+trigger1 = Time = 153
 value = 0
 ctrl = 1
 
@@ -2930,9 +2987,8 @@ sprpriority = 5
 
 [State 3001, Snd]
 type = PlaySnd
-trigger1 = !Time
-value = S7010,1
-;channel = 0
+trigger1 = Time = 40
+value = 8000,16
 
 [State 3013, Scale]
 trigger1 = 1
@@ -2966,6 +3022,14 @@ hitcountpersist = 0
 sprpriority = 0
 
 
+[State 1100, Velocity]
+type = PlaySnd
+trigger1 = Time = 0
+value = 8000,11
+channel = 0
+persistent = 0
+
+
 [State 2010, Super Pause FX]
 type = helper
 trigger1 = AnimElem = 5
@@ -2986,7 +3050,7 @@ value = 0
 
 [State 17100: Var]
 type = VarSet
-trigger1 = !Time
+trigger1 = Time = 30
 v = 29
 value = 0
 
