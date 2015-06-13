@@ -280,9 +280,11 @@ ignorehitpause = 1
 
 [State 7015, LifeAdd]
 type = ChangeState
-trigger1 =  Var(29) > 0
+triggerall =  Var(29) > 0
 trigger1 = Power <= 0
 trigger1 = IfElse(StateNo = 0 || StateNo = 11, !(Var(29) := 0), !(Var(29) := 4))
+trigger2 = Win
+trigger2 = !(Var(29) := 0)
 value = 15080
 ignorehitpause = 1
 

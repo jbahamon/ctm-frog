@@ -591,8 +591,13 @@ value = 15
 
 [State 180, 1]
 type = ChangeState
+trigger1 = prevstateno = 183
+value = 183
+
+[State 180, 1]
+type = ChangeState
 trigger1 = Time = 0
-value = 181
+value = IfElse(PalNo != 12, 181, IfElse(PrevStateNo = 15022, 183,182))
 
 ;---------------------------------------------------------------------------
 ;Winpose
@@ -607,6 +612,62 @@ type = NotHitBy
 trigger1 = 1
 value = SCA
 time = 1
+
+;---------------------------------------------------------------------------
+;Winpose
+[Statedef 182]
+type = S
+ctrl = 0
+anim = 14061
+velset = 0,0
+
+[State 181, 1]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+
+[State 181, Snd]
+trigger1 = !Time
+type = PlaySnd
+value = S8000,3
+
+
+; Special Winpose
+[Statedef 183]
+type = S
+ctrl = 0
+movetype = I
+physics = N
+
+[State 362, Anim]
+type = ChangeAnim
+trigger1 = PrevStateNo = 15022
+value = 15033
+persistent = 0
+
+[State 181, Snd]
+trigger1 = PrevStateNo = 15022
+trigger1 = AnimElem = 5
+type = PlaySnd
+value = S8000,2
+persistent = 0
+
+[State 170, 1]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State 200, 7]
+type = screenbound
+trigger1 = 1
+value = 1
+movecamera = 30,0
+
+[State 362, win]
+type = CtrlSet
+trigger1 = Time > 60
+value = 1
 
 
 ;-------------------------------------Intros: 190, 191, 193... 300-400 xD--------------------------------------
@@ -1091,7 +1152,16 @@ sprpriority = 2
 [State 195, Sound!]
 type=PlaySnd
 trigger1=!time
+trigger1 = PalNo != 12
 value = S7015,1
+channel = 0
+
+
+[State 195, Sound!]
+type = PlaySnd
+trigger1 = !Time
+trigger1 = PalNo = 12
+value = S8000,(14 + Random % 2)
 channel = 0
 
 [State 195, 1]

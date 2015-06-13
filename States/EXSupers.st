@@ -11,6 +11,14 @@ poweradd = -1000
 facep2 = 1 	
 velset = 0,0
 
+
+[State 2010, Liftoff]
+type = PlaySnd
+trigger1 = !Time
+value = S8001,0
+channel = 0
+persistent = 0
+
 [State 2500, NotHitBy]
 type = NotHitBy
 trigger1 = Anim = 15000
@@ -986,6 +994,14 @@ v = 1
 value = 20
 
 [State 2010, Liftoff]
+type = PlaySnd
+trigger1 = !Time
+value = S8001,0
+channel = 0
+persistent = 0
+
+
+[State 2010, Liftoff]
 type = VelSet
 trigger1 = Anim = 15020
 trigger1 = AnimElemTime(1) = 5
@@ -1130,6 +1146,15 @@ time = 12
 freq = 120
 ampl = 8
 ignorehitpause = 1
+
+
+[State 3003, fall]
+type = PlaySnd
+trigger1 = Pos Y > - Vel Y - Var(1)
+trigger1 = Vel Y > 0
+value = 7001,2
+ignorehitpause = 1
+persistent = 0
 
 [State 1100, ChangeState]
 type = ChangeState
@@ -1289,7 +1314,6 @@ channel = 0
 loop = 1
 persistent = 0
 
-
 [State 1100, Velocity]
 type = PlaySnd
 trigger1 = AnimElem = 50
@@ -1297,6 +1321,11 @@ value = 8000,7
 channel = 0
 persistent = 0
 
+[State 1100, Velocity]
+type = ChangeState
+trigger1 = AnimElemNo(0) = 51
+trigger1 = WinKO
+value = 183
 
 [State 1100, Velocity]
 type = ChangeAnim
@@ -1353,6 +1382,25 @@ ampl = 8
 type = VelAdd
 trigger1 = animelemtime(54) > 0
 y = .3
+
+[State 1100, Velocity]
+type = PlaySnd
+triggerall = AnimElemTime(AnimElemNo(0)) = 0
+triggerall = AnimElemNo(0) = [28, 48]
+trigger1 = AnimElemNo(0) % 4 = 3
+trigger2 = AnimElemNo(0) % 4 = 1
+value = 7002,1
+volumescale = 64
+channel = 1
+
+
+[State 1100, Velocity]
+type = PlaySnd
+trigger1 = AnimElem = 50
+value = 7001,2
+volumescale = 128
+channel = 1
+
 
 [State 220, 1]
 type = Hitdef
@@ -1498,7 +1546,7 @@ ignorehitpause = 1
 [State 200, 7]
 type = TargetState
 trigger1 = numtarget(15022)
-trigger1 = win
+trigger1 = winko
 trigger1 = animelemtime(50) >= 0
 ID = 15022
 value = 15029
@@ -1506,13 +1554,10 @@ ignorehitpause = 1
 persistent = 0
 
 [State 200, 7]
-type = TargetBind
+type = TargetDrop
 trigger1 = numtarget(15022)
-trigger1 = win
+trigger1 = winko
 trigger1 = animelemtime(50) >= 0
-ID = 15022
-pos = 10,100
-time = -1
 ignorehitpause = 1
 persistent = 0
 
@@ -1543,12 +1588,6 @@ type = ChangeState
 trigger1 = animelemtime(54) > 0
 trigger1 = Pos Y >= 0 && Vel Y > 0
 value = 52
-
-[State 1100, ChangeState]
-type = ChangeState
-trigger1 = animelem = 51
-trigger1 = win
-value = 15033
 
 ; Landed Off-Screen
 [Statedef 15023]
@@ -1747,7 +1786,7 @@ mul = 200, 200, 200
 
 [State 3015, Fade]
 type = Varset
-triggerall = !Parent, Win
+triggerall = !Parent, WinKO
 trigger1 = Parent, StateNo != [15020, 15022]
 trigger2 = Parent, StateNo = 15022
 trigger2 = Parent, Anim = 15021
@@ -1783,7 +1822,7 @@ value = -1
 
 [State 3015, Fade]
 type = VarSet
-trigger1 = Root, Win
+trigger1 = Root, WinKO
 trigger1 = Root, StateNo = 15033 || Root, StateNo = 15022 || Root, StateNo = 180
 v = 1
 value = 0
@@ -1805,7 +1844,7 @@ var(1) = 0
 
 [State 3015, Fade]
 type = Varset
-triggerall = !Parent, Win
+triggerall = !Parent, WinKO
 trigger1 = Parent, StateNo != [15020, 15022]
 trigger2 = Parent, StateNo = 15022
 trigger2 = Parent, Anim = 15025
@@ -1879,7 +1918,7 @@ value = -1
 
 [State 3015, Fade]
 type = VarSet
-trigger1 = Root, Win
+trigger1 = Root, WinKO
 trigger1 = Root, StateNo = 15033 || Root, StateNo = 15022 || Root, StateNo = 180
 v = 1
 value = 0
@@ -1968,9 +2007,10 @@ anim = 5110
 sprpriority = -1
 
 [State 170, 1]
-type = NotHitBy
-trigger1 = 1
-value = SCA
+type = PosSet
+trigger1 = !Time
+Y = 0
+ignorehitpause = 1
 
 [State 1100, ChangeState]
 type = SelfState
@@ -2116,34 +2156,6 @@ trigger1 = Vel Y > 0
 trigger1 = Pos Y >= 0
 value = 5100
 
-; Special Winpose
-[Statedef 15033]
-type    = S
-movetype = I
-physics = N
-anim = 15033
-
-[State 170, 1]
-type = NotHitBy
-trigger1 = 1
-value = SCA
-
-[State 200, 7]
-type = screenbound
-trigger1 = 1
-value = 1
-movecamera = 30,0
-
-[State 3810,5]
-type = CtrlSet
-trigger1 = time > 80
-value = 1
-
-[State 3810,5]
-type = Changestate
-trigger1 = p2movetype = A
-value = 180
-ctrl = 1
 
 
 ; Chi no Shoukan
