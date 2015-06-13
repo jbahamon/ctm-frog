@@ -11,6 +11,12 @@ poweradd = IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 facep2 = 1
 velset = 0,0
 
+[State 620, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S8000,7
+channel = 0
+ignorehitpause = 1
 
 [State 803, Safety]
 type = ChangeState
@@ -105,6 +111,7 @@ poweradd = IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 facep2 = 1
 velset = 0,0
 
+
 [State 803, Safety]
 type = VarSet
 trigger1 = !Time
@@ -130,6 +137,12 @@ trigger1 = Var(1) = 1
 x = IfElse(Var(0) = 2, 1, IfElse(Var(0) = 1, .5, 0))
 ignorehitpause = 1
 
+[State 17100: ChangeState]
+type = VelMul
+trigger1 = Var(29) > 0
+trigger1 = Abs(P2Dist X) < 40
+X = 0.9
+ignorehitpause = 1
 
 [State 803, Safety]
 type = ChangeState
@@ -220,6 +233,13 @@ trigger1 = Helper(10000), StateNo = 17226
 v = 1
 value = 1
 
+[State 17100: ChangeState]
+type = VelMul
+trigger1 = Var(29) > 0
+trigger1 = Abs(P2Dist X) < 40
+X = 0.9
+ignorehitpause = 1
+
 [State 803, Safety]
 type = PosSet
 trigger1 = Vel Y > 0 && Vel Y >= - Pos Y
@@ -253,6 +273,21 @@ sprpriority = 1
 poweradd = IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 facep2 = 1
 velset = 0,0
+
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S8000,7
+channel = 0
+ignorehitpause = 1
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S8000,7
+channel = 0
+ignorehitpause = 1
 
 [State 1030, whatbuttondidyoupress?]
 type = VarSet
@@ -298,6 +333,13 @@ sprpriority = 1
 poweradd = IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 facep2 = 1
 velset = 0,0
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S8000,7
+channel = 0
+ignorehitpause = 1
 
 [State 803, Safety]
 type = VarSet
@@ -365,6 +407,14 @@ poweradd = IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 facep2 = 1
 velset = 0,0
 
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S8000,7
+channel = 0
+ignorehitpause = 1
+
 [State 803, Safety]
 type = VarSet
 trigger1 = !Time
@@ -422,6 +472,13 @@ anim = 14060
 sprpriority = 2
 poweradd = 0
 velset = 0,0
+
+
+[State 2202, !Shadow]
+type = PlaySnd
+trigger1 = !Time
+value = S8000,8
+channel = 0
 
 [State 1030, whatbuttondidyoupress?]
 type = VarSet
@@ -546,11 +603,16 @@ sprpriority = 2
 poweradd = 0
 velset = 0,0
 
+[State 2202, !Shadow]
+type = PlaySnd
+trigger1 = !Time
+value = S8000,8
+channel = 0
+
 [State 1030, whatbuttondidyoupress?]
 type = VarSet
 trigger1 = !Time
 var(0) = IfElse(command="dfc", 2, IfElse(Command = "dfb", 1, 0))
-
 
 [State 803, Safety]
 type = VarSet
@@ -574,7 +636,6 @@ trigger2 = !NumHelper(10000)
 value = 0
 ctrl = 1
 
-
 [State 803, Safety]
 type = ChangeState
 trigger1 = !NumHelper(10000)
@@ -583,7 +644,6 @@ trigger2 = Var(1) || Time > 3
 trigger2 = Helper(10000), StateNo != 17240
 value = 0
 ctrl = 1
-
 
 ; Space Ripper Stingy Eyes!
 [Statedef 14050]
@@ -596,12 +656,17 @@ sprpriority = 0
 poweradd = 0
 velset = 0,0
 
+[State 2202, !Shadow]
+type = PlaySnd
+trigger1 = !Time
+value = S7010,0
+volumescale = 64
+
 [State 13801, Masa & Mune]
 type = OffSet
 trigger1 = AnimElemNo(0) = 3
 trigger1 = Time % 4 < 2
 Y = 1
-
 
 [State 803, Pal]
 type = PalFX
@@ -692,6 +757,10 @@ trigger1 = 1
 flag = noshadow
 ignorehitpause = 1
 
+[State 2202, !Shadow]
+type = PlaySnd
+trigger1 = Time = 3
+value = S7002,2
 
 [State 3010, HitDef]
 type = HitDef
@@ -708,7 +777,7 @@ pausetime = 0,8
 guard.pausetime = 0,8
 sparkno = S7006
 sparkxy = -14, 0
-hitsound = S1,4
+hitsound = -1
 guardsound = S4,0
 ground.type = High
 air.type = High

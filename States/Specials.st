@@ -282,6 +282,7 @@ type=playsnd
 trigger1=!time
 value = S7010,4
 channel = 1
+ignorehitpause = 1
 
 [State 1015, assert]
 type=assertspecial
@@ -574,9 +575,10 @@ ignorehitpause = 1
 
 [State 1035, OMG it Hurts!]
 type = playsnd
-trigger1 = anim=1035 && AnimElemTime(1) = 8
+trigger1 = anim=1035 && AnimElemTime(1) = 4
 value = S7001,3
 channel=1
+persistent = 0
 
 [State 1035, Shake]
 type = EnvShake

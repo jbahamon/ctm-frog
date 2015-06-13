@@ -47,7 +47,7 @@ type = BGPalFX
 trigger1 = time <= 10 && !Var(1)
 time = 1
 mul = 256 -floor(25.6 * time), 256 -floor(25.6 * time), 256
-color = 256 -floor(25.6 * time)
+color = IfElse(Root, Var(29) > 0, 0, 256 -floor(25.6 * time))
 
 [State 7000, Pal Static]
 type = BGPalFX
@@ -61,14 +61,14 @@ type = BGPalFX
 trigger1 = time >= 40 && !Var(1) 
 time = 1
 mul = ceil(51.2 * (time - 40)), ceil(51.2 * (time - 40)), 256
-color = floor(51.2 * (time - 40))
+color = IfElse(Root, Var(29) > 0, 0, floor(51.2 * (time - 40)))
 
 [State 7000, Pal Down]
 type = BGPalFX
 trigger1 = time <= 10 && Var(1)
 time = 1
 mul = 256 - floor(19.2 * time), 256 - floor(19.2 * time), 256 - floor(19.2 * time)
-color = 256 -floor(25.6 * time)
+color = IfElse(Root, Var(29) > 0, 0, 256 -floor(25.6 * time))
 
 [State 7000, Pal Static]
 type = BGPalFX
@@ -83,7 +83,7 @@ trigger1 = time >= 40
 trigger1 = !Var(1) 
 time = 1
 mul = 256, ceil(51.2 * (time - 40)), ceil(51.2 * (time - 40))
-color = floor(51.2 * (time - 40))
+color = IfElse(Root, Var(29) > 0, 0, floor(51.2 * (time - 40)))
 
 [State 7000, Pal Up]
 type = BGPalFX
@@ -91,7 +91,7 @@ trigger1 = time = [Var(1),(Var(1) + 10)]
 trigger1 = Var(1) 
 time = 1
 mul = 64 + ceil(19.2 * (time - Var(1))), 64 + ceil(19.2 * (time - Var(1))), 64 + ceil(19.2 * (time - Var(1)))
-color = floor(25.6 * (time - Var(1)))
+color = IfElse(Root, Var(29) > 0, 0, floor(25.6 * (time - Var(1))))
 
 [State 7000, Pal None]
 type = BGPalFX
@@ -223,13 +223,13 @@ var(0) = 24
 type = Trans
 trigger1 = Time < 4
 trans = addalpha
-alpha = Time * 64, 256
+alpha = Time * 64, 256 - 32*Time 
 
 [State 8520, Trans]
 type = Trans
 trigger1 = Time = [4, Var(0)]
 trans = addalpha
-alpha = 256, 256
+alpha = 256, 128
 
 [State 8520, Scale]
 type = AngleDraw
@@ -240,7 +240,7 @@ scale = Time/20.0, Time/20.0
 type = Trans
 trigger1 = Time >= Var(0)
 trans = addalpha
-alpha = 256 - 16 * (Time - Var(0)), 256
+alpha = 256 - 16 * (Time - Var(0)), 128 + 8 *  (Time - Var(0))
 
 [State 8520, Safety]
 type = DestroySelf

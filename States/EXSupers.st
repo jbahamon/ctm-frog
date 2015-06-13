@@ -55,9 +55,15 @@ trigger1 = Animelem = 4
 time = 45
 movetime = 45
 anim = -1
-sound = S7050,3
+sound = S8000,18
 p2defmul = 1
 darken = 0
+
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = Animelem=6
+value = S7000,1
 
 [State 2010, End]
 type = VelSet
@@ -260,14 +266,15 @@ type = hitdef
 trigger1 = 1
 priority = 4, Hit
 attr = S, SP
-damage = ceil(31 * root, fvar(39)), 4
+damage = ceil(36 * root, fvar(39)), 4
 animtype = Heavy
 hitflag = MAF
 guardflag = MA
 air.animtype = back
 fall.animtype = back
-pausetime = 0, 4
+pausetime = 0, 7
 sparkno = -1
+hitsound = S7002,2
 guardsound = s2, 0
 ground.type = Low
 air.type = Low
@@ -275,9 +282,9 @@ ground.slidetime = 17
 ground.hittime = 17
 air.hittime = 17
 guard.ctrltime = 17
-ground.velocity = -1.8,-8.6
+ground.velocity = -1.8,-3.6
 guard.velocity = -8
-air.velocity = -1.8,-8.6
+air.velocity = -1.8,-3.6
 airguard.velocity = -4.2,-3.2
 ground.cornerpush.veloff = 0
 air.cornerpush.veloff = 0
@@ -295,6 +302,7 @@ palfx.time = 4
 airguard.ctrltime = 16
 airguard.velocity = ifelse((root, var(21)), -4, -8) * 0.6, -1.5 * 0.6
 forcestand = 1
+air.juggle = 0
 
 [State 1005, End]
 type = changestate
@@ -452,7 +460,7 @@ trigger1 = Helper(10000), AnimElem = 3
 time = 45
 movetime = 45
 anim = -1
-sound = S7050,3
+sound = S8000,18
 p2defmul = 1
 darken = 0
 
@@ -664,7 +672,7 @@ trigger1 = Helper(10000), AnimElem = 3
 time = 45
 movetime = 45
 anim = -1
-sound = S7050,3
+sound = S8000,18
 p2defmul = 1
 darken = 0
 
@@ -877,15 +885,6 @@ type = varadd
 trigger1 = time && var(1) < 25
 var(1) = 1
 
-[State 1005, HitSound]
-type = playsnd
-trigger1 = movehit && numtarget
-trigger1 = !(target, time) && target, movetype = H
-value = S7020,5
-channel = 1
-persistent = 0
-ignorehitpause = 1
-
 [State 1001, Dampen]
 Type = ParentVarset
 Trigger1 = MoveHit
@@ -899,14 +898,15 @@ type = hitdef
 trigger1 = 1
 priority = 4, Hit
 attr = S, SP
-damage = ceil(21 * root, fvar(39)), 4
+damage = ceil(26 * root, fvar(39)), 4
 animtype = Heavy
 hitflag = MAF
 guardflag = MA
 air.animtype = back
 fall.animtype = back
-pausetime = 0, 4
+pausetime = 0, 7
 sparkno = -1
+hitsound = S7002,2
 guardsound = s2, 0
 ground.type = Low
 air.type = Low
@@ -914,9 +914,9 @@ ground.slidetime = 17
 ground.hittime = 17
 air.hittime = 17
 guard.ctrltime = 17
-ground.velocity = -1.8,-8.6
+ground.velocity = -1.8,-3.6
 guard.velocity = -8
-air.velocity = -1.8,-8.6
+air.velocity = -1.8,-3.6
 airguard.velocity = -4.2,-3.2
 ground.cornerpush.veloff = 0
 air.cornerpush.veloff = 0
@@ -934,6 +934,7 @@ palfx.time = 4
 airguard.ctrltime = 16
 airguard.velocity = ifelse((root, var(21)), -4, -8) * 0.6, -1.5 * 0.6
 forcestand = 1
+air.juggle = 0
 
 [State 1005, End]
 type = changestate
@@ -995,7 +996,7 @@ persistent = 0
 [State 1100, Velocity]
 type = PlaySnd
 trigger1 = Anim = 15020
-trigger1 = AnimElem = 2
+trigger1 = AnimElemTime(1) = 40
 value = 8000,0
 channel = 0
 persistent = 0
@@ -1266,7 +1267,7 @@ velset = 0,0
 
 [State 1100, Velocity]
 type = PlaySnd
-trigger1 = AnimElem = 3
+trigger1 = AnimElem = 4
 value = 8000,4
 channel = 0
 persistent = 0
@@ -1274,7 +1275,7 @@ persistent = 0
 
 [State 1100, Velocity]
 type = PlaySnd
-trigger1 = AnimElem = 28
+trigger1 = AnimElem = 27
 value = 8000,5
 channel = 0
 persistent = 0
@@ -2161,7 +2162,7 @@ velset = 0,0
 [State 1100, Velocity]
 type = PlaySnd
 trigger1 = !Time
-value = 8000,10
+value = 8000,17
 channel = 0
 persistent = 0
 
@@ -2201,8 +2202,8 @@ supermovetime = 9999
 [State 2010, Super Pause]
 type = superpause
 trigger1 = Animelem = 5
-time = 30
-movetime = 30
+time = 50
+movetime = 50
 anim = -1
 sound = -1
 p2defmul = 1
@@ -2244,7 +2245,7 @@ guard.pausetime = 0,12
 sparkno = S8204
 guard.sparkno = S8100
 sparkxy = -20,-55
-hitsound = S1,3
+hitsound = S7002,1
 guardsound = S4,0
 p1facing = 1
 p2facing = 1
@@ -2391,7 +2392,7 @@ persistent = 0
 
 [State 1100, Velocity]
 type = PlaySnd
-trigger1 = Time = 80
+trigger1 = Time = 70
 value = 8000,9
 channel = 0
 persistent = 0
@@ -2442,6 +2443,13 @@ trigger1 = Time = [90, 280]
 trigger1 = Time % 30 = 5
 value = -Ceil(28*fvar(39))
 kill = 0
+
+[State 901, Hurt]
+type = PlaySnd
+trigger1 = Time = [90, 280]
+trigger1 = Time % 30 = 5
+value = S7002,2
+channel = 1
 
 [State 901, Hurt]
 type = VarSet
@@ -2626,6 +2634,19 @@ trigger1 = AnimElem = 2
 ampl = 12
 freq = 120
 time = 8
+
+[State 901, Hurt]
+type = AllPalFX
+trigger1 = AnimElem = 2
+time = 2
+add = 255, 255, 255
+
+[State 901, Hurt]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = S7001,3
+channel = 1
+
 
 [State 9000, ModifyExplod]
 type = DestroySelf
@@ -2957,7 +2978,7 @@ var(29) = Power
 
 [State 3001, Bubble]
 type = Helper
-trigger1 = Time = 40
+trigger1 = Time = 50
 helpertype = normal ;player
 name = "Time Bubble"
 ID = 15070
@@ -2968,7 +2989,6 @@ facing = 1
 keyctrl = 0
 ownpal = 1
 pausemovetime = 99999
-
 
 [State 17100: ChangeState]
 type = ChangeState
@@ -2987,13 +3007,61 @@ sprpriority = 5
 
 [State 3001, Snd]
 type = PlaySnd
-trigger1 = Time = 40
+trigger1 = Time = 0
 value = 8000,16
 
 [State 3013, Scale]
-trigger1 = 1
+type = EnvShake
+trigger1 = !Time
+time = 40
+ampl = 4
+freq = 120
+
+[State 3013, Scale]
+type = BGPalFX
+trigger1 = Time = [1,10]
+time = 1
+add = 256 - Floor(Time/10.0 * 256), 256 - Floor(Time/10.0 * 256), 256 - Floor(Time/10.0 * 256)
+invertall = 1
+
+
+[State 3013, Scale]
+type = BGPalFX
+trigger1 = Time = [11,40]
+time = 1
+add = 0,0,0
+invertall = 1
+
+
+
+[State 3013, Scale]
+type = BGPalFX
+trigger1 = Time = [41,60]
+time = 1
+color = Ceil(256 - 256 * (Time - 41.0)/20.0)
+add = Ceil(256 * (Time - 41.0)/20.0), Ceil(256 * (Time - 41.0)/20.0), Ceil(256 * (Time - 41.0)/20.0)
+mul = Floor(256 - 128 * (Time - 41.0)/20.0), Floor(256 - 128 * (Time - 41.0)/20.0), Floor(256 - 128 * (Time - 41.0)/20.0)
+invertall = 1
+
+[State 3013, Scale]
+type = BGPalFX
+trigger1 = Time = [61,80]
+time = 1
+color = 0
+add = Floor(256 - 256 * (Time - 61.0)/20.0), Floor(256 - 256 * (Time - 61.0)/20.0), Floor(256 - 256 * (Time - 61.0)/20.0)
+mul = Floor(128 + 128 * (Time - 61.0)/20.0), Floor(128 + 128 * (Time - 61.0)/20.0), Floor(128 + 128 * (Time - 61.0)/20.0)
+
+
+[State 3013, Scale]
+trigger1 = Time = [0,40]
 type = AngleDraw
-scale = Time/8.0, Time/8.0
+scale = Time/2.0, Time/2.0
+
+
+[State 3013, Scale]
+trigger1 = Time = [41,80]
+type = AngleDraw
+scale = (80 - Time)/2.0, (80 - Time)/2.0
 
 [State 3012, Shadow]
 type = AssertSpecial
@@ -3002,7 +3070,7 @@ flag = NoShadow
 
 [State 3011, end]
 type = DestroySelf
-trigger1 = Time = 130
+trigger1 = Time = 80
 
 
 ; Toki Wo Tomare End
@@ -3027,6 +3095,14 @@ type = PlaySnd
 trigger1 = Time = 0
 value = 8000,11
 channel = 0
+persistent = 0
+
+
+[State 1100, Velocity]
+type = PlaySnd
+trigger1 = Time = 10
+value = 8000,19
+channel = 1
 persistent = 0
 
 

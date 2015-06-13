@@ -11,6 +11,12 @@ poweradd = 0
 juggle = 3 
 facep2= 1
 
+[State 200, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S8001,0
+channel = 0
+
 [State 200, 1]
 type = ChangeState
 trigger1 = !NumHelper(10000) || !Var(23)
@@ -31,6 +37,12 @@ poweradd = 0
 juggle = 3 
 facep2= 1
 
+[State 200, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S8001,0
+channel = 0
+
 [State 200, 1]
 type = ChangeState
 trigger1 = !NumHelper(10000) || !Var(23)
@@ -49,6 +61,12 @@ poweradd= IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 ctrl = 0
 sprpriority=1
 facep2= 1
+
+[State 200, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S8001,1
+channel = 0
 
 [State 220, Position]
 type = PosSet
@@ -129,6 +147,12 @@ sprpriority=1
 facep2= 1
 
 
+[State 200, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S8001,1
+channel = 0
+
 [State 220, Position]
 type = PosAdd
 trigger1 = Helper(10000), AnimElemTime(2) = 18
@@ -185,6 +209,12 @@ poweradd= 18
 juggle = 12
 sprpriority=1
 facep2= 1
+
+[State 200, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S8001,2
+channel = 0
 
 [State 1100, Velocity]
 type = VelSet
@@ -246,6 +276,13 @@ poweradd = 0
 juggle = 3 
 facep2= 1
 
+
+[State 200, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S8001,0
+channel = 0
+
 [State 803, Safety]
 type = VarSet
 trigger1 = !Var(1)
@@ -290,6 +327,12 @@ sprpriority = 1
 poweradd = 0
 juggle = 3 
 facep2= 1
+
+[State 200, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S8001,1
+channel = 0
 
 [State 803, Safety]
 type = VarSet
@@ -336,6 +379,12 @@ poweradd = 0
 juggle = 3 
 facep2= 1
 
+[State 200, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S8001,2
+channel = 0
+
 [State 803, Safety]
 type = VarSet
 trigger1 = !Var(1)
@@ -378,6 +427,13 @@ sprpriority = 1
 poweradd = 0
 juggle = 3 
 facep2= 1
+
+
+[State 200, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S8001,0
+channel = 0
 
 [State 210, 5]
 type = ChangeAnim
@@ -423,6 +479,12 @@ poweradd = 0
 juggle = 3 
 facep2= 1
 
+[State 200, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S8001,0
+channel = 0
+
 [State 210, 5]
 type = ChangeAnim
 trigger1 = !Time
@@ -448,6 +510,12 @@ poweradd= IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 ctrl = 0
 sprpriority=1
 facep2= 1
+
+[State 200, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S8001,1
+channel = 0
 
 [State 220, Position]
 type = PosSet
@@ -485,6 +553,12 @@ poweradd= IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 ctrl = 0
 sprpriority=1
 facep2= 1
+
+[State 200, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S8001,1
+channel = 0
 
 [State 220, Position]
 type = PosSet
@@ -529,6 +603,11 @@ juggle = 12
 sprpriority=1
 facep2= 1
 
+[State 200, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S8001,2
+channel = 0
 
 [State 1100, Velocity]
 type = PosAdd
@@ -581,6 +660,12 @@ poweradd= 18
 juggle = 12
 sprpriority=1
 facep2= 1
+
+[State 200, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S8001,2
+channel = 0
 
 [State 210, 5]
 type = ChangeAnim
@@ -1402,6 +1487,12 @@ type    = U
 movetype= H
 physics = N
 velset = 0,0
+
+
+[State 13899, Safety]
+type = StopSnd
+trigger1 = !Time
+channel = 0
 
 [State 13899, Safety]
 type = ChangeState

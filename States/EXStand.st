@@ -6,6 +6,13 @@ movetype = I
 anim = 3031
 sprpriority = -2
 
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S7015,3
+volumescale = 128
+
 [State 7014, End]
 type = VarSet
 trigger1 = !Time
@@ -261,6 +268,13 @@ velset = 0,0
 sprpriority = -2
 facep2= 0
 
+
+[State 7014, End]
+type = ChangeState
+trigger1 = Parent, StateNo = 15045
+value = 17311
+ignorehitpause = 1
+
 [State 7014, Light Hit]
 type = PlayerPush
 trigger1 = 1
@@ -348,7 +362,7 @@ ignorehitpause = 1
 [State 620, Snd]
 type = PlaySnd
 trigger1 = Animelem=2 
-value = S7000,1
+value = S7000,0
 
 [State 7015, ChangeAnim]
 type = VarSet
@@ -385,7 +399,7 @@ guard.pausetime = 0,11
 sparkno = -1
 guard.sparkno = -1
 sparkxy = -5,-22
-hitsound = -1
+hitsound = S7001,0
 guardsound = -1
 ground.type = Low
 air.type = Low
@@ -476,6 +490,13 @@ anim = 13011
 velset = 0,0
 sprpriority = -2
 facep2= 0
+
+[State 7014, End]
+type = ChangeState
+trigger1 = Parent, StateNo = 15045
+value = 17311
+ignorehitpause = 1
+
 
 [State 7014, End]
 type = VarSet
@@ -710,7 +731,7 @@ guard.pausetime = 0,13
 sparkno = S8201
 guard.sparkno = S8100
 sparkxy = -20,-65
-hitsound = S1,4
+hitsound = S7001,1
 guardsound = S4,0
 ground.type = Low
 air.type = Low
@@ -761,6 +782,12 @@ anim = 13021
 velset = 0,0
 sprpriority = -2
 facep2= 0
+
+[State 7014, End]
+type = ChangeState
+trigger1 = Parent, StateNo = 15045
+value = 17311
+ignorehitpause = 1
 
 
 [State 7011, Light Hit]
@@ -920,7 +947,7 @@ guard.pausetime = 0,13
 sparkno = S8201
 guard.sparkno = S8100
 sparkxy = -20,-65
-hitsound = S1,4
+hitsound = S7001,3
 guardsound = S4,0
 ground.type = Low
 air.type = Low
@@ -984,6 +1011,12 @@ value = 17011
 [Statedef 17015]
 MoveType = H
 poweradd = 0
+
+[State 17015, Shut up]
+type = StopSnd
+trigger1 = !Time
+channel = 0
+ignorehitpause = 1
 
 [State 17015, Vars]
 type = ParentVarSet
@@ -1317,6 +1350,13 @@ movetype = I
 velset = 0,0
 anim = 3031
 
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S7015,3
+volumescale = 128
+
 [State 7010, End]
 type = DestroySelf
 trigger1 = 1
@@ -1329,6 +1369,13 @@ movetype = I
 velset = 0,0
 anim = 3031
 sprpriority = 2
+
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = !Time
+value = S7015,3
+volumescale = 128
 
 [State 7010, appear]
 type = assertspecial
@@ -1382,7 +1429,7 @@ ignorehitpause = 1
 [State 620, Snd]
 type = PlaySnd
 trigger1 = Animelem=2 
-value = S7000,1
+value = S7000,0
 
 [State 7015, ChangeAnim]
 type = VarSet
@@ -1419,7 +1466,7 @@ guard.pausetime = 0,11
 sparkno = -1
 guard.sparkno = -1
 sparkxy = -5,-22
-hitsound = -1
+hitsound = S7001,0
 guardsound = -1
 ground.type = Low
 air.type = Low
@@ -1563,7 +1610,7 @@ guard.pausetime = 0,11
 sparkno = -1
 guard.sparkno = -1
 sparkxy = -5,-22
-hitsound = -1
+hitsound = S7001,1
 guardsound = -1
 ground.type = Low
 air.type = Low
@@ -1705,7 +1752,7 @@ guard.pausetime = 0,14
 sparkno = -1
 guard.sparkno = -1
 sparkxy = -5,-22
-hitsound = -1
+hitsound = S7001,3
 guardsound = -1
 ground.type = Low
 air.type = Low
@@ -1880,7 +1927,7 @@ ignorehitpause = 1
 [State 620, Snd]
 type = PlaySnd
 trigger1 = Animelem=2 
-value = S7000,1
+value = S7000,0
 
 [State 7015, ChangeAnim]
 type = VarSet
@@ -1917,7 +1964,7 @@ guard.pausetime = 0,11
 sparkno = -1
 guard.sparkno = -1
 sparkxy = -5,-22
-hitsound = -1
+hitsound = S7001,0
 guardsound = -1
 ground.type = Low
 air.type = Low
@@ -2138,7 +2185,7 @@ guard.pausetime = 0,13
 sparkno = -1
 guard.sparkno = -1
 sparkxy = -5,-22
-hitsound = -1
+hitsound = S7001,1
 guardsound = -1
 ground.type = Low
 air.type = Low
@@ -2356,7 +2403,7 @@ guard.pausetime = 0,11
 sparkno = -1
 guard.sparkno = -1
 sparkxy = -5,-22
-hitsound = -1
+hitsound = S7001,3
 guardsound = -1
 ground.type = Low
 air.type = Low
@@ -2852,7 +2899,7 @@ pausetime = 7,8
 guard.pausetime = 7,8
 sparkno = S7006
 sparkxy = -4, -10+(random%30)
-hitsound = S1,4
+hitsound = S7001,1
 guardsound = S4,0
 ground.type = High
 air.type = High
@@ -2875,6 +2922,31 @@ p2facing = 1
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=6
+
+
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = Animelem=2 
+value = S8000,5
+channel = 0
+ignorehitpause = 1
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = Animelem=7 || MoveContact
+value = S8000,6
+loop = 1
+channel = 0
+ignorehitpause = 1
+persistent = 0
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = Animelem=30
+value = S8000,7
+channel = 0
+ignorehitpause = 1
 
 [State 7013, Selector Var]
 type = VarSet
@@ -2980,6 +3052,37 @@ type = VarSet
 trigger1 = !Time
 var(0) = Parent, StateNo
 
+[State 620, Snd]
+type = PlaySnd
+trigger1 = !Time 
+value = S8000,5
+channel = 0
+ignorehitpause = 1
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = Animelem=7 || MoveContact
+value = S8000,6
+loop = 1
+channel = 0
+ignorehitpause = 1
+persistent = 0
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = Animelem=31
+trigger2 = Parent, StateNo != 14015
+trigger2 = (Parent, MoveType != H)
+value = S8000,7
+channel = 0
+ignorehitpause = 1
+
+[State 7014, Light Hit]
+type = StopSnd
+trigger1 = Parent, StateNo != 14015
+channel = 0
+ignorehitpause = 1
+
 [State 7014, Light Hit]
 type = ChangeState
 trigger1 = !AnimTime
@@ -3001,7 +3104,7 @@ pausetime = 7,!(random%8=0)*8
 guard.pausetime = 7,!(random%8=0)*8
 sparkno = S7006
 sparkxy = -4, -10+(random%30)
-hitsound = S1,4
+hitsound = S7001,1
 guardsound = S4,0
 ground.type = High
 air.type = High
@@ -3131,6 +3234,40 @@ type = VarSet
 trigger1 = !Time
 var(0) = Parent, StateNo
 
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = !Time 
+value = S8000,5
+channel = 0
+ignorehitpause = 1
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = Animelem=7 || MoveContact
+value = S8000,6
+loop = 1
+channel = 0
+ignorehitpause = 1
+persistent = 0
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = Animelem=31
+trigger2 = Parent, StateNo != 14016
+trigger2 = (Parent, MoveType != H)
+value = S8000,7
+channel = 0
+ignorehitpause = 1
+
+
+[State 7014, Light Hit]
+type = StopSnd
+trigger1 = Parent, StateNo != 14016
+trigger1 = (Parent, MoveType = H)
+channel = 0
+ignorehitpause = 1
+
 [State 7014, Light Hit]
 type = ChangeState
 trigger1 = !AnimTime
@@ -3152,7 +3289,7 @@ pausetime = 7,!(random%8=0)*8
 guard.pausetime = 7,!(random%8=0)*8
 sparkno = S7006
 sparkxy = -4, -10+(random%30)
-hitsound = S1,4
+hitsound = S7001,1
 guardsound = S4,0
 ground.type = High
 air.type = High
@@ -3176,7 +3313,6 @@ p2facing = 1
 palfx.add=200,200,200
 palfx.mul=256,256,256
 palfx.time=6
-
 
 [State 7013, Selector Var]
 type = VarSet
@@ -3345,7 +3481,7 @@ pausetime = 7,8
 guard.pausetime = 7,8
 sparkno = S7006
 sparkxy = -4, -20
-hitsound = S1,4
+hitsound = S7001,3
 guardsound = S4,0
 ground.type = High
 air.type = High
@@ -3513,7 +3649,7 @@ pausetime = 7,8
 guard.pausetime = 7,8
 sparkno = S7006
 sparkxy = -4, -20
-hitsound = S1,4
+hitsound = S7001,3
 guardsound = S4,0
 ground.type = High
 air.type = High
@@ -3662,7 +3798,7 @@ guard.pausetime = 0, 15
 sparkno = S8204
 guard.sparkno = S8100
 sparkxy = -20, -40
-hitsound = S1,4
+hitsound = S7001,3
 guardsound = S4,0
 ground.type = Low
 air.type = Low
@@ -3961,7 +4097,7 @@ guard.pausetime = 0,15
 sparkno = S8204
 guard.sparkno = S8100
 sparkxy = -10, -74
-hitsound = S1,5
+hitsound = S7001,2
 guardsound = S4,0
 ground.type = Low
 air.type = Low
@@ -4314,7 +4450,7 @@ trigger1 = AnimElem = 3
 time = 45
 movetime = 0
 anim = -1
-sound = S7050,3
+sound = -1
 p2defmul = 1
 darken = 0
 
@@ -4334,7 +4470,7 @@ ignorehitpause = 1
 
 [State 620, Snd]
 type = PlaySnd
-trigger1 = Animelem=2 
+trigger1 = Animelem=5
 value = S7000,1
 
 [State 7015, ChangeAnim]
@@ -4535,7 +4671,7 @@ ignorehitpause = 1
 
 [State 620, Snd]
 type = PlaySnd
-trigger1 = Animelem=2 
+trigger1 = Animelem=5
 value = S7000,1
 
 [State 7015, ChangeAnim]

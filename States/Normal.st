@@ -15,6 +15,18 @@ poweradd = 0
 juggle = 3 
 facep2= 1
 
+[State 200, Snd]
+type = PlaySnd
+trigger1 = !Time
+trigger1 = PalNo = 12
+value = S8001,0
+channel = 0
+
+[State 200, Snd]
+type = PlaySnd
+trigger1 = AnimElemTime(1) = 3
+value = S7000,0
+
 [State 200, Explod]
 type = Explod
 trigger1 = AnimElem = 2
@@ -89,6 +101,14 @@ velset = 0,0
 anim = 210
 sprpriority=1
 facep2= 1
+
+
+[State 200, Snd]
+type = PlaySnd
+trigger1 = !Time
+trigger1 = PalNo = 12
+value = S8001,1
+channel = 0
 
 [State 200, Snd]
 type = PlaySnd
@@ -170,6 +190,14 @@ poweradd= IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 juggle = 12
 sprpriority=1
 facep2= 1
+
+
+[State 200, Snd]
+type = PlaySnd
+trigger1 = !Time
+trigger1 = PalNo = 12
+value = S8001,2
+channel = 0
 
 [State 200, Special Anim]
 type = ChangeAnim
@@ -366,6 +394,13 @@ poweradd= 0
 juggle=3 
 facep2= 1
 
+[State 200, Snd]
+type = PlaySnd
+trigger1 = !Time
+trigger1 = PalNo = 12
+value = S8001,0
+channel = 0
+
 [State 200, Special Anim]
 type = VarSet
 trigger1 = !Time
@@ -417,7 +452,7 @@ priority = 3, Hit
 pausetime = 8,8
 sparkno=S7001;
 sparkxy= 0,-30
-hitsound = S6,1      
+hitsound = S7001,0     
 guardsound = 6,0         
 hitflag = MAF
 guardflag = M
@@ -461,6 +496,14 @@ velset=0,0
 poweradd= IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 juggle=4 
 facep2= 1
+
+
+[State 200, Snd]
+type = PlaySnd
+trigger1 = !Time
+trigger1 = PalNo = 12
+value = S8001,1
+channel = 0
 
 [State 200, Special Anim]
 type = VarSet
@@ -513,7 +556,7 @@ priority = 3, Hit
 pausetime = 12,12
 sparkno=S7006
 sparkxy=-10,0
-hitsound = S6,1      
+hitsound = S7001,0
 guardsound = 6,0         
 hitflag = MAF
 guardflag = L
@@ -575,6 +618,14 @@ poweradd= IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 juggle=6 
 facep2= 1
 
+
+[State 200, Snd]
+type = PlaySnd
+trigger1 = !Time
+trigger1 = PalNo = 12
+value = S8001,2
+channel = 0
+
 [State 200, Special Anim]
 type = VarSet
 trigger1 = !Time
@@ -626,7 +677,7 @@ priority = 3, Hit
 pausetime = 15,15
 sparkno=S7004
 sparkxy=-10,0
-hitsound = S6,1      
+hitsound = S7002,2     
 guardsound = 6,0         
 guardflag = L
 hitflag = MAF
@@ -690,6 +741,13 @@ juggle=4
 sprpriority = 1
 facep2= 1
 poweradd= 0
+
+[State 200, Snd]
+type = PlaySnd
+trigger1 = !Time
+trigger1 = PalNo = 12
+value = S8001,0
+channel = 0
 
 [State 600, Snd]
 type = PlaySnd
@@ -765,6 +823,13 @@ poweradd= IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 juggle=4
 sprpriority = 1
 facep2= 1
+
+[State 200, Snd]
+type = PlaySnd
+trigger1 = !Time
+trigger1 = PalNo = 12
+value = S8001,1
+channel = 0
 
 [State 200, Special Anim]
 type = VarSet
@@ -865,6 +930,14 @@ poweradd= IfElse(Var(21) > 0 || Var(29) > 0 || NumHelper(15060), 0, 18)
 juggle=12
 sprpriority = 1
 facep2= 1
+
+
+[State 200, Snd]
+type = PlaySnd
+trigger1 = !Time
+trigger1 = PalNo = 12
+value = S8001,2
+channel = 0
 
 [State 200, Special Anim]
 type = VarSet

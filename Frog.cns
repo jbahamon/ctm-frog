@@ -273,10 +273,8 @@ ignorehitpause = 1
 [State 7015, LifeAdd]
 type = BGPalFX
 trigger1 =  Var(29) > 0
-time = 1
-mul = 0, 120, 256
-sinadd = 20,20,20,10
-invertall = 1
+time = 2
+invertall = 0
 color = 0
 ignorehitpause = 1
 
@@ -284,7 +282,7 @@ ignorehitpause = 1
 type = ChangeState
 trigger1 =  Var(29) > 0
 trigger1 = Power <= 0
-trigger1 = IfElse(StateNo = 0 || StateNo = 50 || StateNo = 11, !(Var(29) := 0), !(Var(29) := 4))
+trigger1 = IfElse(StateNo = 0 || StateNo = 11, !(Var(29) := 0), !(Var(29) := 4))
 value = 15080
 ignorehitpause = 1
 

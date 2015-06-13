@@ -658,6 +658,7 @@ triggerall = StateType != A
 triggerall = Command = "Toki wo Tomare"
 triggerall = PalNo = 12
 triggerall= Ctrl
+triggerall= Power >= 3000
 triggerall = !Var(29) 	
 trigger1 = !Var(23) && !NumHelper(10000)
 trigger2 = Var(23) && NumHelper(10000) 
@@ -702,12 +703,13 @@ trigger6 = ( StateNo = 1020) && MoveHit
 [State -1, Chi no Shoukan]
 type = ChangeState
 triggerall = PalNo = 12 
-triggerall = ctrl || (!MoveContact && StateNo = [200, 220])
 triggerall = Command = "Chi no Shoukan"
 triggerall = StateType != A
+triggerall = !Var(29)
+trigger1 = ctrl || (!MoveContact && StateNo = [200, 220])
 trigger1 = !Var(23) && !NumHelper(10000)
 trigger2 = Var(23) && NumHelper(10000) 
-trigger2 = Helper(10000), StateNo = 17011  || (!(Helper(10000), MoveContact) && Helper(10000), StateNo = [17012, 17014])
+trigger2 = (ctrl && Helper(10000), StateNo = 17011)  || (!(Helper(10000), MoveContact) && Helper(10000), StateNo = [17012, 17014])
 value = 15040
 
 [State -1, Road Rolla Da]
