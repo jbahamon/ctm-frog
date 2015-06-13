@@ -348,7 +348,7 @@ time = 50
 
 [Command]
 name = "Toki wo Tomare"
-command = y;~F, z, x, F, s
+command = ~F, c, a, F, x
 time = 40
 
 
@@ -657,7 +657,7 @@ value = 15070
 triggerall = StateType != A
 triggerall = Command = "Toki wo Tomare"
 triggerall = PalNo = 12
-triggerall= Ctrl
+triggerall= Ctrl || StateNo = 220 || StateNo = 13120
 triggerall= Power >= 3000
 triggerall = !Var(29) 	
 trigger1 = !Var(23) && !NumHelper(10000)

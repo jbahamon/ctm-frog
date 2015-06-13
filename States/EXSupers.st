@@ -3131,16 +3131,19 @@ ownpal = 1
 persistent = 0
 supermovetime = 9999
 
-[State 17100: Power]
-type = PowerSet
-trigger1 = !Time
-value = 0
-
 [State 17100: Var]
 type = VarSet
 trigger1 = Time = 30
 v = 29
 value = 0
+
+
+[State 3013, Scale]
+type = BGPalFX
+trigger1 = Time = [30,50]
+time = 1
+color = Ceil(256 * (Time - 30.0)/20.0)
+
 
 [State 3000, Superpause]
 type = Pause
@@ -3151,6 +3154,6 @@ ignorehitpause = 1
 
 [State 17100: ChangeState]
 type = ChangeState
-trigger1 = Time = 60
+trigger1 = Time = 50
 value = 0
 ctrl = 1

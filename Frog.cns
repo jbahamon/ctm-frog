@@ -285,6 +285,7 @@ trigger1 = Power <= 0
 trigger1 = IfElse(StateNo = 0 || StateNo = 11, !(Var(29) := 0), !(Var(29) := 4))
 trigger2 = Win
 trigger2 = !(Var(29) := 0)
+trigger3 = command = "Toki wo Tomare" && ( Ctrl || StateNo = 220 || StateNo = 13120 ) && StateType != A
 value = 15080
 ignorehitpause = 1
 
