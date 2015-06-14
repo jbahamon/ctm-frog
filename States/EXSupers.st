@@ -2892,13 +2892,13 @@ physics = N
 anim = 15060
 velset = 0,0
 ctrl = 0
-poweradd = 0
 juggle = 0
 facep2 = 0
 hitdefpersist = 0
 movehitpersist = 0
 hitcountpersist = 0
 sprpriority = 0
+poweradd = -500
 
 
 [State 1100, Velocity]
@@ -3030,7 +3030,7 @@ ampl = 4
 freq = 120
 
 [State 3013, Scale]
-type = BGPalFX
+type = AllPalFX
 trigger1 = Time = [1,10]
 time = 1
 add = 256 - Floor(Time/10.0 * 256), 256 - Floor(Time/10.0 * 256), 256 - Floor(Time/10.0 * 256)
@@ -3038,7 +3038,7 @@ invertall = 1
 
 
 [State 3013, Scale]
-type = BGPalFX
+type = AllPalFX
 trigger1 = Time = [11,40]
 time = 1
 add = 0,0,0
@@ -3047,7 +3047,7 @@ invertall = 1
 
 
 [State 3013, Scale]
-type = BGPalFX
+type = AllPalFX
 trigger1 = Time = [41,60]
 time = 1
 color = Ceil(256 - 256 * (Time - 41.0)/20.0)

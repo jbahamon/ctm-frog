@@ -657,12 +657,13 @@ value = 15070
 triggerall = StateType != A
 triggerall = Command = "Toki wo Tomare"
 triggerall = PalNo = 12
-triggerall= Ctrl || StateNo = 220 || StateNo = 13120
-triggerall= Power >= 3000
+triggerall= Power >= 500
 triggerall = !Var(29) 	
 trigger1 = !Var(23) && !NumHelper(10000)
+trigger1 = (Ctrl || StateNo = 220)
 trigger2 = Var(23) && NumHelper(10000) 
-trigger2 = Helper(10000), StateNo = 17011
+trigger2 = (Ctrl && Helper(10000), StateNo = 17011) || (Helper(10000), StateNo = 17014)
+
 ;----------------------Supers----------------------
 
 [State -1, Masamune]
@@ -812,6 +813,7 @@ triggerall = PalNo = 12
 triggerall = StateType != A 
 triggerall = ctrl || StateNo = [200, 220]
 triggerall = !Var(23) && !NumHelper(10000)
+triggerall = !Var(29) || Power > 0
 trigger1 = Command = "Space Ripper Stingy Eyes"
 value = 14050
 
@@ -821,6 +823,7 @@ triggerall = PalNo = 12
 triggerall = StateType != A 
 triggerall = ctrl
 triggerall = Var(23) && NumHelper(10000)
+triggerall = !Var(29) || Power > 0
 trigger1 = Helper(10000), StateNo = 17011
 trigger1 = Command = "dfa" || Command = "dfb" || Command = "dfc"
 value = 14040
@@ -828,6 +831,7 @@ value = 14040
 [State -1, The World]
 type = ChangeState
 triggerall = PalNo = 12
+triggerall = !Var(29) || Power > 0
 triggerall = StateType != A 
 triggerall = ctrl
 triggerall = !Var(23) && !NumHelper(10000)
@@ -837,6 +841,7 @@ value = 14030
 [State -1, MUDAA - Second Hit]
 type = ChangeState
 triggerall = PalNo = 12
+triggerall = !Var(29) || Power > 0
 triggerall = StateNo = 14025
 triggerall = (Var(23) && NumHelper(10000))  
 triggerall = Command = "qcba" || Command = "qcbb" || Command = "qcbc" 
@@ -847,6 +852,7 @@ value = 14026
 [State -1, MUDAA]
 type = ChangeState
 triggerall = PalNo = 12
+triggerall = !Var(29) || Power > 0
 triggerall = StateType != A 
 triggerall = Ctrl || StateNo = 195 || StateNo = 200 || StateNo = 210 || StateNo = 220 || StateNo = 400 || StateNo = 410 || StateNo = 420
 triggerall = Command = "qcba" || Command = "qcbb" || Command = "qcbc"
@@ -859,6 +865,7 @@ value = IfElse(Var(23), 14025, 14020)
 [State -1, Muda Muda - Air]
 type = ChangeState
 triggerall = PalNo = 12
+triggerall = !Var(29) || Power > 0
 triggerall = StateType = A 
 triggerall = Command = "qcfa" || Command = "qcfb" || Command = "qcfc"
 triggerall = Ctrl
@@ -870,6 +877,7 @@ value = 14016
 [State -1, Muda Muda]
 type = ChangeState
 triggerall = PalNo = 12
+triggerall = !Var(29) || Power > 0
 triggerall = StateType != A 
 triggerall = Command = "qcfa" || Command = "qcfb" || Command = "qcfc"
 triggerall = Ctrl || StateNo = 195 || StateNo = 200 || StateNo = 210 || StateNo = 220 || StateNo = 400 || StateNo = 410 || StateNo = 420
@@ -882,6 +890,7 @@ value = IfElse(Var(23) && NumHelper(10000), 14015, 14010)
 [State -1, Stand Attack]
 type = ChangeState
 triggerall = command = "qcfx"
+triggerall = !Var(29) || Power > 0
 triggerall = statetype != A
 triggerall = PalNo = 12
 trigger1 = !Var(23) && !NumHelper(10000)
@@ -894,6 +903,7 @@ type = ChangeState
 triggerall = command = "qcbx"
 triggerall = statetype != A
 triggerall = PalNo = 12
+triggerall = !Var(29) || Power > 0
 triggerall = ctrl
 triggerall = !Var(29)
 trigger1 = !Var(23) && !NumHelper(10000)
@@ -905,6 +915,7 @@ value = 15060
 type = ChangeState
 triggerall = (command = "c") && (command = "holdfwd" || command = "holdback")
 triggerall = PalNo = 12
+triggerall = !Var(29) || Power > 0
 triggerall = roundstate = 2 && ctrl && statetype = S && stateno != 100
 trigger1 = (!Var(23) && !NumHelper(10000)) 
 trigger2 = (Var(23) && NumHelper(10000))
@@ -916,6 +927,7 @@ value = 13800
 type = ChangeState
 value = 13400
 triggerall = roundstate = 2
+triggerall = !Var(29) || Power > 0
 triggerall = Command = "dfa" || Command = "dfb" || Command = "dfc"
 triggerall = PalNo = 12
 triggerall = prevstateno != [810,811]
@@ -927,6 +939,7 @@ ignorehitpause = 0
 type = ChangeState
 value = 13300
 triggerall = PalNo = 12
+triggerall = !Var(29) || Power > 0
 triggerall = roundstate = 2
 triggerall = command = "2p"
 triggerall = prevstateno != [13300,13301]
@@ -938,6 +951,7 @@ ignorehitpause = 0
 type = ChangeState
 value = 13500
 triggerall = command = "2p"
+triggerall = !Var(29) || Power > 0
 triggerall = PalNo = 12
 triggerall = !Var(23)
 trigger1 = StateType != A
@@ -950,7 +964,7 @@ type = ChangeState
 value = 400
 triggerall = command = "a"
 triggerall = command = "holddown"
-triggerall = PalNo != 12 || (!Var(23))
+triggerall = PalNo != 12 || (!Var(23)) || !Var(29) || Power > 0
 trigger1 = statetype != A
 trigger1 = ctrl
 trigger2 = (stateno = 200)
@@ -960,6 +974,7 @@ trigger2 = movecontact && PalNo != 12
 type = ChangeState
 value = 13141
 triggerall = PalNo = 12 && (Var(23) && NumHelper(10000))
+triggerall = !Var(29) || Power > 0
 triggerall = command = "c"
 triggerall = command = "holdback"
 triggerall = Helper(10000), StateNo = 17013
@@ -974,6 +989,7 @@ value = 13140
 triggerall = command = "a"
 triggerall = command = "holddown"
 triggerall = PalNo = 12 && (Var(23) && NumHelper(10000))
+triggerall = !Var(29) || Power > 0
 triggerall = Helper(10000), StateNo = 17011
 trigger1 = statetype != A
 trigger1 = ctrl || (stateno = 100 && time >= 4) || stateno = 101 || (stateno = 105 && time >= 4)
@@ -988,7 +1004,7 @@ type = ChangeState
 value = 410
 triggerall = command = "b"
 triggerall = command = "holddown"
-triggerall = PalNo != 12 || (!Var(23))
+triggerall = PalNo != 12 || (!Var(23)) || !Var(29) || Power > 0
 trigger1 = statetype != A
 trigger1 = ctrl
 trigger2 = (stateno = 200) || (stateno = 400) 
@@ -1000,6 +1016,7 @@ trigger2 = movecontact && PalNo != 12
 type = ChangeState
 value = 13151
 triggerall = PalNo = 12 && NumHelper(10000)
+triggerall = !Var(29) || Power > 0
 triggerall = command = "b"
 triggerall = command = "holddown"
 trigger1 = Helper(10000), StateNo = 17012
@@ -1014,6 +1031,7 @@ trigger2 = StateNo = 13140 && (prevstateno != [100,105])
 type = ChangeState
 value = 13150
 triggerall = StateNo = 13100 && (prevstateno != [100,105]) 
+triggerall = !Var(29) || Power > 0
 triggerall = PalNo = 12 && NumHelper(10000)
 triggerall = Helper(10000), StateNo = 17012
 triggerall = Helper(10000), AnimElemTime(4) >= 6
@@ -1027,6 +1045,7 @@ value = 13150
 triggerall = command = "b"
 triggerall = command = "holddown"
 triggerall = PalNo = 12 && (Var(23) && NumHelper(10000))
+triggerall = !Var(29) || Power > 0
 triggerall = Helper(10000), StateNo = 17011
 trigger1 = statetype != A
 trigger1 = ctrl || (stateno = 100 && time >= 4) || stateno = 101 || (stateno = 105 && time >= 4)
@@ -1038,7 +1057,7 @@ type = ChangeState
 value = 420
 triggerall = command = "c"
 triggerall = command = "holddown"
-triggerall = PalNo != 12 || (!Var(23))
+triggerall = PalNo != 12 || (!Var(23)) || !Var(29) || Power > 0
 trigger1 = statetype != A
 trigger1 = ctrl
 
@@ -1048,7 +1067,9 @@ value = 13161
 triggerall = command = "c" 
 triggerall = command = "holddown"
 triggerall = statetype != A
+triggerall = PalNo = 12
 triggerall = NumHelper(10000)
+triggerall = !Var(29) || Power > 0
 trigger1 = Helper(10000), Stateno = 17012
 trigger1 = Helper(10000), Animelemtime(4) > 0
 trigger1 = StateNo = 13100 && (prevstateno != [100,105]) 
@@ -1069,7 +1090,9 @@ value = 13161
 triggerall = command = "c" 
 triggerall = command = "holdfwd"
 triggerall = statetype != A
+triggerall = PalNo = 12
 triggerall = NumHelper(10000)
+triggerall = !Var(29) || Power > 0
 trigger1 = Helper(10000),stateno = 17013
 trigger1 = StateNo = 13111 && prevstateno = 13100 
 trigger1 = Helper(10000), Animelemtime(4) > 0
@@ -1081,6 +1104,7 @@ value = 13160
 triggerall = command = "c"
 triggerall = command = "holddown"
 triggerall = PalNo = 12 && (Var(23) && NumHelper(10000))
+triggerall = !Var(29) || Power > 0
 triggerall = Helper(10000), StateNo = 17011
 trigger1 = statetype != A
 trigger1 = ctrl || (stateno = 100 && time >= 4) || stateno = 101 || (stateno = 105 && time >= 4)
@@ -1106,7 +1130,7 @@ type = ChangeState
 value = 600
 triggerall = command = "a"
 trigger1 = statetype = A
-triggerall = PalNo != 12 || (!Var(23))
+triggerall = PalNo != 12 || (!Var(23)) || !Var(29) || Power > 0
 trigger1 = ctrl
 trigger2 = stateno = 600 && movecontact && PalNo != 12
 trigger2 = animtime >= 6
@@ -1118,6 +1142,7 @@ type = ChangeState
 value = 13131
 triggerall = command = "b"
 triggerall = PalNo = 12 && (Var(23) && NumHelper(10000))
+triggerall = !Var(29) || Power > 0
 triggerall = StateNo != [100, 105]
 triggerall = Helper(10000), StateNo = 17011
 trigger1 = statetype = A
@@ -1129,7 +1154,7 @@ trigger2 = stateno = 1350 ;Air blocking
 type = ChangeState
 value = 610
 triggerall = command = "b"
-triggerall = PalNo != 12 || (!Var(23))
+triggerall = PalNo != 12 || (!Var(23)) || !Var(29) || Power > 0
 trigger1 = statetype = A
 trigger1 = ctrl
 trigger2 = (stateno = 600) || (stateno = 220 && AnimElemNo(0) >= 3)  || (stateno = 1040)
@@ -1153,7 +1178,7 @@ trigger2 = stateno = 1350 ;Air blocking
 type = ChangeState
 value = 620
 triggerall = command = "c"
-triggerall = PalNo != 12 || (!Var(23))
+triggerall = PalNo != 12 || (!Var(23)) || !Var(29) || Power > 0
 triggerall = statetype = A
 trigger1 = ctrl
 trigger2 = (stateno = 600) || (stateno = 610) || (stateno = 220 && AnimElemNo(0) >= 3) || (stateno = 1040) || (stateno = 1020)
@@ -1168,6 +1193,7 @@ trigger4 = StateNo = 1001 && AnimElemTime(4) >= 0
 type = ChangeState
 value = 13100
 triggerall = PalNo = 12 && NumHelper(10000)
+triggerall = !Var(29) || Power > 0
 triggerall = Helper(10000), StateNo = 17011
 triggerall = command = "a"
 triggerall = command != "holddown"
@@ -1182,6 +1208,7 @@ type = ChangeState
 value = 13101
 triggerall = StateNo = 13100
 triggerall = PalNo = 12 && NumHelper(10000)
+triggerall = !Var(29) || Power > 0
 triggerall = Helper(10000), StateNo = 17012
 triggerall = Helper(10000), AnimElemTime(4) >= 6
 triggerall = command = "a"
@@ -1194,6 +1221,7 @@ type = ChangeState
 value = 13110
 triggerall = StateNo = 13101
 triggerall = PalNo = 12 && NumHelper(10000)
+triggerall = !Var(29) || Power > 0
 triggerall = Helper(10000), StateNo = 17012
 triggerall = Helper(10000), AnimElemTime(4) >= 6
 triggerall = command = "b"
@@ -1205,6 +1233,7 @@ type = ChangeState
 value = 13111
 triggerall = StateNo = 13100
 triggerall = PalNo = 12 && NumHelper(10000)
+triggerall = !Var(29) || Power > 0
 triggerall = Helper(10000), StateNo = 17012
 triggerall = Helper(10000), AnimElemTime(4) >= 6
 triggerall = command = "b"
@@ -1216,6 +1245,7 @@ type = ChangeState
 value = 13111
 triggerall = StateNo = 13140
 triggerall = PalNo = 12 && NumHelper(10000)
+triggerall = !Var(29) || Power > 0
 triggerall = Helper(10000), StateNo = 17030
 triggerall = Helper(10000), AnimElemTime(4) >= 6
 triggerall = command = "b"
@@ -1227,6 +1257,7 @@ type = ChangeState
 value = 13111
 triggerall = StateNo = 13110
 triggerall = PalNo = 12 && NumHelper(10000)
+triggerall = !Var(29) || Power > 0
 triggerall = Helper(10000), StateNo = 17013
 triggerall = Helper(10000), Var(6) = 1
 triggerall = Helper(10000), AnimElemTime(4) >= 6
@@ -1239,6 +1270,7 @@ trigger1 = statetype = S
 type = ChangeState
 value = 13110
 triggerall = PalNo = 12 && NumHelper(10000)
+triggerall = !Var(29) || Power > 0
 triggerall = Helper(10000), StateNo = 17011
 triggerall = command = "b"
 triggerall = command != "holddown"
@@ -1253,6 +1285,7 @@ type = ChangeState
 value = 13120
 triggerall = StateNo = 13101
 triggerall = PalNo = 12 && NumHelper(10000)
+triggerall = !Var(29) || Power > 0
 triggerall = Helper(10000), StateNo = 17012
 triggerall = Helper(10000), Var(6) = 1
 triggerall = Helper(10000), AnimElemTime(4) >= 4
@@ -1265,6 +1298,7 @@ trigger1 = statetype = S
 type = ChangeState
 value = 13120
 triggerall = PalNo = 12 && NumHelper(10000)
+triggerall = !Var(29) || Power > 0
 triggerall = statetype != A
 triggerall = Helper(10000), Var(6) = 1
 triggerall = Helper(10000), AnimElemTime(4) >= 4
@@ -1286,6 +1320,7 @@ type = ChangeState
 value = 13120
 triggerall = StateNo = 13140
 triggerall = PalNo = 12 && NumHelper(10000)
+triggerall = !Var(29) || Power > 0
 triggerall = Helper(10000), StateNo = 17030
 triggerall = Helper(10000), Var(6) = 0
 triggerall = Helper(10000), AnimElemTime(4) > 2
@@ -1299,6 +1334,7 @@ type = ChangeState
 value = 13120
 triggerall = StateNo = 13110
 triggerall = PalNo = 12 && NumHelper(10000)
+triggerall = !Var(29) || Power > 0
 triggerall = Helper(10000), StateNo = 17013
 triggerall = Helper(10000), Var(6) = 0
 triggerall = Helper(10000), AnimElemTime(4) >= 6
@@ -1312,6 +1348,7 @@ type = ChangeState
 value = 13120
 triggerall = StateNo = 13110
 triggerall = PalNo = 12 && NumHelper(10000)
+triggerall = !Var(29) || Power > 0
 triggerall = Helper(10000), StateNo = 17013
 triggerall = Helper(10000), Var(6) = 1
 triggerall = Helper(10000), AnimElemTime(4) >= 6
@@ -1325,6 +1362,7 @@ type = ChangeState
 value = 13120
 triggerall = StateNo = 13150
 triggerall = PalNo = 12 && NumHelper(10000)
+triggerall = !Var(29) || Power > 0
 triggerall = Helper(10000), StateNo = 17031
 triggerall = Helper(10000), AnimElemTime(5) > 0
 triggerall = command = "c"
@@ -1337,6 +1375,7 @@ type = ChangeState
 value = 13120
 triggerall = command = "c"
 triggerall = PalNo = 12 && NumHelper(10000)
+triggerall = !Var(29) || Power > 0
 triggerall = Helper(10000), StateNo = 17011
 triggerall = command != "holddown"
 trigger1 = statetype = S
@@ -1349,7 +1388,7 @@ type = ChangeState
 value = 200
 triggerall = command = "a"
 triggerall = command != "holddown"
-triggerall = PalNo != 12 || (!Var(23))
+triggerall = PalNo != 12 || (!Var(23)) || !Var(29) || Power > 0
 trigger1 = statetype = S
 trigger1 = ctrl
 
@@ -1359,7 +1398,7 @@ type = ChangeState
 value = 210
 triggerall = command = "b"
 triggerall = command != "holddown"
-triggerall = PalNo != 12 || (!Var(23))
+triggerall = PalNo != 12 || (!Var(23)) || !Var(29) || Power > 0
 trigger1 = statetype = S
 trigger1 = ctrl
 trigger2 = stateno = 200 && movecontact && PalNo != 12
@@ -1370,7 +1409,7 @@ type = ChangeState
 value = 220
 triggerall = command = "c"
 triggerall = command != "holddown"
-triggerall = PalNo != 12 || (!Var(23))
+triggerall = PalNo != 12 || (!Var(23)) || !Var(29) || Power > 0
 trigger1 = statetype = S
 trigger1 = ctrl
 trigger2 = (stateno = 200) || (stateno = 210)
@@ -1383,6 +1422,7 @@ trigger2 = movecontact && PalNo != 12
 [State -1, Run Fwd]
 type = ChangeState
 value = 100
+triggerall = PalNo != 12 || !Var(29) || Power > 0
 trigger1 = command = "FF"
 trigger1 = statetype = S
 trigger1 = ctrl
@@ -1391,6 +1431,7 @@ trigger1 = ctrl
 [State -1, Run Back]
 type = ChangeState
 value = 105
+triggerall = PalNo != 12 || !Var(29) || Power > 0
 trigger1 = command = "BB"
 trigger1 = statetype = S
 trigger1 = ctrl
@@ -1399,6 +1440,7 @@ trigger1 = ctrl
 [State -1, Taunt]
 type = ChangeState
 value = 195
+triggerall = PalNo != 12 || !Var(29) || Power > 0
 triggerall = !NumHelper(15060)
 triggerall = command = "start"
 trigger1 = statetype != A
@@ -1409,7 +1451,8 @@ trigger1 = ctrl
 type = ChangeState
 value = 13195
 triggerall = command = "x"
-triggerall = PalNo = 12
+triggerall = PalNo = 12 
+triggerall = !Var(29) || Power > 0
 trigger1 = ctrl
 
 ;High Jump
@@ -1418,6 +1461,7 @@ type = ChangeState
 value = 40
 triggerall = PalNo = 12
 triggerall = !Var(23)
+triggerall = !Var(29) || Power > 0
 triggerall = Command = "longjump"
 trigger1 = statetype = C
 trigger1 = ctrl
@@ -1425,6 +1469,7 @@ trigger1 = ctrl
 ;Air Jump
 [State -1, Air Jump]
 type = ChangeState
+triggerall = PalNo != 12 || !Var(29) || Power > 0
 triggerall = command = "holdup"
 triggerall = statetype = A
 trigger1 = !Var(25) && (Var(23) || PalNo != 12)

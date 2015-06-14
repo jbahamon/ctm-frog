@@ -1352,9 +1352,6 @@ movetime = 2
 type = BGPalFX
 trigger1 =  Time < 80
 time = 1
-mul = 0, 120, 256
-sinadd = 20,20,20,10
-invertall = 1
 color = 0
 
 [State 801, Throw Enemy]

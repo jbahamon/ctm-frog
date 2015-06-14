@@ -148,7 +148,7 @@ Trigger2=P2Stateno=[120,160]
 Trigger3=enemynear,ctrl
 Trigger4=P2StateType!=A
 Trigger4=P2MoveType!=H
-fvar(39)=IfElse(PalNo = 12, IfElse(Var(29) > 0, 0.5, 0.8), 1)
+fvar(39)=IfElse(PalNo = 12, IfElse(Var(29) > 0, 0.55, 0.8), 1)
 ignorehitpause=1
 
 ;Guard Helper
@@ -360,7 +360,7 @@ ignorehitpause = 1
 [State -3, Dampener]
 Type = DefenceMulSet
 Trigger1 = PalNo = 12
-value = IfElse(Var(23) = 1, 1.15, 1) * IfElse(StateNo = 14040, 1.5, 1)
+value = IfElse(Var(23) = 1, 1.45, 1.25) * IfElse(StateNo = 14040, 1.6, 1)
 ignorehitpause = 1
 
 [State -3, Power]

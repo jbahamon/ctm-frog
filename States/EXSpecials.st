@@ -476,9 +476,15 @@ velset = 0,0
 
 [State 2202, !Shadow]
 type = PlaySnd
-trigger1 = !Time
-value = S8000,8
+trigger1 = AnimElem = 3
+value = S8001,0
 channel = 0
+
+
+[State 2202, !Shadow]
+type = PlaySnd
+trigger1 = !Time
+value = S8000,20
 
 [State 1030, whatbuttondidyoupress?]
 type = VarSet

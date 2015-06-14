@@ -3041,7 +3041,7 @@ Clsn2: 1
 
 ; Masamune Throwing
 [Begin Action 13802]
-7173,1, 0,0, 1
+7173,1, 0,0, 80
 7173,0, 15,1, 50
 
 ; Stand Apparition Attack

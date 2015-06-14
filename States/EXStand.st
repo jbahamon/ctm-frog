@@ -6,7 +6,6 @@ movetype = I
 anim = 3031
 sprpriority = -2
 
-
 [State 620, Snd]
 type = PlaySnd
 trigger1 = !Time
@@ -48,6 +47,7 @@ physics = N
 movetype = I
 anim = 3032
 sprpriority = -2
+
 
 [State 7010, appear]
 type = StateTypeSet
@@ -2526,6 +2526,13 @@ ignorehitpause = 1
 type = PlaySnd
 trigger1 = !Time
 value = S7000,1
+
+
+[State 620, Snd]
+type = PlaySnd
+trigger1 = Animelem = 2
+value = S7001,1
+channel = 0
 
 [State 7011, HitOverride]
 type = NotHitBy
