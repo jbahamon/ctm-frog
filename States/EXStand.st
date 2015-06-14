@@ -3826,7 +3826,7 @@ air.fall = 1
 fall.recover = 0
 yaccel = .35;44
 guard.kill = 0
-p2stateno = 17237
+p2stateno = IfElse(Var(29) > 0, 17237, -1)
 p2facing = 1
 
 
