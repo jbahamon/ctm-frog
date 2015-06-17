@@ -964,7 +964,7 @@ type = ChangeState
 value = 400
 triggerall = command = "a"
 triggerall = command = "holddown"
-triggerall = PalNo != 12 || (!Var(23)) || !Var(29) || Power > 0
+triggerall = PalNo != 12 || (!Var(23) && (!Var(29) || Power > 0))
 trigger1 = statetype != A
 trigger1 = ctrl
 trigger2 = (stateno = 200)
@@ -1004,7 +1004,7 @@ type = ChangeState
 value = 410
 triggerall = command = "b"
 triggerall = command = "holddown"
-triggerall = PalNo != 12 || (!Var(23)) || !Var(29) || Power > 0
+triggerall = PalNo != 12 || (!Var(23) && (!Var(29) || Power > 0))
 trigger1 = statetype != A
 trigger1 = ctrl
 trigger2 = (stateno = 200) || (stateno = 400) 
@@ -1057,7 +1057,7 @@ type = ChangeState
 value = 420
 triggerall = command = "c"
 triggerall = command = "holddown"
-triggerall = PalNo != 12 || (!Var(23)) || !Var(29) || Power > 0
+triggerall = PalNo != 12 || (!Var(23) && (!Var(29) || Power > 0))
 trigger1 = statetype != A
 trigger1 = ctrl
 
