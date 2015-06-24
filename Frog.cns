@@ -313,6 +313,7 @@ ignorehitpause = 1
 type = VarAdd;
 trigger1 =  Var(24) < 1000
 trigger1 = !Var(23)
+trigger1 = !NumHelper(10000)
 v = 24
 value = 4
 ignorehitpause = 1
