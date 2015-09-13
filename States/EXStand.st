@@ -1196,6 +1196,12 @@ MoveType = H
 poweradd = 0
 
 
+[State 17015, Shut up]
+type = StopSnd
+trigger1 = !Time
+channel = 0
+ignorehitpause = 1
+
 [State 7010, appear]
 type = trans
 trigger1 = 1
@@ -1268,6 +1274,12 @@ ignorehitpause = 1
 MoveType = I
 Anim = 3032
 poweradd = 0
+
+[State 17015, Shut up]
+type = StopSnd
+trigger1 = !Time
+channel = 0
+ignorehitpause = 1
 
 [State 7010, appear]
 type = trans
@@ -1350,6 +1362,11 @@ movetype = I
 velset = 0,0
 anim = 3031
 
+[State 17015, Shut up]
+type = StopSnd
+trigger1 = !Time
+channel = 0
+ignorehitpause = 1
 
 [State 620, Snd]
 type = PlaySnd
@@ -2842,6 +2859,7 @@ ignorehitpause = 1
 [State 620, Snd]
 type = PlaySnd
 trigger1 = Animelem=2 
+channel = 0
 value = S7000,1 
 
 [State 7011, HitOverride]
@@ -3039,6 +3057,7 @@ Y = (ParentDist Y - 10)/2.0
 type = PlaySnd
 trigger1 = Animelem=2 
 value = S7000,1 
+channel = 0
 
 [State 7011, HitOverride]
 type = HitOverride
