@@ -150,31 +150,30 @@ flag=noshadow
 ignorehitpause=1
 
 [State 1010, vert1]
-type=velset
-trigger1=time < 120*var(1) && var(0)
-y=ifelse(var(1)=3,-.84,ifelse(var(1)=2,-.45,-.24))-sin(time*6)
+type = VelSet
+trigger1 = (Time < 120) && Var(0)
+Y = - Var(1) * 0.3 - Sin(Time * 6)
+
+[State 1010, vert1]
+type = VelSet
+trigger1 = (Time < 120) && !Var(0)
+Y = Var(1) * 0.14 - Sin(Time * 6)
 
 
 [State 1010, vert1]
-type=velset
-trigger1=time < 120*var(1) && !var(0)
-y=ifelse(var(1)=3,.54,ifelse(var(1)=2,.35,.14))-sin(time*6)
-
-
-[State 1010, vert1]
-type=velset
-trigger1=time>100+20*var(1)
-y=0-sin(time*6)
+type = VelSet
+trigger1 = (Time >= 120)
+Y = - Sin(Time * 6)
 
 [State 1010, hor]
-type=velset
-trigger1=time <100+20*var(1)
-x=.3*var(1)+.5
+type = VelSet
+trigger1 = (Time < 120)
+X = .3 * var(1) + .5
 
 [State 1010, hor]
-type=velset
-trigger1=time >100+20*var(1)
-x=0
+type = VelSet
+trigger1 = (Time >= 120)
+X = 0
 
 [State 1010, hitdef]
 type=hitdef
