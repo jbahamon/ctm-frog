@@ -628,9 +628,31 @@ value = SCA
 time = 1
 
 [State 181, Snd]
+type = VarSet
 trigger1 = !Time
+v = 0
+value = 1;Random 
+
+[State 181, Snd]
+trigger1 = !Time
+trigger1 = Var(0) % 3 = 0
 type = PlaySnd
 value = S8000,3
+
+
+[State 181, Snd]
+trigger1 = !Time
+trigger1 = Var(0) % 3 != 0
+type = PlaySnd
+value = S8000,20 + (Var(0) % 3)
+
+
+
+[State 181, Snd]
+trigger1 = (Var(0) % 3) = 1
+trigger1 = Time < 240
+type = AssertSpecial
+flag = RoundNotOver
 
 
 ; Special Winpose
@@ -743,6 +765,7 @@ velset = 0,0
 
 [State 191, 1] ;Freeze animation until PreIntro is over
 type = ChangeAnim
+trigger1 = PalNo != 12
 trigger1 = RoundState = 0
 value = 190
 
@@ -752,10 +775,36 @@ trigger1 = 1
 flag = Intro
 
 [State 191, random]
-type=changestate
-trigger1=!time
-value=192+floor(random%3)
+type = ChangeState
+trigger1 = !Time
+trigger1 = PalNo != 12
+value = 192 + (Random % 3)
 
+[State 191, random]
+type = ChangeAnim
+trigger1 = !Time
+trigger1 = PalNo = 12
+value = 14061
+
+[State 191, random]
+type = VarSet
+trigger1 = !Time
+trigger1 = PalNo = 12
+v = 0
+value = Random
+
+[State 191, random]
+type = PlaySnd
+trigger1 = !Time
+trigger1 = PalNo = 12
+value = S8000,23 + (Var(0) % 3)
+channel = 0
+
+[State 192, 3] ;Change to stand state when done
+type = ChangeState
+trigger1 = Time > IfElse((Var(0) % 3) = 2, 220, IfElse(Var(0) % 3 = 1, 160, 120))
+trigger1 = PalNo = 12
+value = 0
 
 ;Weapon Intro
 [Statedef 192]
