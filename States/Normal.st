@@ -202,7 +202,7 @@ channel = 0
 [State 200, Special Anim]
 type = ChangeAnim
 trigger1 = !Time
-trigger1 = PalNo = 12 && !Var(23)
+trigger1 = PalNo = 12
 value = 13026
 
 [State 210, Explod]
