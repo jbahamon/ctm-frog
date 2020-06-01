@@ -760,7 +760,7 @@ triggerall = PalNo != 12
 triggerall = Command = "qcfa" || Command = "qcfb" || Command = "qcfc" 
 trigger1 = StateType = A 
 trigger1 = Ctrl
-trigger2 = StateNo = 220
+trigger2 = StateNo = 220 || StateNo = 610 || StateNo = 620
 trigger2 = MoveContact
 
 [State -1, Water Magic]
